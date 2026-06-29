@@ -1,0 +1,49 @@
+companies:
+  - name: 字节跳动
+    priority: high
+    city: 北京
+    directions: [AI应用开发, 大模型应用开发, 后端开发]
+    official_url: https://jobs.bytedance.com/campus/
+    check_frequency: weekly
+  - name: 阿里
+    priority: high
+    city: 北京
+    directions: [AI应用开发, 后端开发, AI平台]
+    official_url: ""
+    check_frequency: weekly
+  - name: 腾讯
+    priority: high
+    city: 北京
+    directions: [AI应用开发, 后台开发]
+    official_url: https://join.qq.com/
+    check_frequency: weekly
+  - name: 美团
+    priority: high
+    city: 北京
+    directions: [大模型应用, 后端开发, 搜索推荐]
+    official_url: https://zhaopin.meituan.com/web/campus
+    check_frequency: weekly
+  - name: 小米
+    priority: medium
+    city: 北京
+    directions: [AI, 后端, IoT]
+    official_url: ""
+    check_frequency: weekly
+  - name: 京东
+    priority: medium
+    city: 北京
+    directions: [AI, 后端, 数据服务]
+    official_url: ""
+    check_frequency: weekly
+  - name: DeepSeek
+    priority: high
+    city: 北京
+    directions: [AI工程, 大模型应用, 后端]
+    official_url: https://www.deepseek.com/
+    check_frequency: weekly
+  - name: 智谱
+    priority: high
+    city: 北京
+    directions: [大模型应用, Agent, 后端]
+    official_url: ""
+    check_frequency: weekly

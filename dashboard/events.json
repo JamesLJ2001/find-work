@@ -1,0 +1,74 @@
+[
+  {
+    "company": "字节跳动",
+    "event": "检查校招官网",
+    "date": "2026-07-01",
+    "stage": "关注",
+    "priority": "high",
+    "url": "https://jobs.bytedance.com/campus/",
+    "notes": "每周三检查岗位是否新增"
+  },
+  {
+    "company": "阿里",
+    "event": "检查校招官网",
+    "date": "2026-07-01",
+    "stage": "关注",
+    "priority": "high",
+    "url": "",
+    "notes": "补充官方链接"
+  },
+  {
+    "company": "腾讯",
+    "event": "检查校招官网",
+    "date": "2026-07-01",
+    "stage": "关注",
+    "priority": "high",
+    "url": "https://join.qq.com/",
+    "notes": "每周三检查岗位是否新增"
+  },
+  {
+    "company": "美团",
+    "event": "检查校招官网",
+    "date": "2026-07-01",
+    "stage": "关注",
+    "priority": "high",
+    "url": "https://zhaopin.meituan.com/web/campus",
+    "notes": "每周三检查岗位是否新增"
+  },
+  {
+    "company": "小米",
+    "event": "检查校招官网",
+    "date": "2026-07-01",
+    "stage": "关注",
+    "priority": "medium",
+    "url": "",
+    "notes": "补充官方链接"
+  },
+  {
+    "company": "京东",
+    "event": "检查校招官网",
+    "date": "2026-07-01",
+    "stage": "关注",
+    "priority": "medium",
+    "url": "",
+    "notes": "补充官方链接"
+  },
+  {
+    "company": "DeepSeek",
+    "event": "检查官网/招聘页",
+    "date": "2026-07-01",
+    "stage": "关注",
+    "priority": "high",
+    "url": "https://www.deepseek.com/",
+    "notes": "每周三检查岗位是否新增"
+  },
+  {
+    "company": "智谱",
+    "event": "检查官网/招聘页",
+    "date": "2026-07-01",
+    "stage": "关注",
+    "priority": "high",
+    "url": "",
+    "notes": "补充官方链接"
+  }
+]
