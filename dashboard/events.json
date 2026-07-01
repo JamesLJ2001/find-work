@@ -1,74 +1,173 @@
 [
   {
     "company": "字节跳动",
-    "event": "检查校招官网",
+    "event": "检查目标岗位/秋招动态",
     "date": "2026-07-01",
-    "stage": "关注",
+    "stage": "转正实习替代",
     "priority": "high",
-    "url": "https://jobs.bytedance.com/campus/",
-    "notes": "每周三检查岗位是否新增"
+    "url": "https://jobs.bytedance.com/campus/position/7605138439188990261/detail",
+    "notes": "岗位：AIDP后端开发；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：2"
   },
   {
-    "company": "阿里",
-    "event": "检查校招官网",
+    "company": "阿里巴巴",
+    "event": "检查目标岗位/秋招动态",
     "date": "2026-07-01",
-    "stage": "关注",
+    "stage": "转正实习替代",
     "priority": "high",
-    "url": "",
-    "notes": "补充官方链接"
-  },
-  {
-    "company": "腾讯",
-    "event": "检查校招官网",
-    "date": "2026-07-01",
-    "stage": "关注",
-    "priority": "high",
-    "url": "https://join.qq.com/",
-    "notes": "每周三检查岗位是否新增"
-  },
-  {
-    "company": "美团",
-    "event": "检查校招官网",
-    "date": "2026-07-01",
-    "stage": "关注",
-    "priority": "high",
-    "url": "https://zhaopin.meituan.com/web/campus",
-    "notes": "每周三检查岗位是否新增"
-  },
-  {
-    "company": "小米",
-    "event": "检查校招官网",
-    "date": "2026-07-01",
-    "stage": "关注",
-    "priority": "medium",
-    "url": "",
-    "notes": "补充官方链接"
+    "url": "https://campus-talent.alibaba.com/campus/position/199903220038?deptCodes=",
+    "notes": "岗位：AI应用研发工程师；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：n*2"
   },
   {
     "company": "京东",
-    "event": "检查校招官网",
+    "event": "检查目标岗位/秋招动态",
     "date": "2026-07-01",
-    "stage": "关注",
+    "stage": "转正实习替代",
     "priority": "medium",
-    "url": "",
-    "notes": "补充官方链接"
+    "url": "https://campus.jd.com/#/details?id=4868",
+    "notes": "岗位：后端开发工程师；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：1+1"
+  },
+  {
+    "company": "腾讯",
+    "event": "检查目标岗位/秋招动态",
+    "date": "2026-07-01",
+    "stage": "转正实习替代",
+    "priority": "high",
+    "url": "https://join.qq.com/post_detail.html?postid=1224696110585937920",
+    "notes": "岗位：AI应用开发；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：♾"
+  },
+  {
+    "company": "美团",
+    "event": "检查目标岗位/秋招动态",
+    "date": "2026-07-01",
+    "stage": "转正实习替代",
+    "priority": "high",
+    "url": "https://zhaopin.meituan.com/web/position/detail?jobUnionId=4531750384&highlightType=campus",
+    "notes": "岗位：【北斗】大模型算法工程师（金融场景）；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：3"
+  },
+  {
+    "company": "小米",
+    "event": "检查目标岗位/秋招动态",
+    "date": "2026-07-01",
+    "stage": "转正实习替代",
+    "priority": "high",
+    "url": "https://xiaomi.jobs.f.mioffice.cn/internship/position/7616940640676350246/detail?spread=6AA3R7B",
+    "notes": "岗位：AI Agent开发；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：2"
+  },
+  {
+    "company": "快手",
+    "event": "检查目标岗位/秋招动态",
+    "date": "2026-07-01",
+    "stage": "转正实习替代",
+    "priority": "high",
+    "url": "https://campus.kuaishou.cn/recruit/campus/e/#/campus/job-info/11260",
+    "notes": "岗位：AI应用服务端开发工程师；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：♾"
   },
   {
     "company": "DeepSeek",
-    "event": "检查官网/招聘页",
+    "event": "检查目标岗位/秋招动态",
     "date": "2026-07-01",
-    "stage": "关注",
+    "stage": "转正实习替代",
     "priority": "high",
-    "url": "https://www.deepseek.com/",
-    "notes": "每周三检查岗位是否新增"
+    "url": "https://app.mokahr.com/social-recruitment/high-flyer/140576#/job/2eb2e75d-29f3-47b5-bb10-39f12547d398",
+    "notes": "岗位：服务端开发工程师；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：待补充"
   },
   {
     "company": "智谱",
-    "event": "检查官网/招聘页",
+    "event": "检查目标岗位/秋招动态",
     "date": "2026-07-01",
-    "stage": "关注",
+    "stage": "转正实习替代",
     "priority": "high",
-    "url": "",
-    "notes": "补充官方链接"
+    "url": "https://app.mokahr.com/campus-recruitment/zphz/148984#/job/df9452b2-6456-47e7-a4a4-204e1320870d",
+    "notes": "岗位：Code Agent；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：待补充"
+  },
+  {
+    "company": "Kimi",
+    "event": "检查目标岗位/秋招动态",
+    "date": "2026-07-01",
+    "stage": "转正实习替代",
+    "priority": "high",
+    "url": "https://app.mokahr.com/campus-recruitment/moonshot/148507?sourceToken=36ae0fe79b871e0600f2b2cfe0a81ebb#/job/529591c4-cac4-47a1-b122-a15088e5459e",
+    "notes": "岗位：Agent Development Engineer；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：3"
+  },
+  {
+    "company": "字节跳动",
+    "event": "岗位开放参考：AIDP后端开发",
+    "date": "2026-08-04",
+    "stage": "开放参考",
+    "priority": "high",
+    "url": "https://jobs.bytedance.com/campus/position/7605138439188990261/detail",
+    "notes": "来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：2"
+  },
+  {
+    "company": "阿里巴巴",
+    "event": "岗位开放参考：AI应用研发工程师",
+    "date": "2026-08-05",
+    "stage": "开放参考",
+    "priority": "high",
+    "url": "https://campus-talent.alibaba.com/campus/position/199903220038?deptCodes=",
+    "notes": "来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：n*2"
+  },
+  {
+    "company": "京东",
+    "event": "岗位开放参考：后端开发工程师",
+    "date": "2026-07-21",
+    "stage": "开放参考",
+    "priority": "medium",
+    "url": "https://campus.jd.com/#/details?id=4868",
+    "notes": "来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：1+1"
+  },
+  {
+    "company": "腾讯",
+    "event": "岗位开放参考：AI应用开发",
+    "date": "2026-08-06",
+    "stage": "开放参考",
+    "priority": "high",
+    "url": "https://join.qq.com/post_detail.html?postid=1224696110585937920",
+    "notes": "来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：♾"
+  },
+  {
+    "company": "美团",
+    "event": "岗位开放参考：【北斗】大模型算法工程师（金融场景）",
+    "date": "2026-07-29",
+    "stage": "开放参考",
+    "priority": "high",
+    "url": "https://zhaopin.meituan.com/web/position/detail?jobUnionId=4531750384&highlightType=campus",
+    "notes": "来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：3"
+  },
+  {
+    "company": "小米",
+    "event": "岗位开放参考：AI Agent开发",
+    "date": "2026-08-05",
+    "stage": "开放参考",
+    "priority": "high",
+    "url": "https://xiaomi.jobs.f.mioffice.cn/internship/position/7616940640676350246/detail?spread=6AA3R7B",
+    "notes": "来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：2"
+  },
+  {
+    "company": "快手",
+    "event": "岗位开放参考：AI应用服务端开发工程师",
+    "date": "2026-07-30",
+    "stage": "开放参考",
+    "priority": "high",
+    "url": "https://campus.kuaishou.cn/recruit/campus/e/#/campus/job-info/11260",
+    "notes": "来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：♾"
+  },
+  {
+    "company": "DeepSeek",
+    "event": "岗位开放参考：服务端开发工程师",
+    "date": "2026-06-25",
+    "stage": "开放参考",
+    "priority": "high",
+    "url": "https://app.mokahr.com/social-recruitment/high-flyer/140576#/job/2eb2e75d-29f3-47b5-bb10-39f12547d398",
+    "notes": "来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：待补充"
+  },
+  {
+    "company": "智谱",
+    "event": "岗位开放参考：Code Agent",
+    "date": "2026-10-10",
+    "stage": "开放参考",
+    "priority": "high",
+    "url": "https://app.mokahr.com/campus-recruitment/zphz/148984#/job/df9452b2-6456-47e7-a4a4-204e1320870d",
+    "notes": "来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：待补充"
   }
 ]

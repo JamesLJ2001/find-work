@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import csv
 import json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,7 +61,7 @@ def write_events_json(events: list[dict]) -> None:
 
 def write_ics(events: list[dict]) -> None:
     """生成 ICS 日历文件。"""
-    now = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+    now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     lines = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",

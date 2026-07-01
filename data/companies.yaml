@@ -1,49 +1,71 @@
 companies:
   - name: 字节跳动
     priority: high
-    city: 北京
-    directions: [AI应用开发, 大模型应用开发, 后端开发]
-    official_url: https://jobs.bytedance.com/campus/
+    city: 北京优先
+    directions: [AI数据平台, 大模型数据基建, 后端开发]
+    reference_role: AIDP后端开发
+    reference_source: recruitment/target_roles.csv
     check_frequency: weekly
-  - name: 阿里
+  - name: 阿里巴巴
     priority: high
-    city: 北京
-    directions: [AI应用开发, 后端开发, AI平台]
-    official_url: ""
-    check_frequency: weekly
-  - name: 腾讯
-    priority: high
-    city: 北京
-    directions: [AI应用开发, 后台开发]
-    official_url: https://join.qq.com/
-    check_frequency: weekly
-  - name: 美团
-    priority: high
-    city: 北京
-    directions: [大模型应用, 后端开发, 搜索推荐]
-    official_url: https://zhaopin.meituan.com/web/campus
-    check_frequency: weekly
-  - name: 小米
-    priority: medium
-    city: 北京
-    directions: [AI, 后端, IoT]
-    official_url: ""
+    city: 北京优先
+    directions: [AI应用研发, Agent工程, RAG, 业务AI落地]
+    reference_role: AI应用研发工程师
+    reference_source: recruitment/target_roles.csv
     check_frequency: weekly
   - name: 京东
     priority: medium
-    city: 北京
-    directions: [AI, 后端, 数据服务]
-    official_url: ""
+    city: 北京优先
+    directions: [后端开发, AI辅助研发, 分布式系统]
+    reference_role: 后端开发工程师
+    reference_source: recruitment/target_roles.csv
+    check_frequency: weekly
+  - name: 腾讯
+    priority: high
+    city: 北京优先
+    directions: [AI应用开发, 后台开发, 服务稳定性]
+    reference_role: AI应用开发
+    reference_source: recruitment/target_roles.csv
+    check_frequency: weekly
+  - name: 美团
+    priority: high
+    city: 北京优先
+    directions: [金融大模型, Agent算法, AI金融场景]
+    reference_role: 【北斗】大模型算法工程师（金融场景）
+    reference_source: recruitment/target_roles.csv
+    check_frequency: weekly
+  - name: 小米
+    priority: high
+    city: 北京优先
+    directions: [AI Agent, 代码智能体, Agent评测]
+    reference_role: AI Agent开发
+    reference_source: recruitment/target_roles.csv
+    check_frequency: weekly
+  - name: 快手
+    priority: high
+    city: 北京优先
+    directions: [AI应用服务端, Agent工程, 提示词工程]
+    reference_role: AI应用服务端开发工程师
+    reference_source: recruitment/target_roles.csv
     check_frequency: weekly
   - name: DeepSeek
     priority: high
-    city: 北京
-    directions: [AI工程, 大模型应用, 后端]
-    official_url: https://www.deepseek.com/
+    city: 北京优先
+    directions: [大模型服务端, Agent执行环境, AI基础设施]
+    reference_role: 服务端开发工程师
+    reference_source: recruitment/target_roles.csv
     check_frequency: weekly
   - name: 智谱
     priority: high
-    city: 北京
-    directions: [大模型应用, Agent, 后端]
-    official_url: ""
+    city: 北京优先
+    directions: [Code Agent, Agent评测, Agent平台工程]
+    reference_role: Code Agent
+    reference_source: recruitment/target_roles.csv
+    check_frequency: weekly
+  - name: Kimi
+    priority: high
+    city: 北京优先
+    directions: [Agent开发, Agent SDK, Agent基础设施]
+    reference_role: Agent Development Engineer
+    reference_source: recruitment/target_roles.csv
     check_frequency: weekly

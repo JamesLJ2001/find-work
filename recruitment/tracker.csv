@@ -1,9 +1,11 @@
 公司,岗位,城市,JD链接,来源,投递时间,简历版本,状态,下一步,截止时间,备注
-字节跳动,AI应用开发,北京,https://jobs.bytedance.com/campus/,官方校招站,待定,AI应用版,关注中,每周检查,,
-阿里,AI应用开发/后端,北京,,官方校招站,待定,AI应用版,关注中,每周检查,,
-腾讯,AI应用开发/后台开发,北京,https://join.qq.com/,官方校招站,待定,AI应用版,关注中,每周检查,,
-美团,大模型应用/后端,北京,https://zhaopin.meituan.com/web/campus,官方校招站,待定,AI应用版,关注中,每周检查,,
-小米,AI/后端,北京,,官方校招站,待定,AI应用版,关注中,每周检查,,
-京东,AI/后端,北京,,官方校招站,待定,AI应用版,关注中,每周检查,,
-DeepSeek,AI工程/后端,北京,https://www.deepseek.com/,官网/招聘页,待定,AI公司冲刺版,关注中,每周检查,,
-智谱,大模型应用/后端,北京,,官网/招聘页,待定,AI公司冲刺版,关注中,每周检查,,
+字节跳动,AIDP后端开发,北京优先/待确认,https://jobs.bytedance.com/campus/position/7605138439188990261/detail,A官方/转正实习替代样本,待定,AI平台后端版,待分析JD,JD深挖+简历匹配,,秋招开始参考：2026-08-04；可投岗位数量：2；完整JD见 recruitment/target_roles.csv；原始表见 recruitment/source/target_companies.xlsx
+阿里巴巴,AI应用研发工程师,北京优先/待确认,https://campus-talent.alibaba.com/campus/position/199903220038?deptCodes=,A官方/转正实习替代样本,待定,AI应用版,待分析JD,JD深挖+简历匹配,,秋招开始参考：2026-08-05；可投岗位数量：n*2；完整JD见 recruitment/target_roles.csv；原始表见 recruitment/source/target_companies.xlsx
+京东,后端开发工程师,北京优先/待确认,https://campus.jd.com/#/details?id=4868,A官方/转正实习替代样本,待定,后端版,待分析JD,JD深挖+简历匹配,,秋招开始参考：2026-07-21；可投岗位数量：1+1；完整JD见 recruitment/target_roles.csv；原始表见 recruitment/source/target_companies.xlsx
+腾讯,AI应用开发,北京优先/待确认,https://join.qq.com/post_detail.html?postid=1224696110585937920,A官方/转正实习替代样本,待定,AI应用后端版,待分析JD,JD深挖+简历匹配,,秋招开始参考：2026-08-06；可投岗位数量：♾；完整JD见 recruitment/target_roles.csv；原始表见 recruitment/source/target_companies.xlsx
+美团,【北斗】大模型算法工程师（金融场景）,北京优先/待确认,https://zhaopin.meituan.com/web/position/detail?jobUnionId=4531750384&highlightType=campus,A官方/转正实习替代样本,待定,金融AI算法版,待分析JD,JD深挖+简历匹配,,秋招开始参考：2026-07-29；可投岗位数量：3；完整JD见 recruitment/target_roles.csv；原始表见 recruitment/source/target_companies.xlsx
+小米,AI Agent开发,北京优先/待确认,https://xiaomi.jobs.f.mioffice.cn/internship/position/7616940640676350246/detail?spread=6AA3R7B,A官方/转正实习替代样本,待定,Agent工程版,待分析JD,JD深挖+简历匹配,,秋招开始参考：2026-08-05；可投岗位数量：2；完整JD见 recruitment/target_roles.csv；原始表见 recruitment/source/target_companies.xlsx
+快手,AI应用服务端开发工程师,北京优先/待确认,https://campus.kuaishou.cn/recruit/campus/e/#/campus/job-info/11260,A官方/转正实习替代样本,待定,AI应用版,待分析JD,JD深挖+简历匹配,,秋招开始参考：2026-07-30；可投岗位数量：♾；完整JD见 recruitment/target_roles.csv；原始表见 recruitment/source/target_companies.xlsx
+DeepSeek,服务端开发工程师,北京优先/待确认,https://app.mokahr.com/social-recruitment/high-flyer/140576#/job/2eb2e75d-29f3-47b5-bb10-39f12547d398,A官方/转正实习替代样本,待定,AI公司冲刺版,待分析JD,JD深挖+简历匹配,,秋招开始参考：2026-06-25；可投岗位数量：待补充；完整JD见 recruitment/target_roles.csv；原始表见 recruitment/source/target_companies.xlsx
+智谱,Code Agent,北京优先/待确认,https://app.mokahr.com/campus-recruitment/zphz/148984#/job/df9452b2-6456-47e7-a4a4-204e1320870d,A官方/转正实习替代样本,待定,Agent工程版,待分析JD,JD深挖+简历匹配,,秋招开始参考：2026-10-10；可投岗位数量：待补充；完整JD见 recruitment/target_roles.csv；原始表见 recruitment/source/target_companies.xlsx
+Kimi,Agent Development Engineer,北京优先/待确认,https://app.mokahr.com/campus-recruitment/moonshot/148507?sourceToken=36ae0fe79b871e0600f2b2cfe0a81ebb#/job/529591c4-cac4-47a1-b122-a15088e5459e,A官方/转正实习替代样本,待定,Agent工程版,待分析JD,JD深挖+简历匹配,,秋招开始参考：待补充；可投岗位数量：3；完整JD见 recruitment/target_roles.csv；原始表见 recruitment/source/target_companies.xlsx
