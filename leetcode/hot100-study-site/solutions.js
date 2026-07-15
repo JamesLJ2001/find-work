@@ -1410,26 +1410,30 @@ class Solution:
 #         self.right = right
 
 class Solution:
-    def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        best_path_sum = float("-inf")
+    def __init__(self):
+        # 跨递归分支共享全局最优值，使用实例属性就不需要 nonlocal。
+        self.max_sum = float("-inf")
 
-        def maximum_gain(node: Optional[TreeNode]) -> int:
-            nonlocal best_path_sum
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        # 防止同一个 Solution 对象被重复调用时沿用上一次的结果。
+        self.max_sum = float("-inf")
+
+        def max_gain(node: Optional[TreeNode]) -> int:
             if not node:
                 return 0
 
             # 负贡献只会拉低路径和，等价于不选择该子树。
-            left_gain = max(0, maximum_gain(node.left))
-            right_gain = max(0, maximum_gain(node.right))
+            left_gain = max(0, max_gain(node.left))
+            right_gain = max(0, max_gain(node.right))
             # 更新全局答案时可以同时连接左右两支，形成经过当前节点的完整路径。
             path_through_node = node.val + left_gain + right_gain
-            best_path_sum = max(best_path_sum, path_through_node)
+            self.max_sum = max(self.max_sum, path_through_node)
 
             # 返回父节点的路径不能分叉，所以只能携带左右较大的一支。
             return node.val + max(left_gain, right_gain)
 
-        maximum_gain(root)
-        return best_path_sum`,
+        max_gain(root)
+        return self.max_sum`,
 
     200: String.raw`from typing import List
 
