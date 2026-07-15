@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="为面试学习打造的 LeetCode Hot 100 Python3 统一题解、模板与动态演示。">
+  <title>Hot 100 · 模板化学习手册</title>
+  <link rel="stylesheet" href="styles.css?v=fira-code-2">
+</head>
+<body>
+  <a class="skip-link" href="#problem-list">跳到题目列表</a>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="返回首页顶部">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>
+        <strong>HOT / 100</strong>
+        <small>PYTHON3 STUDY FIELD GUIDE</small>
+      </span>
+    </a>
+    <div class="top-actions">
+      <button class="icon-button" id="export-button" type="button" title="导出学习数据">
+        <span aria-hidden="true">⇩</span><span class="button-label">导出</span>
+      </button>
+      <button class="icon-button" id="import-button" type="button" title="导入学习数据">
+        <span aria-hidden="true">⇧</span><span class="button-label">导入</span>
+      </button>
+      <input id="import-file" type="file" accept="application/json,.json" hidden>
+      <button class="theme-button" id="theme-button" type="button" aria-label="切换深浅主题" title="切换主题">
+        <span class="theme-sun" aria-hidden="true">☀</span>
+        <span class="theme-moon" aria-hidden="true">☾</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="page-shell" id="top">
+    <aside class="sidebar" aria-label="题目分类">
+      <div class="sidebar-heading">
+        <span class="kicker">学习地图</span>
+        <h2>17 个知识分块</h2>
+        <p>把 100 道题压缩成可迁移的解题模板。</p>
+      </div>
+
+      <button class="category-link is-active" type="button" data-category="all" aria-current="true">
+        <span class="category-index">00</span>
+        <span class="category-copy"><strong>全部题目</strong><small id="all-progress-text">0 / 100 掌握</small></span>
+        <span class="category-count" id="all-count">100</span>
+      </button>
+      <nav class="category-nav" id="category-nav" aria-label="17 个题目分类"></nav>
+
+      <section class="sidebar-review" aria-labelledby="review-heading">
+        <div>
+          <span class="kicker">REVIEW QUEUE</span>
+          <h3 id="review-heading">今天该复习</h3>
+        </div>
+        <strong id="due-count">0</strong>
+        <button type="button" id="show-due-button">查看队列 <span aria-hidden="true">→</span></button>
+      </section>
+    </aside>
+
+    <main class="main-content">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span>LEETCODE HOT 100</span><i></i><span>统一 Python3 解法</span></p>
+          <h1 id="page-title">不背一百份答案，<br><em>练会一套思考系统。</em></h1>
+          <p>每题只保留兼顾复杂度、可读性与面试表达的主解。用一句话抓本质，用统一代码风格固化模板，再通过逐帧演示看见算法。</p>
+        </div>
+        <div class="hero-progress" aria-label="总体学习进度">
+          <div class="progress-orbit" id="progress-orbit" style="--progress: 0deg">
+            <div><strong id="mastered-percent">0%</strong><span>已掌握</span></div>
+          </div>
+          <dl>
+            <div><dt id="learned-count">0</dt><dd>学习中</dd></div>
+            <div><dt id="mastered-count">0</dt><dd>已掌握</dd></div>
+            <div><dt id="favorite-count">0</dt><dd>已收藏</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="control-deck" aria-label="搜索与筛选">
+        <label class="search-box" for="search-input">
+          <span aria-hidden="true">⌕</span>
+          <input id="search-input" type="search" autocomplete="off" placeholder="搜索题号、题名、标签、模板或解题信号…">
+          <kbd>/</kbd>
+        </label>
+        <div class="filter-row">
+          <label><span>分类</span><select id="category-filter"><option value="all">全部分类</option></select></label>
+          <label><span>难度</span><select id="difficulty-filter"><option value="all">全部难度</option><option value="简单">简单</option><option value="中等">中等</option><option value="困难">困难</option></select></label>
+          <label><span>进度</span><select id="status-filter"><option value="all">全部进度</option><option value="unstarted">未学习</option><option value="learning">学习中</option><option value="mastered">已掌握</option><option value="review">待复习</option></select></label>
+          <button class="filter-toggle" id="favorite-filter" type="button" aria-pressed="false"><span aria-hidden="true">☆</span> 仅看收藏</button>
+          <button class="reset-filter" id="reset-filter" type="button">清除筛选</button>
+        </div>
+      </section>
+
+      <section class="list-section" id="problem-list" aria-labelledby="list-title" tabindex="-1">
+        <div class="list-heading">
+          <div>
+            <p class="section-number">01 / PROBLEM INDEX</p>
+            <h2 id="list-title">全部题目</h2>
+          </div>
+          <p><strong id="result-count">0</strong> 道符合条件 <span id="filter-summary"></span></p>
+        </div>
+        <div class="problem-grid" id="problem-grid"></div>
+        <div class="empty-state" id="empty-state" hidden>
+          <span aria-hidden="true">⌁</span>
+          <h3>没有找到匹配的题目</h3>
+          <p>换个关键词，或清除部分筛选条件。</p>
+          <button type="button" id="empty-reset">查看全部题目</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="problem-dialog" id="problem-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-shell">
+      <header class="dialog-header">
+        <div class="dialog-title-block">
+          <span class="dialog-number" id="dialog-number">LC 001</span>
+          <div>
+            <div class="dialog-badges" id="dialog-badges"></div>
+            <h2 id="dialog-title">题目标题</h2>
+          </div>
+        </div>
+        <div class="dialog-header-actions">
+          <button class="dialog-favorite" id="dialog-favorite" type="button" aria-pressed="false"><span aria-hidden="true">☆</span><span>收藏</span></button>
+          <a class="official-link" id="official-link" href="#" target="_blank" rel="noopener noreferrer">查看原题 ↗</a>
+          <button class="dialog-close" id="dialog-close" type="button" aria-label="关闭题目详情">×</button>
+        </div>
+      </header>
+
+      <nav class="dialog-tabs" role="tablist" aria-label="题目详情">
+        <button type="button" role="tab" aria-selected="true" aria-controls="panel-overview" id="tab-overview" data-tab="overview"><span>01</span>核心讲解</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-code" id="tab-code" data-tab="code" tabindex="-1"><span>02</span>Python3 主解</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-demo" id="tab-demo" data-tab="demo" tabindex="-1"><span>03</span>动态演示</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-study" id="tab-study" data-tab="study" tabindex="-1"><span>04</span>学习记录</button>
+      </nav>
+
+      <div class="dialog-body">
+        <section class="tab-panel is-active" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+          <div class="essence-card">
+            <span>一句话本质</span>
+            <p id="detail-essence"></p>
+          </div>
+          <div class="explain-grid">
+            <article>
+              <div class="article-label"><span>WHY</span><h3>为什么选这个解法</h3></div>
+              <p id="detail-why"></p>
+            </article>
+            <article>
+              <div class="article-label"><span>SIGNAL</span><h3>看到什么就该想到它</h3></div>
+              <p id="detail-signal"></p>
+            </article>
+          </div>
+          <div class="method-strip">
+            <div><span>推荐做法</span><strong id="detail-method"></strong></div>
+            <div><span>通用模板</span><strong id="detail-template"></strong></div>
+            <div><span>时间复杂度</span><strong id="detail-time"></strong></div>
+            <div><span>空间复杂度</span><strong id="detail-space"></strong></div>
+          </div>
+          <section class="pitfall-card">
+            <div class="pitfall-icon" aria-hidden="true">!</div>
+            <div><h3>最容易写错的地方</h3><p id="detail-pitfall"></p></div>
+          </section>
+          <section class="detail-tags"><h3>知识标签</h3><div id="detail-tags"></div></section>
+        </section>
+
+        <section class="tab-panel" id="panel-code" role="tabpanel" aria-labelledby="tab-code" hidden>
+          <div class="code-intro">
+            <div><span class="section-number">PYTHON 3 / INTERVIEW READY</span><h3>统一风格的推荐主解</h3></div>
+            <p>变量命名、边界处理与模板结构保持一致，适合默写，也适合在面试中逐行解释。</p>
+          </div>
+          <div class="code-window">
+            <div class="code-toolbar"><span><i></i><i></i><i></i></span><strong id="code-filename">solution.py</strong><button id="copy-code" type="button">复制代码</button></div>
+            <pre tabindex="0" aria-label="Python3 题解代码"><code id="solution-code"></code></pre>
+          </div>
+          <p class="code-footnote"><span aria-hidden="true">⌘</span> 先讲不变量，再讲指针或状态如何移动，最后补上复杂度。</p>
+        </section>
+
+        <section class="tab-panel" id="panel-demo" role="tabpanel" aria-labelledby="tab-demo" hidden>
+          <div class="demo-topline">
+            <div><span class="section-number">ALGORITHM PLAYGROUND</span><h3>跟着状态一步步变化</h3></div>
+            <div class="demo-controls" aria-label="动画控制">
+              <button type="button" id="demo-reset" aria-label="重置演示" title="重置">↺</button>
+              <button type="button" id="demo-prev" aria-label="上一步" title="上一步">←</button>
+              <button class="play-button" type="button" id="demo-play" aria-label="播放"><span aria-hidden="true">▶</span></button>
+              <button type="button" id="demo-next" aria-label="下一步" title="下一步">→</button>
+              <label class="speed-control"><span>速度</span><select id="demo-speed"><option value="1400">慢</option><option value="850" selected>正常</option><option value="450">快</option></select></label>
+            </div>
+          </div>
+          <div class="demo-layout">
+            <div class="visual-panel">
+              <div class="visual-grid-bg" aria-hidden="true"></div>
+              <div class="visual-stage" id="visual-stage" aria-live="polite"></div>
+              <div class="visual-legend"><span><i class="legend-active"></i>当前操作</span><span><i class="legend-range"></i>有效范围</span><span><i class="legend-done"></i>已确定</span></div>
+            </div>
+            <aside class="step-panel">
+              <div class="step-counter"><span>STEP</span><strong id="step-index">01</strong><em>/</em><span id="step-total">01</span></div>
+              <h4 id="step-title">初始状态</h4>
+              <p id="step-note">准备开始演示。</p>
+              <dl class="variable-list" id="variable-list"></dl>
+              <div class="step-track" id="step-track" aria-label="演示步骤"></div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="panel-study" role="tabpanel" aria-labelledby="tab-study" hidden>
+          <div class="study-heading"><span class="section-number">LOCAL STUDY LOG</span><h3>把这道题真正变成自己的</h3><p>数据只保存在当前浏览器中，可随时导出备份。</p></div>
+          <div class="study-grid">
+            <fieldset class="status-fieldset"><legend>学习状态</legend><div class="segment-control" id="status-control">
+              <label><input type="radio" name="study-status" value="unstarted"><span><i></i>未学习</span></label>
+              <label><input type="radio" name="study-status" value="learning"><span><i></i>学习中</span></label>
+              <label><input type="radio" name="study-status" value="mastered"><span><i></i>已掌握</span></label>
+            </div></fieldset>
+            <fieldset class="mastery-fieldset"><legend>掌握程度 <small>1 到 5 级</small></legend><div class="mastery-control" id="mastery-control" role="radiogroup" aria-label="掌握程度"></div></fieldset>
+            <section class="review-card" aria-labelledby="review-card-title">
+              <div><h4 id="review-card-title">加入复习队列</h4><p>到期后会在首页提醒你。</p></div>
+              <label class="switch"><input id="review-toggle" type="checkbox"><span></span><em>加入复习</em></label>
+              <label class="date-field"><span>下次复习日</span><input id="review-date" type="date"></label>
+            </section>
+            <label class="notes-field"><span>我的笔记 <small id="notes-count">0 / 2000</small></span><textarea id="study-notes" maxlength="2000" rows="8" placeholder="例如：为什么会想到这个模板？哪处边界曾经写错？二刷时还卡在哪里？"></textarea></label>
+          </div>
+        </section>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="data.js" defer></script>
+  <script src="solutions.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
