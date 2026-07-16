@@ -1439,129 +1439,127 @@ class Solution:
 
 
 class Solution:
+    def dfs(self, grid, row, column):
+        # 进入陆地后立刻标记为已访问，避免相邻陆地递归回来。
+        grid[row][column] = 0
+        rows, columns = len(grid), len(grid[0])
+
+        # 一座岛只通过上下左右相连，对角线不算连通。
+        for x, y in [
+            (row - 1, column),
+            (row + 1, column),
+            (row, column - 1),
+            (row, column + 1),
+        ]:
+            if (
+                0 <= x < rows
+                and 0 <= y < columns
+                and grid[x][y] == "1"
+            ):
+                self.dfs(grid, x, y)
+
     def numIslands(self, grid: List[List[str]]) -> int:
         rows = len(grid)
+        if rows == 0:
+            return 0
         columns = len(grid[0])
-        island_count = 0
+        ans = 0
 
         for row in range(rows):
             for column in range(columns):
-                if grid[row][column] != "1":
-                    continue
+                if grid[row][column] == "1":
+                    # 每发现一块未访问陆地，就找到了一座新的岛。
+                    ans += 1
+                    # DFS 会一次标记与它相连的整座岛，后面不会重复计数。
+                    self.dfs(grid, row, column)
 
-                # 每遇到一块未访问陆地，就发现了一个新的连通分量。
-                island_count += 1
-                grid[row][column] = "0"
-                stack = [(row, column)]
+        return ans`,
 
-                # 入栈时立即改为水，避免同一格被相邻陆地重复加入栈。
-                while stack:
-                    current_row, current_column = stack.pop()
-                    for row_change, column_change in (
-                        (1, 0),
-                        (-1, 0),
-                        (0, 1),
-                        (0, -1),
-                    ):
-                        next_row = current_row + row_change
-                        next_column = current_column + column_change
-                        if (
-                            0 <= next_row < rows
-                            and 0 <= next_column < columns
-                            and grid[next_row][next_column] == "1"
-                        ):
-                            grid[next_row][next_column] = "0"
-                            stack.append((next_row, next_column))
-
-        return island_count`,
-
-    994: String.raw`from collections import deque
+    994: String.raw`import collections
 from typing import List
 
 
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
+        # time 保存当前出队橘子的腐烂时间；没有传播时答案就是 0。
+        time = 0
         rows = len(grid)
         columns = len(grid[0])
-        rotten_queue = deque()
-        fresh_count = 0
+        # 队列元素是（行、列、这个橘子在第几分钟腐烂）。
+        queue = collections.deque()
 
-        for row in range(rows):
-            for column in range(columns):
-                if grid[row][column] == 2:
-                    rotten_queue.append((row, column))
-                elif grid[row][column] == 1:
-                    fresh_count += 1
+        # 所有初始腐烂橘子都是第 0 分钟的传播源，必须同时入队。
+        for r, row in enumerate(grid):
+            for c, val in enumerate(row):
+                if val == 2:
+                    queue.append((r, c, 0))
 
-        minutes = 0
-        # 所有初始腐烂橘子同时入队，构成多源 BFS 的第 0 层。
-        while rotten_queue and fresh_count > 0:
-            # 一轮只扩散当前层，轮末加一分钟，保证时间与 BFS 层数一致。
-            for _ in range(len(rotten_queue)):
-                row, column = rotten_queue.popleft()
-                for row_change, column_change in (
-                    (1, 0),
-                    (-1, 0),
-                    (0, 1),
-                    (0, -1),
-                ):
-                    next_row = row + row_change
-                    next_column = column + column_change
-                    if (
-                        0 <= next_row < rows
-                        and 0 <= next_column < columns
-                        and grid[next_row][next_column] == 1
-                    ):
-                        grid[next_row][next_column] = 2
-                        fresh_count -= 1
-                        rotten_queue.append((next_row, next_column))
-            minutes += 1
+        def helper(r, c):
+            # yield 逐个交出没有越界的上下左右邻居。
+            for row, column in (
+                (r - 1, c),
+                (r + 1, c),
+                (r, c - 1),
+                (r, c + 1),
+            ):
+                if 0 <= row < rows and 0 <= column < columns:
+                    yield row, column
 
-        # 队列耗尽后仍有新鲜橘子，说明它们与所有腐烂源都不连通。
-        return minutes if fresh_count == 0 else -1`,
+        # 多源 BFS 保证队列中的 time 从小到大排列。
+        while queue:
+            r, c, time = queue.popleft()
+            for row, column in helper(r, c):
+                if grid[row][column] == 1:
+                    # 入队时立即标记，防止同一个橘子被重复加入队列。
+                    grid[row][column] = 2
+                    queue.append((row, column, time + 1))
 
-    207: String.raw`from collections import deque
+        # BFS 结束后还有新鲜橘子，说明它无法被任何腐烂源到达。
+        if any(1 in row for row in grid):
+            return -1
+        # 最后一次出队的 time 就是全部腐烂所需的最长时间。
+        return time`,
+
+    207: String.raw`import collections
 from typing import List
 
 
 class Solution:
-    def canFinish(
-        self,
-        numCourses: int,
-        prerequisites: List[List[int]],
-    ) -> bool:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         graph = [[] for _ in range(numCourses)]
-        indegree = [0] * numCourses
+        indegrees = [0] * numCourses
 
+        # 边的方向是“前置课程 -> 后续课程”。
         for course, prerequisite in prerequisites:
             graph[prerequisite].append(course)
-            indegree[course] += 1
+            indegrees[course] += 1
 
         # 入度为 0 的课程没有未完成前置条件，可以立即学习。
-        available = deque(
-            course
-            for course in range(numCourses)
-            if indegree[course] == 0
-        )
-        completed_count = 0
+        queue = collections.deque()
+        for course in range(numCourses):
+            if indegrees[course] == 0:
+                queue.append(course)
 
-        while available:
-            prerequisite = available.popleft()
-            completed_count += 1
+        completed = 0
+        while queue:
+            course = queue.popleft()
+            completed += 1
 
-            for course in graph[prerequisite]:
-                # 移除已完成课程对应的边，新的零入度节点进入队列。
-                indegree[course] -= 1
-                if indegree[course] == 0:
-                    available.append(course)
+            # 学完当前课程后，它的后续课程少了一个前置条件。
+            for next_course in graph[course]:
+                indegrees[next_course] -= 1
+                if indegrees[next_course] == 0:
+                    queue.append(next_course)
 
         # 有环时环内节点永远无法降到零入度，因此完成数会不足。
-        return completed_count == numCourses`,
+        return completed == numCourses`,
 
     208: String.raw`class TrieNode:
     def __init__(self):
+        # children 保存从当前节点出发的字符路径。
         self.children = {}
-        self.is_word = False
+        # is_end 表示当前节点是不是一个完整单词的结尾。
+        self.is_end = False
 
 
 class Trie:
@@ -1569,29 +1567,32 @@ class Trie:
         self.root = TrieNode()
 
     def insert(self, word: str) -> None:
-        current = self.root
-        # 每条边代表一个字符，共享路径自然复用了相同前缀。
+        node = self.root
         for character in word:
-            if character not in current.children:
-                current.children[character] = TrieNode()
-            current = current.children[character]
-        # 结束标记用于区分“完整单词”和“仅仅是某个单词的前缀”。
-        current.is_word = True
+            # 当前字符的路径不存在时，创建一个新节点。
+            if character not in node.children:
+                node.children[character] = TrieNode()
+            node = node.children[character]
+
+        # 最后一个字符对应的节点标记为单词结尾。
+        node.is_end = True
 
     def search(self, word: str) -> bool:
-        node = self._find_prefix(word)
-        return node is not None and node.is_word
+        node = self._find(word)
+        # 路径存在并且到达单词结尾，单词才真正存在。
+        return node is not None and node.is_end
 
     def startsWith(self, prefix: str) -> bool:
-        return self._find_prefix(prefix) is not None
+        # 查询前缀只要求路径存在，不要求到达单词结尾。
+        return self._find(prefix) is not None
 
-    def _find_prefix(self, prefix: str):
-        current = self.root
-        for character in prefix:
-            if character not in current.children:
+    def _find(self, text: str):
+        node = self.root
+        for character in text:
+            if character not in node.children:
                 return None
-            current = current.children[character]
-        return current`,
+            node = node.children[character]
+        return node`,
 
     46: String.raw`from typing import List
 
