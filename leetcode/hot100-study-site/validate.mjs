@@ -65,6 +65,94 @@ for (const [name, expected] of Object.entries(expectedCounts)) {
 const extraSolutions = Object.keys(solutions ?? {}).filter((id) => !ids.has(Number(id)));
 if (extraSolutions.length) errors.push(`存在多余解法：${extraSolutions.join(", ")}`);
 
+const detailedDemoRules = {
+  200: {
+    minimumSteps: 60,
+    minimumConditions: 30,
+    runtimeField: "stack",
+    expectedResult: "2",
+    expectedChanges: [[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 3, 0], [2, 3, 0], [2, 2, 0]],
+    requiredLines: [5, 7, 8, 11, 12, 13, 14, 15, 17, 18, 19, 20, 22, 24, 25, 26, 27, 28, 29, 31, 32, 33, 35, 37, 39],
+    forbiddenActualLines: [27],
+  },
+  994: {
+    minimumSteps: 120,
+    minimumConditions: 80,
+    runtimeField: "queue",
+    expectedResult: "4 分钟",
+    expectedChanges: [[1, 0, 2], [0, 1, 2], [1, 1, 2], [0, 2, 2], [2, 1, 2], [2, 2, 2]],
+    requiredLines: [6, 8, 9, 10, 12, 15, 16, 17, 18, 20, 22, 23, 24, 25, 26, 28, 29, 32, 33, 34, 35, 37, 38, 41, 42, 44],
+    forbiddenActualLines: [42],
+  },
+};
+
+for (const [problemId, rule] of Object.entries(detailedDemoRules)) {
+  const problem = problems.find((item) => item.id === Number(problemId));
+  const steps = problem?.demo?.steps ?? [];
+  const sourceLineCount = (solutions?.[problemId] ?? "").split(/\r?\n/).length;
+  const allChanges = [];
+  const coveredLines = new Set();
+  let conditionCount = 0;
+
+  if (steps.length < rule.minimumSteps) {
+    errors.push(`${problemId} 详细动画至少需要 ${rule.minimumSteps} 步，实际为 ${steps.length}`);
+  }
+
+  steps.forEach((step, index) => {
+    const label = `${problemId} 动画第 ${index + 1} 步`;
+    if (!step.phase) errors.push(`${label} 缺少 phase`);
+    if (!step.vars || typeof step.vars !== "object") errors.push(`${label} 缺少 vars`);
+    if (!Object.prototype.hasOwnProperty.call(step, rule.runtimeField)) {
+      errors.push(`${label} 缺少 ${rule.runtimeField}`);
+    }
+
+    const lineNumbers = Array.isArray(step.codeLine) ? step.codeLine : [step.codeLine];
+    const validLines = lineNumbers.filter((line) => Number.isInteger(Number(line)));
+    if (!validLines.length) {
+      errors.push(`${label} 缺少 codeLine`);
+    } else if (validLines.some((line) => Number(line) < 1 || Number(line) > sourceLineCount)) {
+      errors.push(`${label} 的 codeLine 超出 Python3 解法范围`);
+    }
+    validLines.forEach((line) => coveredLines.add(Number(line)));
+    if (validLines.some((line) => rule.forbiddenActualLines.includes(Number(line)))) {
+      errors.push(`${label} 把本例未执行的第 ${validLines.find((line) => rule.forbiddenActualLines.includes(Number(line)))} 行标成了实际执行`);
+    }
+
+    const skippedLineNumbers = Array.isArray(step.skippedLine) ? step.skippedLine : [step.skippedLine];
+    const validSkippedLines = skippedLineNumbers.filter((line) => Number.isInteger(Number(line)));
+    if (validSkippedLines.some((line) => Number(line) < 1 || Number(line) > sourceLineCount)) {
+      errors.push(`${label} 的 skippedLine 超出 Python3 解法范围`);
+    }
+    validSkippedLines.forEach((line) => coveredLines.add(Number(line)));
+    if (validSkippedLines.some((line) => validLines.map(Number).includes(Number(line)))) {
+      errors.push(`${label} 的同一源码行不能既实际执行又标记为跳过`);
+    }
+
+    const changes = Array.isArray(step.changes)
+      ? (Array.isArray(step.changes[0]) ? step.changes : [step.changes])
+      : [];
+    allChanges.push(...changes);
+    if (step.condition) conditionCount += 1;
+  });
+
+  if (JSON.stringify(allChanges) !== JSON.stringify(rule.expectedChanges)) {
+    errors.push(`${problemId} 动画网格变化顺序不正确：${JSON.stringify(allChanges)}`);
+  }
+  if (conditionCount < rule.minimumConditions) {
+    errors.push(`${problemId} 动画判断分支不足 ${rule.minimumConditions} 步，实际为 ${conditionCount}`);
+  }
+  const missingLines = rule.requiredLines.filter((line) => !coveredLines.has(line));
+  if (missingLines.length) {
+    errors.push(`${problemId} 动画没有覆盖源码行：${missingLines.join(", ")}`);
+  }
+  if (String(steps.at(-1)?.result) !== rule.expectedResult) {
+    errors.push(`${problemId} 动画最终结果应为 ${rule.expectedResult}，实际为 ${steps.at(-1)?.result ?? "缺失"}`);
+  }
+  if (Number(problemId) === 994 && JSON.stringify(problem?.demo?.initialDone) !== JSON.stringify([[0, 0]])) {
+    errors.push("994 动画必须把初始腐烂源 (0,0) 标记为已腐烂");
+  }
+}
+
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exitCode = 1;

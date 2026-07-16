@@ -22,7 +22,7 @@
   ];
 
   const S = (title, note, meta = {}) => ({ title, note, ...meta });
-  const D = (type, values, steps) => ({ type, values, steps });
+  const D = (type, values, steps, meta = {}) => ({ type, values, steps, ...meta });
   const P = (id, title, slug, category, difficulty, method, template, tags, essence, why, signal, time, space, pitfall, demo) => ({
     id, title, slug, category, difficulty, method, template, tags, essence, why, signal, time, space, pitfall, demo
   });
@@ -449,18 +449,653 @@
       "扫描到未访问陆地就发现一个新连通块；立刻 DFS 淹没其四向可达陆地，后续不会重复计数。",
       "洪水填充是网格连通性的最小模板，原地改标记还能省去 visited。", "二维网格中统计四向连通块", "O(mn)", "O(mn)，最坏递归栈", "进入陆地必须先标记再递归；Python 遇到极大连通块时还要留意递归深度限制。",
       D("matrix", [["1", "1", "0", "0"], ["1", "0", "0", "1"], ["0", "0", "1", "1"]], [
-        S("发现第一座岛", "扫描到 (0,0)，ans 加一并递归标记相连的 (0,1)、(1,0)。", { active: [0, 0], vars: { ans: 1 } }),
-        S("跳过已标记区域", "这些格已不再等于字符串 '1'，后续扫描不会重复计数。", { active: [0, 1], vars: { ans: 1 } }),
-        S("发现第二座岛", "(1,3) 与下方两个陆地连通，整体只计一次。", { active: [1, 3], result: "2" })
-      ])),
+        S("进入 numIslands", "调用主函数，第一步只读取网格行数。", {
+          phase: "初始化", codeLine: [24, 25], stack: ["numIslands"],
+          changed: ["rows"], vars: { rows: "未定义 → 3" }
+        }),
+        S("判断空网格分支", "rows 等于 3，所以条件为假，不执行 return 0；空网格才会在这里提前结束。", {
+          phase: "初始化", codeLine: 26, skippedLine: 27, stack: ["numIslands"],
+          condition: "rows == 0 → False", vars: { rows: 3, branch: "继续执行" }
+        }),
+        S("读取列数", "确认网格非空后才能安全访问 grid[0]；当前每行有 4 列。", {
+          phase: "初始化", codeLine: 28, stack: ["numIslands"],
+          changed: ["columns"], vars: { rows: 3, columns: "未定义 → 4" }
+        }),
+        S("初始化岛屿数量", "执行 ans = 0；外层扫描还没有发现任何岛屿。", {
+          phase: "初始化", codeLine: 29, stack: ["numIslands"],
+          changed: ["ans"], vars: { rows: 3, columns: 4, ans: "未定义 → 0" }
+        }),
+        S("双重循环开始扫描", "外层 row=0，内层 column=0，当前检查左上角。", {
+          phase: "外层扫描", codeLine: [31, 32], stack: ["numIslands"],
+          active: [0, 0], vars: { row: 0, column: 0, ans: 0 }
+        }),
+        S("第一个格子是陆地", "grid[0][0] 是字符串 '1'，说明找到一块尚未访问的陆地。", {
+          phase: "外层扫描", codeLine: 33, stack: ["numIslands"],
+          active: [0, 0], condition: "grid[0][0] == '1' → True",
+          vars: { row: 0, column: 0, cell: "'1'", ans: 0 }
+        }),
+        S("岛屿数加一", "外层扫描第一次遇到这座连通块，ans 从 0 变成 1。", {
+          phase: "外层扫描", codeLine: 35, stack: ["numIslands"],
+          active: [0, 0], changed: ["ans"], vars: { ans: "0 → 1" }
+        }),
+        S("调用 dfs(0,0)", "以 (0,0) 为入口进入递归；numIslands 暂停等待 DFS 返回。", {
+          phase: "第一座岛 · DFS", codeLine: [37, 5], event: "call",
+          active: [0, 0], stack: ["numIslands", "dfs(0,0)"],
+          vars: { row: 0, column: 0, ans: 1 }
+        }),
+        S("标记 DFS 入口", "进入 DFS 后立即把 grid[0][0] 从 '1' 改成 0，再读取 rows 和 columns。", {
+          phase: "第一座岛 · DFS", codeLine: [7, 8],
+          active: [0, 0], changes: [[0, 0, 0]], stack: ["numIslands", "dfs(0,0)"],
+          changed: ["grid[0][0]"], vars: { "grid[0][0]": "'1' → 0", rows: 3, columns: 4 }
+        }),
+        S("检查上邻居", "候选坐标 (-1,0) 越过上边界，and 在第一项就短路，不访问 grid[-1][0]。", {
+          phase: "第一座岛 · DFS", codeLine: [11, 12, 17, 18], skippedLine: [19, 20, 22],
+          active: [0, 0], probe: [-1, 0], stack: ["numIslands", "dfs(0,0)"],
+          condition: "0 <= -1 < 3 → False", vars: { x: -1, y: 0, action: "跳过" }
+        }),
+        S("检查下邻居", "(1,0) 没有越界，而且仍为 '1'，三个判断全部为真。", {
+          phase: "第一座岛 · DFS", codeLine: [13, 17, 18, 19, 20],
+          active: [0, 0], probe: [1, 0], stack: ["numIslands", "dfs(0,0)"],
+          condition: "边界合法 且 grid[1][0] == '1' → True", vars: { x: 1, y: 0 }
+        }),
+        S("递归到 dfs(1,0)", "父调用 dfs(0,0) 保留现场，新调用被压到递归栈顶。", {
+          phase: "第一座岛 · DFS", codeLine: [22, 5], event: "call",
+          active: [1, 0], stack: ["numIslands", "dfs(0,0)", "dfs(1,0)"],
+          vars: { row: 1, column: 0, depth: 2 }
+        }),
+        S("标记 (1,0)", "这块陆地属于第一座岛，进入时立即改成 0。", {
+          phase: "第一座岛 · DFS", codeLine: [7, 8],
+          active: [1, 0], changes: [[1, 0, 0]], stack: ["numIslands", "dfs(0,0)", "dfs(1,0)"],
+          changed: ["grid[1][0]"], vars: { "grid[1][0]": "'1' → 0", rows: 3, columns: 4 }
+        }),
+        S("检查 dfs(1,0) 的上邻居", "(0,0) 在边界内，但已在进入父调用时改成 0，所以不能递归回去。", {
+          phase: "第一座岛 · DFS", codeLine: [11, 12, 17, 18, 19, 20], skippedLine: 22,
+          active: [1, 0], probe: [0, 0], stack: ["numIslands", "dfs(0,0)", "dfs(1,0)"],
+          condition: "grid[0][0] == '1' → False",
+          vars: { row: 1, column: 0, x: 0, y: 0, cell: "0" }
+        }),
+        S("检查 dfs(1,0) 的下邻居", "(2,0) 在边界内，但它是字符串 '0'，属于水域。", {
+          phase: "第一座岛 · DFS", codeLine: [11, 13, 17, 18, 19, 20], skippedLine: 22,
+          active: [1, 0], probe: [2, 0], stack: ["numIslands", "dfs(0,0)", "dfs(1,0)"],
+          condition: "grid[2][0] == '1' → False",
+          vars: { row: 1, column: 0, x: 2, y: 0, cell: "'0'" }
+        }),
+        S("检查 dfs(1,0) 的左邻居", "(1,-1) 的行坐标合法，但列坐标越界；and 在列判断处短路。", {
+          phase: "第一座岛 · DFS", codeLine: [11, 14, 17, 18, 19], skippedLine: [20, 22],
+          active: [1, 0], probe: [1, -1], stack: ["numIslands", "dfs(0,0)", "dfs(1,0)"],
+          condition: "0 <= -1 < 4 → False",
+          vars: { row: 1, column: 0, x: 1, y: -1, action: "跳过" }
+        }),
+        S("检查 dfs(1,0) 的右邻居", "(1,1) 在边界内，但它是水域，四个方向至此全部检查完成。", {
+          phase: "第一座岛 · DFS", codeLine: [11, 15, 17, 18, 19, 20], skippedLine: 22,
+          active: [1, 0], probe: [1, 1], stack: ["numIslands", "dfs(0,0)", "dfs(1,0)"],
+          condition: "grid[1][1] == '1' → False",
+          vars: { row: 1, column: 0, x: 1, y: 1, cell: "'0'" }
+        }),
+        S("dfs(1,0) 返回", "四个方向检查完毕，当前调用隐式返回，继续执行父调用的邻居循环。", {
+          phase: "第一座岛 · DFS", codeLine: 11, event: "return",
+          active: [0, 0], stack: ["numIslands", "dfs(0,0)"],
+          vars: { returned: "dfs(1,0)", resume: "dfs(0,0)" }
+        }),
+        S("父节点检查左邻居", "回到 dfs(0,0)，继续检查 (0,-1)；列坐标越界。", {
+          phase: "第一座岛 · DFS", codeLine: [11, 14, 17, 18, 19], skippedLine: [20, 22],
+          active: [0, 0], probe: [0, -1], stack: ["numIslands", "dfs(0,0)"],
+          condition: "0 <= -1 < 4 → False", vars: { x: 0, y: -1, action: "跳过" }
+        }),
+        S("父节点检查右邻居", "(0,1) 合法且为 '1'，需要继续递归。", {
+          phase: "第一座岛 · DFS", codeLine: [15, 17, 18, 19, 20],
+          active: [0, 0], probe: [0, 1], stack: ["numIslands", "dfs(0,0)"],
+          condition: "边界合法 且 grid[0][1] == '1' → True", vars: { x: 0, y: 1 }
+        }),
+        S("递归到 dfs(0,1)", "把右邻居作为新的 DFS 调用压入栈顶。", {
+          phase: "第一座岛 · DFS", codeLine: [22, 5], event: "call",
+          active: [0, 1], stack: ["numIslands", "dfs(0,0)", "dfs(0,1)"],
+          vars: { row: 0, column: 1, depth: 2 }
+        }),
+        S("标记 (0,1)", "第一座岛的第三块陆地从 '1' 改成 0。", {
+          phase: "第一座岛 · DFS", codeLine: [7, 8],
+          active: [0, 1], changes: [[0, 1, 0]], stack: ["numIslands", "dfs(0,0)", "dfs(0,1)"],
+          changed: ["grid[0][1]"], vars: { "grid[0][1]": "'1' → 0", rows: 3, columns: 4 }
+        }),
+        S("检查 dfs(0,1) 的上邻居", "(-1,1) 越过上边界，后面的列判断和网格访问都被短路。", {
+          phase: "第一座岛 · DFS", codeLine: [11, 12, 17, 18], skippedLine: [19, 20, 22],
+          active: [0, 1], probe: [-1, 1], stack: ["numIslands", "dfs(0,0)", "dfs(0,1)"],
+          condition: "0 <= -1 < 3 → False",
+          vars: { row: 0, column: 1, x: -1, y: 1, action: "跳过" }
+        }),
+        S("检查 dfs(0,1) 的下邻居", "(1,1) 在边界内，但值为字符串 '0'，不进入递归。", {
+          phase: "第一座岛 · DFS", codeLine: [11, 13, 17, 18, 19, 20], skippedLine: 22,
+          active: [0, 1], probe: [1, 1], stack: ["numIslands", "dfs(0,0)", "dfs(0,1)"],
+          condition: "grid[1][1] == '1' → False",
+          vars: { row: 0, column: 1, x: 1, y: 1, cell: "'0'" }
+        }),
+        S("检查 dfs(0,1) 的左邻居", "(0,0) 已被标成 0，因此不会递归回到父节点。", {
+          phase: "第一座岛 · DFS", codeLine: [11, 14, 17, 18, 19, 20], skippedLine: 22,
+          active: [0, 1], probe: [0, 0], stack: ["numIslands", "dfs(0,0)", "dfs(0,1)"],
+          condition: "grid[0][0] == '1' → False",
+          vars: { row: 0, column: 1, x: 0, y: 0, cell: "0" }
+        }),
+        S("检查 dfs(0,1) 的右邻居", "(0,2) 是水域；当前调用的四个候选全部处理完。", {
+          phase: "第一座岛 · DFS", codeLine: [11, 15, 17, 18, 19, 20], skippedLine: 22,
+          active: [0, 1], probe: [0, 2], stack: ["numIslands", "dfs(0,0)", "dfs(0,1)"],
+          condition: "grid[0][2] == '1' → False",
+          vars: { row: 0, column: 1, x: 0, y: 2, cell: "'0'" }
+        }),
+        S("dfs(0,1) 返回", "四个方向检查完成，当前调用返回父调用 dfs(0,0)。", {
+          phase: "第一座岛 · DFS", codeLine: 11, event: "return",
+          active: [0, 0], stack: ["numIslands", "dfs(0,0)"],
+          vars: { returned: "dfs(0,1)", resume: "dfs(0,0)" }
+        }),
+        S("dfs(0,0) 返回", "父调用的四个方向也全部完成，第一座岛 DFS 结束并回到主函数。", {
+          phase: "第一座岛 · DFS", codeLine: 11, event: "return",
+          active: [0, 0], stack: ["numIslands"],
+          vars: { returned: "dfs(0,0)", ans: 1 }
+        }),
+        S("扫描 (0,1)", "这块陆地已经被 DFS 改成整数 0，不会被重复计数。", {
+          phase: "外层扫描", codeLine: [32, 33], skippedLine: [35, 37],
+          active: [0, 1], stack: ["numIslands"], condition: "grid[0][1] == '1' → False",
+          vars: { row: 0, column: 1, cell: "0", ans: 1 }
+        }),
+        S("扫描 (0,2)", "当前位置是水域，条件为假。", {
+          phase: "外层扫描", codeLine: [32, 33], skippedLine: [35, 37],
+          active: [0, 2], stack: ["numIslands"], condition: "grid[0][2] == '1' → False",
+          vars: { row: 0, column: 2, cell: "'0'", ans: 1 }
+        }),
+        S("扫描 (0,3)", "第一行最后一个格子也是水域。", {
+          phase: "外层扫描", codeLine: [32, 33], skippedLine: [35, 37],
+          active: [0, 3], stack: ["numIslands"], condition: "grid[0][3] == '1' → False",
+          vars: { row: 0, column: 3, cell: "'0'", ans: 1 }
+        }),
+        S("外层循环进入第 1 行", "row 从 0 变成 1，column 回到 0；(1,0) 已被第一座岛的 DFS 标记。", {
+          phase: "外层扫描", codeLine: [31, 32, 33], skippedLine: [35, 37],
+          active: [1, 0], stack: ["numIslands"], condition: "grid[1][0] == '1' → False",
+          changed: ["row", "column"], vars: { row: "0 → 1", column: "3 → 0", cell: "0", ans: 1 }
+        }),
+        S("扫描 (1,1)", "当前位置是水域，不增加 ans。", {
+          phase: "外层扫描", codeLine: [32, 33], skippedLine: [35, 37],
+          active: [1, 1], stack: ["numIslands"], condition: "grid[1][1] == '1' → False",
+          vars: { row: 1, column: 1, cell: "'0'", ans: 1 }
+        }),
+        S("扫描 (1,2)", "当前位置仍是水域；下一个格子才是第二座岛的入口。", {
+          phase: "外层扫描", codeLine: [32, 33], skippedLine: [35, 37],
+          active: [1, 2], stack: ["numIslands"], condition: "grid[1][2] == '1' → False",
+          vars: { row: 1, column: 2, cell: "'0'", ans: 1 }
+        }),
+        S("发现第二座岛入口", "扫描到 (1,3) 时，它仍是 '1'，说明这是一个新的连通块。", {
+          phase: "外层扫描", codeLine: [32, 33],
+          active: [1, 3], stack: ["numIslands"],
+          condition: "grid[1][3] == '1' → True", vars: { row: 1, column: 3, ans: 1 }
+        }),
+        S("岛屿数再次加一", "第二次从外层扫描发现未访问陆地，ans 从 1 变成 2。", {
+          phase: "外层扫描", codeLine: 35,
+          active: [1, 3], stack: ["numIslands"], changed: ["ans"],
+          vars: { ans: "1 → 2" }
+        }),
+        S("调用 dfs(1,3)", "从第二座岛入口开始新的洪水填充。", {
+          phase: "第二座岛 · DFS", codeLine: [37, 5], event: "call",
+          active: [1, 3], stack: ["numIslands", "dfs(1,3)"],
+          vars: { row: 1, column: 3, ans: 2 }
+        }),
+        S("标记 (1,3)", "入口陆地从 '1' 改成 0，保证后续递归不会走回来。", {
+          phase: "第二座岛 · DFS", codeLine: [7, 8],
+          active: [1, 3], changes: [[1, 3, 0]], stack: ["numIslands", "dfs(1,3)"],
+          changed: ["grid[1][3]"], vars: { "grid[1][3]": "'1' → 0", rows: 3, columns: 4 }
+        }),
+        S("检查 dfs(1,3) 的上邻居", "(0,3) 在边界内，但它是水域，不进入递归。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 12, 17, 18, 19, 20], skippedLine: 22,
+          active: [1, 3], probe: [0, 3], stack: ["numIslands", "dfs(1,3)"],
+          condition: "grid[0][3] == '1' → False",
+          vars: { row: 1, column: 3, x: 0, y: 3, cell: "'0'" }
+        }),
+        S("检查 dfs(1,3) 的下邻居", "(2,3) 合法且仍是 '1'，必须递归处理。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 13, 17, 18, 19, 20],
+          active: [1, 3], probe: [2, 3], stack: ["numIslands", "dfs(1,3)"],
+          condition: "grid[2][3] == '1' → True",
+          vars: { row: 1, column: 3, x: 2, y: 3, next_call: "dfs(2,3)" }
+        }),
+        S("递归到 dfs(2,3)", "父调用 dfs(1,3) 暂停，新的调用被压入递归栈。", {
+          phase: "第二座岛 · DFS", codeLine: [22, 5], event: "call",
+          active: [2, 3],
+          stack: ["numIslands", "dfs(1,3)", "dfs(2,3)"],
+          changed: ["row", "column"], vars: { row: "1 → 2", column: 3, depth: "1 → 2" }
+        }),
+        S("标记 (2,3)", "进入 dfs(2,3) 后立即把当前陆地改成 0，再读取网格尺寸。", {
+          phase: "第二座岛 · DFS", codeLine: [7, 8],
+          active: [2, 3], changes: [[2, 3, 0]],
+          stack: ["numIslands", "dfs(1,3)", "dfs(2,3)"],
+          changed: ["grid[2][3]"], vars: { "grid[2][3]": "'1' → 0", rows: 3, columns: 4 }
+        }),
+        S("检查 dfs(2,3) 的上邻居", "(1,3) 已在父调用中标记为 0，不会递归回去。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 12, 17, 18, 19, 20], skippedLine: 22,
+          active: [2, 3], probe: [1, 3],
+          stack: ["numIslands", "dfs(1,3)", "dfs(2,3)"],
+          condition: "grid[1][3] == '1' → False",
+          vars: { row: 2, column: 3, x: 1, y: 3, cell: "0" }
+        }),
+        S("检查 dfs(2,3) 的下邻居", "(3,3) 的行坐标越过网格下边界，后续判断短路。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 13, 17, 18], skippedLine: [19, 20, 22],
+          active: [2, 3], probe: [3, 3],
+          stack: ["numIslands", "dfs(1,3)", "dfs(2,3)"],
+          condition: "0 <= 3 < 3 → False",
+          vars: { row: 2, column: 3, x: 3, y: 3, action: "跳过" }
+        }),
+        S("检查 dfs(2,3) 的左邻居", "(2,2) 合法且为 '1'，找到同一座岛中的下一块陆地。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 14, 17, 18, 19, 20],
+          active: [2, 3], probe: [2, 2],
+          stack: ["numIslands", "dfs(1,3)", "dfs(2,3)"],
+          condition: "grid[2][2] == '1' → True",
+          vars: { row: 2, column: 3, x: 2, y: 2, next_call: "dfs(2,2)" }
+        }),
+        S("递归到 dfs(2,2)", "调用栈达到本例最深处，父调用 dfs(2,3) 暂停。", {
+          phase: "第二座岛 · DFS", codeLine: [22, 5], event: "call",
+          active: [2, 2],
+          stack: ["numIslands", "dfs(1,3)", "dfs(2,3)", "dfs(2,2)"],
+          changed: ["column", "depth"], vars: { row: 2, column: "3 → 2", depth: "2 → 3" }
+        }),
+        S("标记 (2,2)", "进入最深层调用后，先把最后一块未访问陆地改成 0。", {
+          phase: "第二座岛 · DFS", codeLine: [7, 8],
+          active: [2, 2], changes: [[2, 2, 0]],
+          stack: ["numIslands", "dfs(1,3)", "dfs(2,3)", "dfs(2,2)"],
+          changed: ["grid[2][2]"], vars: { "grid[2][2]": "'1' → 0", rows: 3, columns: 4 }
+        }),
+        S("检查 dfs(2,2) 的上邻居", "(1,2) 是水域，不执行递归调用。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 12, 17, 18, 19, 20], skippedLine: 22,
+          active: [2, 2], probe: [1, 2], stack: ["numIslands", "dfs(1,3)", "dfs(2,3)", "dfs(2,2)"],
+          condition: "grid[1][2] == '1' → False",
+          vars: { row: 2, column: 2, x: 1, y: 2, cell: "'0'" }
+        }),
+        S("检查 dfs(2,2) 的下邻居", "(3,2) 的行坐标越界，and 立即短路。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 13, 17, 18], skippedLine: [19, 20, 22],
+          active: [2, 2], probe: [3, 2], stack: ["numIslands", "dfs(1,3)", "dfs(2,3)", "dfs(2,2)"],
+          condition: "0 <= 3 < 3 → False",
+          vars: { row: 2, column: 2, x: 3, y: 2, action: "跳过" }
+        }),
+        S("检查 dfs(2,2) 的左邻居", "(2,1) 是水域，不进入递归。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 14, 17, 18, 19, 20], skippedLine: 22,
+          active: [2, 2], probe: [2, 1], stack: ["numIslands", "dfs(1,3)", "dfs(2,3)", "dfs(2,2)"],
+          condition: "grid[2][1] == '1' → False",
+          vars: { row: 2, column: 2, x: 2, y: 1, cell: "'0'" }
+        }),
+        S("检查 dfs(2,2) 的右邻居", "(2,3) 已被上一层调用标记为 0，所以不会递归回去。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 15, 17, 18, 19, 20], skippedLine: 22,
+          active: [2, 2], probe: [2, 3], stack: ["numIslands", "dfs(1,3)", "dfs(2,3)", "dfs(2,2)"],
+          condition: "grid[2][3] == '1' → False",
+          vars: { row: 2, column: 2, x: 2, y: 3, cell: "0" }
+        }),
+        S("dfs(2,2) 返回", "四个邻居都检查完，最深层调用返回 dfs(2,3)。", {
+          phase: "第二座岛 · DFS", codeLine: 11, event: "return",
+          active: [2, 3], stack: ["numIslands", "dfs(1,3)", "dfs(2,3)"],
+          changed: ["depth"], vars: { returned: "dfs(2,2)", depth: "3 → 2" }
+        }),
+        S("检查 dfs(2,3) 的右邻居", "父调用恢复后继续最后一个方向；(2,4) 的列坐标越界。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 15, 17, 18, 19], skippedLine: [20, 22],
+          active: [2, 3], probe: [2, 4], stack: ["numIslands", "dfs(1,3)", "dfs(2,3)"],
+          condition: "0 <= 4 < 4 → False",
+          vars: { row: 2, column: 3, x: 2, y: 4, action: "跳过" }
+        }),
+        S("dfs(2,3) 返回", "它的四个方向全部处理完，返回 dfs(1,3)。", {
+          phase: "第二座岛 · DFS", codeLine: 11, event: "return",
+          active: [1, 3], stack: ["numIslands", "dfs(1,3)"],
+          changed: ["depth"], vars: { returned: "dfs(2,3)", depth: "2 → 1" }
+        }),
+        S("检查 dfs(1,3) 的左邻居", "恢复入口调用后继续检查 (1,2)，它是水域。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 14, 17, 18, 19, 20], skippedLine: 22,
+          active: [1, 3], probe: [1, 2], stack: ["numIslands", "dfs(1,3)"],
+          condition: "grid[1][2] == '1' → False",
+          vars: { row: 1, column: 3, x: 1, y: 2, cell: "'0'" }
+        }),
+        S("检查 dfs(1,3) 的右邻居", "(1,4) 的行坐标合法，但列坐标越界。", {
+          phase: "第二座岛 · DFS", codeLine: [11, 15, 17, 18, 19], skippedLine: [20, 22],
+          active: [1, 3], probe: [1, 4], stack: ["numIslands", "dfs(1,3)"],
+          condition: "0 <= 4 < 4 → False",
+          vars: { row: 1, column: 3, x: 1, y: 4, action: "跳过" }
+        }),
+        S("dfs(1,3) 返回", "第二座岛的入口调用完成，递归栈退回 numIslands。", {
+          phase: "第二座岛 · DFS", codeLine: 11, event: "return",
+          active: [1, 3], stack: ["numIslands"],
+          changed: ["depth"], vars: { returned: "dfs(1,3)", depth: "1 → 0", ans: 2 }
+        }),
+        S("外层循环进入第 2 行", "row 从 1 变成 2，column 回到 0；当前位置是水域。", {
+          phase: "外层扫描", codeLine: [31, 32, 33], skippedLine: [35, 37],
+          active: [2, 0], stack: ["numIslands"],
+          condition: "grid[2][0] == '1' → False",
+          changed: ["row", "column"], vars: { row: "1 → 2", column: "3 → 0", cell: "'0'", ans: 2 }
+        }),
+        S("扫描 (2,1)", "当前位置仍是水域，不增加 ans。", {
+          phase: "外层扫描", codeLine: [32, 33], skippedLine: [35, 37],
+          active: [2, 1], stack: ["numIslands"],
+          condition: "grid[2][1] == '1' → False",
+          vars: { row: 2, column: 1, cell: "'0'", ans: 2 }
+        }),
+        S("扫描 (2,2)", "这块原陆地已被第二座岛的 DFS 改成 0，不会重复计数。", {
+          phase: "外层扫描", codeLine: [32, 33], skippedLine: [35, 37],
+          active: [2, 2], stack: ["numIslands"],
+          condition: "grid[2][2] == '1' → False",
+          vars: { row: 2, column: 2, cell: "0", ans: 2 }
+        }),
+        S("扫描 (2,3)", "最后一个格子也已被标记为 0，双重循环至此结束。", {
+          phase: "外层扫描", codeLine: [32, 33], skippedLine: [35, 37],
+          active: [2, 3], stack: ["numIslands"],
+          condition: "grid[2][3] == '1' → False",
+          vars: { row: 2, column: 3, cell: "0", ans: 2 }
+        }),
+        S("返回岛屿数量", "双重循环结束；ans=2，代表网格中有两个四向连通块。", {
+          phase: "返回答案", codeLine: 39, stack: ["numIslands"],
+          changed: ["result"], vars: { ans: 2 }, result: "2"
+        })
+      ], { secondaryLegend: "邻居检查", doneLegend: "已访问" })),
     P(994, "腐烂的橘子", "rotting-oranges", "图论", "中等", "多源 BFS 携带时间", "多源最短传播", ["网格", "BFS", "多源"],
       "所有腐烂源以 time=0 同时入队；相邻新鲜橘子以当前 time+1 入队，FIFO 保证最后出队的 time 是最大最短距离。",
       "队列直接携带每格首次腐烂时间，helper 用 yield 逐个提供合法四邻居，最后扫描剩余的 1 即可判断是否存在不可达橘子。", "多个起点同时向外按步传播", "O(mn)", "O(mn)", "必须使用当前出队的 time+1，并在入队时立刻置为 2；BFS 后仍有 1 就返回 -1。",
-      D("matrix", [["2", "1", "1"], ["1", "1", "0"], ["0", "1", "1"]], [
-        S("所有源同时入队", "初始腐烂橘子 (0,0) 带着 time=0 入队。", { active: [0, 0], vars: { time: 0, queue: "[(0,0,0)]" } }),
-        S("时间随节点传播", "第 1 分钟腐烂的相邻格以 time=1 入队，之后继续加一。", { active: [0, 1], vars: { time: 1, queue: "[(1,0,1),(0,1,1)]" } }),
-        S("最后一格出队", "最后到达的 (2,2) 携带 time=4，因此答案是 4。", { active: [2, 2], vars: { time: 4 }, result: "4 分钟" })
-      ])),
+      D("matrix", [[2, 1, 1], [1, 1, 0], [0, 1, 1]], [
+        S("初始化 time", "执行 time = 0；它保存最近一次出队橘子的腐烂时间。", {
+          phase: "初始化", codeLine: [6, 8], queue: [],
+          changed: ["time"], vars: { time: "未定义 → 0" }
+        }),
+        S("读取网格行数", "执行 rows = len(grid)，当前网格共有 3 行。", {
+          phase: "初始化", codeLine: 9, queue: [],
+          changed: ["rows"], vars: { time: 0, rows: "未定义 → 3" }
+        }),
+        S("读取网格列数", "执行 columns = len(grid[0])，每行共有 3 列。", {
+          phase: "初始化", codeLine: 10, queue: [],
+          changed: ["columns"], vars: { time: 0, rows: 3, columns: "未定义 → 3" }
+        }),
+        S("创建 FIFO 队列", "deque 从左侧出队、右侧入队；每个三元组保存行、列和腐烂时间。", {
+          phase: "初始化", codeLine: 12, queue: [],
+          changed: ["queue"], vars: { time: 0, queue: "[]" }
+        }),
+        S("扫描到初始腐烂源", "r=0、c=0、val=2，条件成立；这是第 0 分钟的传播源。", {
+          phase: "初始扫描", codeLine: [15, 16, 17], active: [0, 0], queue: [],
+          condition: "val == 2 → True", vars: { r: 0, c: 0, val: 2 }
+        }),
+        S("腐烂源入队", "把 (0,0,0) 放到队尾：坐标 (0,0) 在第 0 分钟已经腐烂。", {
+          phase: "初始扫描", codeLine: 18, active: [0, 0], queue: [[0, 0, 0]],
+          changed: ["queue"], vars: { r: 0, c: 0, source_time: 0, queue: "[] → [(0,0,0)]" }
+        }),
+        S("扫描初始格子 (0,1)", "c 变成 1，val=1，不是初始腐烂源，不执行入队。", {
+          phase: "初始扫描", codeLine: [16, 17], skippedLine: 18,
+          active: [0, 1], queue: [[0, 0, 0]], condition: "val == 2 → False",
+          changed: ["c", "val"], vars: { r: 0, c: "0 → 1", val: "2 → 1" }
+        }),
+        S("扫描初始格子 (0,2)", "第一行最后一个格子的 val 仍为 1，不入队。", {
+          phase: "初始扫描", codeLine: [16, 17], skippedLine: 18,
+          active: [0, 2], queue: [[0, 0, 0]], condition: "val == 2 → False",
+          changed: ["c"], vars: { r: 0, c: "1 → 2", val: 1 }
+        }),
+        S("扫描初始格子 (1,0)", "外层 enumerate 进入第 1 行，内层列下标回到 0；val=1。", {
+          phase: "初始扫描", codeLine: [15, 16, 17], skippedLine: 18,
+          active: [1, 0], queue: [[0, 0, 0]], condition: "val == 2 → False",
+          changed: ["r", "row", "c"], vars: { r: "0 → 1", c: "2 → 0", val: 1 }
+        }),
+        S("扫描初始格子 (1,1)", "中间格子是新鲜橘子，不是第 0 分钟的传播源。", {
+          phase: "初始扫描", codeLine: [16, 17], skippedLine: 18,
+          active: [1, 1], queue: [[0, 0, 0]], condition: "val == 2 → False",
+          changed: ["c"], vars: { r: 1, c: "0 → 1", val: 1 }
+        }),
+        S("扫描初始格子 (1,2)", "val=0 表示空格，也不加入传播队列。", {
+          phase: "初始扫描", codeLine: [16, 17], skippedLine: 18,
+          active: [1, 2], queue: [[0, 0, 0]], condition: "val == 2 → False",
+          changed: ["c", "val"], vars: { r: 1, c: "1 → 2", val: "1 → 0" }
+        }),
+        S("扫描初始格子 (2,0)", "外层循环进入最后一行，当前位置是空格。", {
+          phase: "初始扫描", codeLine: [15, 16, 17], skippedLine: 18,
+          active: [2, 0], queue: [[0, 0, 0]], condition: "val == 2 → False",
+          changed: ["r", "row", "c"], vars: { r: "1 → 2", c: "2 → 0", val: 0 }
+        }),
+        S("扫描初始格子 (2,1)", "val 从 0 变成 1，但仍不等于 2。", {
+          phase: "初始扫描", codeLine: [16, 17], skippedLine: 18,
+          active: [2, 1], queue: [[0, 0, 0]], condition: "val == 2 → False",
+          changed: ["c", "val"], vars: { r: 2, c: "0 → 1", val: "0 → 1" }
+        }),
+        S("扫描初始格子 (2,2)", "最后一个格子也是新鲜橘子；初始扫描结束时队列中只有 (0,0,0)。", {
+          phase: "初始扫描", codeLine: [16, 17], skippedLine: 18,
+          active: [2, 2], queue: [[0, 0, 0]], condition: "val == 2 → False",
+          changed: ["c"], vars: { r: 2, c: "1 → 2", val: 1, source_count: 1 }
+        }),
+        S("定义邻居生成器", "这里只创建 helper；函数体还没运行。调用后才按上、下、左、右检查，合法坐标才会 yield。", {
+          phase: "定义 helper", codeLine: 20,
+          queue: [[0, 0, 0]], vars: { helper: "已定义，尚未调用", order: "上 → 下 → 左 → 右" }
+        }),
+        S("第一次 while 判断", "queue 中有一个初始腐烂源，所以进入 BFS 循环。", {
+          phase: "BFS 循环判断", codeLine: 32, active: [0, 0], queue: [[0, 0, 0]],
+          condition: "bool(queue) → True",
+          vars: { time: 0, queue_nonempty: true, next: "(0,0,0)" }
+        }),
+        S("弹出初始腐烂源", "popleft 从队首取出 (0,0,0)，并同时赋值给 r、c、time。", {
+          phase: "BFS 出队", codeLine: 33, active: [0, 0], queue: [],
+          changed: ["r", "c", "time", "queue"],
+          vars: { r: "2 → 0", c: "2 → 0", time: 0, queue: "[(0,0,0)] → []" }
+        }),
+        S("调用 helper(0,0)", "邻居 for 循环创建生成器并请求第一个合法坐标；helper 从上方向开始。", {
+          phase: "调用邻居生成器", codeLine: 34, active: [0, 0], queue: [],
+          changed: ["generator"], vars: { r: 0, c: 0, time: 0, generator: "helper(0,0)" }
+        }),
+        S("向上越界", "helper 先检查 (-1,0)；行坐标不满足边界条件，因此不执行 yield，BFS 的 for 循环看不到它。", {
+          phase: "helper 边界判断", codeLine: [22, 23, 28], skippedLine: 29, active: [0, 0],
+          probe: [-1, 0], queue: [], condition: "0 <= -1 < 3 → False",
+          vars: { row: -1, column: 0, yielded: false }
+        }),
+        S("检查下候选 (1,0)", "行列坐标都在网格内，因此边界判断为真。", {
+          phase: "helper 边界判断", codeLine: [22, 24, 28], active: [0, 0],
+          probe: [1, 0], queue: [], condition: "0 <= 1 < 3 且 0 <= 0 < 3 → True",
+          changed: ["row", "column"], vars: { row: "-1 → 1", column: 0, time: 0 }
+        }),
+        S("yield 下邻居 (1,0)", "helper 执行 yield，把坐标交给第 34 行的 for 循环，然后暂停在这里。", {
+          phase: "helper yield", codeLine: [29, 34], active: [0, 0],
+          probe: [1, 0], queue: [], condition: "yield (1,0)",
+          changed: ["yielded"], vars: { row: 1, column: 0, yielded: "未产生 → (1,0)" }
+        }),
+        S("判断为新鲜橘子", "grid[1][0] 的值是 1，感染分支成立。", {
+          phase: "BFS 判断", codeLine: 35, active: [1, 0], probe: [1, 0], queue: [],
+          condition: "grid[1][0] == 1 → True", vars: { "grid[1][0]": 1, time: 0 }
+        }),
+        S("立刻标记为腐烂", "把 (1,0) 从 1 改为 2；提前标记能防止它以后被重复加入队列。", {
+          phase: "BFS 修改", codeLine: 37, active: [1, 0], changes: [[1, 0, 2]], queue: [],
+          changed: ["grid[1][0]"], vars: { "grid[1][0]": "1 → 2", time: 0 }
+        }),
+        S("以 time + 1 入队", "当前 time 仍是 0；新橘子的入队时间是 0+1=1。", {
+          phase: "BFS 入队", codeLine: 38, active: [1, 0], queue: [[1, 0, 1]],
+          changed: ["queue"], vars: { time: 0, new_time: 1, queue: "[] → [(1,0,1)]" }
+        }),
+        S("向左越界", "helper 从上次 yield 后继续；候选 (0,-1) 越界，不会交给 BFS。", {
+          phase: "helper 边界判断", codeLine: [22, 25, 28], skippedLine: 29, active: [0, 0],
+          probe: [0, -1], queue: [[1, 0, 1]], condition: "0 <= -1 < 3 → False",
+          vars: { row: 0, column: -1, yielded: false }
+        }),
+        S("检查右候选 (0,1)", "行列坐标都合法，helper 将在下一步交出它。", {
+          phase: "helper 边界判断", codeLine: [22, 26, 28],
+          active: [0, 0], probe: [0, 1], queue: [[1, 0, 1]],
+          condition: "0 <= 0 < 3 且 0 <= 1 < 3 → True",
+          changed: ["row", "column"], vars: { row: 0, column: "-1 → 1", time: 0 }
+        }),
+        S("yield 右邻居 (0,1)", "helper 把 (0,1) 交给外层 for，并再次暂停。", {
+          phase: "helper yield", codeLine: [29, 34],
+          active: [0, 0], probe: [0, 1], queue: [[1, 0, 1]],
+          condition: "yield (0,1)", changed: ["yielded"],
+          vars: { row: 0, column: 1, yielded: "(1,0) → (0,1)" }
+        }),
+        S("判断右邻居为新鲜橘子", "grid[0][1] 的值为 1，进入感染分支。", {
+          phase: "BFS 邻居值判断", codeLine: 35,
+          active: [0, 1], probe: [0, 1], queue: [[1, 0, 1]],
+          condition: "grid[0][1] == 1 → True",
+          vars: { row: 0, column: 1, value: 1, time: 0 }
+        }),
+        S("标记右邻居为腐烂", "先把 grid[0][1] 从 1 改成 2，避免以后重复入队。", {
+          phase: "BFS 修改", codeLine: 37, active: [0, 1],
+          changes: [[0, 1, 2]], queue: [[1, 0, 1]],
+          changed: ["grid[0][1]"],
+          vars: { "grid[0][1]": "1 → 2", time: 0 }
+        }),
+        S("右邻居以第 1 分钟入队", "把 (0,1,1) 加到队尾；队列现在有两个 time=1 的节点。", {
+          phase: "BFS 入队", codeLine: 38, active: [0, 1],
+          queue: [[1, 0, 1], [0, 1, 1]], changed: ["queue"],
+          vars: { time: 0, new_time: 1, queue: "[(1,0,1)] → [(1,0,1),(0,1,1)]" }
+        }),
+        S("helper(0,0) 耗尽", "四个候选全部检查完，生成器返回 StopIteration，本轮邻居 for 结束。", {
+          phase: "helper 返回", codeLine: [22, 34], active: [0, 0],
+          queue: [[1, 0, 1], [0, 1, 1]], condition: "helper → StopIteration",
+          changed: ["generator"], vars: { generator: "暂停 → 结束", processed_candidates: 4, time: 0 }
+        }),
+        ...(() => {
+          const steps = [];
+          const gridState = [[2, 2, 1], [2, 1, 0], [0, 1, 1]];
+          const queueState = [[1, 0, 1], [0, 1, 1]];
+          const directions = [
+            { name: "上", dr: -1, dc: 0, codeLine: 23 },
+            { name: "下", dr: 1, dc: 0, codeLine: 24 },
+            { name: "左", dr: 0, dc: -1, codeLine: 25 },
+            { name: "右", dr: 0, dc: 1, codeLine: 26 }
+          ];
+          const snapshotQueue = () => queueState.map((item) => item.slice());
+          const tupleText = (item) => `(${item.join(",")})`;
+          const queueText = (items) => `[${items.map(tupleText).join(",")}]`;
+          const add = (title, note, meta) => steps.push(S(title, note, meta));
+          let previousR = 0;
+          let previousC = 0;
+          let currentTime = 0;
+
+          while (queueState.length) {
+            add("while 再次判断为真", `队首是 ${tupleText(queueState[0])}，继续下一轮 BFS。`, {
+              phase: "BFS 循环判断", codeLine: 32, queue: snapshotQueue(),
+              condition: "bool(queue) → True",
+              vars: { time: currentTime, queue_nonempty: true, next: tupleText(queueState[0]) }
+            });
+
+            const beforePop = snapshotQueue();
+            const oldTime = currentTime;
+            const [r, c, time] = queueState.shift();
+            currentTime = time;
+            const popChanged = ["queue"];
+            if (r !== previousR) popChanged.push("r");
+            if (c !== previousC) popChanged.push("c");
+            if (time !== oldTime) popChanged.push("time");
+
+            add(`出队 (${r},${c},${time})`, "popleft 取出队首三元组，并更新当前传播坐标与时间。", {
+              phase: `BFS 第 ${time} 分钟 · 出队`, codeLine: 33,
+              active: [r, c], queue: snapshotQueue(), changed: popChanged,
+              vars: {
+                r: r === previousR ? r : `${previousR} → ${r}`,
+                c: c === previousC ? c : `${previousC} → ${c}`,
+                time: time === oldTime ? time : `${oldTime} → ${time}`,
+                queue: `${queueText(beforePop)} → ${queueText(queueState)}`
+              }
+            });
+            previousR = r;
+            previousC = c;
+
+            add(`调用 helper(${r},${c})`, "第 34 行创建邻居生成器并请求合法坐标；生成器按上、下、左、右恢复执行。", {
+              phase: `BFS 第 ${time} 分钟 · 调用 helper`, codeLine: 34,
+              active: [r, c], queue: snapshotQueue(), changed: ["generator"],
+              vars: { r, c, time, generator: `helper(${r},${c})` }
+            });
+
+            for (const direction of directions) {
+              const row = r + direction.dr;
+              const column = c + direction.dc;
+              const rowInRange = 0 <= row && row < 3;
+              const columnInRange = 0 <= column && column < 3;
+              const valid = rowInRange && columnInRange;
+              let boundary;
+              let boundaryNote;
+
+              if (!rowInRange) {
+                boundary = `0 <= ${row} < 3 → False，and 短路`;
+                boundaryNote = `${direction.name}候选的行坐标越界，不执行 yield。`;
+              } else if (!columnInRange) {
+                boundary = `0 <= ${row} < 3 → True；0 <= ${column} < 3 → False`;
+                boundaryNote = `${direction.name}候选的列坐标越界，不执行 yield。`;
+              } else {
+                boundary = `0 <= ${row} < 3 且 0 <= ${column} < 3 → True`;
+                boundaryNote = `${direction.name}候选的行列坐标都合法，可以 yield。`;
+              }
+
+              add(`${direction.name}候选 (${row},${column})：${valid ? "合法" : "越界"}`, boundaryNote, {
+                phase: `helper · ${direction.name}邻居边界判断`,
+                codeLine: [22, direction.codeLine, 28],
+                ...(valid ? {} : { skippedLine: 29 }),
+                active: [r, c], probe: [row, column], queue: snapshotQueue(),
+                condition: boundary, changed: ["row", "column"],
+                vars: { r, c, time, row, column }
+              });
+
+              if (!valid) continue;
+
+              add(`yield (${row},${column})`, "第 29 行交出合法坐标；第 34 行接收 row、column，helper 暂停等待恢复。", {
+                phase: "helper · yield 暂停", codeLine: [29, 34],
+                active: [r, c], probe: [row, column], queue: snapshotQueue(),
+                condition: `yield (${row},${column})`, changed: ["row", "column"],
+                vars: { r, c, time, row, column, generator: "运行 → 暂停" }
+              });
+
+              const value = gridState[row][column];
+              const isFresh = value === 1;
+              add(`判断 grid[${row}][${column}]`, isFresh
+                ? "这个合法邻居仍是新鲜橘子，进入感染分支。"
+                : `当前值是 ${value}，不执行修改网格和入队。`, {
+                phase: `BFS 第 ${time} 分钟 · 邻居值判断`, codeLine: 35,
+                ...(isFresh ? {} : { skippedLine: [37, 38] }),
+                active: [row, column], probe: [row, column], queue: snapshotQueue(),
+                condition: `grid[${row}][${column}] == 1 → ${isFresh ? "True" : "False"}`,
+                vars: { r, c, time, row, column, value }
+              });
+
+              if (!isFresh) continue;
+
+              gridState[row][column] = 2;
+              add(`把 (${row},${column}) 从 1 改成 2`, "入队前立即标记，其他传播点以后看到 2 就不会重复加入它。", {
+                phase: `BFS 第 ${time} 分钟 · 修改网格`, codeLine: 37,
+                active: [row, column], changes: [[row, column, 2]],
+                queue: snapshotQueue(), changed: [`grid[${row}][${column}]`],
+                vars: { r, c, time, [`grid[${row}][${column}]`]: "1 → 2" }
+              });
+
+              const beforePush = snapshotQueue();
+              queueState.push([row, column, time + 1]);
+              add(`把 (${row},${column},${time + 1}) 加入队尾`, "新橘子的腐烂时间是当前出队时间 time + 1。", {
+                phase: `BFS 第 ${time} 分钟 · 入队`, codeLine: 38,
+                active: [row, column], queue: snapshotQueue(), changed: ["queue"],
+                vars: {
+                  r, c, time, new_time: time + 1,
+                  queue: `${queueText(beforePush)} → ${queueText(queueState)}`
+                }
+              });
+            }
+
+            add(`helper(${r},${c}) 耗尽`, "四个候选全部处理完，生成器返回 StopIteration，本轮邻居 for 结束。", {
+              phase: "helper 返回", codeLine: [22, 34],
+              active: [r, c], queue: snapshotQueue(),
+              condition: "helper → StopIteration", changed: ["generator"],
+              vars: { r, c, time, generator: "暂停 → 结束", processed_candidates: 4 }
+            });
+          }
+
+          return steps;
+        })(),
+        S("队列耗尽，退出 BFS", "queue 为空，while queue 为假；所有能从初始腐烂源到达的橘子都已处理。", {
+          phase: "结束 BFS", codeLine: 32, queue: [],
+          condition: "bool(queue) → False", vars: { queue: "[]", time: 4 }
+        }),
+        S("any 检查第 0 行", "1 in [2,2,2] 为假，生成器继续检查下一行。", {
+          phase: "检查剩余新鲜橘子", codeLine: 41,
+          active: [[0, 0], [0, 1], [0, 2]], queue: [],
+          condition: "1 in [2,2,2] → False", vars: { checked_row: 0, time: 4 }
+        }),
+        S("any 检查第 1 行", "1 in [2,2,0] 仍为假，继续检查最后一行。", {
+          phase: "检查剩余新鲜橘子", codeLine: 41,
+          active: [[1, 0], [1, 1], [1, 2]], queue: [],
+          condition: "1 in [2,2,0] → False", vars: { checked_row: 1, time: 4 }
+        }),
+        S("any 检查完毕", "最后一行也没有 1，所以 any(...) 为假，return -1 分支被跳过；若任一行仍有 1，就会立即返回 -1。", {
+          phase: "检查剩余新鲜橘子", codeLine: 41, skippedLine: 42,
+          active: [[2, 0], [2, 1], [2, 2]], queue: [],
+          condition: "any(1 in row for row in grid) → False",
+          vars: { checked_row: 2, branch: "跳过 return -1", time: 4 }
+        }),
+        S("返回最长腐烂时间", "BFS 按 FIFO 让 time 从小到大出队；最后一次出队的 time=4，就是全部橘子腐烂所需时间。", {
+          phase: "返回答案", codeLine: 44, queue: [],
+          changed: ["result"], vars: { time: 4 }, result: "4 分钟"
+        })
+      ], { initialDone: [[0, 0]], secondaryLegend: "邻居检查", doneLegend: "已腐烂" })),
     P(207, "课程表", "course-schedule", "图论", "中等", "Kahn 入度拓扑排序", "有向图判环", ["图", "拓扑排序", "BFS"],
       "入度为 0 的课程当前没有未完成前置；不断移除它并削减后继入度，能处理完全部节点才说明无环。",
       "Kahn 算法既判环又能自然产出修课顺序，比递归三色状态更直观。", "依赖关系能否全部完成", "O(V+E)", "O(V+E)", "边方向应从 prerequisite 指向 course；最终比较已出队节点数而非队列是否曾为空。",

@@ -179,25 +179,27 @@
 
         <section class="tab-panel" id="panel-demo" role="tabpanel" aria-labelledby="tab-demo" hidden>
           <div class="demo-topline">
-            <div><span class="section-number">ALGORITHM PLAYGROUND</span><h3>跟着状态一步步变化</h3></div>
+            <div><span class="section-number">ALGORITHM PLAYGROUND</span><h3>跟着代码逐行看状态变化</h3></div>
             <div class="demo-controls" aria-label="动画控制">
               <button type="button" id="demo-reset" aria-label="重置演示" title="重置">↺</button>
               <button type="button" id="demo-prev" aria-label="上一步" title="上一步">←</button>
               <button class="play-button" type="button" id="demo-play" aria-label="播放"><span aria-hidden="true">▶</span></button>
               <button type="button" id="demo-next" aria-label="下一步" title="下一步">→</button>
-              <label class="speed-control"><span>速度</span><select id="demo-speed"><option value="1400">慢</option><option value="850" selected>正常</option><option value="450">快</option></select></label>
+              <label class="speed-control"><span>速度</span><select id="demo-speed"><option value="2200">慢</option><option value="1400" selected>正常</option><option value="750">快</option></select></label>
             </div>
           </div>
           <div class="demo-layout">
             <div class="visual-panel">
               <div class="visual-grid-bg" aria-hidden="true"></div>
-              <div class="visual-stage" id="visual-stage" aria-live="polite"></div>
-              <div class="visual-legend"><span><i class="legend-active"></i>当前操作</span><span><i class="legend-range"></i>有效范围</span><span><i class="legend-done"></i>已确定</span></div>
+              <div class="visual-stage" id="visual-stage" aria-hidden="true"></div>
+              <div class="visual-legend"><span><i class="legend-active"></i>当前操作</span><span><i class="legend-range" id="legend-secondary-marker"></i><b id="legend-secondary-label">有效范围</b></span><span><i class="legend-done"></i><b id="legend-done-label">已确定</b></span></div>
             </div>
             <aside class="step-panel">
               <div class="step-counter"><span>STEP</span><strong id="step-index">01</strong><em>/</em><span id="step-total">01</span></div>
               <h4 id="step-title">初始状态</h4>
               <p id="step-note">准备开始演示。</p>
+              <p class="sr-only" id="demo-announcement" aria-live="polite" aria-atomic="true"></p>
+              <div class="execution-trace" id="execution-trace" hidden></div>
               <dl class="variable-list" id="variable-list"></dl>
               <div class="step-track" id="step-track" aria-label="演示步骤"></div>
             </aside>

@@ -684,15 +684,18 @@
     const columns = Math.max.apply(null, matrix.map(function (row) { return row.length; }));
     const active = coordinateSet(step.active);
     const done = coordinateSet(step.done);
+    const probe = coordinateSet(step.probe);
     const html = [];
     matrix.forEach(function (row, rowIndex) {
       for (let columnIndex = 0; columnIndex < columns; columnIndex += 1) {
         const key = rowIndex + "," + columnIndex;
         const classes = [type === "dp" ? "dp-cell" : "matrix-cell"];
         if (active.has(key)) classes.push("is-active");
+        if (probe.has(key)) classes.push("is-probe");
         if (done.has(key)) classes.push("is-done");
         if (Array.isArray(step.range) && step.range.length === 4 && rowIndex >= step.range[0] && rowIndex <= step.range[2] && columnIndex >= step.range[1] && columnIndex <= step.range[3]) classes.push("is-range");
-        html.push("<div class=\"" + classes.join(" ") + "\">" + escapeHTML(asText(row[columnIndex], "")) + "</div>");
+        const coordinate = type === "matrix" ? "<span class=\"matrix-index\">" + rowIndex + "," + columnIndex + "</span>" : "";
+        html.push("<div class=\"" + classes.join(" ") + "\"><span class=\"matrix-value\">" + escapeHTML(asText(row[columnIndex], "")) + "</span>" + coordinate + "</div>");
       }
     });
     return "<div class=\"" + (type === "dp" ? "dp-visual" : "matrix-visual") + "\" style=\"grid-template-columns:repeat(" + columns + ",auto)\">" + html.join("") + "</div>" + visualResult(step);
@@ -840,16 +843,18 @@
 
   function renderVisual(demo, step) {
     const type = String(demo.type || "array").toLowerCase();
-    if (!demo.values && demo.values !== 0) {
+    const visualDemo = Object.assign({}, demo);
+    if (step.values !== undefined) visualDemo.values = step.values;
+    if (!visualDemo.values && visualDemo.values !== 0) {
       return "<div class=\"visual-unavailable\"><strong>本题演示正在整理</strong>讲解、代码和学习记录仍可正常使用。</div>";
     }
-    if (type === "matrix") return renderMatrixVisual(demo, step, type);
-    if (type === "dp" && Array.isArray(demo.values) && Array.isArray(demo.values[0])) return renderMatrixVisual(demo, step, type);
-    if (["linked-list", "linkedlist", "list"].includes(type)) return renderListVisual(demo, step);
-    if (type === "tree" || type === "heap") return renderTreeVisual(demo, step, type);
-    if (type === "graph") return renderGraphVisual(demo, step);
-    if (type === "stack") return renderStackVisual(demo, step);
-    return renderArrayVisual(demo, step, type);
+    if (type === "matrix") return renderMatrixVisual(visualDemo, step, type);
+    if (type === "dp" && Array.isArray(visualDemo.values) && Array.isArray(visualDemo.values[0])) return renderMatrixVisual(visualDemo, step, type);
+    if (["linked-list", "linkedlist", "list"].includes(type)) return renderListVisual(visualDemo, step);
+    if (type === "tree" || type === "heap") return renderTreeVisual(visualDemo, step, type);
+    if (type === "graph") return renderGraphVisual(visualDemo, step);
+    if (type === "stack") return renderStackVisual(visualDemo, step);
+    return renderArrayVisual(visualDemo, step, type);
   }
 
   function demoInfo() {
@@ -860,8 +865,130 @@
     return { demo: demo, steps: steps };
   }
 
+  function cloneVisualValues(values) {
+    if (!Array.isArray(values)) return values;
+    return values.map(function (value) {
+      return Array.isArray(value) ? value.slice() : value;
+    });
+  }
+
+  function gridChanges(value) {
+    if (!Array.isArray(value) || !value.length) return [];
+    if (value.length >= 3 && !Array.isArray(value[0])) return [value];
+    return value.filter(function (change) {
+      return Array.isArray(change) && change.length >= 3;
+    });
+  }
+
+  function resolvedDemoStep(info, index) {
+    const current = info.steps[index] || {};
+    let values = cloneVisualValues(info.demo.values);
+    const changedCoordinates = coordinateSet(info.demo.initialDone);
+
+    for (let stepIndex = 0; stepIndex <= index; stepIndex += 1) {
+      const item = info.steps[stepIndex] || {};
+      if (item.values !== undefined) values = cloneVisualValues(item.values);
+      gridChanges(item.changes).forEach(function (change) {
+        const row = Number(change[0]);
+        const column = Number(change[1]);
+        if (
+          Array.isArray(values)
+          && Array.isArray(values[row])
+          && column >= 0
+          && column < values[row].length
+        ) {
+          values[row][column] = change[2];
+          changedCoordinates.add(row + "," + column);
+        }
+      });
+    }
+
+    const done = coordinateSet(current.done);
+    changedCoordinates.forEach(function (coordinate) { done.add(coordinate); });
+    return Object.assign({}, current, {
+      values: values,
+      done: Array.from(done).map(function (coordinate) {
+        return coordinate.split(",").map(Number);
+      })
+    });
+  }
+
+  function codeLineNumbers(value) {
+    return asArray(value).map(Number).filter(function (line) {
+      return Number.isInteger(line) && line > 0;
+    });
+  }
+
+  function sourceCodeRows(sourceLines, value, className) {
+    return codeLineNumbers(value).map(function (lineNumber) {
+      const source = sourceLines[lineNumber - 1];
+      if (source == null) return "";
+      return "<div class=\"trace-code-line " + (className || "") + "\"><span>" +
+        String(lineNumber).padStart(2, "0") + "</span><code>" +
+        escapeHTML(source || " ") + "</code></div>";
+    }).join("");
+  }
+
+  function renderExecutionTrace(step) {
+    const container = $("#execution-trace");
+    const problem = currentProblem();
+    const sourceLines = problem ? getSolution(problem).split(/\r?\n/) : [];
+    let codeRows = sourceCodeRows(sourceLines, step.codeLine, "");
+    const skippedRows = sourceCodeRows(sourceLines, step.skippedLine, "is-skipped");
+
+    if (!codeRows && step.code) {
+      codeRows = "<div class=\"trace-code-line\"><code>" + escapeHTML(asText(step.code)) + "</code></div>";
+    }
+
+    const phase = asText(step.phase, "");
+    const event = asText(step.event, "");
+    const condition = asText(step.condition, "");
+    const parts = [];
+    if (phase || event) {
+      parts.push("<div class=\"trace-meta\">" +
+        (phase ? "<span>" + escapeHTML(phase) + "</span>" : "") +
+        (event ? "<em>" + escapeHTML(event === "call" ? "进入调用" : (event === "return" ? "递归返回" : event)) + "</em>" : "") +
+        "</div>");
+    }
+    if (codeRows || skippedRows) {
+      parts.push("<div class=\"trace-code\">" +
+        (codeRows ? "<small>本步实际执行</small>" + codeRows : "") +
+        (skippedRows ? "<small class=\"trace-skipped-label\">条件不成立，本步跳过</small>" + skippedRows : "") +
+        "</div>");
+    }
+    if (condition) parts.push("<div class=\"trace-condition\"><small>判断结果</small><strong>" + escapeHTML(condition) + "</strong></div>");
+
+    container.hidden = parts.length === 0;
+    container.innerHTML = parts.join("");
+  }
+
+  function runtimeItem(value) {
+    if (Array.isArray(value)) return "(" + value.map(function (item) { return asText(item); }).join(", ") + ")";
+    return asText(value);
+  }
+
+  function renderRuntimeLane(label, values, kind) {
+    const items = Array.isArray(values) ? values : [];
+    const content = items.length ? items.map(function (item, index) {
+      const marker = kind === "queue" && index === 0 ? "<small>队首</small>" : (kind === "stack" && index === items.length - 1 ? "<small>栈顶</small>" : "");
+      return "<span class=\"runtime-item " + (marker ? "is-current" : "") + "\">" + escapeHTML(runtimeItem(item)) + marker + "</span>";
+    }).join("") : "<span class=\"runtime-empty\">∅</span>";
+    return "<div class=\"runtime-lane\"><strong>" + escapeHTML(label) + "</strong><div>" + content + "</div></div>";
+  }
+
+  function renderRuntimeState(step) {
+    const lanes = [];
+    if (Object.prototype.hasOwnProperty.call(step, "queue")) lanes.push(renderRuntimeLane("FIFO 队列", step.queue, "queue"));
+    if (Object.prototype.hasOwnProperty.call(step, "stack")) lanes.push(renderRuntimeLane("递归调用栈", step.stack, "stack"));
+    if (Array.isArray(step.probe) && step.probe.length >= 2) {
+      lanes.push(renderRuntimeLane("检查邻居", [[step.probe[0], step.probe[1]]], "probe"));
+    }
+    return lanes.length ? "<div class=\"runtime-state\">" + lanes.join("") + "</div>" : "";
+  }
+
   function renderVariables(step) {
     const entries = [];
+    const changed = new Set(asArray(step.changed).map(String));
     if (step.vars && typeof step.vars === "object" && !Array.isArray(step.vars)) {
       Object.keys(step.vars).forEach(function (key) { entries.push([key, step.vars[key]]); });
     } else if (Array.isArray(step.vars)) {
@@ -875,19 +1002,46 @@
     }
     if (step.result != null && step.result !== "") entries.push(["result", step.result]);
     $("#variable-list").innerHTML = entries.map(function (entry) {
-      return "<div><dt>" + escapeHTML(entry[0]) + "</dt><dd>" + escapeHTML(asText(entry[1])) + "</dd></div>";
+      const isChanged = changed.has(String(entry[0])) || String(entry[1]).includes("→");
+      return "<div class=\"" + (isChanged ? "is-changed" : "") + "\"><dt>" + escapeHTML(entry[0]) + "</dt><dd>" + escapeHTML(asText(entry[1])) + "</dd></div>";
     }).join("");
   }
 
   function renderDemo() {
     const info = demoInfo();
     demoStep = Math.max(0, Math.min(demoStep, info.steps.length - 1));
-    const step = info.steps[demoStep] || {};
-    $("#visual-stage").innerHTML = renderVisual(info.demo, step);
+    const step = resolvedDemoStep(info, demoStep);
+    $("#visual-stage").innerHTML = renderVisual(info.demo, step) + renderRuntimeState(step);
     $("#step-index").textContent = String(demoStep + 1).padStart(2, "0");
     $("#step-total").textContent = String(info.steps.length).padStart(2, "0");
     $("#step-title").textContent = asText(step.title, "步骤 " + (demoStep + 1));
     $("#step-note").textContent = asText(step.note, "观察当前状态的变化。");
+    const announcedVariables = step.vars && typeof step.vars === "object" && !Array.isArray(step.vars)
+      ? Object.keys(step.vars).map(function (key) {
+        return key + " 等于 " + asText(step.vars[key], "");
+      }).join("；")
+      : "";
+    const announcedRuntime = [
+      Object.prototype.hasOwnProperty.call(step, "queue")
+        ? "队列：" + asArray(step.queue).map(runtimeItem).join("，")
+        : "",
+      Object.prototype.hasOwnProperty.call(step, "stack")
+        ? "调用栈：" + asArray(step.stack).map(runtimeItem).join("，")
+        : ""
+    ].filter(Boolean).join("。");
+    const announcement = $("#demo-announcement");
+    announcement.setAttribute("aria-live", demoPlaying ? "off" : "polite");
+    announcement.textContent = "第 " + (demoStep + 1) + " 步，共 " + info.steps.length + " 步。" +
+      asText(step.title, "") + "。" + asText(step.note, "") +
+      (step.condition ? "判断结果：" + asText(step.condition, "") + "。" : "") +
+      (announcedVariables ? "变量：" + announcedVariables + "。" : "") +
+      (announcedRuntime ? announcedRuntime + "。" : "");
+    const secondaryMarker = $("#legend-secondary-marker");
+    const secondaryLabel = $("#legend-secondary-label");
+    secondaryMarker.className = info.demo.secondaryLegend === "邻居检查" ? "legend-probe" : "legend-range";
+    secondaryLabel.textContent = asText(info.demo.secondaryLegend, "有效范围");
+    $("#legend-done-label").textContent = asText(info.demo.doneLegend, "已确定");
+    renderExecutionTrace(step);
     renderVariables(step);
     $("#demo-prev").disabled = demoStep === 0;
     $("#demo-next").disabled = demoStep >= info.steps.length - 1;
@@ -895,8 +1049,26 @@
     $("#demo-play").setAttribute("aria-label", demoPlaying ? "暂停" : "播放");
     $("#step-track").innerHTML = info.steps.map(function (item, index) {
       const classes = index === demoStep ? "is-current" : (index < demoStep ? "is-past" : "");
-      return "<button type=\"button\" class=\"" + classes + "\" data-step=\"" + index + "\" aria-label=\"跳到步骤 " + (index + 1) + "：" + escapeHTML(asText(item.title, "")) + "\"></button>";
+      const label = "步骤 " + (index + 1) + "：" + asText(item.title, "");
+      return "<button type=\"button\" class=\"" + classes + "\" data-step=\"" + index + "\" aria-label=\"" +
+        escapeHTML(label) + "\" title=\"" + escapeHTML(label) + "\"" +
+        (index === demoStep ? " aria-current=\"step\"" : "") + ">" + (index + 1) + "</button>";
     }).join("");
+    const track = $("#step-track");
+    const currentStepButton = track.querySelector("[aria-current='step']");
+    if (currentStepButton) {
+      const trackRect = track.getBoundingClientRect();
+      const buttonRect = currentStepButton.getBoundingClientRect();
+      if (buttonRect.left < trackRect.left || buttonRect.right > trackRect.right) {
+        track.scrollLeft = Math.max(
+          0,
+          track.scrollLeft
+            + buttonRect.left
+            - trackRect.left
+            - Math.floor((track.clientWidth - buttonRect.width) / 2)
+        );
+      }
+    }
   }
 
   function stopDemo() {
@@ -913,6 +1085,13 @@
   function startDemo() {
     const info = demoInfo();
     if (info.steps.length <= 1) return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      stopDemo();
+      demoStep = demoStep >= info.steps.length - 1 ? 0 : demoStep + 1;
+      renderDemo();
+      showToast("已按减少动态效果设置前进一步");
+      return;
+    }
     if (demoStep >= info.steps.length - 1) demoStep = 0;
     demoPlaying = true;
     renderDemo();
@@ -925,8 +1104,9 @@
         return;
       }
       demoStep += 1;
+      if (demoStep >= current.steps.length - 1) stopDemo();
       renderDemo();
-    }, Number($("#demo-speed").value) || 850);
+    }, Number($("#demo-speed").value) || 1400);
   }
 
   function copyCode() {
@@ -1107,6 +1287,8 @@
       stopDemo();
       demoStep = Number(step.dataset.step) || 0;
       renderDemo();
+      const currentStep = $("#step-track").querySelector("[data-step='" + demoStep + "']");
+      if (currentStep) currentStep.focus();
     });
 
     $("#status-control").addEventListener("change", function (event) {
