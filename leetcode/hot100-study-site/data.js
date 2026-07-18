@@ -449,21 +449,21 @@
       "扫描到未访问陆地就发现一个新连通块；立刻 DFS 淹没其四向可达陆地，后续不会重复计数。",
       "洪水填充是网格连通性的最小模板，原地改标记还能省去 visited。", "二维网格中统计四向连通块", "O(mn)", "O(mn)，最坏递归栈", "进入陆地必须先标记再递归；Python 遇到极大连通块时还要留意递归深度限制。",
       D("matrix", [["1", "1", "0", "0"], ["1", "0", "0", "1"], ["0", "0", "1", "1"]], [
-        S("进入 numIslands", "调用主函数，第一步只读取网格行数。", {
+        S("进入 numIslands", "调用主函数，先把最终答案 ans 初始化为 0。", {
           phase: "初始化", codeLine: [24, 25], stack: ["numIslands"],
-          changed: ["rows"], vars: { rows: "未定义 → 3" }
+          changed: ["ans"], vars: { ans: "未定义 → 0" }
         }),
-        S("判断空网格分支", "rows 等于 3，所以条件为假，不执行 return 0；空网格才会在这里提前结束。", {
-          phase: "初始化", codeLine: 26, skippedLine: 27, stack: ["numIslands"],
-          condition: "rows == 0 → False", vars: { rows: 3, branch: "继续执行" }
+        S("读取网格行数", "执行 rows = len(grid)，当前网格共有 3 行。", {
+          phase: "初始化", codeLine: 26, stack: ["numIslands"],
+          changed: ["rows"], vars: { ans: 0, rows: "未定义 → 3" }
+        }),
+        S("判断空网格分支", "rows 等于 3，所以条件为假，不执行 return ans；空网格才会在这里返回已经初始化好的 0。", {
+          phase: "初始化", codeLine: 27, skippedLine: 28, stack: ["numIslands"],
+          condition: "rows == 0 → False", vars: { ans: 0, rows: 3, branch: "继续执行" }
         }),
         S("读取列数", "确认网格非空后才能安全访问 grid[0]；当前每行有 4 列。", {
-          phase: "初始化", codeLine: 28, stack: ["numIslands"],
-          changed: ["columns"], vars: { rows: 3, columns: "未定义 → 4" }
-        }),
-        S("初始化岛屿数量", "执行 ans = 0；外层扫描还没有发现任何岛屿。", {
           phase: "初始化", codeLine: 29, stack: ["numIslands"],
-          changed: ["ans"], vars: { rows: 3, columns: 4, ans: "未定义 → 0" }
+          changed: ["columns"], vars: { ans: 0, rows: 3, columns: "未定义 → 4" }
         }),
         S("双重循环开始扫描", "外层 row=0，内层 column=0，当前检查左上角。", {
           phase: "外层扫描", codeLine: [31, 32], stack: ["numIslands"],
@@ -926,7 +926,7 @@
           changed: ["grid[0][1]"],
           vars: { "grid[0][1]": "1 → 2", time: 0 }
         }),
-        S("右邻居以第 1 分钟入队", "把 (0,1,1) 加到队尾；队列现在有两个 time=1 的节点。", {
+        S("右邻居以第 1 分钟入队", "把 (0,1,1) 加到队尾；队列现在有两个将在第 1 分钟腐烂的节点。", {
           phase: "BFS 入队", codeLine: 38, active: [0, 1],
           queue: [[1, 0, 1], [0, 1, 1]], changed: ["queue"],
           vars: { time: 0, new_time: 1, queue: "[(1,0,1)] → [(1,0,1),(0,1,1)]" }
@@ -1071,29 +1071,29 @@
 
           return steps;
         })(),
-        S("队列耗尽，退出 BFS", "queue 为空，while queue 为假；所有能从初始腐烂源到达的橘子都已处理。", {
-          phase: "结束 BFS", codeLine: 32, queue: [],
-          condition: "bool(queue) → False", vars: { queue: "[]", time: 4 }
+        S("队列耗尽，保存默认答案", "queue 为空后退出 while；先把最后一次出队时间 time=4 赋给最终答案 ans。", {
+          phase: "结束 BFS", codeLine: [32, 41], queue: [], changed: ["ans"],
+          condition: "bool(queue) → False", vars: { queue: "[]", time: 4, ans: "未定义 → 4" }
         }),
         S("any 检查第 0 行", "1 in [2,2,2] 为假，生成器继续检查下一行。", {
-          phase: "检查剩余新鲜橘子", codeLine: 41,
+          phase: "检查剩余新鲜橘子", codeLine: 42,
           active: [[0, 0], [0, 1], [0, 2]], queue: [],
-          condition: "1 in [2,2,2] → False", vars: { checked_row: 0, time: 4 }
+          condition: "1 in [2,2,2] → False", vars: { checked_row: 0, time: 4, ans: 4 }
         }),
         S("any 检查第 1 行", "1 in [2,2,0] 仍为假，继续检查最后一行。", {
-          phase: "检查剩余新鲜橘子", codeLine: 41,
+          phase: "检查剩余新鲜橘子", codeLine: 42,
           active: [[1, 0], [1, 1], [1, 2]], queue: [],
-          condition: "1 in [2,2,0] → False", vars: { checked_row: 1, time: 4 }
+          condition: "1 in [2,2,0] → False", vars: { checked_row: 1, time: 4, ans: 4 }
         }),
-        S("any 检查完毕", "最后一行也没有 1，所以 any(...) 为假，return -1 分支被跳过；若任一行仍有 1，就会立即返回 -1。", {
-          phase: "检查剩余新鲜橘子", codeLine: 41, skippedLine: 42,
+        S("any 检查完毕", "最后一行也没有 1，所以 any(...) 为假，ans = -1 这一行被跳过；若任一行仍有 1，就会把答案改成 -1。", {
+          phase: "检查剩余新鲜橘子", codeLine: 42, skippedLine: 43,
           active: [[2, 0], [2, 1], [2, 2]], queue: [],
           condition: "any(1 in row for row in grid) → False",
-          vars: { checked_row: 2, branch: "跳过 return -1", time: 4 }
+          vars: { checked_row: 2, branch: "跳过 ans = -1", time: 4, ans: 4 }
         }),
         S("返回最长腐烂时间", "BFS 按 FIFO 让 time 从小到大出队；最后一次出队的 time=4，就是全部橘子腐烂所需时间。", {
           phase: "返回答案", codeLine: 44, queue: [],
-          changed: ["result"], vars: { time: 4 }, result: "4 分钟"
+          changed: ["result"], vars: { time: 4, ans: 4 }, result: "4 分钟"
         })
       ], { initialDone: [[0, 0]], secondaryLegend: "邻居检查", doneLegend: "已腐烂" })),
     P(207, "课程表", "course-schedule", "图论", "中等", "Kahn 入度拓扑排序", "有向图判环", ["图", "拓扑排序", "BFS"],

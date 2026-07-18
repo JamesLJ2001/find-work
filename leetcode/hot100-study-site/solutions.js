@@ -10,10 +10,12 @@ class Solution:
         for index, value in enumerate(nums):
             complement = target - value
             if complement in index_by_value:
-                return [index_by_value[complement], index]
+                ans = [index_by_value[complement], index]
+                return ans
             index_by_value[value] = index
 
-        return []`,
+        ans = []
+        return ans`,
 
     49: String.raw`from collections import defaultdict
 from typing import List
@@ -30,7 +32,8 @@ class Solution:
                 letter_counts[ord(character) - ord("a")] += 1
             groups[tuple(letter_counts)].append(word)
 
-        return list(groups.values())`,
+        ans = list(groups.values())
+        return ans`,
 
     128: String.raw`from typing import List
 
@@ -38,7 +41,7 @@ class Solution:
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
         values = set(nums)
-        longest_length = 0
+        ans = 0
 
         for value in values:
             # 只从连续序列的起点向右扩展，保证每个数字最多参与一次扫描
@@ -51,9 +54,9 @@ class Solution:
                 current_value += 1
                 current_length += 1
 
-            longest_length = max(longest_length, current_length)
+            ans = max(ans, current_length)
 
-        return longest_length`,
+        return ans`,
 
     283: String.raw`from typing import List
 
@@ -80,12 +83,12 @@ class Solution:
     def maxArea(self, height: List[int]) -> int:
         left = 0
         right = len(height) - 1
-        best_area = 0
+        ans = 0
 
         while left < right:
             width = right - left
             current_height = min(height[left], height[right])
-            best_area = max(best_area, width * current_height)
+            ans = max(ans, width * current_height)
 
             # 面积受短板限制；移动长板不会突破当前高度，只能尝试替换短板
             if height[left] <= height[right]:
@@ -93,7 +96,7 @@ class Solution:
             else:
                 right -= 1
 
-        return best_area`,
+        return ans`,
 
     15: String.raw`from typing import List
 
@@ -102,7 +105,7 @@ class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         # 排序后固定第一个数，剩余两数可用相向双指针线性寻找
         nums.sort()
-        triplets = []
+        ans = []
 
         for first in range(len(nums) - 2):
             # 固定位置去重，避免产生相同三元组
@@ -120,7 +123,7 @@ class Solution:
                 elif total > 0:
                     right -= 1
                 else:
-                    triplets.append([nums[first], nums[left], nums[right]])
+                    ans.append([nums[first], nums[left], nums[right]])
                     left += 1
                     right -= 1
                     # 找到答案后两端都越过重复值
@@ -129,7 +132,7 @@ class Solution:
                     while left < right and nums[right] == nums[right + 1]:
                         right -= 1
 
-        return triplets`,
+        return ans`,
 
     42: String.raw`from typing import List
 
@@ -140,35 +143,35 @@ class Solution:
         right = len(height) - 1
         left_max = 0
         right_max = 0
-        trapped_water = 0
+        ans = 0
 
         while left < right:
             # 较低一侧的水位已由该侧最大值确定，因此可以立即结算并向内移动
             if height[left] <= height[right]:
                 left_max = max(left_max, height[left])
-                trapped_water += left_max - height[left]
+                ans += left_max - height[left]
                 left += 1
             else:
                 right_max = max(right_max, height[right])
-                trapped_water += right_max - height[right]
+                ans += right_max - height[right]
                 right -= 1
 
-        return trapped_water`,
+        return ans`,
 
     3: String.raw`class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         last_index = {}
         left = 0
-        longest_length = 0
+        ans = 0
 
         for right, character in enumerate(s):
             # 窗口内出现重复字符时，左端直接跳到其上次位置之后
             if character in last_index and last_index[character] >= left:
                 left = last_index[character] + 1
             last_index[character] = right
-            longest_length = max(longest_length, right - left + 1)
+            ans = max(ans, right - left + 1)
 
-        return longest_length`,
+        return ans`,
 
     438: String.raw`from typing import List
 
@@ -176,14 +179,15 @@ class Solution:
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
         if len(p) > len(s):
-            return []
+            ans = []
+            return ans
 
         needed = [0] * 26
         window = [0] * 26
         for character in p:
             needed[ord(character) - ord("a")] += 1
 
-        result = []
+        ans = []
         window_size = len(p)
         for right, character in enumerate(s):
             # 每次加入右端并移出恰好相隔 window_size 的字符，维持定长窗口
@@ -194,9 +198,9 @@ class Solution:
                 window[ord(outgoing) - ord("a")] -= 1
 
             if right >= window_size - 1 and window == needed:
-                result.append(right - window_size + 1)
+                ans.append(right - window_size + 1)
 
-        return result`,
+        return ans`,
 
     76: String.raw`from collections import Counter, defaultdict
 
@@ -204,7 +208,8 @@ class Solution:
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
         if not s or not t:
-            return ""
+            ans = ""
+            return ans
 
         needed = Counter(t)
         window = defaultdict(int)
@@ -234,8 +239,10 @@ class Solution:
                 left += 1
 
         if best_length == float("inf"):
-            return ""
-        return s[best_start:best_start + best_length]`,
+            ans = ""
+            return ans
+        ans = s[best_start:best_start + best_length]
+        return ans`,
 
     560: String.raw`from collections import defaultdict
 from typing import List
@@ -247,15 +254,15 @@ class Solution:
         # 空前缀出现一次，使从下标 0 开始且和为 k 的子数组也能被统计
         prefix[0] = 1
         prefix_sum = 0
-        subarray_count = 0
+        ans = 0
 
         for value in nums:
             prefix_sum += value
             # 每个此前出现的 prefix_sum-k 都对应一个以当前位置结尾的答案
-            subarray_count += prefix[prefix_sum - k]
+            ans += prefix[prefix_sum - k]
             prefix[prefix_sum] += 1
 
-        return subarray_count`,
+        return ans`,
 
     239: String.raw`from collections import deque
 from typing import List
@@ -264,7 +271,7 @@ from typing import List
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         decreasing_indices = deque()
-        maximums = []
+        ans = []
 
         for right, value in enumerate(nums):
             # 队列中下标对应的值严格递减，队首始终是当前窗口最大值
@@ -278,9 +285,9 @@ class Solution:
                 decreasing_indices.popleft()
 
             if left >= 0:
-                maximums.append(nums[decreasing_indices[0]])
+                ans.append(nums[decreasing_indices[0]])
 
-        return maximums`,
+        return ans`,
 
     53: String.raw`from typing import List
 
@@ -288,14 +295,14 @@ class Solution:
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         best_ending_here = nums[0]
-        best_overall = nums[0]
+        ans = nums[0]
 
         for value in nums[1:]:
             # 以前一位置结尾的和若拖累当前值，就从当前值重新开始子数组
             best_ending_here = max(value, best_ending_here + value)
-            best_overall = max(best_overall, best_ending_here)
+            ans = max(ans, best_ending_here)
 
-        return best_overall`,
+        return ans`,
 
     56: String.raw`from typing import List
 
@@ -304,15 +311,15 @@ class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         # 按左端点排序后，只需判断当前区间能否接到最后一个合并区间上
         intervals.sort()
-        merged = []
+        ans = []
 
         for start, end in intervals:
-            if not merged or start > merged[-1][1]:
-                merged.append([start, end])
+            if not ans or start > ans[-1][1]:
+                ans.append([start, end])
             else:
-                merged[-1][1] = max(merged[-1][1], end)
+                ans[-1][1] = max(ans[-1][1], end)
 
-        return merged`,
+        return ans`,
 
     189: String.raw`from typing import List
 
@@ -339,21 +346,21 @@ class Solution:
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        # 第一遍让 products[i] 保存 i 左侧所有元素的乘积
-        products = [1] * len(nums)
+        # 第一遍让 ans[i] 保存 i 左侧所有元素的乘积
+        ans = [1] * len(nums)
 
         prefix_product = 1
         for index in range(len(nums)):
-            products[index] = prefix_product
+            ans[index] = prefix_product
             prefix_product *= nums[index]
 
         # 第二遍用滚动后缀积补上右侧部分，从而不需要额外数组
         suffix_product = 1
         for index in range(len(nums) - 1, -1, -1):
-            products[index] *= suffix_product
+            ans[index] *= suffix_product
             suffix_product *= nums[index]
 
-        return products`,
+        return ans`,
 
     41: String.raw`from typing import List
 
@@ -373,9 +380,11 @@ class Solution:
 
         for index, value in enumerate(nums):
             if value != index + 1:
-                return index + 1
+                ans = index + 1
+                return ans
 
-        return n + 1`,
+        ans = n + 1
+        return ans`,
 
     73: String.raw`from typing import List
 
@@ -418,30 +427,30 @@ class Solution:
         bottom = len(matrix) - 1
         left = 0
         right = len(matrix[0]) - 1
-        order = []
+        ans = []
 
         # 每轮沿四条边遍历一圈，再把对应边界向内收缩
         while top <= bottom and left <= right:
             for column in range(left, right + 1):
-                order.append(matrix[top][column])
+                ans.append(matrix[top][column])
             top += 1
 
             for row in range(top, bottom + 1):
-                order.append(matrix[row][right])
+                ans.append(matrix[row][right])
             right -= 1
 
             # 单行或单列收缩后可能已越界，后两条边必须再次检查
             if top <= bottom:
                 for column in range(right, left - 1, -1):
-                    order.append(matrix[bottom][column])
+                    ans.append(matrix[bottom][column])
                 bottom -= 1
 
             if left <= right:
                 for row in range(bottom, top - 1, -1):
-                    order.append(matrix[row][left])
+                    ans.append(matrix[row][left])
                 left += 1
 
-        return order`,
+        return ans`,
 
     48: String.raw`from typing import List
 
@@ -473,13 +482,15 @@ class Solution:
         while row < len(matrix) and column >= 0:
             value = matrix[row][column]
             if value == target:
-                return True
+                ans = True
+                return ans
             if value > target:
                 column -= 1
             else:
                 row += 1
 
-        return False`,
+        ans = False
+        return ans`,
 
     160: String.raw`from typing import Optional
 
@@ -504,7 +515,8 @@ class Solution:
             pointer_a = pointer_a.next if pointer_a else headB
             pointer_b = pointer_b.next if pointer_b else headA
 
-        return pointer_a`,
+        ans = pointer_a
+        return ans`,
 
     206: String.raw`from typing import Optional
 
@@ -527,7 +539,8 @@ class Solution:
             previous = current
             current = next_node
 
-        return previous`,
+        ans = previous
+        return ans`,
 
     234: String.raw`from typing import Optional
 
@@ -541,7 +554,8 @@ class Solution:
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         if not head or not head.next:
-            return True
+            ans = True
+            return ans
 
         slow = head
         fast = head
@@ -554,18 +568,18 @@ class Solution:
         second_half = self._reverse(slow.next)
         left = head
         right = second_half
-        is_palindrome = True
+        ans = True
 
         while right:
             if left.val != right.val:
-                is_palindrome = False
+                ans = False
                 break
             left = left.next
             right = right.next
 
         # 判断结束后恢复原链表，避免给调用方留下结构副作用
         slow.next = self._reverse(second_half)
-        return is_palindrome
+        return ans
 
     def _reverse(self, head: Optional[ListNode]) -> Optional[ListNode]:
         previous = None
@@ -598,9 +612,11 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
             if slow is fast:
-                return True
+                ans = True
+                return ans
 
-        return False`,
+        ans = False
+        return ans`,
 
     142: String.raw`from typing import Optional
 
@@ -623,7 +639,8 @@ class Solution:
             if slow is fast:
                 break
         else:
-            return None
+            ans = None
+            return ans
 
         # 相遇后从链头与相遇点同速前进，两者再次相遇处就是环入口
         entry = head
@@ -631,7 +648,8 @@ class Solution:
             entry = entry.next
             slow = slow.next
 
-        return entry`,
+        ans = entry
+        return ans`,
 
     21: String.raw`from typing import Optional
 
@@ -662,7 +680,8 @@ class Solution:
             tail = tail.next
 
         tail.next = list1 if list1 else list2
-        return dummy.next`,
+        ans = dummy.next
+        return ans`,
 
     2: String.raw`from typing import Optional
 
@@ -695,7 +714,8 @@ class Solution:
             l1 = l1.next if l1 else None
             l2 = l2.next if l2 else None
 
-        return dummy.next`,
+        ans = dummy.next
+        return ans`,
 
     19: String.raw`from typing import Optional
 
@@ -726,7 +746,8 @@ class Solution:
             slow = slow.next
 
         slow.next = slow.next.next
-        return dummy.next`,
+        ans = dummy.next
+        return ans`,
 
     24: String.raw`from typing import Optional
 
@@ -753,7 +774,8 @@ class Solution:
             # 交换后 first 成为这一对的末尾，也是下一轮的前驱
             previous = first
 
-        return dummy.next`,
+        ans = dummy.next
+        return ans`,
 
     25: String.raw`from typing import Optional
 
@@ -795,7 +817,8 @@ class Solution:
             group_previous.next = group_end
             group_previous = old_group_start
 
-        return dummy.next
+        ans = dummy.next
+        return ans
 
     def _find_kth(self, start: ListNode, k: int) -> Optional[ListNode]:
         current = start
@@ -818,7 +841,8 @@ class Solution:
 class Solution:
     def copyRandomList(self, head: Optional[Node]) -> Optional[Node]:
         if not head:
-            return None
+            ans = None
+            return ans
 
         copy_by_original = {}
         current = head
@@ -835,7 +859,8 @@ class Solution:
             copied_node.random = copy_by_original.get(current.random)
             current = current.next
 
-        return copy_by_original[head]`,
+        ans = copy_by_original[head]
+        return ans`,
 
     148: String.raw`from typing import Optional
 
@@ -849,7 +874,8 @@ class Solution:
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
-            return head
+            ans = head
+            return ans
 
         slow = head
         fast = head.next
@@ -863,7 +889,8 @@ class Solution:
         # 递归排序两半后线性归并，整体复杂度为 O(n log n)
         left = self.sortList(head)
         right = self.sortList(right_head)
-        return self._merge(left, right)
+        ans = self._merge(left, right)
+        return ans
 
     def _merge(
         self,
@@ -921,7 +948,8 @@ class Solution:
                 heapq.heappush(min_heap, (node.next.val, sequence, node.next))
                 sequence += 1
 
-        return dummy.next`,
+        ans = dummy.next
+        return ans`,
 
     146: String.raw`class DoublyLinkedNode:
     def __init__(self, key: int = 0, value: int = 0):
@@ -943,13 +971,15 @@ class LRUCache:
 
     def get(self, key: int) -> int:
         if key not in self.node_by_key:
-            return -1
+            ans = -1
+            return ans
 
         node = self.node_by_key[key]
         # 每次访问都把节点移到头部，头部表示最近使用
         self._remove(node)
         self._add_to_front(node)
-        return node.value
+        ans = node.value
+        return ans
 
     def put(self, key: int, value: int) -> None:
         if key in self.node_by_key:
@@ -991,7 +1021,7 @@ class LRUCache:
 
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        values = []
+        ans = []
         stack = []
         current = root
 
@@ -1003,10 +1033,10 @@ class Solution:
                 current = current.left
 
             current = stack.pop()
-            values.append(current.val)
+            ans.append(current.val)
             current = current.right
 
-        return values`,
+        return ans`,
 
     104: String.raw`from typing import Optional
 
@@ -1021,12 +1051,14 @@ class Solution:
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
-            return 0
+            ans = 0
+            return ans
 
         # 递归返回当前子树的高度，父节点只需取两侧较大值再加一。
         left_depth = self.maxDepth(root.left)
         right_depth = self.maxDepth(root.right)
-        return 1 + max(left_depth, right_depth)`,
+        ans = 1 + max(left_depth, right_depth)
+        return ans`,
 
     226: String.raw`from typing import Optional
 
@@ -1041,11 +1073,13 @@ class Solution:
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root:
-            return None
+            ans = None
+            return ans
 
         # 先分别翻转原来的右、左子树，再把它们交换到相反位置。
         root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
-        return root`,
+        ans = root
+        return ans`,
 
     101: String.raw`from typing import Optional
 
@@ -1060,8 +1094,10 @@ class Solution:
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         if not root:
-            return True
-        return self._is_mirror(root.left, root.right)
+            ans = True
+            return ans
+        ans = self._is_mirror(root.left, root.right)
+        return ans
 
     def _is_mirror(
         self,
@@ -1092,10 +1128,10 @@ class Solution:
 
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        longest_diameter = 0
+        ans = 0
 
         def height(node: Optional[TreeNode]) -> int:
-            nonlocal longest_diameter
+            nonlocal ans
             if not node:
                 return 0
 
@@ -1103,14 +1139,14 @@ class Solution:
             left_height = height(node.left)
             right_height = height(node.right)
             # 经过当前节点的路径可同时使用左右两边，因此边数正好是两侧高度之和。
-            longest_diameter = max(
-                longest_diameter,
+            ans = max(
+                ans,
                 left_height + right_height,
             )
             return 1 + max(left_height, right_height)
 
         height(root)
-        return longest_diameter`,
+        return ans`,
 
     102: String.raw`from collections import deque
 from typing import List, Optional
@@ -1126,9 +1162,10 @@ from typing import List, Optional
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
-            return []
+            ans = []
+            return ans
 
-        levels = []
+        ans = []
         queue = deque([root])
 
         while queue:
@@ -1141,9 +1178,9 @@ class Solution:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-            levels.append(level)
+            ans.append(level)
 
-        return levels`,
+        return ans`,
 
     108: String.raw`from typing import List, Optional
 
@@ -1169,7 +1206,8 @@ class Solution:
             root.right = build(middle + 1, right)
             return root
 
-        return build(0, len(nums) - 1)`,
+        ans = build(0, len(nums) - 1)
+        return ans`,
 
     98: String.raw`from typing import Optional
 
@@ -1202,7 +1240,8 @@ class Solution:
                 and validate(node.right, node.val, upper_bound)
             )
 
-        return validate(root, None, None)`,
+        ans = validate(root, None, None)
+        return ans`,
 
     230: String.raw`from typing import Optional
 
@@ -1229,7 +1268,8 @@ class Solution:
             current = stack.pop()
             k -= 1
             if k == 0:
-                return current.val
+                ans = current.val
+                return ans
             current = current.right
 
         raise ValueError("k exceeds the number of nodes")`,
@@ -1248,9 +1288,10 @@ from typing import List, Optional
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         if not root:
-            return []
+            ans = []
+            return ans
 
-        visible_values = []
+        ans = []
         queue = deque([root])
 
         while queue:
@@ -1259,13 +1300,13 @@ class Solution:
             for index in range(level_size):
                 node = queue.popleft()
                 if index == level_size - 1:
-                    visible_values.append(node.val)
+                    ans.append(node.val)
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
 
-        return visible_values`,
+        return ans`,
 
     114: String.raw`from typing import Optional
 
@@ -1331,7 +1372,8 @@ class Solution:
             root.right = build(middle + 1, right)
             return root
 
-        return build(0, len(inorder) - 1)`,
+        ans = build(0, len(inorder) - 1)
+        return ans`,
 
     437: String.raw`from collections import defaultdict
 from typing import Optional
@@ -1367,7 +1409,8 @@ class Solution:
             prefix[cur] -= 1
             return path_count
 
-        return dfs(root, 0)`,
+        ans = dfs(root, 0)
+        return ans`,
 
     236: String.raw`from typing import Optional
 
@@ -1388,16 +1431,19 @@ class Solution:
     ) -> Optional[TreeNode]:
         # 找到 p 或 q 就向上返回该节点；空节点表示这一支没有目标。
         if not root or root is p or root is q:
-            return root
+            ans = root
+            return ans
 
         left_result = self.lowestCommonAncestor(root.left, p, q)
         right_result = self.lowestCommonAncestor(root.right, p, q)
 
         # 两侧各找到一个目标时，当前节点是它们第一次汇合的位置。
         if left_result and right_result:
-            return root
+            ans = root
+            return ans
         # 只有一侧非空时，把已找到的目标或公共祖先继续向上传递。
-        return left_result if left_result else right_result`,
+        ans = left_result if left_result else right_result
+        return ans`,
 
     124: String.raw`from typing import Optional
 
@@ -1433,7 +1479,8 @@ class Solution:
             return node.val + max(left_gain, right_gain)
 
         max_gain(root)
-        return self.max_sum`,
+        ans = self.max_sum
+        return ans`,
 
     200: String.raw`from typing import List
 
@@ -1459,11 +1506,11 @@ class Solution:
                 self.dfs(grid, x, y)
 
     def numIslands(self, grid: List[List[str]]) -> int:
+        ans = 0
         rows = len(grid)
         if rows == 0:
-            return 0
+            return ans
         columns = len(grid[0])
-        ans = 0
 
         for row in range(rows):
             for column in range(columns):
@@ -1481,7 +1528,7 @@ from typing import List
 
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        # time 保存当前出队橘子的腐烂时间；没有传播时答案就是 0。
+        # time 保存当前出队橘子的腐烂时间；最终还要检查是否剩有新鲜橘子。
         time = 0
         rows = len(grid)
         columns = len(grid[0])
@@ -1514,11 +1561,11 @@ class Solution:
                     grid[row][column] = 2
                     queue.append((row, column, time + 1))
 
-        # BFS 结束后还有新鲜橘子，说明它无法被任何腐烂源到达。
+        # 默认答案是最后一次出队时间；若仍有新鲜橘子，再把答案改为 -1。
+        ans = time
         if any(1 in row for row in grid):
-            return -1
-        # 最后一次出队的 time 就是全部腐烂所需的最长时间。
-        return time`,
+            ans = -1
+        return ans`,
 
     207: String.raw`import collections
 from typing import List
@@ -1552,7 +1599,8 @@ class Solution:
                     queue.append(next_course)
 
         # 有环时环内节点永远无法降到零入度，因此完成数会不足。
-        return completed == numCourses`,
+        ans = completed == numCourses
+        return ans`,
 
     208: String.raw`class TrieNode:
     def __init__(self):
@@ -1580,11 +1628,13 @@ class Trie:
     def search(self, word: str) -> bool:
         node = self._find(word)
         # 路径存在并且到达单词结尾，单词才真正存在。
-        return node is not None and node.is_end
+        ans = node is not None and node.is_end
+        return ans
 
     def startsWith(self, prefix: str) -> bool:
         # 查询前缀只要求路径存在，不要求到达单词结尾。
-        return self._find(prefix) is not None
+        ans = self._find(prefix) is not None
+        return ans
 
     def _find(self, text: str):
         node = self.root
@@ -1599,14 +1649,14 @@ class Trie:
 
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        permutations = []
+        ans = []
         path = []
         used = [False] * len(nums)
 
         def backtrack() -> None:
             # path 的层数表示已经确定了多少个位置，used 防止同一元素重复入选。
             if len(path) == len(nums):
-                permutations.append(path.copy())
+                ans.append(path.copy())
                 return
 
             for index, value in enumerate(nums):
@@ -1620,19 +1670,19 @@ class Solution:
                 used[index] = False
 
         backtrack()
-        return permutations`,
+        return ans`,
 
     78: String.raw`from typing import List
 
 
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        all_subsets = []
+        ans = []
         path = []
 
         def backtrack(start_index: int) -> None:
             # 回溯树的每个节点都对应一个合法子集，因此进入函数就收集答案。
-            all_subsets.append(path.copy())
+            ans.append(path.copy())
 
             # 只向后选择，既避免重复，也保证每个元素最多使用一次。
             for index in range(start_index, len(nums)):
@@ -1641,7 +1691,7 @@ class Solution:
                 path.pop()
 
         backtrack(0)
-        return all_subsets`,
+        return ans`,
 
     17: String.raw`from typing import List
 
@@ -1649,7 +1699,8 @@ class Solution:
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         if not digits:
-            return []
+            ans = []
+            return ans
 
         letters_by_digit = {
             "2": "abc",
@@ -1661,13 +1712,13 @@ class Solution:
             "8": "tuv",
             "9": "wxyz",
         }
-        combinations = []
+        ans = []
         path = []
 
         def backtrack(digit_index: int) -> None:
             # 每一层固定处理一个数字，递归深度就是已选字符数量。
             if digit_index == len(digits):
-                combinations.append("".join(path))
+                ans.append("".join(path))
                 return
 
             # 当前数字的每个字母都是本层互斥的选择，返回后撤销再尝试下一个。
@@ -1677,7 +1728,7 @@ class Solution:
                 path.pop()
 
         backtrack(0)
-        return combinations`,
+        return ans`,
 
     39: String.raw`from typing import List
 
@@ -1689,12 +1740,12 @@ class Solution:
         target: int,
     ) -> List[List[int]]:
         candidates.sort()
-        combinations = []
+        ans = []
         path = []
 
         def backtrack(start_index: int, remaining: int) -> None:
             if remaining == 0:
-                combinations.append(path.copy())
+                ans.append(path.copy())
                 return
 
             # start_index 限制选择顺序，避免同一组合产生不同排列。
@@ -1709,19 +1760,19 @@ class Solution:
                 path.pop()
 
         backtrack(0, target)
-        return combinations`,
+        return ans`,
 
     22: String.raw`from typing import List
 
 
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        combinations = []
+        ans = []
         path = []
 
         def backtrack(open_count: int, close_count: int) -> None:
             if len(path) == 2 * n:
-                combinations.append("".join(path))
+                ans.append("".join(path))
                 return
 
             # 左括号总数不能超过 n，它负责开启新的未闭合结构。
@@ -1737,7 +1788,7 @@ class Solution:
                 path.pop()
 
         backtrack(0, 0)
-        return combinations`,
+        return ans`,
 
     79: String.raw`from typing import List
 
@@ -1776,9 +1827,11 @@ class Solution:
         for row in range(rows):
             for column in range(columns):
                 if search(row, column, 0):
-                    return True
+                    ans = True
+                    return ans
 
-        return False`,
+        ans = False
+        return ans`,
 
     131: String.raw`from typing import List
 
@@ -1797,13 +1850,13 @@ class Solution:
                     and (right - left <= 2 or is_palindrome[left + 1][right - 1])
                 )
 
-        partitions = []
+        ans = []
         path = []
 
         def backtrack(start: int) -> None:
             # start 表示尚未分割的后缀起点，到达末尾才得到完整方案。
             if start == n:
-                partitions.append(path.copy())
+                ans.append(path.copy())
                 return
 
             for end in range(start, n):
@@ -1814,14 +1867,14 @@ class Solution:
                 path.pop()
 
         backtrack(0)
-        return partitions`,
+        return ans`,
 
     51: String.raw`from typing import List
 
 
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        solutions = []
+        ans = []
         queen_column_by_row = [-1] * n
         used_columns = set()
         used_main_diagonals = set()
@@ -1833,7 +1886,7 @@ class Solution:
                 board = []
                 for column in queen_column_by_row:
                     board.append("." * column + "Q" + "." * (n - column - 1))
-                solutions.append(board)
+                ans.append(board)
                 return
 
             for column in range(n):
@@ -1860,7 +1913,7 @@ class Solution:
                 used_anti_diagonals.remove(anti_diagonal)
 
         backtrack(0)
-        return solutions`,
+        return ans`,
 
     35: String.raw`from typing import List
 
@@ -1879,7 +1932,8 @@ class Solution:
             else:
                 left = middle + 1
 
-        return left`,
+        ans = left
+        return ans`,
 
     74: String.raw`from typing import List
 
@@ -1901,10 +1955,11 @@ class Solution:
             else:
                 left = middle + 1
 
-        return (
+        ans = (
             left < rows * columns
             and matrix[left // columns][left % columns] == target
-        )`,
+        )
+        return ans`,
 
     34: String.raw`from typing import List
 
@@ -1914,11 +1969,13 @@ class Solution:
         # 第一次二分找第一个 >= target 的位置，先确认目标确实存在。
         first = self._lower_bound(nums, target)
         if first == len(nums) or nums[first] != target:
-            return [-1, -1]
+            ans = [-1, -1]
+            return ans
 
         # 第一个 >= target + 1 的位置就是目标区间的右侧开边界。
         after_last = self._lower_bound(nums, target + 1)
-        return [first, after_last - 1]
+        ans = [first, after_last - 1]
+        return ans
 
     def _lower_bound(self, nums: List[int], target: int) -> int:
         left = 0
@@ -1944,7 +2001,8 @@ class Solution:
         while left <= right:
             middle = left + (right - left) // 2
             if nums[middle] == target:
-                return middle
+                ans = middle
+                return ans
 
             # 旋转数组被 middle 切开后，至少有一侧仍然有序。
             if nums[left] <= nums[middle]:
@@ -1960,7 +2018,8 @@ class Solution:
                 else:
                     right = middle - 1
 
-        return -1`,
+        ans = -1
+        return ans`,
 
     153: String.raw`from typing import List
 
@@ -1980,7 +2039,8 @@ class Solution:
                 # middle 可能就是最小值，不能用 middle - 1 排除它。
                 right = middle
 
-        return nums[left]`,
+        ans = nums[left]
+        return ans`,
 
     4: String.raw`from typing import List
 
@@ -1995,11 +2055,13 @@ class Solution:
 
         # 中位数统一转化为寻找两个有序数组合并后的第 k 小元素。
         if total_length % 2 == 1:
-            return float(self._find_kth(nums1, nums2, total_length // 2 + 1))
+            ans = float(self._find_kth(nums1, nums2, total_length // 2 + 1))
+            return ans
 
         left_middle = self._find_kth(nums1, nums2, total_length // 2)
         right_middle = self._find_kth(nums1, nums2, total_length // 2 + 1)
-        return (left_middle + right_middle) / 2.0
+        ans = (left_middle + right_middle) / 2.0
+        return ans
 
     def _find_kth(self, nums1: List[int], nums2: List[int], k: int) -> int:
         index1 = 0
@@ -2042,9 +2104,11 @@ class Solution:
             if bracket not in opening_for_closing:
                 stack.append(bracket)
             elif not stack or stack.pop() != opening_for_closing[bracket]:
-                return False
+                ans = False
+                return ans
 
-        return not stack`,
+        ans = not stack
+        return ans`,
 
     155: String.raw`class MinStack:
     def __init__(self):
@@ -2059,10 +2123,12 @@ class Solution:
         self.stack.pop()
 
     def top(self) -> int:
-        return self.stack[-1][0]
+        ans = self.stack[-1][0]
+        return ans
 
     def getMin(self) -> int:
-        return self.stack[-1][1]`,
+        ans = self.stack[-1][1]
+        return ans`,
 
     394: String.raw`class Solution:
     def decodeString(self, s: str) -> str:
@@ -2084,14 +2150,15 @@ class Solution:
             else:
                 current_text.append(character)
 
-        return "".join(current_text)`,
+        ans = "".join(current_text)
+        return ans`,
 
     739: String.raw`from typing import List
 
 
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        wait_days = [0] * len(temperatures)
+        ans = [0] * len(temperatures)
         decreasing_indices = []
 
         # 栈中是仍未找到更高温度的日期，温度从栈底到栈顶单调不增。
@@ -2101,10 +2168,10 @@ class Solution:
                 and temperatures[decreasing_indices[-1]] < temperature
             ):
                 previous_index = decreasing_indices.pop()
-                wait_days[previous_index] = index - previous_index
+                ans[previous_index] = index - previous_index
             decreasing_indices.append(index)
 
-        return wait_days`,
+        return ans`,
 
     84: String.raw`from typing import List
 
@@ -2113,7 +2180,7 @@ class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
         # 栈内柱高单调递增，-1 是计算最左宽度时的边界哨兵。
         increasing_indices = [-1]
-        maximum_area = 0
+        ans = 0
 
         for index in range(len(heights) + 1):
             current_height = 0 if index == len(heights) else heights[index]
@@ -2125,11 +2192,11 @@ class Solution:
             ):
                 height = heights[increasing_indices.pop()]
                 width = index - increasing_indices[-1] - 1
-                maximum_area = max(maximum_area, height * width)
+                ans = max(ans, height * width)
 
             increasing_indices.append(index)
 
-        return maximum_area`,
+        return ans`,
 
     215: String.raw`import random
 from typing import List
@@ -2157,7 +2224,8 @@ class Solution:
             elif target_index > equal_right:
                 left = equal_right + 1
             else:
-                return nums[target_index]
+                ans = nums[target_index]
+                return ans
 
         raise ValueError("k is outside the valid range")
 
@@ -2202,7 +2270,8 @@ class Solution:
             if len(min_heap) > k:
                 heapq.heappop(min_heap)
 
-        return [value for _, value in min_heap]`,
+        ans = [value for _, value in min_heap]
+        return ans`,
 
     295: String.raw`import heapq
 
@@ -2226,8 +2295,10 @@ class MedianFinder:
 
     def findMedian(self) -> float:
         if len(self.smaller_half) > len(self.larger_half):
-            return float(-self.smaller_half[0])
-        return (-self.smaller_half[0] + self.larger_half[0]) / 2.0`,
+            ans = float(-self.smaller_half[0])
+            return ans
+        ans = (-self.smaller_half[0] + self.larger_half[0]) / 2.0
+        return ans`,
 
     121: String.raw`from typing import List
 
@@ -2236,13 +2307,13 @@ class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         # 最低价只来自当前日期之前，因此当前差价天然满足“先买后卖”。
         minimum_price = prices[0]
-        maximum_profit = 0
+        ans = 0
 
         for price in prices[1:]:
-            maximum_profit = max(maximum_profit, price - minimum_price)
+            ans = max(ans, price - minimum_price)
             minimum_price = min(minimum_price, price)
 
-        return maximum_profit`,
+        return ans`,
 
     55: String.raw`from typing import List
 
@@ -2254,22 +2325,25 @@ class Solution:
 
         for index, maximum_jump in enumerate(nums):
             if index > farthest_reachable:
-                return False
+                ans = False
+                return ans
             farthest_reachable = max(
                 farthest_reachable,
                 index + maximum_jump,
             )
             if farthest_reachable >= len(nums) - 1:
-                return True
+                ans = True
+                return ans
 
-        return True`,
+        ans = True
+        return ans`,
 
     45: String.raw`from typing import List
 
 
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        jump_count = 0
+        ans = 0
         # current_end 是当前跳数能覆盖的边界，farthest_reachable 是下一层的边界。
         current_end = 0
         farthest_reachable = 0
@@ -2282,10 +2356,10 @@ class Solution:
 
             # 扫完当前覆盖层才增加一次跳跃，等价于对隐式图进行分层 BFS。
             if index == current_end:
-                jump_count += 1
+                ans += 1
                 current_end = farthest_reachable
 
-        return jump_count`,
+        return ans`,
 
     763: String.raw`from typing import List
 
@@ -2294,17 +2368,17 @@ class Solution:
     def partitionLabels(self, s: str) -> List[int]:
         # 当前片段必须延伸到其中每个字符的最后位置；到达 end 才能安全切分。
         last_index = {character: index for index, character in enumerate(s)}
-        partition_lengths = []
+        ans = []
         start = 0
         end = 0
 
         for index, character in enumerate(s):
             end = max(end, last_index[character])
             if index == end:
-                partition_lengths.append(end - start + 1)
+                ans.append(end - start + 1)
                 start = index + 1
 
-        return partition_lengths`,
+        return ans`,
 
     70: String.raw`class Solution:
     def climbStairs(self, n: int) -> int:
@@ -2315,7 +2389,8 @@ class Solution:
         for _ in range(n):
             previous, current = current, previous + current
 
-        return previous`,
+        ans = previous
+        return ans`,
 
     118: String.raw`from typing import List
 
@@ -2323,18 +2398,18 @@ class Solution:
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
         # 每行边界固定为 1，内部元素由上一行左上和右上两个状态相加得到。
-        triangle = []
+        ans = []
 
         for row_index in range(numRows):
             row = [1] * (row_index + 1)
             for column in range(1, row_index):
                 row[column] = (
-                    triangle[row_index - 1][column - 1]
-                    + triangle[row_index - 1][column]
+                    ans[row_index - 1][column - 1]
+                    + ans[row_index - 1][column]
                 )
-            triangle.append(row)
+            ans.append(row)
 
-        return triangle`,
+        return ans`,
 
     198: String.raw`from typing import List
 
@@ -2351,7 +2426,8 @@ class Solution:
                 max(best_through_previous, best_before_previous + money),
             )
 
-        return best_through_previous`,
+        ans = best_through_previous
+        return ans`,
 
     279: String.raw`class Solution:
     def numSquares(self, n: int) -> int:
@@ -2369,7 +2445,8 @@ class Solution:
                 )
             square += 1
 
-        return minimum_count[n]`,
+        ans = minimum_count[n]
+        return ans`,
 
     322: String.raw`from typing import List
 
@@ -2389,8 +2466,10 @@ class Solution:
                 )
 
         if minimum_coins[amount] == amount + 1:
-            return -1
-        return minimum_coins[amount]`,
+            ans = -1
+            return ans
+        ans = minimum_coins[amount]
+        return ans`,
 
     139: String.raw`from typing import List
 
@@ -2411,7 +2490,8 @@ class Solution:
                     can_split[end] = True
                     break
 
-        return can_split[len(s)]`,
+        ans = can_split[len(s)]
+        return ans`,
 
     300: String.raw`from bisect import bisect_left
 from typing import List
@@ -2430,7 +2510,8 @@ class Solution:
             else:
                 smallest_tail[position] = value
 
-        return len(smallest_tail)`,
+        ans = len(smallest_tail)
+        return ans`,
 
     152: String.raw`from typing import List
 
@@ -2440,7 +2521,7 @@ class Solution:
         # 同时记录以当前位置结尾的最大积和最小积，因为负数会让二者互换角色。
         maximum_ending_here = nums[0]
         minimum_ending_here = nums[0]
-        best_product = nums[0]
+        ans = nums[0]
 
         for value in nums[1:]:
             # 乘负数前先交换，之后仍可用同一套“继续相乘或从当前值重启”的转移。
@@ -2452,9 +2533,9 @@ class Solution:
 
             maximum_ending_here = max(value, maximum_ending_here * value)
             minimum_ending_here = min(value, minimum_ending_here * value)
-            best_product = max(best_product, maximum_ending_here)
+            ans = max(ans, maximum_ending_here)
 
-        return best_product`,
+        return ans`,
 
     416: String.raw`from typing import List
 
@@ -2463,7 +2544,8 @@ class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         total_sum = sum(nums)
         if total_sum % 2 == 1:
-            return False
+            ans = False
+            return ans
 
         target = total_sum // 2
         # reachable[s] 表示能否用已经处理过的数字恰好组成和 s。
@@ -2478,13 +2560,14 @@ class Solution:
                     or reachable[current_sum - value]
                 )
 
-        return reachable[target]`,
+        ans = reachable[target]
+        return ans`,
 
     32: String.raw`class Solution:
     def longestValidParentheses(self, s: str) -> int:
         # longest_ending_at[i] 只记录“恰好以 i 结尾”的最长有效括号长度。
         longest_ending_at = [0] * len(s)
-        longest_length = 0
+        ans = 0
 
         for index in range(1, len(s)):
             if s[index] != ")":
@@ -2506,9 +2589,9 @@ class Solution:
                     )
                     longest_ending_at[index] = previous_length + 2 + earlier_length
 
-            longest_length = max(longest_length, longest_ending_at[index])
+            ans = max(ans, longest_ending_at[index])
 
-        return longest_length`,
+        return ans`,
 
     62: String.raw`class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
@@ -2519,7 +2602,8 @@ class Solution:
             for column in range(1, n):
                 path_count[column] += path_count[column - 1]
 
-        return path_count[-1]`,
+        ans = path_count[-1]
+        return ans`,
 
     64: String.raw`from typing import List
 
@@ -2538,7 +2622,8 @@ class Solution:
                 from_left = minimum_sum[column - 1] if column > 0 else float("inf")
                 minimum_sum[column] = grid[row][column] + min(from_above, from_left)
 
-        return minimum_sum[-1]`,
+        ans = minimum_sum[-1]
+        return ans`,
 
     5: String.raw`class Solution:
     def longestPalindrome(self, s: str) -> str:
@@ -2561,7 +2646,8 @@ class Solution:
             expand(center, center)
             expand(center, center + 1)
 
-        return s[best_start:best_start + best_length]`,
+        ans = s[best_start:best_start + best_length]
+        return ans`,
 
     1143: String.raw`class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
@@ -2581,7 +2667,8 @@ class Solution:
                         longest[row][column - 1],
                     )
 
-        return longest[-1][-1]`,
+        ans = longest[-1][-1]
+        return ans`,
 
     72: String.raw`class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
@@ -2607,7 +2694,8 @@ class Solution:
                         distance[row - 1][column - 1],
                     )
 
-        return distance[-1][-1]`,
+        ans = distance[-1][-1]
+        return ans`,
 
     136: String.raw`from typing import List
 
@@ -2615,12 +2703,12 @@ class Solution:
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
         # 异或满足交换律且 x ^ x = 0，成对数字会抵消，只留下唯一值。
-        unique_value = 0
+        ans = 0
 
         for value in nums:
-            unique_value ^= value
+            ans ^= value
 
-        return unique_value`,
+        return ans`,
 
     169: String.raw`from typing import List
 
@@ -2636,7 +2724,8 @@ class Solution:
                 candidate = value
             balance += 1 if value == candidate else -1
 
-        return candidate`,
+        ans = candidate
+        return ans`,
 
     75: String.raw`from typing import List
 
@@ -2706,5 +2795,6 @@ class Solution:
             entry = nums[entry]
             slow = nums[slow]
 
-        return entry`,
+        ans = entry
+        return ans`,
 };
