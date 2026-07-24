@@ -482,15 +482,13 @@ class Solution:
         while row < len(matrix) and column >= 0:
             value = matrix[row][column]
             if value == target:
-                ans = True
-                return ans
+                return True
             if value > target:
                 column -= 1
             else:
                 row += 1
 
-        ans = False
-        return ans`,
+        return False`,
 
     160: String.raw`from typing import Optional
 
@@ -554,8 +552,7 @@ class Solution:
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         if not head or not head.next:
-            ans = True
-            return ans
+            return True
 
         slow = head
         fast = head
@@ -568,18 +565,18 @@ class Solution:
         second_half = self._reverse(slow.next)
         left = head
         right = second_half
-        ans = True
+        is_palindrome = True
 
         while right:
             if left.val != right.val:
-                ans = False
+                is_palindrome = False
                 break
             left = left.next
             right = right.next
 
         # 判断结束后恢复原链表，避免给调用方留下结构副作用
         slow.next = self._reverse(second_half)
-        return ans
+        return is_palindrome
 
     def _reverse(self, head: Optional[ListNode]) -> Optional[ListNode]:
         previous = None
@@ -612,11 +609,9 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
             if slow is fast:
-                ans = True
-                return ans
+                return True
 
-        ans = False
-        return ans`,
+        return False`,
 
     142: String.raw`from typing import Optional
 
@@ -1094,10 +1089,8 @@ class Solution:
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         if not root:
-            ans = True
-            return ans
-        ans = self._is_mirror(root.left, root.right)
-        return ans
+            return True
+        return self._is_mirror(root.left, root.right)
 
     def _is_mirror(
         self,
@@ -1240,8 +1233,7 @@ class Solution:
                 and validate(node.right, node.val, upper_bound)
             )
 
-        ans = validate(root, None, None)
-        return ans`,
+        return validate(root, None, None)`,
 
     230: String.raw`from typing import Optional
 
@@ -1599,8 +1591,7 @@ class Solution:
                     queue.append(next_course)
 
         # 有环时环内节点永远无法降到零入度，因此完成数会不足。
-        ans = completed == numCourses
-        return ans`,
+        return completed == numCourses`,
 
     208: String.raw`class TrieNode:
     def __init__(self):
@@ -1628,13 +1619,11 @@ class Trie:
     def search(self, word: str) -> bool:
         node = self._find(word)
         # 路径存在并且到达单词结尾，单词才真正存在。
-        ans = node is not None and node.is_end
-        return ans
+        return node is not None and node.is_end
 
     def startsWith(self, prefix: str) -> bool:
         # 查询前缀只要求路径存在，不要求到达单词结尾。
-        ans = self._find(prefix) is not None
-        return ans
+        return self._find(prefix) is not None
 
     def _find(self, text: str):
         node = self.root
@@ -1827,11 +1816,9 @@ class Solution:
         for row in range(rows):
             for column in range(columns):
                 if search(row, column, 0):
-                    ans = True
-                    return ans
+                    return True
 
-        ans = False
-        return ans`,
+        return False`,
 
     131: String.raw`from typing import List
 
@@ -1955,11 +1942,10 @@ class Solution:
             else:
                 left = middle + 1
 
-        ans = (
+        return (
             left < rows * columns
             and matrix[left // columns][left % columns] == target
-        )
-        return ans`,
+        )`,
 
     34: String.raw`from typing import List
 
@@ -2104,11 +2090,9 @@ class Solution:
             if bracket not in opening_for_closing:
                 stack.append(bracket)
             elif not stack or stack.pop() != opening_for_closing[bracket]:
-                ans = False
-                return ans
+                return False
 
-        ans = not stack
-        return ans`,
+        return not stack`,
 
     155: String.raw`class MinStack:
     def __init__(self):
@@ -2325,18 +2309,15 @@ class Solution:
 
         for index, maximum_jump in enumerate(nums):
             if index > farthest_reachable:
-                ans = False
-                return ans
+                return False
             farthest_reachable = max(
                 farthest_reachable,
                 index + maximum_jump,
             )
             if farthest_reachable >= len(nums) - 1:
-                ans = True
-                return ans
+                return True
 
-        ans = True
-        return ans`,
+        return True`,
 
     45: String.raw`from typing import List
 
@@ -2490,8 +2471,7 @@ class Solution:
                     can_split[end] = True
                     break
 
-        ans = can_split[len(s)]
-        return ans`,
+        return can_split[len(s)]`,
 
     300: String.raw`from bisect import bisect_left
 from typing import List
@@ -2544,8 +2524,7 @@ class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         total_sum = sum(nums)
         if total_sum % 2 == 1:
-            ans = False
-            return ans
+            return False
 
         target = total_sum // 2
         # reachable[s] 表示能否用已经处理过的数字恰好组成和 s。
@@ -2560,8 +2539,7 @@ class Solution:
                     or reachable[current_sum - value]
                 )
 
-        ans = reachable[target]
-        return ans`,
+        return reachable[target]`,
 
     32: String.raw`class Solution:
     def longestValidParentheses(self, s: str) -> int:
