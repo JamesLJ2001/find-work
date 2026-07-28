@@ -142,6 +142,33 @@ function directMethodStatements(method) {
   return statements;
 }
 
+function inspectTrivialAnsRelays(problemId, source) {
+  const lines = source.split(/\r?\n/);
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const assignmentLine = lines[index];
+    const assignmentWithoutComment = assignmentLine.replace(/\s+#.*$/, "").trimEnd();
+    const assignment = assignmentWithoutComment.match(/^(\s*)ans\s*=(?!=)\s*(.+)$/);
+    if (!assignment || /\bans\b/.test(assignment[2])) continue;
+
+    let nextIndex = index + 1;
+    while (
+      nextIndex < lines.length
+      && (!lines[nextIndex].trim() || lines[nextIndex].trimStart().startsWith("#"))
+    ) {
+      nextIndex += 1;
+    }
+
+    if (nextIndex >= lines.length) continue;
+    const returnWithoutComment = lines[nextIndex].replace(/\s+#.*$/, "").trimEnd();
+    if (returnWithoutComment === `${assignment[1]}return ans`) {
+      errors.push(
+        `${problemId} 第 ${index + 1}-${nextIndex + 1} 行只是把现成结果中转给 ans，请直接返回右侧表达式`,
+      );
+    }
+  }
+}
+
 function inspectReturnConvention(problemId, method, expectsValue, returnsBoolean = false) {
   const statements = directMethodStatements(method);
   const returns = statements.filter((statement) => /^return(?:\s|$)/.test(statement.text));
@@ -180,21 +207,14 @@ function inspectReturnConvention(problemId, method, expectsValue, returnsBoolean
     return;
   }
 
-  for (const statement of valueReturns) {
-    const withoutComment = statement.text.replace(/\s+#.*$/, "").trim();
-    if (withoutComment !== "return ans") {
-      errors.push(`${label} 第 ${statement.line} 行必须写成 return ans，实际为 ${withoutComment}`);
-    }
-  }
-
-  if (!hasAnsAssignment) errors.push(`${label} 返回 ans 前没有给 ans 赋值`);
+  // 非布尔有值入口可以直接返回表达式，也可以返回真正累积或构造出的 ans。
 }
 
 let valueEntryCount = 0;
 let booleanEntryCount = 0;
-let ansEntryCount = 0;
 for (const problem of problems ?? []) {
   const source = solutions?.[problem.id] ?? "";
+  inspectTrivialAnsRelays(problem.id, source);
   const design = designApis[problem.id];
   if (design) {
     const methods = classMethods(source, design.className);
@@ -205,7 +225,6 @@ for (const problem of problems ?? []) {
         const returnsBoolean = methodReturnsBool(method);
         valueEntryCount += 1;
         if (returnsBoolean) booleanEntryCount += 1;
-        else ansEntryCount += 1;
         inspectReturnConvention(problem.id, method, true, returnsBoolean);
       }
     }
@@ -232,7 +251,6 @@ for (const problem of problems ?? []) {
   if (expectsValue) {
     valueEntryCount += 1;
     if (returnsBoolean) booleanEntryCount += 1;
-    else ansEntryCount += 1;
   }
   inspectReturnConvention(problem.id, publicMethods[0], expectsValue, returnsBoolean);
 }
@@ -242,9 +260,6 @@ if (valueEntryCount !== 95) {
 }
 if (booleanEntryCount !== 14) {
   errors.push(`应有 14 个布尔公开入口直接返回，实际识别到 ${booleanEntryCount} 个`);
-}
-if (ansEntryCount !== 81) {
-  errors.push(`应有 81 个非布尔公开有值入口使用 return ans，实际识别到 ${ansEntryCount} 个`);
 }
 
 const detailedDemoRules = {
@@ -339,5 +354,5 @@ if (errors.length) {
   console.error(errors.join("\n"));
   process.exitCode = 1;
 } else {
-  console.log("验证通过：100 道题、14 个布尔入口直接返回、81 个非布尔有值入口统一 return ans，字段与动画轨迹完整。");
+  console.log("验证通过：100 道题、95 个公开有值入口符合语义返回规则，字段与动画轨迹完整。");
 }
