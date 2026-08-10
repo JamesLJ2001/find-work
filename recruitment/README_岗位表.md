@@ -2,10 +2,11 @@
 
 ## 文件分层
 
-1. `source/target_companies.xlsx`：原始手工收集表，保留你的原始判断和岗位链接。
-2. `target_roles.csv`：岗位总表，从原始表结构化整理，保留完整 JD 描述。
-3. `tracker.csv`：投递执行表，只放状态、下一步、简历版本和投递动作。
-4. `../data/recruitment_events.csv`：日历提醒数据，由岗位表中的时间节点同步而来。
+1. `2027-autumn-openings.md`：当前秋招开放状态和最终投递岗位，使用 UTF-8 Markdown 维护，是后续唯一主记录。
+2. `source/target_companies.xlsx`：旧版原始资料，只读保留，不再继续更新，避免再次出现乱码。
+3. `target_roles.csv`：岗位总表，从原始表结构化整理，保留完整 JD 描述。
+4. `tracker.csv`：投递执行表，只放状态、下一步、简历版本和投递动作。
+5. `../data/recruitment_events.csv`：日历提醒数据，由岗位表中的时间节点同步而来。
 
 ## 当前策略
 
