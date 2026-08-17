@@ -26,6 +26,8 @@ test("ships the finished command center instead of the starter", async () => {
   assert.match(page, /loadDashboardData/);
   assert.match(route, /Cache-Control": "no-store"/);
   assert.match(css, /@media \(max-width: 620px\)/);
+  assert.match(css, /@keyframes review-complete/);
+  assert.match(css, /\.queue-list a\.is-complete \.queue-state/);
   assert.doesNotMatch(`${layout}${dashboard}${page}`, /codex-preview|Building your site|SkeletonPreview/i);
 });
 
