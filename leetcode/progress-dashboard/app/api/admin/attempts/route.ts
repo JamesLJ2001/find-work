@@ -1,4 +1,3 @@
-import { env } from "cloudflare:workers";
 import type { MasteryStatus } from "../../../lib/types";
 
 type RuntimeEnv = {
@@ -25,6 +24,7 @@ function unauthorized() {
 }
 
 export async function POST(request: Request) {
+  const { env } = await import("cloudflare:workers");
   const runtime = env as unknown as RuntimeEnv;
   const expected = runtime.ADMIN_TOKEN;
   const supplied = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");

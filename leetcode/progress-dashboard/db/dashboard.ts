@@ -10,7 +10,7 @@ function messageFrom(error: unknown) {
 
 export async function loadDashboardData(): Promise<DashboardPayload> {
   try {
-    const db = getDb();
+    const db = await getDb();
     const [problemRows, attemptRows] = await Promise.all([
       db.select().from(problems).orderBy(asc(problems.sortOrder)),
       db.select().from(attempts).orderBy(asc(attempts.id)),
