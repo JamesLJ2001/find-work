@@ -2443,6 +2443,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-17T12:00:00+08:00"
+    },
+    {
+      "id": 68,
+      "externalId": "csv-0068",
+      "problemId": 74,
+      "attemptedOn": "2026-08-17",
+      "recordedTitle": "搜索二维矩阵",
+      "recordedTopic": "回溯与二分入门",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已独立写出从右上角开始、每次排除一行或一列的正确主思路；但循环边界写成 column>0，导致第 0 列永远不会被检查，例如单行矩阵查找首元素时会错误返回 False；本题属于矩阵搜索或二分查找，不是回溯",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答主思路正确但边界未通过｜将条件改为 row<rows and column>=0；若追求本题最优复杂度则将矩阵视作一维有序数组做 O(log(mn)) 二分",
+      "sourceRow": 70,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-17T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-17T23:59:59+08:00",
