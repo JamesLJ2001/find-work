@@ -16,7 +16,11 @@ test("ships the finished command center instead of the starter", async () => {
   assert.match(dashboard, /今日新题/);
   assert.match(dashboard, /data\.dailyPlan\.newProblemIds/);
   assert.match(dashboard, /data\.dailyPlan\.reviewQueues/);
-  assert.match(dashboard, /120_000/);
+  assert.doesNotMatch(dashboard, /120_000/);
+  assert.match(dashboard, /progressVersion/);
+  assert.match(dashboard, /对话记录写入后即时更新/);
+  assert.match(dashboard, /每日 08:30 单独同步/);
+  assert.match(dashboard, /millisecondsUntilNextMorningPlanSync/);
   assert.match(dashboard, /visibilitychange/);
   assert.match(dashboard, /今日复习队列/);
   assert.match(dashboard, /今日任务已完成/);

@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { progressVersion } from "../data/progress-version";
 import type {
   AttemptRecord,
   DashboardPayload,
@@ -26,6 +27,19 @@ function dateInChina() {
     month: "2-digit",
     day: "2-digit",
   }).format(new Date());
+}
+
+function isPastMorningPlanSync() {
+  const now = new Date();
+  return now.getHours() > 8 || (now.getHours() === 8 && now.getMinutes() >= 30);
+}
+
+function millisecondsUntilNextMorningPlanSync() {
+  const now = new Date();
+  const next = new Date(now);
+  next.setHours(8, 30, 15, 0);
+  if (next <= now) next.setDate(next.getDate() + 1);
+  return next.getTime() - now.getTime();
 }
 
 function shortDate(value: string) {
@@ -230,6 +244,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
   const [difficultyFilter, setDifficultyFilter] = useState("全部");
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [page, setPage] = useState(1);
+  const loadedProgressVersion = useRef(progressVersion);
   const pageSize = 20;
 
   useEffect(() => {
@@ -425,17 +440,39 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
   }, []);
 
   useEffect(() => {
+    if (loadedProgressVersion.current === progressVersion) return;
+    loadedProgressVersion.current = progressVersion;
+    void refresh(false);
+  }, [refresh]);
+
+  useEffect(() => {
     const syncInBackground = () => void refresh(false);
-    const interval = window.setInterval(syncInBackground, 120_000);
+    let morningTimeout: number | undefined;
+    let retryInterval: number | undefined;
+    const startMorningPlanSync = () => {
+      syncInBackground();
+      retryInterval = window.setInterval(syncInBackground, 60_000);
+    };
+
+    if (data.dailyPlan.date !== dateInChina() && isPastMorningPlanSync()) {
+      startMorningPlanSync();
+    } else {
+      morningTimeout = window.setTimeout(
+        startMorningPlanSync,
+        millisecondsUntilNextMorningPlanSync(),
+      );
+    }
+
     const syncWhenVisible = () => {
       if (document.visibilityState === "visible") syncInBackground();
     };
     document.addEventListener("visibilitychange", syncWhenVisible);
     return () => {
-      window.clearInterval(interval);
+      if (morningTimeout !== undefined) window.clearTimeout(morningTimeout);
+      if (retryInterval !== undefined) window.clearInterval(retryInterval);
       document.removeEventListener("visibilitychange", syncWhenVisible);
     };
-  }, [refresh]);
+  }, [data.dailyPlan.date, refresh]);
 
   const maxDailyAttempts = Math.max(...model.dayStats.map((day) => day.attempts), 1);
 
@@ -514,9 +551,9 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               <div><dt>红题</dt><dd>{model.redReview.length} 道额外复测</dd></div>
             </dl>
             <p className="freshness">
-              执行单生成：{formatSyncTime(data.dailyPlan.generatedAt)} · {data.dailyPlan.planVersion}
+              执行单生成：{formatSyncTime(data.dailyPlan.generatedAt)} · 每日 08:30 单独同步
               <br />
-              作答数据同步：{formatSyncTime(data.syncedAt)} · 页面每 2 分钟自动刷新
+              作答数据同步：{formatSyncTime(data.syncedAt)} · 对话记录写入后即时更新
             </p>
           </aside>
         </section>

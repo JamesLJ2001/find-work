@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -7,6 +8,7 @@ const leetcodeRoot = path.resolve(projectRoot, "..");
 const csvPath = path.join(leetcodeRoot, "progress.csv");
 const planPath = path.join(leetcodeRoot, "2026-08-bytedance-100-plan.md");
 const snapshotPath = path.join(projectRoot, "app", "data", "progress-snapshot.ts");
+const versionPath = path.join(projectRoot, "app", "data", "progress-version.ts");
 
 function parseCsv(text) {
   const rows = [];
@@ -175,10 +177,17 @@ const attempts = csvRows.map(({ rowNumber, values }, index) => {
 
 const syncedAt = `${attempts.at(-1).attemptedOn}T23:59:59+08:00`;
 const snapshot = { problems, attempts, syncedAt, source: "snapshot", stale: false };
+const progressVersion = createHash("sha256").update(csvText).digest("hex").slice(0, 16);
 
 await writeFile(
   snapshotPath,
   `import type { DashboardPayload } from "../lib/types";\n\nexport const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = ${JSON.stringify(snapshot, null, 2)};\n`,
+  "utf8",
+);
+
+await writeFile(
+  versionPath,
+  `export const progressVersion = "${progressVersion}";\n`,
   "utf8",
 );
 

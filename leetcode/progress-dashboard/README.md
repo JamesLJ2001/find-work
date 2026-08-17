@@ -9,7 +9,8 @@
 - 每题最新一条未作废记录决定当前颜色，不自动升级。
 - 错误记录通过 `is_void`、`supersedes_attempt_id` 和 `correction_reason` 作废或替代，不物理删除。
 - 早上 8:30 的 ChatGPT 定时任务是每日排程的唯一计算者，把新题和 D+1/D+3/D+7/红题复测写入 GitHub 上的 `../daily-plan.json`。
-- GitHub 只保存和同步执行单，不负责计算；网页每两分钟读取一次同一文件，不再自行计算另一套队列。
+- GitHub 只保存和同步执行单，不负责计算；网页不再自行计算另一套队列。
+- 对话新增作答记录后，`data:sync` 会更新本地进度版本，开发页面通过热更新立即重新读取数据，不做全天定时轮询。
 - 执行单只决定“今天做什么”，是否完成仍由真实作答记录判断。
 - 执行单日期不是今天或 GitHub 同步失败时，页面明确显示提示，不使用旧计划冒充今日计划。
 - 数据库不可用时，页面自动降级到 `app/data/progress-snapshot.ts` 的带时间戳快照。
@@ -32,7 +33,7 @@ npm run local
 
 现有早上 8:30 定时任务应使用 [`../daily-plan-automation-prompt.md`](../daily-plan-automation-prompt.md) 中的完整提示词。任务每天读取 GitHub main 的最新计划与 `progress.csv`，更新 `daily-plan.json`，回读校验后再发送聊天提醒。
 
-网页服务保持运行时会每两分钟检查 GitHub 最新执行单；切回网页标签页时也会立即刷新。无需晚上任务，也无需 GitHub Action。
+网页服务保持运行时会在每天 8:30 单独检查 GitHub 最新执行单；如果任务尚未写完则每分钟重试，读取到当天版本后停止。切回网页标签页时也会立即刷新。无需晚上任务，也无需 GitHub Action。
 
 ## 写入接口
 
