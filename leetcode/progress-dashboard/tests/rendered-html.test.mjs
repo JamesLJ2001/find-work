@@ -34,3 +34,14 @@ test("ships the data and storage surfaces", async () => {
   assert.match(schema, /sqliteTable\(\s*"attempts"/);
   assert.equal(JSON.parse(hosting).d1, "DB");
 });
+
+test("runs the private local dashboard through the live development server", async () => {
+  const packageJson = JSON.parse(
+    await readFile(new URL("../package.json", import.meta.url), "utf8"),
+  );
+
+  assert.equal(
+    packageJson.scripts.local,
+    "vinext dev --hostname 127.0.0.1 --port 4173",
+  );
+});
