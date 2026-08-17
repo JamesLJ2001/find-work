@@ -178,7 +178,7 @@ const snapshot = { problems, attempts, syncedAt, source: "snapshot", stale: fals
 
 await writeFile(
   snapshotPath,
-  `import type { DashboardPayload } from "../lib/types";\n\nexport const progressSnapshot: DashboardPayload = ${JSON.stringify(snapshot, null, 2)};\n`,
+  `import type { DashboardPayload } from "../lib/types";\n\nexport const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = ${JSON.stringify(snapshot, null, 2)};\n`,
   "utf8",
 );
 

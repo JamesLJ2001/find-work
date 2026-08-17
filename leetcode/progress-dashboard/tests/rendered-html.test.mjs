@@ -3,25 +3,64 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 test("ships the finished command center instead of the starter", async () => {
-  const [layout, dashboard, page, css] = await Promise.all([
+  const [layout, dashboard, page, css, route] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/Dashboard.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/dashboard/route.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(layout, /LeetCode 100 · 刷题作战台/);
   assert.match(dashboard, /字节最近 100/);
   assert.match(dashboard, /今日新题/);
-  assert.match(dashboard, /problem\.planDate === today/);
+  assert.match(dashboard, /data\.dailyPlan\.newProblemIds/);
+  assert.match(dashboard, /data\.dailyPlan\.reviewQueues/);
+  assert.match(dashboard, /120_000/);
+  assert.match(dashboard, /visibilitychange/);
   assert.match(dashboard, /今日复习队列/);
   assert.match(dashboard, /今日复习已完成/);
   assert.match(dashboard, /✓ 已复习/);
   assert.match(dashboard, /redReview/);
   assert.match(dashboard, /完整题库/);
   assert.match(page, /loadDashboardData/);
+  assert.match(route, /Cache-Control": "no-store"/);
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.doesNotMatch(`${layout}${dashboard}${page}`, /codex-preview|Building your site|SkeletonPreview/i);
+});
+
+test("validates the single GitHub-backed daily execution sheet", async () => {
+  const [rawPlan, loader, prompt, rawSnapshot] = await Promise.all([
+    readFile(new URL("../../daily-plan.json", import.meta.url), "utf8"),
+    readFile(new URL("../db/daily-plan.ts", import.meta.url), "utf8"),
+    readFile(new URL("../../daily-plan-automation-prompt.md", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/progress-snapshot.ts", import.meta.url), "utf8"),
+  ]);
+  const plan = JSON.parse(rawPlan);
+  const snapshot = JSON.parse(
+    rawSnapshot.slice(rawSnapshot.indexOf("= {") + 2, rawSnapshot.lastIndexOf(";")).trim(),
+  );
+  const queues = Object.values(plan.reviewQueues);
+  const reviewIds = queues.flatMap((queue) => queue.problemIds);
+  const catalogIds = new Set(snapshot.problems.map((problem) => problem.id));
+  const allPlannedIds = [
+    ...plan.newProblemIds,
+    ...reviewIds,
+    ...(plan.reviewQueues.d7.poolProblemIds ?? []),
+  ];
+
+  assert.equal(plan.schemaVersion, 1);
+  assert.equal(plan.timezone, "Asia/Shanghai");
+  assert.equal(plan.totals.newProblems, plan.newProblemIds.length);
+  assert.equal(plan.totals.reviewProblems, new Set(reviewIds).size);
+  assert.equal(reviewIds.length, new Set(reviewIds).size);
+  assert.equal(plan.totals.totalTasks, plan.totals.newProblems + plan.totals.reviewProblems);
+  assert.ok(allPlannedIds.every((id) => catalogIds.has(id)));
+  assert.match(loader, /raw\.githubusercontent\.com/);
+  assert.match(loader, /isDailyPlan/);
+  assert.match(loader, /AbortSignal\.timeout\(5_000\)/);
+  assert.match(prompt, /唯一每日排程者/);
+  assert.match(prompt, /不要创建或调用 GitHub Action/);
 });
 
 test("ships the data and storage surfaces", async () => {

@@ -172,6 +172,16 @@ a {
   background: var(--amber);
 }
 
+.live-dot.is-stale {
+  border-color: color-mix(in srgb, var(--amber) 45%, var(--line));
+  color: var(--amber);
+}
+
+.live-dot.is-stale::before {
+  background: var(--amber);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--amber) 70%, transparent);
+}
+
 .text-button,
 .icon-button,
 .pagination button {
@@ -443,6 +453,24 @@ button:disabled {
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
   margin-top: 18px;
+}
+
+.plan-alert {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 14px 18px;
+  border: 1px solid color-mix(in srgb, var(--amber) 45%, var(--line));
+  border-radius: 12px;
+  color: var(--amber);
+  background: color-mix(in srgb, var(--amber) 7%, var(--panel));
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.plan-alert span {
+  color: var(--text-soft);
 }
 
 .status-card {
@@ -1296,6 +1324,7 @@ footer {
   .activity-day small { font-size: 8px; transform: rotate(-35deg); transform-origin: center; }
   .chart-foot, footer { align-items: flex-start; flex-direction: column; }
   .history-drawer { width: 100%; padding: 22px 18px; }
+  .plan-alert { align-items: flex-start; flex-direction: column; gap: 5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

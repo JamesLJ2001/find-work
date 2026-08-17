@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "planVersion": "2026-08-17.1",
+  "date": "2026-08-17",
+  "timezone": "Asia/Shanghai",
+  "generatedAt": "2026-08-17T16:37:54+08:00",
+  "generator": "Codex migration bootstrap",
+  "source": {
+    "repository": "JamesLJ2001/find-work",
+    "branch": "main",
+    "planFile": "leetcode/2026-08-bytedance-100-plan.md",
+    "progressFile": "leetcode/progress.csv",
+    "sourceCommit": "d9213be1257b458e160133f95b06069d8a963704"
+  },
+  "completionSource": "leetcode/progress.csv",
+  "newProblemIds": [39, 22, 131, 51, 74],
+  "reviewQueues": {
+    "d1": {
+      "label": "D+1",
+      "sourceDate": "2026-08-16",
+      "problemIds": [],
+      "instruction": "口述思路和关键代码；绿色题不完整重写。来源日只有复测记录，没有首次作答题。"
+    },
+    "d3": {
+      "label": "D+3",
+      "sourceDate": "2026-08-13",
+      "problemIds": [101, 543, 102, 199, 114],
+      "instruction": "红黄题从空白重写；绿色题抽查边界。"
+    },
+    "d7": {
+      "label": "D+7",
+      "sourceDate": "2026-08-03",
+      "problemIds": [15, 42],
+      "poolProblemIds": [15, 42, 3, 560],
+      "instruction": "从来源题池抽两题完整盲写，优先尚未连续两次间隔独立通过的题。"
+    },
+    "red": {
+      "label": "红题复测",
+      "sourceDate": null,
+      "problemIds": [23, 146, 94, 236, 994, 208],
+      "instruction": "复测日初仍为红色且未被 D 队列覆盖的题；与其他队列自动去重。"
+    }
+  },
+  "totals": {
+    "newProblems": 5,
+    "reviewProblems": 13,
+    "totalTasks": 18
+  }
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type {
   AttemptRecord,
   DashboardPayload,
@@ -251,9 +251,16 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     });
 
     const today = dateInChina();
-    const todayProblems = data.problems
-      .filter((problem) => problem.planDate === today)
-      .sort((left, right) => left.sortOrder - right.sortOrder);
+    const planIsCurrent = data.dailyPlan.date === today;
+    const problemById = new Map(data.problems.map((problem) => [problem.id, problem]));
+    const problemsFromIds = (ids: number[]) =>
+      ids.flatMap((id) => {
+        const problem = problemById.get(id);
+        return problem ? [problem] : [];
+      });
+    const todayProblems = planIsCurrent
+      ? problemsFromIds(data.dailyPlan.newProblemIds)
+      : [];
     const attemptedToday = new Set(
       activeAttempts
         .filter((attempt) => attempt.attemptedOn === today)
@@ -267,37 +274,26 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
         .filter((attempt) => attempt.attemptedOn === today && attempt.isReview)
         .map((attempt) => attempt.problemId),
     );
-    const latestBeforeToday = new Map<number, AttemptRecord>();
-    for (const attempt of activeAttempts) {
-      if (attempt.attemptedOn < today) latestBeforeToday.set(attempt.problemId, attempt);
-    }
     const studyDays = Array.from(new Set(activeAttempts.map((attempt) => attempt.attemptedOn)));
     if (!studyDays.includes(today)) studyDays.push(today);
     studyDays.sort();
-    const currentDayIndex = studyDays.indexOf(today);
-    const sourceAt = (offset: number) => studyDays[currentDayIndex - offset];
-    const problemsFirstSeenOn = (date?: string) =>
-      date
-        ? data.problems.filter((problem) => firstDateByProblem.get(problem.id) === date)
-        : [];
 
-    const d1Date = sourceAt(1);
-    const d3Date = sourceAt(3);
-    const d7Date = sourceAt(7);
-    const d1 = problemsFirstSeenOn(d1Date);
-    const d3 = problemsFirstSeenOn(d3Date);
-    const d7Pool = problemsFirstSeenOn(d7Date);
-    const d7 = d7Pool.slice(0, 2);
-
-    const scheduledReviewIds = new Set(
-      [...d1, ...d3, ...d7].map((problem) => problem.id),
+    const queues = data.dailyPlan.reviewQueues;
+    const d1Date = planIsCurrent ? queues.d1.sourceDate ?? undefined : undefined;
+    const d3Date = planIsCurrent ? queues.d3.sourceDate ?? undefined : undefined;
+    const d7Date = planIsCurrent ? queues.d7.sourceDate ?? undefined : undefined;
+    const d1 = planIsCurrent ? problemsFromIds(queues.d1.problemIds) : [];
+    const d3 = planIsCurrent ? problemsFromIds(queues.d3.problemIds) : [];
+    const d7 = planIsCurrent ? problemsFromIds(queues.d7.problemIds) : [];
+    const d7Pool = planIsCurrent
+      ? problemsFromIds(queues.d7.poolProblemIds ?? queues.d7.problemIds)
+      : [];
+    const redReview = planIsCurrent ? problemsFromIds(queues.red.problemIds) : [];
+    const reviewProblems = Array.from(
+      new Map(
+        [...d1, ...d3, ...d7, ...redReview].map((problem) => [problem.id, problem]),
+      ).values(),
     );
-    const redReview = data.problems.filter(
-      (problem) =>
-        latestBeforeToday.get(problem.id)?.status === "红" &&
-        !scheduledReviewIds.has(problem.id),
-    );
-    const reviewProblems = [...d1, ...d3, ...d7, ...redReview];
     const reviewCompletedCount = reviewProblems.filter((problem) =>
       reviewedToday.has(problem.id),
     ).length;
@@ -322,6 +318,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
       difficultyStats,
       topics,
       today,
+      planIsCurrent,
       todayProblems,
       attemptedToday,
       todayAttemptedCount,
@@ -379,15 +376,30 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     window.localStorage.setItem("algo-ops-theme", nextTheme);
   };
 
-  const refresh = async () => {
-    setIsRefreshing(true);
+  const refresh = useCallback(async (showSpinner = true) => {
+    if (showSpinner) setIsRefreshing(true);
     try {
-      const response = await fetch("/api/dashboard", { cache: "no-store" });
+      const response = await fetch(`/api/dashboard?t=${Date.now()}`, {
+        cache: "no-store",
+      });
       if (response.ok) setData((await response.json()) as DashboardPayload);
     } finally {
-      setIsRefreshing(false);
+      if (showSpinner) setIsRefreshing(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const syncInBackground = () => void refresh(false);
+    const interval = window.setInterval(syncInBackground, 120_000);
+    const syncWhenVisible = () => {
+      if (document.visibilityState === "visible") syncInBackground();
+    };
+    document.addEventListener("visibilitychange", syncWhenVisible);
+    return () => {
+      window.clearInterval(interval);
+      document.removeEventListener("visibilitychange", syncWhenVisible);
+    };
+  }, [refresh]);
 
   const maxDailyAttempts = Math.max(...model.dayStats.map((day) => day.attempts), 1);
 
@@ -405,7 +417,16 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
           <span className={`source-badge ${data.stale ? "is-stale" : ""}`}>
             <i /> {data.source === "database" ? "D1 数据库" : "静态快照"}
           </span>
-          <button className="text-button" type="button" onClick={refresh} disabled={isRefreshing}>
+          <span
+            className={`source-badge ${
+              data.dailyPlan.stale || data.dailyPlan.syncSource !== "github"
+                ? "is-stale"
+                : ""
+            }`}
+          >
+            <i /> 执行单 · {data.dailyPlan.syncSource === "github" ? "GitHub" : "仓库回退"}
+          </span>
+          <button className="text-button" type="button" onClick={() => void refresh()} disabled={isRefreshing}>
             {isRefreshing ? "同步中…" : "同步"}
           </button>
           <button className="icon-button" type="button" onClick={toggleTheme} aria-label="切换深浅主题">
@@ -441,7 +462,9 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
                 <span className="eyebrow">TODAY · {model.today}</span>
                 <h2>今日战情</h2>
               </div>
-              <span className="live-dot">LIVE</span>
+              <span className={`live-dot ${model.planIsCurrent ? "" : "is-stale"}`}>
+                {model.planIsCurrent ? "LIVE" : "WAIT"}
+              </span>
             </div>
             <div className="brief-number">
               <strong>{model.reviewCompletedCount}/{model.reviewProblems.length}</strong>
@@ -454,7 +477,11 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               <div><dt>D+7</dt><dd>{model.d7.length} / {model.d7Pool.length} 题盲写抽查</dd></div>
               <div><dt>红题</dt><dd>{model.redReview.length} 道额外复测</dd></div>
             </dl>
-            <p className="freshness">最近同步：{formatSyncTime(data.syncedAt)} · {data.stale ? "数据库异常，当前为可用快照" : "数据正常"}</p>
+            <p className="freshness">
+              执行单生成：{formatSyncTime(data.dailyPlan.generatedAt)} · {data.dailyPlan.planVersion}
+              <br />
+              作答数据同步：{formatSyncTime(data.syncedAt)} · 页面每 2 分钟自动刷新
+            </p>
           </aside>
         </section>
 
@@ -468,13 +495,25 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
           ))}
         </section>
 
+        {(data.dailyPlan.warning || !model.planIsCurrent) && (
+          <section className="plan-alert" role="status">
+            <b>{model.planIsCurrent ? "执行单同步提示" : "今日执行单尚未生成"}</b>
+            <span>
+              {data.dailyPlan.warning ??
+                `当前读取到 ${data.dailyPlan.date} 的执行单，请等待早上 8:30 任务写入今天的版本。`}
+            </span>
+          </section>
+        )}
+
         <section className="section today-mission" id="today">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">TODAY&apos;S MISSION · {model.today}</span>
+              <span className="eyebrow">
+                TODAY&apos;S MISSION · {model.today} · {data.dailyPlan.planVersion}
+              </span>
               <h2>今日新题 · {model.todayProblems.length}</h2>
             </div>
-            <p>当天计划题直接从这里进入；“已作答”只表示今天留下记录，颜色仍按真实掌握状态判断。</p>
+            <p>题单由早上 8:30 任务写入 GitHub；“已作答”与颜色仍按真实作答记录判断。</p>
           </div>
           <div className="today-task-grid">
             {model.todayProblems.length ? (
@@ -505,7 +544,9 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
                 );
               })
             ) : (
-              <div className="today-empty panel">今天的计划中没有新题。</div>
+              <div className="today-empty panel">
+                {model.planIsCurrent ? "今天的执行单没有新题。" : "等待今天的执行单同步后显示。"}
+              </div>
             )}
           </div>
         </section>
@@ -519,10 +560,10 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
             <p>右侧标签表示今天是否复习；左侧圆点表示当前掌握程度，两种状态互不替代。</p>
           </div>
           <div className="queue-grid">
-            <QueueCard label="D+1" sourceDate={model.d1Date} description="口述思路与关键代码；绿色题无需完整重写。" problems={model.d1} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
-            <QueueCard label="D+3" sourceDate={model.d3Date} description="红黄题从空白重写；绿色题只抽查边界。" problems={model.d3} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
-            <QueueCard label="D+7" sourceDate={model.d7Date} description={`来源批次共 ${model.d7Pool.length} 题，今日抽两题完整盲写。`} problems={model.d7} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
-            <QueueCard label="红题复测" title="日初红题池" description="今日开始前仍为红色、且没有被 D 队列覆盖的题；自动去重。" problems={model.redReview} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label="D+1" sourceDate={model.d1Date} description={data.dailyPlan.reviewQueues.d1.instruction} problems={model.d1} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label="D+3" sourceDate={model.d3Date} description={data.dailyPlan.reviewQueues.d3.instruction} problems={model.d3} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label="D+7" sourceDate={model.d7Date} description={`${data.dailyPlan.reviewQueues.d7.instruction} 来源题池共 ${model.d7Pool.length} 题。`} problems={model.d7} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label="红题复测" title="日初红题池" description={data.dailyPlan.reviewQueues.red.instruction} problems={model.redReview} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
           </div>
         </section>
 

@@ -1,6 +1,6 @@
 import type { DashboardPayload } from "../lib/types";
 
-export const progressSnapshot: DashboardPayload = {
+export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
   "problems": [
     {
       "id": 1,

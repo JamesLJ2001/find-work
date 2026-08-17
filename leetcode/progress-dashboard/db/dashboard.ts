@@ -2,6 +2,7 @@ import { asc } from "drizzle-orm";
 import { progressSnapshot } from "../app/data/progress-snapshot";
 import type { DashboardPayload } from "../app/lib/types";
 import { getDb } from "./index";
+import { loadDailyPlan } from "./daily-plan";
 import { attempts, problems } from "./schema";
 
 function messageFrom(error: unknown) {
@@ -9,6 +10,8 @@ function messageFrom(error: unknown) {
 }
 
 export async function loadDashboardData(): Promise<DashboardPayload> {
+  const dailyPlan = await loadDailyPlan();
+
   try {
     const db = await getDb();
     const [problemRows, attemptRows] = await Promise.all([
@@ -23,6 +26,7 @@ export async function loadDashboardData(): Promise<DashboardPayload> {
     return {
       problems: problemRows,
       attempts: attemptRows,
+      dailyPlan,
       syncedAt: new Date().toISOString(),
       source: "database",
       stale: false,
@@ -30,6 +34,7 @@ export async function loadDashboardData(): Promise<DashboardPayload> {
   } catch (error) {
     return {
       ...progressSnapshot,
+      dailyPlan,
       source: "snapshot",
       stale: true,
       fallbackReason: messageFrom(error),
