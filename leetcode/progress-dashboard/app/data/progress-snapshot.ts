@@ -2463,6 +2463,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-17T12:00:00+08:00"
+    },
+    {
+      "id": 69,
+      "externalId": "csv-0069",
+      "problemId": 51,
+      "attemptedOn": "2026-08-17",
+      "recordedTitle": "N 皇后",
+      "recordedTopic": "回溯与二分入门",
+      "recordedDifficulty": "困难",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已判断需要回溯并提出先放一个皇后、标记横竖斜冲突后继续选择下一个可用位置的正确方向；但尚不能将思路落实为逐行递归、三个集合判冲突以及选择和撤销的完整代码",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答有方向但无法实现｜固定每行只放一个皇后以消除横向冲突；用 columns、diagonal1(row-column)、diagonal2(row+column) 记录其余冲突，递归返回时撤销棋盘和三个集合中的选择",
+      "sourceRow": 71,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-17T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-17T23:59:59+08:00",
