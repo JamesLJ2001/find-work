@@ -235,6 +235,17 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     });
 
     const today = dateInChina();
+    const todayProblems = data.problems
+      .filter((problem) => problem.planDate === today)
+      .sort((left, right) => left.sortOrder - right.sortOrder);
+    const attemptedToday = new Set(
+      activeAttempts
+        .filter((attempt) => attempt.attemptedOn === today)
+        .map((attempt) => attempt.problemId),
+    );
+    const todayAttemptedCount = todayProblems.filter((problem) =>
+      attemptedToday.has(problem.id),
+    ).length;
     const studyDays = Array.from(new Set(activeAttempts.map((attempt) => attempt.attemptedOn)));
     if (!studyDays.includes(today)) studyDays.push(today);
     studyDays.sort();
@@ -273,6 +284,9 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
       difficultyStats,
       topics,
       today,
+      todayProblems,
+      attemptedToday,
+      todayAttemptedCount,
       d1Date,
       d3Date,
       d7Date,
@@ -392,6 +406,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               <span>项复习动作（含红题队列）</span>
             </div>
             <dl className="brief-list">
+              <div><dt>新题</dt><dd>{model.todayAttemptedCount} / {model.todayProblems.length} 已作答</dd></div>
               <div><dt>D+1</dt><dd>{model.d1.length ? `${model.d1.length} 题口述` : "来源日无首次题"}</dd></div>
               <div><dt>D+3</dt><dd>{model.d3.length} 题按状态复写</dd></div>
               <div><dt>D+7</dt><dd>{model.d7.length} / {model.d7Pool.length} 题盲写抽查</dd></div>
@@ -411,7 +426,49 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
           ))}
         </section>
 
-        <section className="section" id="today">
+        <section className="section today-mission" id="today">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">TODAY&apos;S MISSION · {model.today}</span>
+              <h2>今日新题 · {model.todayProblems.length}</h2>
+            </div>
+            <p>当天计划题直接从这里进入；“已作答”只表示今天留下记录，颜色仍按真实掌握状态判断。</p>
+          </div>
+          <div className="today-task-grid">
+            {model.todayProblems.length ? (
+              model.todayProblems.map((problem, index) => {
+                const status = statusFrom(model.latestByProblem.get(problem.id));
+                const attempted = model.attemptedToday.has(problem.id);
+                return (
+                  <a
+                    className={`today-task-card panel ${attempted ? "is-attempted" : "is-pending"}`}
+                    href={problem.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    key={problem.id}
+                  >
+                    <div className="today-task-card__top">
+                      <span className="today-task-index">{String(index + 1).padStart(2, "0")}</span>
+                      <span className={`table-status status-${status}`}>
+                        <i aria-hidden="true" /> {statusLabels[status]}
+                      </span>
+                    </div>
+                    <h3>{problem.id}. {problem.title}</h3>
+                    <p>{problem.topic}</p>
+                    <div className="today-task-card__foot">
+                      <span className={`difficulty difficulty-${problem.difficulty}`}>{problem.difficulty}</span>
+                      <strong>{attempted ? "今日已作答" : "待作答 →"}</strong>
+                    </div>
+                  </a>
+                );
+              })
+            ) : (
+              <div className="today-empty panel">今天的计划中没有新题。</div>
+            )}
+          </div>
+        </section>
+
+        <section className="section" id="review">
           <div className="section-heading">
             <div>
               <span className="eyebrow">SPACED REPETITION</span>

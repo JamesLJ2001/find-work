@@ -12,6 +12,8 @@ test("ships the finished command center instead of the starter", async () => {
 
   assert.match(layout, /LeetCode 100 · 刷题作战台/);
   assert.match(dashboard, /字节最近 100/);
+  assert.match(dashboard, /今日新题/);
+  assert.match(dashboard, /problem\.planDate === today/);
   assert.match(dashboard, /今日复习队列/);
   assert.match(dashboard, /完整题库/);
   assert.match(page, /loadDashboardData/);

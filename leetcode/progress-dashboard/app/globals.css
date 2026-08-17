@@ -508,6 +508,80 @@ button:disabled {
   letter-spacing: 0.1em;
 }
 
+.today-task-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.today-task-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 190px;
+  padding: 20px;
+  box-shadow: none;
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.today-task-card:hover {
+  border-color: var(--green);
+  box-shadow: 0 18px 40px color-mix(in srgb, var(--green) 8%, transparent);
+  transform: translateY(-3px);
+}
+
+.today-task-card.is-pending {
+  border-style: dashed;
+}
+
+.today-task-card__top,
+.today-task-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.today-task-index {
+  color: var(--green);
+  font: 800 11px/1 ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: 0.08em;
+}
+
+.today-task-card h3 {
+  margin: 25px 0 7px;
+  font-size: 17px;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+
+.today-task-card > p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.today-task-card__foot {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.today-task-card__foot strong {
+  color: var(--green);
+  font-size: 11px;
+}
+
+.today-task-card.is-attempted .today-task-card__foot strong {
+  color: var(--text-soft);
+}
+
+.today-empty {
+  grid-column: 1 / -1;
+  padding: 34px;
+  color: var(--text-soft);
+  text-align: center;
+}
+
 .section {
   margin-top: 76px;
   scroll-margin-top: 98px;
@@ -1150,6 +1224,7 @@ footer {
 
   .progress-orbit strong { font-size: 50px; }
   .status-grid { grid-template-columns: repeat(2, 1fr); }
+  .today-task-grid { grid-template-columns: repeat(3, 1fr); }
   .queue-grid { grid-template-columns: 1fr; }
   .queue-card { min-height: 0; }
   .filters { grid-template-columns: 1fr 1fr; }
@@ -1161,6 +1236,7 @@ footer {
   .hero-grid { grid-template-columns: 1fr; }
   .progress-command { min-height: 480px; }
   .today-brief { min-height: 390px; }
+  .today-task-grid { grid-template-columns: repeat(2, 1fr); }
   .analytics-grid { grid-template-columns: 1fr; }
   .activity-panel { grid-column: auto; }
   .risk-list > button { grid-template-columns: 42px 1fr 24px; }
@@ -1188,6 +1264,8 @@ footer {
   .status-grid { gap: 8px; }
   .status-card { min-height: 124px; padding: 18px; }
   .status-card strong { font-size: 34px; }
+  .today-task-grid { grid-template-columns: 1fr; }
+  .today-task-card { min-height: 165px; }
   .section { margin-top: 58px; }
   .section-heading h2, .panel-title-row h2 { font-size: 23px; }
   .queue-card, .topic-panel, .difficulty-panel, .activity-panel { padding: 21px; }
