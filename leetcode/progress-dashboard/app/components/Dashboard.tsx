@@ -328,6 +328,8 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     const reviewCompletedCount = reviewProblems.filter((problem) =>
       reviewedToday.has(problem.id),
     ).length;
+    const todayCompletedCount = todayAttemptedCount + reviewCompletedCount;
+    const todayTaskCount = todayProblems.length + reviewProblems.length;
 
     const redProblems = data.problems.filter((problem) => latestByProblem.get(problem.id)?.status === "红");
 
@@ -365,6 +367,8 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
       redReview,
       reviewProblems,
       reviewCompletedCount,
+      todayCompletedCount,
+      todayTaskCount,
       redProblems,
       dayStats,
     };
@@ -499,8 +503,8 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               </span>
             </div>
             <div className="brief-number">
-              <strong>{model.reviewCompletedCount}/{model.reviewProblems.length}</strong>
-              <span>项今日复习已完成</span>
+              <strong>{model.todayCompletedCount}/{model.todayTaskCount}</strong>
+              <span>项今日任务已完成</span>
             </div>
             <dl className="brief-list">
               <div><dt>新题</dt><dd>{model.todayAttemptedCount} / {model.todayProblems.length} 已作答</dd></div>
