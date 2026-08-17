@@ -59,6 +59,7 @@ function QueueCard({
   description,
   problems,
   latestByProblem,
+  beforeReviewByProblem,
   reviewedToday,
 }: {
   label: string;
@@ -67,6 +68,7 @@ function QueueCard({
   description: string;
   problems: ProblemRecord[];
   latestByProblem: Map<number, AttemptRecord>;
+  beforeReviewByProblem: Map<number, AttemptRecord>;
   reviewedToday: Set<number>;
 }) {
   const completedCount = problems.filter((problem) => reviewedToday.has(problem.id)).length;
@@ -86,7 +88,8 @@ function QueueCard({
       <div className="queue-list">
         {problems.length ? (
           problems.map((problem) => {
-            const status = statusFrom(latestByProblem.get(problem.id));
+            const beforeStatus = statusFrom(beforeReviewByProblem.get(problem.id));
+            const afterStatus = statusFrom(latestByProblem.get(problem.id));
             const reviewed = reviewedToday.has(problem.id);
             return (
               <a
@@ -96,10 +99,32 @@ function QueueCard({
                 rel="noreferrer"
                 key={problem.id}
               >
-                <span className={`status-dot status-${status}`} aria-hidden="true" />
+                <span className={`status-dot status-${afterStatus}`} aria-hidden="true" />
                 <b>{problem.id}</b>
                 <span>{problem.title}</span>
-                <strong className="queue-state">{reviewed ? "✓ 已复习" : "待复习"}</strong>
+                <strong
+                  className="queue-state"
+                  aria-label={
+                    reviewed
+                      ? `掌握状态由${beforeStatus}变为${afterStatus}`
+                      : `复习前状态${beforeStatus}，待复习`
+                  }
+                >
+                  <span className={`queue-status-chip queue-status-${beforeStatus}`}>
+                    {beforeStatus}
+                  </span>
+                  {reviewed ? (
+                    <>
+                      <span className="queue-state__arrow" aria-hidden="true">→</span>
+                      <span className={`queue-status-chip queue-status-${afterStatus}`}>
+                        {afterStatus}
+                      </span>
+                      <span className="queue-state__done" aria-hidden="true">✓</span>
+                    </>
+                  ) : (
+                    <span className="queue-state__pending">待复习</span>
+                  )}
+                </strong>
               </a>
             );
           })
@@ -274,6 +299,12 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
         .filter((attempt) => attempt.attemptedOn === today && attempt.isReview)
         .map((attempt) => attempt.problemId),
     );
+    const beforeReviewByProblem = new Map<number, AttemptRecord>();
+    for (const attempt of activeAttempts) {
+      if (attempt.attemptedOn < today) {
+        beforeReviewByProblem.set(attempt.problemId, attempt);
+      }
+    }
     const studyDays = Array.from(new Set(activeAttempts.map((attempt) => attempt.attemptedOn)));
     if (!studyDays.includes(today)) studyDays.push(today);
     studyDays.sort();
@@ -323,6 +354,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
       attemptedToday,
       todayAttemptedCount,
       reviewedToday,
+      beforeReviewByProblem,
       d1Date,
       d3Date,
       d7Date,
@@ -560,10 +592,10 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
             <p>右侧标签表示今天是否复习；左侧圆点表示当前掌握程度，两种状态互不替代。</p>
           </div>
           <div className="queue-grid">
-            <QueueCard label="D+1" sourceDate={model.d1Date} description={data.dailyPlan.reviewQueues.d1.instruction} problems={model.d1} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
-            <QueueCard label="D+3" sourceDate={model.d3Date} description={data.dailyPlan.reviewQueues.d3.instruction} problems={model.d3} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
-            <QueueCard label="D+7" sourceDate={model.d7Date} description={`${data.dailyPlan.reviewQueues.d7.instruction} 来源题池共 ${model.d7Pool.length} 题。`} problems={model.d7} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
-            <QueueCard label="红题复测" title="日初红题池" description={data.dailyPlan.reviewQueues.red.instruction} problems={model.redReview} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label="D+1" sourceDate={model.d1Date} description={data.dailyPlan.reviewQueues.d1.instruction} problems={model.d1} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label="D+3" sourceDate={model.d3Date} description={data.dailyPlan.reviewQueues.d3.instruction} problems={model.d3} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label="D+7" sourceDate={model.d7Date} description={`${data.dailyPlan.reviewQueues.d7.instruction} 来源题池共 ${model.d7Pool.length} 题。`} problems={model.d7} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label="红题复测" title="日初红题池" description={data.dailyPlan.reviewQueues.red.instruction} problems={model.redReview} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
           </div>
         </section>
 

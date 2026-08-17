@@ -20,14 +20,19 @@ test("ships the finished command center instead of the starter", async () => {
   assert.match(dashboard, /visibilitychange/);
   assert.match(dashboard, /今日复习队列/);
   assert.match(dashboard, /今日复习已完成/);
-  assert.match(dashboard, /✓ 已复习/);
+  assert.match(dashboard, /queue-state__done/);
   assert.match(dashboard, /redReview/);
   assert.match(dashboard, /完整题库/);
   assert.match(page, /loadDashboardData/);
   assert.match(route, /Cache-Control": "no-store"/);
   assert.match(css, /@media \(max-width: 620px\)/);
-  assert.match(css, /@keyframes review-complete/);
-  assert.match(css, /\.queue-list a\.is-complete \.queue-state/);
+  assert.match(dashboard, /beforeReviewByProblem/);
+  assert.match(dashboard, /掌握状态由/);
+  assert.match(dashboard, /queue-status-chip/);
+  assert.match(css, /\.queue-status-红/);
+  assert.match(css, /\.queue-status-黄/);
+  assert.match(css, /\.queue-status-绿/);
+  assert.doesNotMatch(css, /@keyframes review-complete/);
   assert.doesNotMatch(`${layout}${dashboard}${page}`, /codex-preview|Building your site|SkeletonPreview/i);
 });
 
