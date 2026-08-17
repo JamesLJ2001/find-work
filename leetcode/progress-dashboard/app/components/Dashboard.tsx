@@ -54,36 +54,52 @@ function compareAttempts(left: AttemptRecord, right: AttemptRecord) {
 
 function QueueCard({
   label,
+  title,
   sourceDate,
   description,
   problems,
   latestByProblem,
+  reviewedToday,
 }: {
   label: string;
+  title?: string;
   sourceDate?: string;
   description: string;
   problems: ProblemRecord[];
   latestByProblem: Map<number, AttemptRecord>;
+  reviewedToday: Set<number>;
 }) {
+  const completedCount = problems.filter((problem) => reviewedToday.has(problem.id)).length;
+
   return (
     <article className="queue-card panel">
       <div className="queue-card__head">
         <div>
           <span className="eyebrow">{label}</span>
-          <h3>{sourceDate ? `${shortDate(sourceDate)} 来源批次` : "暂无来源批次"}</h3>
+          <h3>{title ?? (sourceDate ? `${shortDate(sourceDate)} 来源批次` : "暂无来源批次")}</h3>
         </div>
-        <span className="queue-count">{problems.length}</span>
+        <span className="queue-count">
+          {problems.length ? `${completedCount}/${problems.length}` : "—"}
+        </span>
       </div>
       <p>{description}</p>
       <div className="queue-list">
         {problems.length ? (
           problems.map((problem) => {
             const status = statusFrom(latestByProblem.get(problem.id));
+            const reviewed = reviewedToday.has(problem.id);
             return (
-              <a href={problem.url} target="_blank" rel="noreferrer" key={problem.id}>
+              <a
+                className={reviewed ? "is-complete" : "is-pending"}
+                href={problem.url}
+                target="_blank"
+                rel="noreferrer"
+                key={problem.id}
+              >
                 <span className={`status-dot status-${status}`} aria-hidden="true" />
                 <b>{problem.id}</b>
                 <span>{problem.title}</span>
+                <strong className="queue-state">{reviewed ? "✓ 已复习" : "待复习"}</strong>
               </a>
             );
           })
@@ -246,6 +262,15 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     const todayAttemptedCount = todayProblems.filter((problem) =>
       attemptedToday.has(problem.id),
     ).length;
+    const reviewedToday = new Set(
+      activeAttempts
+        .filter((attempt) => attempt.attemptedOn === today && attempt.isReview)
+        .map((attempt) => attempt.problemId),
+    );
+    const latestBeforeToday = new Map<number, AttemptRecord>();
+    for (const attempt of activeAttempts) {
+      if (attempt.attemptedOn < today) latestBeforeToday.set(attempt.problemId, attempt);
+    }
     const studyDays = Array.from(new Set(activeAttempts.map((attempt) => attempt.attemptedOn)));
     if (!studyDays.includes(today)) studyDays.push(today);
     studyDays.sort();
@@ -263,6 +288,19 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     const d3 = problemsFirstSeenOn(d3Date);
     const d7Pool = problemsFirstSeenOn(d7Date);
     const d7 = d7Pool.slice(0, 2);
+
+    const scheduledReviewIds = new Set(
+      [...d1, ...d3, ...d7].map((problem) => problem.id),
+    );
+    const redReview = data.problems.filter(
+      (problem) =>
+        latestBeforeToday.get(problem.id)?.status === "红" &&
+        !scheduledReviewIds.has(problem.id),
+    );
+    const reviewProblems = [...d1, ...d3, ...d7, ...redReview];
+    const reviewCompletedCount = reviewProblems.filter((problem) =>
+      reviewedToday.has(problem.id),
+    ).length;
 
     const redProblems = data.problems.filter((problem) => latestByProblem.get(problem.id)?.status === "红");
 
@@ -287,6 +325,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
       todayProblems,
       attemptedToday,
       todayAttemptedCount,
+      reviewedToday,
       d1Date,
       d3Date,
       d7Date,
@@ -294,6 +333,9 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
       d3,
       d7,
       d7Pool,
+      redReview,
+      reviewProblems,
+      reviewCompletedCount,
       redProblems,
       dayStats,
     };
@@ -402,15 +444,15 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               <span className="live-dot">LIVE</span>
             </div>
             <div className="brief-number">
-              <strong>{model.d1.length + model.d3.length + model.d7.length + model.redProblems.length}</strong>
-              <span>项复习动作（含红题队列）</span>
+              <strong>{model.reviewCompletedCount}/{model.reviewProblems.length}</strong>
+              <span>项今日复习已完成</span>
             </div>
             <dl className="brief-list">
               <div><dt>新题</dt><dd>{model.todayAttemptedCount} / {model.todayProblems.length} 已作答</dd></div>
               <div><dt>D+1</dt><dd>{model.d1.length ? `${model.d1.length} 题口述` : "来源日无首次题"}</dd></div>
               <div><dt>D+3</dt><dd>{model.d3.length} 题按状态复写</dd></div>
               <div><dt>D+7</dt><dd>{model.d7.length} / {model.d7Pool.length} 题盲写抽查</dd></div>
-              <div><dt>高危</dt><dd>{model.redProblems.length} 道红题待攻克</dd></div>
+              <div><dt>红题</dt><dd>{model.redReview.length} 道额外复测</dd></div>
             </dl>
             <p className="freshness">最近同步：{formatSyncTime(data.syncedAt)} · {data.stale ? "数据库异常，当前为可用快照" : "数据正常"}</p>
           </aside>
@@ -474,12 +516,13 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               <span className="eyebrow">SPACED REPETITION</span>
               <h2>今日复习队列</h2>
             </div>
-            <p>按有效学习日回溯，空白日不占 D 序号；D+7 固定抽来源批次前两题。</p>
+            <p>右侧标签表示今天是否复习；左侧圆点表示当前掌握程度，两种状态互不替代。</p>
           </div>
           <div className="queue-grid">
-            <QueueCard label="D+1" sourceDate={model.d1Date} description="口述思路与关键代码；绿色题无需完整重写。" problems={model.d1} latestByProblem={model.latestByProblem} />
-            <QueueCard label="D+3" sourceDate={model.d3Date} description="红黄题从空白重写；绿色题只抽查边界。" problems={model.d3} latestByProblem={model.latestByProblem} />
-            <QueueCard label="D+7" sourceDate={model.d7Date} description={`来源批次共 ${model.d7Pool.length} 题，今日抽两题完整盲写。`} problems={model.d7} latestByProblem={model.latestByProblem} />
+            <QueueCard label="D+1" sourceDate={model.d1Date} description="口述思路与关键代码；绿色题无需完整重写。" problems={model.d1} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label="D+3" sourceDate={model.d3Date} description="红黄题从空白重写；绿色题只抽查边界。" problems={model.d3} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label="D+7" sourceDate={model.d7Date} description={`来源批次共 ${model.d7Pool.length} 题，今日抽两题完整盲写。`} problems={model.d7} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label="红题复测" title="日初红题池" description="今日开始前仍为红色、且没有被 D 队列覆盖的题；自动去重。" problems={model.redReview} latestByProblem={model.latestByProblem} reviewedToday={model.reviewedToday} />
           </div>
         </section>
 

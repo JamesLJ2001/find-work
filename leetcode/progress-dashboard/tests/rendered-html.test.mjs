@@ -15,6 +15,9 @@ test("ships the finished command center instead of the starter", async () => {
   assert.match(dashboard, /今日新题/);
   assert.match(dashboard, /problem\.planDate === today/);
   assert.match(dashboard, /今日复习队列/);
+  assert.match(dashboard, /今日复习已完成/);
+  assert.match(dashboard, /✓ 已复习/);
+  assert.match(dashboard, /redReview/);
   assert.match(dashboard, /完整题库/);
   assert.match(page, /loadDashboardData/);
   assert.match(css, /@media \(max-width: 620px\)/);
