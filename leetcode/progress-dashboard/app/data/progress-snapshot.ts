@@ -2723,6 +2723,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 82,
+      "externalId": "csv-0082",
+      "problemId": 236,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "二叉树的最近公共祖先",
+      "recordedTopic": "图与搜索",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "D+3 复测仍无法独立形成完整思路；只记得需要 DFS 以及 return left、return right 的代码碎片，但没有恢复 dfs 返回当前子树中找到的目标节点或公共祖先这一核心含义，也未能写出命中空节点或 p、q 的边界，以及左右结果都非空时返回当前 node 的汇合判断",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "红｜D+3 复习已作答但主模型仍未建立｜红→红；dfs 返回当前子树找到的 p、q 或公共祖先，左右均找到返回当前 node，只有一侧找到就把该侧结果向上传递",
+      "sourceRow": 84,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
