@@ -2863,6 +2863,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 89,
+      "externalId": "csv-0089",
+      "problemId": 200,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "岛屿数量",
+      "recordedTopic": "树、图与 Trie",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+3 复习未进行完整闭卷实现，直接询问最适合掌握的方法并请求讲解；此前已经建立遍历网格、遇到未访问陆地计数并用 DFS 淹没整个连通块的主体模型，但仍需重新稳定越界判断、先标记再递归和四方向搜索代码",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "黄｜D+3 复习已处理但未独立重写｜黄→黄；主学 DFS 沉岛法，遇到 1 计数一次并立即把上下左右连通的全部 1 改成 0",
+      "sourceRow": 91,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
