@@ -2563,6 +2563,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 74,
+      "externalId": "csv-0074",
+      "problemId": 70,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "爬楼梯",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答能判断属于经典动态规划并记得需要使用 dp，但已经忘记 dp 状态含义、边界初始化、状态转移方程和标准代码模板，尚不能独立实现",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答无法实现｜dp[floor] 表示到达第 floor 阶的方法数；最后一步只能从 floor-1 走一步或从 floor-2 走两步，因此 dp[floor]=dp[floor-1]+dp[floor-2]",
+      "sourceRow": 76,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
