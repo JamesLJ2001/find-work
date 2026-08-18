@@ -2703,6 +2703,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 81,
+      "externalId": "csv-0081",
+      "problemId": 73,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "矩阵置零",
+      "recordedTopic": "矩阵与原地标记",
+      "recordedDifficulty": "中等",
+      "status": "绿",
+      "independentWrite": true,
+      "errorReason": "无；D+7 从空白独立写出并通过",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "绿｜D+7 复测通过｜绿→绿；已于 8/13 和 8/18 连续两次完成间隔独立通过，退出高频复习，后续不再优先抽取",
+      "sourceRow": 83,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
