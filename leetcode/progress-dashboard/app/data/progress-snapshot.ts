@@ -2783,6 +2783,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 85,
+      "externalId": "csv-0085",
+      "problemId": 994,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "腐烂的橘子",
+      "recordedTopic": "图与搜索",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "D+3 复测经举例讲解后能够跟随理解腐烂橘子按分钟逐层扩散的过程，但仍不能从空白独立恢复多源 BFS 实现；尚未形成初始扫描时将全部腐烂橘子入队并统计 fresh、每轮固定 level_size、感染时立即标记并减少 fresh、最后根据 fresh 返回分钟数或 -1 的完整模板",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "红｜D+3 复习已作答但仍不能独立实现｜红→红；多源 BFS 中全部初始腐烂橘子同时入队，一层代表一分钟，感染时立即标记以避免重复入队",
+      "sourceRow": 87,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
