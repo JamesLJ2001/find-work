@@ -2623,6 +2623,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 77,
+      "externalId": "csv-0077",
+      "problemId": 39,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "组合总和",
+      "recordedTopic": "回溯与二分入门",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 已从空白恢复 ans、path、递归函数、候选循环、append、递归和 pop 撤销选择，并尝试用 tar 表示剩余目标；但初始调用后立即用 tar==target 误收集空路径，正确终止条件应为 remaining==0；筛选和递归错误地持续使用原 target，导致剩余值不继续减少并可能无限递归；没有 start 参数会产生同一组合的不同排列",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "黄｜D+1 复习完成且回溯主模型已恢复｜红→黄；递归参数使用 start 和 remaining，循环从 start 开始，同一数字可重复使用所以递归继续传当前 index",
+      "sourceRow": 79,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
