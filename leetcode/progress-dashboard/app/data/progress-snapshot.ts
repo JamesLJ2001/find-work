@@ -2683,6 +2683,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 80,
+      "externalId": "csv-0080",
+      "problemId": 41,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "缺失的第一个正数",
+      "recordedTopic": "数组与原地哈希",
+      "recordedDifficulty": "困难",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+7 复测已记住清洗非正数、使用绝对值读取原数、以负号标记出现情况和扫描首个未标记位置的整体模型；但清洗误用 nums[i]<0 遗漏 0，标记时错误地修改当前下标 i 而不是数字 num 对应的下标 num-1，未使用 -abs 防止重复数字反复翻转符号，扫描条件误写为 0<=nums[i]，全部出现时误返回 n 而不是 n+1",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "黄｜D+7 复习完成但代码未通过｜黄→黄；清洗使用 <=0，标记使用 nums[num-1]=-abs(nums[num-1])，扫描首个 >0 的位置返回 i+1，全部为负时返回 n+1",
+      "sourceRow": 82,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
