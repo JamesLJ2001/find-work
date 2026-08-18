@@ -2603,6 +2603,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 76,
+      "externalId": "csv-0076",
+      "problemId": 22,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "括号生成",
+      "recordedTopic": "回溯与二分入门",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 已从空白恢复 ans、backtrack、path、append、递归和 pop 撤销选择的回溯主框架；但 path 未定义，递归函数没有 left 和 right 计数，终止条件误用 while 且使用赋值符号 =，只尝试添加左括号，没有 right<left 的右括号合法性约束，path.copy 也不符合返回字符串的要求",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "黄｜D+1 复习完成且主模型已恢复｜红→黄；left<n 时选择左括号，right<left 时选择右括号，长度达到 2*n 后用 join(path) 保存并 return",
+      "sourceRow": 78,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
