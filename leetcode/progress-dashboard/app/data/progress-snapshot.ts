@@ -2803,6 +2803,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 86,
+      "externalId": "csv-0086",
+      "problemId": 207,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "课程表",
+      "recordedTopic": "图与搜索",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "D+3 复测仍只能回忆出题目本质是判断有向图中是否存在环，不能独立恢复拓扑排序 BFS；尚未建立由 prerequisite 指向 course 的邻接表、indegree 记录每门课程剩余前置数量、将全部入度为 0 的课程入队并逐步解除后续课程限制、最后比较完成数量与 numCourses 的实现",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "红｜D+3 复习已作答但拓扑排序模型仍未建立｜红→红；Kahn BFS 从所有入度为 0 的课程开始，每学完一门就将后续课程入度减一，最终处理数量等于课程总数说明无环",
+      "sourceRow": 88,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
