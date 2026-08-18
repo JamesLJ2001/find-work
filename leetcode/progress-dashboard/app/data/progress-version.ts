@@ -1,1 +1,1 @@
-export const progressVersion = "3eeff6867c32d288";
+export const progressVersion = "3b28d316731640e4";

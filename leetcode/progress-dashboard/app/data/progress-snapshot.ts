@@ -2883,6 +2883,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 90,
+      "externalId": "csv-0090",
+      "problemId": 23,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "合并 K 个升序链表",
+      "recordedTopic": "链表进阶与树入门",
+      "recordedDifficulty": "困难",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "额外红题复测已独立回忆出应使用堆维护 K 个链表当前头节点，但不熟悉 Python heapq 的 heappush、heappop 代码，也尚未恢复用虚拟头节点和 tail 依次连接弹出节点、再将该节点的 next 加入堆的完整实现",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "黄｜额外红题复测核心思路已恢复但堆代码不熟｜红→黄；小根堆最多保存每条链表一个候选节点，使用 value、list_index、node 三元组处理相同节点值",
+      "sourceRow": 92,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
