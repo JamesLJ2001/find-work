@@ -422,7 +422,7 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
     },
     {
       "id": 4,
-      "title": "两个正序数组的中位数",
+      "title": "寻找两个正序数组的中位数",
       "topic": "二分、栈、堆与基础 DP",
       "planDate": "2026-08-18",
       "phase": "S",
@@ -2483,9 +2483,29 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-17T12:00:00+08:00"
+    },
+    {
+      "id": 70,
+      "externalId": "csv-0070",
+      "problemId": 4,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "寻找两个正序数组的中位数",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "困难",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已判断直接合并两个数组需要 O(m+n) 时间而不满足题目要求；但尚未建立在较短数组上二分切分位置、让左右两部分数量相等并满足左侧最大值不大于右侧最小值的模型",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答无完整思路｜在较短数组上二分 partition1，并由总左半长度推出 partition2；当 left1<=right2 且 left2<=right1 时，根据总长度奇偶计算中位数",
+      "sourceRow": 72,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
-  "syncedAt": "2026-08-17T23:59:59+08:00",
+  "syncedAt": "2026-08-18T23:59:59+08:00",
   "source": "snapshot",
   "stale": false
 };
