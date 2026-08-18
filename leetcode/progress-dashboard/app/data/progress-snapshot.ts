@@ -2503,6 +2503,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 71,
+      "externalId": "csv-0071",
+      "problemId": 20,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "有效的括号",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已想到用哈希表保存三类括号映射并尝试为每个左括号向后寻找对应右括号；但该方法不能保证后进先出的嵌套顺序、不能阻止右括号被重复匹配且最终 ans 会被后续字符覆盖，hash_map 实际也未使用；例如 ([)] 会被误判为有效",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答主模型错误｜使用栈保存每个左括号所期待的右括号；遇到右括号时必须与栈顶完全相等并弹出，最后栈为空才有效",
+      "sourceRow": 73,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
