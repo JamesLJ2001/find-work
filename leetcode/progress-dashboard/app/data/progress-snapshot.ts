@@ -2583,6 +2583,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 75,
+      "externalId": "csv-0075",
+      "problemId": 74,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "搜索二维矩阵",
+      "recordedTopic": "回溯与二分入门",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 已恢复将矩阵视为一维有序数组做二分的主解法；但 middle 使用 / 得到浮点数；一维下标转二维坐标时忘记应使用 row=middle//columns 和 column=middle%columns，并误用 left+right 直接换算；二分边界写成 left<right 且更新为 left=middle、right=middle，可能死循环且遗漏最终位置",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "黄｜D+1 复习完成但代码未通过｜黄→黄；使用 while left<=right，middle=(left+right)//2，小则 left=middle+1，大则 right=middle-1",
+      "sourceRow": 77,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
