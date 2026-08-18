@@ -2763,6 +2763,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 84,
+      "externalId": "csv-0084",
+      "problemId": 102,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "二叉树的层序遍历",
+      "recordedTopic": "二叉树",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "额外红题复测已独立判断应使用 BFS 和 deque，但忘记按层遍历的完整代码模板；尚未恢复每轮 while 开始先固定 level_size=len(queue)、只弹出这一层节点并将孩子留给下一轮的实现细节",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "黄｜额外红题复测主模型已恢复但代码模板不稳｜红→黄；queue 从 root 开始，每轮固定 level_size，循环 popleft 当前层并追加左右孩子，层结束后收集 level",
+      "sourceRow": 86,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
