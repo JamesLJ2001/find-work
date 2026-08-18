@@ -2743,6 +2743,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 83,
+      "externalId": "csv-0083",
+      "problemId": 543,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "二叉树的直径",
+      "recordedTopic": "二叉树",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "额外红题复测仍无独立思路；未先定义 dfs 返回当前子树高度，因而无法通过左右子树高度之和计算经过当前节点的路径长度，也未恢复用全局变量维护所有节点最大直径的后序遍历模型",
+      "isReview": true,
+      "reviewDate": "2026-08-18",
+      "notes": "红｜额外红题复测已作答但主模型仍未建立｜红→红；dfs 返回高度 max(left_depth right_depth)+1，每个节点用 left_depth+right_depth 更新最大直径",
+      "sourceRow": 85,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
