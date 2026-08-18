@@ -2543,6 +2543,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 73,
+      "externalId": "csv-0073",
+      "problemId": 121,
+      "attemptedOn": "2026-08-18",
+      "recordedTitle": "买卖股票的最佳时机",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答能判断属于动态规划题，但已忘记动态规划模板，尚未定义持有与未持有状态、初始化和状态转移，也未恢复本题可进一步压缩为历史最低价格与当前最大利润的实现",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答无法实现｜通用股票状态为持有和未持有；本题只允许一次交易，可维护 min_price，并用当前价格减历史最低价更新 max_profit",
+      "sourceRow": 75,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-18T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-18T23:59:59+08:00",
