@@ -3003,6 +3003,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 96,
+      "externalId": "csv-0096",
+      "problemId": 198,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "打家劫舍",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已正确提出 dp 应表示考虑偷到第 i 家时的最大金额，并知道边界值可初始化；但尚未恢复对第 i 家分为不偷时继承 dp[i-1] 与偷时取 dp[i-2]+nums[i] 的两种选择，也未能写出取最大值的状态转移",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答状态定义已恢复但转移方程未建立｜dp[i]=max(dp[i-1] dp[i-2]+nums[i])，状态含义应是考虑前 i+1 家而非必须偷第 i 家",
+      "sourceRow": 98,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-19T23:59:59+08:00",
