@@ -3203,6 +3203,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 106,
+      "externalId": "csv-0106",
+      "problemId": 114,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "二叉树展开为链表",
+      "recordedTopic": "二叉树",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "红题复测能回忆使用前序 DFS 以及 dummy/pre 连线，但尚未独立写出保存左右子树、将前序当前节点接到 pre.right、清空 left 并继续递归的完整指针逻辑",
+      "isReview": true,
+      "reviewDate": "2026-08-19",
+      "notes": "黄｜红题复测主模型恢复但代码不稳｜红→黄；pre 保存前一个前序节点，dfs 不需要返回高度或节点，职责是按根左右顺序把节点接成 right 链",
+      "sourceRow": 108,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-19T23:59:59+08:00",
