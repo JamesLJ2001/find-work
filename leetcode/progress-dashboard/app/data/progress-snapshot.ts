@@ -3074,7 +3074,7 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "recordedDifficulty": "困难",
       "status": "黄",
       "independentWrite": false,
-      "errorReason": "D+7 盲写已恢复单调队列需要两个 while，且记得靠前一端负责处理旧元素；但混淆队列保存的下标和数组值，错误写成 nums[i]>queue[-1]，将 append 错放在 while 内且拼写为 appeng，过期元素错误从队尾 pop 而非队首 popleft，未在入队后才按完整窗口条件记录 nums[queue[0]]，尚不能独立稳定实现",
+      "errorReason": "D+7 盲写已恢复单调队列需要两个 while，且明确知道队列保存下标并尝试 append(i)；但比较队尾值时误写 nums[i]>queue[-1]，应通过 nums[queue[-1]] 取出该下标对应的值；append 错放在 while 内且拼写为 appeng，过期元素虽使用了正确条件 queue[0]<i-k+1，但错误从队尾 pop 而非队首 popleft，未在入队后才按完整窗口条件记录 nums[queue[0]]，尚不能独立稳定实现",
       "isReview": true,
       "reviewDate": "2026-08-19",
       "notes": "黄｜D+7 盲写双 while 骨架已恢复但代码未通过｜黄→黄；队列存下标、值单调递减，过期队首 popleft，较小或相等的队尾 pop，完整窗口后记录 nums[queue[0]]",
