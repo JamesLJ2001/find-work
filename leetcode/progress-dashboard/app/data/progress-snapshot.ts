@@ -2923,9 +2923,29 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-18T12:00:00+08:00"
+    },
+    {
+      "id": 92,
+      "externalId": "csv-0092",
+      "problemId": 121,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "买卖股票的最佳时机",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 复习已恢复维护最低买入价和最大利润的方向；但 min_buy 错误初始化为 0 导致所有正价格都无法成为更低买入价，max_sell 跨所有历史维护会把卖出价放到买入价之前形成非法的先卖后买组合，且 max_profit 被当前差值直接覆盖而非维护历史最大值",
+      "isReview": true,
+      "reviewDate": "2026-08-19",
+      "notes": "黄｜D+1 复习主模型已恢复但代码未通过｜黄→黄；min_price 初始化为 prices[0]，逐日用当前 price-min_price 更新 max_profit，不需要 max_sell",
+      "sourceRow": 94,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
-  "syncedAt": "2026-08-18T23:59:59+08:00",
+  "syncedAt": "2026-08-19T23:59:59+08:00",
   "source": "snapshot",
   "stale": false
 };
