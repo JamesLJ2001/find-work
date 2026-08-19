@@ -3043,6 +3043,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 98,
+      "externalId": "csv-0098",
+      "problemId": 139,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "单词拆分",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答未建立文字也可用动态规划的模型；尚未定义 dp[end] 为前 end 个字符 s[:end] 是否能由词典单词完整拼出，也未能从某个切分位置 start 推出 dp[start] 为真且 s[start:end] 在词典中时 dp[end] 为真的布尔状态转移",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答未建立字符串前缀 DP 模型｜dp[0]=True；枚举 end 和 start，若前缀可拼且最后一段在 words 中则 dp[end]=True",
+      "sourceRow": 100,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-19T23:59:59+08:00",
