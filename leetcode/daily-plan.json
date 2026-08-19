@@ -1,49 +1,49 @@
 {
   "schemaVersion": 1,
-  "planVersion": "2026-08-18.1",
-  "date": "2026-08-18",
+  "planVersion": "2026-08-19.1",
+  "date": "2026-08-19",
   "timezone": "Asia/Shanghai",
-  "generatedAt": "2026-08-18T09:23:55.3626989+08:00",
+  "generatedAt": "2026-08-19T09:24:41.070+08:00",
   "generator": "Codex 08:30 local automation",
   "source": {
     "repository": "JamesLJ2001/find-work",
     "branch": "main",
     "planFile": "leetcode/2026-08-bytedance-100-plan.md",
     "progressFile": "leetcode/progress.csv",
-    "sourceCommit": "af88d20a18a9a58819ef3089fb70719ebe189c05"
+    "sourceCommit": "7545d92964be44f58760bfe851630fb5a7c6966d"
   },
   "completionSource": "leetcode/progress.csv",
-  "newProblemIds": [4, 20, 215, 121, 70],
+  "newProblemIds": [118, 136, 198, 279, 139],
   "reviewQueues": {
     "d1": {
       "label": "D+1",
-      "sourceDate": "2026-08-17",
-      "problemIds": [39, 22, 131, 51, 74],
+      "sourceDate": "2026-08-18",
+      "problemIds": [4, 20, 215, 121, 70],
       "instruction": "口述思路和关键代码；绿色题无需完整重写。"
     },
     "d3": {
       "label": "D+3",
-      "sourceDate": "2026-08-14",
-      "problemIds": [236, 200, 994, 207, 208],
+      "sourceDate": "2026-08-16",
+      "problemIds": [],
       "instruction": "红黄题从空白重写；绿色题抽查边界。"
     },
     "d7": {
       "label": "D+7",
-      "sourceDate": "2026-08-10",
-      "problemIds": [41, 73],
-      "poolProblemIds": [41, 73, 206, 234, 141],
+      "sourceDate": "2026-08-11",
+      "problemIds": [239, 53],
+      "poolProblemIds": [239, 53, 56, 189, 238],
       "instruction": "从来源题池选两题完整盲写；先应用退出与优先级规则，同优先级按计划原始题序稳定取前两题。"
     },
     "red": {
       "label": "红题复测",
       "sourceDate": null,
-      "problemIds": [23, 146, 543, 102, 114],
+      "problemIds": [146, 543, 114, 236, 994, 207, 208, 51],
       "instruction": "复测今日开始前最新有效状态仍为红色且未进入 D+1、D+3、D+7 的题；机械抄写、跳过和只看答案不算掌握。"
     }
   },
   "totals": {
     "newProblems": 5,
-    "reviewProblems": 17,
-    "totalTasks": 22
+    "reviewProblems": 15,
+    "totalTasks": 20
   }
 }
