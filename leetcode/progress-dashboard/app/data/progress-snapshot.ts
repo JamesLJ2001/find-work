@@ -3083,6 +3083,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 100,
+      "externalId": "csv-0100",
+      "problemId": 53,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "最大子数组和",
+      "recordedTopic": "队列与数组补课",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+7 盲写已独立恢复核心选择：当前连续和应当接上本次数字，还是从本次数重新开始；但仍将本题与前缀和混淆，未能稳定写出以当前位置结尾的最大和 cur=max(num cur+num) 及全局最大值 ans 的完整 Kadane 实现",
+      "isReview": true,
+      "reviewDate": "2026-08-19",
+      "notes": "黄｜D+7 盲写主模型已恢复但未完整实现｜黄→黄；53 主用 Kadane 一维 DP，560 才是前缀和加哈希计数求和恰好为 K",
+      "sourceRow": 102,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-19T23:59:59+08:00",
