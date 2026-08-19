@@ -2963,6 +2963,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 94,
+      "externalId": "csv-0094",
+      "problemId": 118,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "杨辉三角",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已判断与 DP 有关，但无法定义 dp 状态，不确定应把 DP 直接作为最终二维输出还是另设变量拼接；尚未恢复 dp[row][column] 就是杨辉三角该位置的值、边界为每行两端 1、内部由上一行左上与正上相加的递推",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答未建立状态定义｜dp 表就是最终 triangle 输出；第 row 行第 column 个值等于上一行 column-1 与 column 的和",
+      "sourceRow": 96,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-19T23:59:59+08:00",
