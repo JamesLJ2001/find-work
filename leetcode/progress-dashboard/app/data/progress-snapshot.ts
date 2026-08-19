@@ -3123,6 +3123,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 102,
+      "externalId": "csv-0102",
+      "problemId": 20,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "有效的括号",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 复习已独立恢复应使用栈保存左括号、遇到右括号时判断配对的主模型；但尚未从空白稳定写出右括号到对应左括号的映射、空栈时直接失败、匹配栈顶后弹出以及最终栈必须为空的完整实现",
+      "isReview": true,
+      "reviewDate": "2026-08-19",
+      "notes": "黄｜D+1 复习主模型已恢复但代码模板不稳｜红→黄；栈仅保存未配对左括号，右括号必须匹配栈顶，遍历结束后栈为空才返回 True",
+      "sourceRow": 104,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-19T23:59:59+08:00",
