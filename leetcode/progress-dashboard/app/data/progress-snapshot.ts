@@ -2983,6 +2983,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 95,
+      "externalId": "csv-0095",
+      "problemId": 136,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "只出现一次的数字",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答未能自行回忆本题使用异或；尚未恢复相同数字异或为 0、0 与任意数字异或不变、异或满足交换结合律，因此所有成对元素可抵消并只剩单独元素的位运算模型",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答未建立异或抵消模型｜从 0 开始对所有数字累积 ^，成对元素抵消后返回剩余值",
+      "sourceRow": 97,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-19T23:59:59+08:00",
