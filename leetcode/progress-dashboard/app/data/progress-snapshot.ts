@@ -3063,6 +3063,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 99,
+      "externalId": "csv-0099",
+      "problemId": 239,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "滑动窗口最大值",
+      "recordedTopic": "队列与数组补课",
+      "recordedDifficulty": "困难",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+7 盲写已恢复单调队列需要两个 while，且记得靠前一端负责处理旧元素；但混淆队列保存的下标和数组值，错误写成 nums[i]>queue[-1]，将 append 错放在 while 内且拼写为 appeng，过期元素错误从队尾 pop 而非队首 popleft，未在入队后才按完整窗口条件记录 nums[queue[0]]，尚不能独立稳定实现",
+      "isReview": true,
+      "reviewDate": "2026-08-19",
+      "notes": "黄｜D+7 盲写双 while 骨架已恢复但代码未通过｜黄→黄；队列存下标、值单调递减，过期队首 popleft，较小或相等的队尾 pop，完整窗口后记录 nums[queue[0]]",
+      "sourceRow": 101,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-19T23:59:59+08:00",
