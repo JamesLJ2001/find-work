@@ -3023,6 +3023,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 97,
+      "externalId": "csv-0097",
+      "problemId": 279,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "完全平方数",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答无独立思路，尚未定义 dp[total] 为凑成 total 所需的最少完全平方数个数，也未能从最后选择一个平方数 square*square 推出 dp[total]=min(dp[total-square*square]+1) 的最小值转移",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答未建立完全背包式最小值 DP 模型｜dp[0]=0，其余初始为无穷大；枚举总和和不超过它的平方数，取前一状态加一的最小值",
+      "sourceRow": 99,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-19T23:59:59+08:00",
