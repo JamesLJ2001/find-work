@@ -3103,6 +3103,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 101,
+      "externalId": "csv-0101",
+      "problemId": 4,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "寻找两个正序数组的中位数",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "困难",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 复习已独立恢复应在较短数组上二分切分位置、让两数组左半部分数量符合中位数要求，并以左侧最大值和右侧最小值判断切分是否正确；但尚不能实现 partition1、partition2 的计算、四个边界值的无穷处理、二分移动方向和奇偶长度返回值",
+      "isReview": true,
+      "reviewDate": "2026-08-19",
+      "notes": "黄｜D+1 复习核心模型已恢复但代码未写出｜红→黄；在较短数组二分 cut1，cut2=left_size-cut1，满足 left1<=right2 且 left2<=right1 后按总长度奇偶取边界值",
+      "sourceRow": 103,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-19T23:59:59+08:00",
