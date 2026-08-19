@@ -2943,6 +2943,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 93,
+      "externalId": "csv-0093",
+      "problemId": 70,
+      "attemptedOn": "2026-08-19",
+      "recordedTitle": "爬楼梯",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 复习已独立恢复边界 n<=2 和状态转移 dp[i]=dp[i-1]+dp[i-2]；但未创建 dp 数组，循环从 2 开始会重复覆盖已初始化的 dp[2] 且访问未定义的 dp[0]，循环上界未覆盖 dp[n]，因此最终返回 dp[n] 时没有被计算",
+      "isReview": true,
+      "reviewDate": "2026-08-19",
+      "notes": "黄｜D+1 复习主模型已恢复但代码未通过｜黄→黄；创建长度 n+1 的 dp，设 dp[1]=1、dp[2]=2，再从 i=3 循环到 n（含）",
+      "sourceRow": 95,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-19T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-19T23:59:59+08:00",
