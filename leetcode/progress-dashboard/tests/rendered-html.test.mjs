@@ -40,6 +40,7 @@ test("ships the finished command center instead of the starter", async () => {
   assert.match(css, /\.queue-status-绿/);
   assert.doesNotMatch(css, /@keyframes review-complete/);
   assert.doesNotMatch(`${layout}${dashboard}${page}`, /codex-preview|Building your site|SkeletonPreview/i);
+  assert.doesNotMatch(dashboard, /studyDays\.push\(today\)/);
 });
 
 test("validates the single GitHub-backed daily execution sheet", async () => {

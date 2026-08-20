@@ -321,7 +321,6 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
       }
     }
     const studyDays = Array.from(new Set(activeAttempts.map((attempt) => attempt.attemptedOn)));
-    if (!studyDays.includes(today)) studyDays.push(today);
     studyDays.sort();
 
     const queues = data.dailyPlan.reviewQueues;

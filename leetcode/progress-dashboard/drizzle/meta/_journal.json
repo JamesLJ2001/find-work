@@ -15,6 +15,13 @@
       "when": 1786951068453,
       "tag": "0001_seed_initial_data",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1787240701976,
+      "tag": "0002_shift_schedule_after_pause",
+      "breakpoints": true
     }
   ]
 }

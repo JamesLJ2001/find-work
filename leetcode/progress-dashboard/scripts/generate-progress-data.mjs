@@ -54,8 +54,11 @@ function parseCsv(text) {
 function parsePlan(markdown) {
   const problems = [];
   let sortOrder = 0;
+  let phase = null;
 
   for (const line of markdown.split(/\r?\n/)) {
+    if (line.startsWith("## 阶段二")) phase = "S";
+    if (line.startsWith("## 阶段三")) phase = "A";
     if (!line.startsWith("| 8/")) continue;
     const cells = line.slice(1, -1).split("|").map((cell) => cell.trim());
     if (cells.length !== 5 || !/^8\/\d{1,2}$/.test(cells[0])) continue;
@@ -70,7 +73,7 @@ function parsePlan(markdown) {
         title: match[2].trim(),
         topic: cells[2],
         planDate: `2026-08-${String(day).padStart(2, "0")}`,
-        phase: day <= 20 ? "S" : "A",
+        phase,
         sortOrder,
       });
     }
@@ -177,7 +180,10 @@ const attempts = csvRows.map(({ rowNumber, values }, index) => {
 
 const syncedAt = `${attempts.at(-1).attemptedOn}T23:59:59+08:00`;
 const snapshot = { problems, attempts, syncedAt, source: "snapshot", stale: false };
-const progressVersion = createHash("sha256").update(csvText).digest("hex").slice(0, 16);
+const progressVersion = createHash("sha256")
+  .update(csvText.replaceAll("\r\n", "\n"))
+  .digest("hex")
+  .slice(0, 16);
 
 await writeFile(
   snapshotPath,
