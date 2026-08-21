@@ -2,19 +2,19 @@ company,event,date,stage,priority,url,notes
 字节跳动,检查目标岗位/秋招动态,2026-07-01,转正实习替代,high,https://jobs.bytedance.com/campus/position/7605138439188990261/detail,岗位：AIDP后端开发；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：2
 阿里巴巴,检查目标岗位/秋招动态,2026-07-01,转正实习替代,high,https://campus-talent.alibaba.com/campus/position/199903220038?deptCodes=,岗位：AI应用研发工程师；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：n*2
 京东,检查目标岗位/秋招动态,2026-07-01,转正实习替代,medium,https://campus.jd.com/#/details?id=4868,岗位：后端开发工程师；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：1+1
-腾讯,检查目标岗位/秋招动态,2026-07-01,转正实习替代,high,https://join.qq.com/post_detail.html?postid=1224696110585937920,岗位：AI应用开发；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：♾
-美团,检查目标岗位/秋招动态,2026-07-01,转正实习替代,high,https://zhaopin.meituan.com/web/position/detail?jobUnionId=4531750384&highlightType=campus,岗位：【北斗】大模型算法工程师（金融场景）；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：3
-小米,检查目标岗位/秋招动态,2026-07-01,转正实习替代,high,https://xiaomi.jobs.f.mioffice.cn/internship/position/7616940640676350246/detail?spread=6AA3R7B,岗位：AI Agent开发；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：2
+腾讯,检查目标岗位/秋招动态,2026-08-21,2027正式秋招已开放,high,https://join.qq.com/post_detail.html?postid=1282707395466077184,主选Agent开发工程师；北京通用AI B级候补；腾讯金融科技与微信支付只在深圳；单流程规则待提交页复核
+美团,检查目标岗位/秋招动态,2026-08-21,2027正式秋招已开放,high,https://zhaopin.meituan.com/web/position/detail?jobUnionId=4694862735&highlightType=campus,主选AI应用开发工程师金融服务平台方向；北京与金融部门组合HC待确认；北斗金融大模型为高门槛冲刺
+小米,检查目标岗位/秋招动态,2026-08-21,2027正式秋招已开放,high,https://hr.xiaomi.com/website/opportunities.html?q=AI%E7%A0%94%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88-%E6%99%BA%E8%83%BD%E9%A3%8E%E6%8E%A7%E6%96%B9%E5%90%91&city=%E5%8C%97%E4%BA%AC&project=%E6%A0%A1%E6%8B%9B,主选AI研发工程师-智能风控方向；北京严格A级匹配；岗位代码A13853；投递次数待提交页复核
 快手,检查目标岗位/秋招动态,2026-07-01,转正实习替代,high,https://campus.kuaishou.cn/recruit/campus/e/#/campus/job-info/11260,岗位：AI应用服务端开发工程师；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：♾
 DeepSeek,检查目标岗位/秋招动态,2026-07-01,转正实习替代,high,https://app.mokahr.com/social-recruitment/high-flyer/140576#/job/2eb2e75d-29f3-47b5-bb10-39f12547d398,岗位：服务端开发工程师；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：待补充
-智谱,检查目标岗位/秋招动态,2026-07-01,转正实习替代,high,https://app.mokahr.com/campus-recruitment/zphz/148984#/job/df9452b2-6456-47e7-a4a4-204e1320870d,岗位：Code Agent；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：待补充
+智谱,检查目标岗位/秋招动态,2026-08-21,2027正式秋招已开放,high,https://app.mokahr.com/campus-recruitment/zphz/148984/#/job/124aa3c6-e4a8-4e7d-a63b-ec8b915611a8,北京确定候补为27届GLM-Code Agent；Trading Agent金融强匹配但地点字段为空；确认北京前不投
 Kimi,检查目标岗位/秋招动态,2026-07-01,转正实习替代,high,https://app.mokahr.com/campus-recruitment/moonshot/148507?sourceToken=36ae0fe79b871e0600f2b2cfe0a81ebb#/job/529591c4-cac4-47a1-b122-a15088e5459e,岗位：Agent Development Engineer；秋招未开，按转正实习/同类岗位替代跟踪；可投岗位数量：3
 字节跳动,岗位开放参考：AIDP后端开发,2026-08-04,开放参考,high,https://jobs.bytedance.com/campus/position/7605138439188990261/detail,来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：2
 阿里巴巴,岗位开放参考：AI应用研发工程师,2026-08-05,开放参考,high,https://campus-talent.alibaba.com/campus/position/199903220038?deptCodes=,来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：n*2
 京东,岗位开放参考：后端开发工程师,2026-07-21,开放参考,medium,https://campus.jd.com/#/details?id=4868,来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：1+1
-腾讯,岗位开放参考：AI应用开发,2026-08-06,开放参考,high,https://join.qq.com/post_detail.html?postid=1224696110585937920,来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：♾
-美团,岗位开放参考：【北斗】大模型算法工程师（金融场景）,2026-07-29,开放参考,high,https://zhaopin.meituan.com/web/position/detail?jobUnionId=4531750384&highlightType=campus,来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：3
-小米,岗位开放参考：AI Agent开发,2026-08-05,开放参考,high,https://xiaomi.jobs.f.mioffice.cn/internship/position/7616940640676350246/detail?spread=6AA3R7B,来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：2
+腾讯,正式岗位开放：Agent开发工程师,2026-08-06,2027正式岗位,high,https://join.qq.com/post_detail.html?postid=1282707395466077184,北京可选；Agent架构与评测匹配；金融部门仅深圳；来源为腾讯应届毕业生项目projectId=1
+美团,正式岗位开放：AI应用开发工程师,2026-08-17,2027正式岗位,high,https://zhaopin.meituan.com/web/position/detail?jobUnionId=4694862735&highlightType=campus,项目115为2026年（2027届）秋季校招；城市含北京且部门含金融服务平台；组合HC待确认
+小米,正式岗位开放：AI研发工程师-智能风控方向,2026-08-11,2027正式岗位,high,https://hr.xiaomi.com/website/opportunities.html?q=AI%E7%A0%94%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88-%E6%99%BA%E8%83%BD%E9%A3%8E%E6%8E%A7%E6%96%B9%E5%90%91&city=%E5%8C%97%E4%BA%AC&project=%E6%A0%A1%E6%8B%9B,北京；智能风控+Agent+RAG+MCP+Python后端严格匹配；官方校园type=2
 快手,岗位开放参考：AI应用服务端开发工程师,2026-07-30,开放参考,high,https://campus.kuaishou.cn/recruit/campus/e/#/campus/job-info/11260,来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：♾
 DeepSeek,岗位开放参考：服务端开发工程师,2026-06-25,开放参考,high,https://app.mokahr.com/social-recruitment/high-flyer/140576#/job/2eb2e75d-29f3-47b5-bb10-39f12547d398,来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：待补充
-智谱,岗位开放参考：Code Agent,2026-10-10,开放参考,high,https://app.mokahr.com/campus-recruitment/zphz/148984#/job/df9452b2-6456-47e7-a4a4-204e1320870d,来自目标岗位表；秋招未开时用转正实习/同类岗位替代；可投岗位数量：待补充
+智谱,正式岗位开放：27届校招 GLM-Code Agent算法工程师,2026-07-28,2027正式岗位,high,https://app.mokahr.com/campus-recruitment/zphz/148984/#/job/124aa3c6-e4a8-4e7d-a63b-ec8b915611a8,北京海淀全职；官方校园门户；Trading Agent为全职金融强匹配但地点待确认

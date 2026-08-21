@@ -22,23 +22,23 @@ companies:
     check_frequency: weekly
   - name: 腾讯
     priority: high
-    city: 北京优先
-    directions: [AI应用开发, 后台开发, 服务稳定性]
-    reference_role: AI应用开发
+    city: 北京
+    directions: [Agent开发, Agent评测, AI应用工程]
+    reference_role: Agent开发工程师
     reference_source: recruitment/target_roles.csv
     check_frequency: weekly
   - name: 美团
     priority: high
-    city: 北京优先
-    directions: [金融大模型, Agent算法, AI金融场景]
-    reference_role: 【北斗】大模型算法工程师（金融场景）
+    city: 北京
+    directions: [金融AI应用, Agent后端, 金融大模型]
+    reference_role: AI应用开发工程师（金融服务平台方向）
     reference_source: recruitment/target_roles.csv
     check_frequency: weekly
   - name: 小米
     priority: high
-    city: 北京优先
-    directions: [AI Agent, 代码智能体, Agent评测]
-    reference_role: AI Agent开发
+    city: 北京
+    directions: [智能风控Agent, RAG, MCP, 金融AI应用工程]
+    reference_role: AI研发工程师-智能风控方向
     reference_source: recruitment/target_roles.csv
     check_frequency: weekly
   - name: 快手
@@ -57,9 +57,9 @@ companies:
     check_frequency: weekly
   - name: 智谱
     priority: high
-    city: 北京优先
-    directions: [Code Agent, Agent评测, Agent平台工程]
-    reference_role: Code Agent
+    city: 北京
+    directions: [GLM-Code Agent, Agent评测, 量化金融Agent]
+    reference_role: 27届校招 GLM-Code Agent算法工程师
     reference_source: recruitment/target_roles.csv
     check_frequency: weekly
   - name: Kimi

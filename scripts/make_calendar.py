@@ -95,7 +95,10 @@ def write_ics(events: list[dict]) -> None:
         )
 
     lines.append("END:VCALENDAR")
-    ICS_FILE.write_text("\r\n".join(lines) + "\r\n", encoding="utf-8")
+    # Keep generated output deterministic across Windows and Linux.  Using
+    # newline="" avoids Windows turning each LF into CRLF during the write.
+    with ICS_FILE.open("w", encoding="utf-8", newline="") as f:
+        f.write("\n".join(lines) + "\n")
 
 
 def main() -> None:
