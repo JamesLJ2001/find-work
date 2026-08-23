@@ -3403,6 +3403,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-23T12:00:00+08:00"
+    },
+    {
+      "id": 116,
+      "externalId": "csv-0116",
+      "problemId": 139,
+      "attemptedOn": "2026-08-23",
+      "recordedTitle": "单词拆分",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "D+1 复习仅记得将 wordDict 转为 set 以便快速查词，但忘记 DP 状态定义以及 end、start 的切分遍历；尚未恢复 dp[end] 表示前 end 个字符 s[:end] 能否由词典单词完整拼出，也未能写出 dp[start] 为真且 s[start:end] 在词典中时令 dp[end] 为真的布尔转移",
+      "isReview": true,
+      "reviewDate": "2026-08-23",
+      "notes": "红｜D+1 复习仍未建立字符串前缀 DP 模型｜红→红；dp[0]=True，外层枚举 end=1..n，内层枚举 start=0..end-1，命中可行切分后令 dp[end]=True 并停止内层遍历",
+      "sourceRow": 118,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-23T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-23T23:59:59+08:00",
