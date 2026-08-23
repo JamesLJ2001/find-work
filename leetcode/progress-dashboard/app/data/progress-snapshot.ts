@@ -3343,6 +3343,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-23T12:00:00+08:00"
+    },
+    {
+      "id": 113,
+      "externalId": "csv-0113",
+      "problemId": 198,
+      "attemptedOn": "2026-08-23",
+      "recordedTitle": "打家劫舍",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 复习从空白写出一维 DP 数组、前两项初始化与取最大值的基本框架；但将 nums 与其长度比较，循环错误写成 range(2,len(nums)-2)，转移误用 dp[i]+dp[i-2] 而不是 nums[i]+dp[i-2]，并返回越界的 dp[len(nums)]，代码未通过",
+      "isReview": true,
+      "reviewDate": "2026-08-23",
+      "notes": "黄｜D+1 闭卷主模型已恢复但边界与下标不稳｜黄→黄；长度判断使用 len(nums)，循环到 len(nums)，转移为 max(dp[i-1],dp[i-2]+nums[i])，返回 dp[-1]",
+      "sourceRow": 115,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-23T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-23T23:59:59+08:00",
