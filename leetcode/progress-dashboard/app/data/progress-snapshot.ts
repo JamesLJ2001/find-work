@@ -3363,6 +3363,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-23T12:00:00+08:00"
+    },
+    {
+      "id": 114,
+      "externalId": "csv-0114",
+      "problemId": 118,
+      "attemptedOn": "2026-08-23",
+      "recordedTitle": "杨辉三角",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 复习已想起二维 DP 与 dp[i][j]=dp[i-1][j-1]+dp[i-1][j] 的内部递推；但 dp 为空时直接写 dp[i] 会越界，每行长度误设为 numRows，内层遍历所有列导致边界越界，也未先 append 当前行并保留每行两端 1，代码未通过",
+      "isReview": true,
+      "reviewDate": "2026-08-23",
+      "notes": "黄｜D+1 闭卷已恢复内部递推但行构造与边界不稳｜红→黄；第 i 行长度为 i+1，先创建 [1]*(i+1)，仅遍历 j=1..i-1，再 append 当前行",
+      "sourceRow": 116,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-23T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-23T23:59:59+08:00",
