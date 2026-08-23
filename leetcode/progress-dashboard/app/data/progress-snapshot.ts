@@ -3323,9 +3323,29 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-19T12:00:00+08:00"
+    },
+    {
+      "id": 112,
+      "externalId": "csv-0112",
+      "problemId": 136,
+      "attemptedOn": "2026-08-23",
+      "recordedTitle": "只出现一次的数字",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "简单",
+      "status": "绿",
+      "independentWrite": true,
+      "errorReason": "无；D+1 复习从空白独立写出并秒过，正确使用 0 与所有数字累积异或，利用相同数字抵消后得到唯一元素",
+      "isReview": true,
+      "reviewDate": "2026-08-23",
+      "notes": "绿｜D+1 闭卷秒过｜红→绿；异或抵消模型已独立通过；本次是首次间隔独立通过，尚未达到连续两次通过的永久退役条件",
+      "sourceRow": 114,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-23T12:00:00+08:00"
     }
   ],
-  "syncedAt": "2026-08-19T23:59:59+08:00",
+  "syncedAt": "2026-08-23T23:59:59+08:00",
   "source": "snapshot",
   "stale": false
 };
