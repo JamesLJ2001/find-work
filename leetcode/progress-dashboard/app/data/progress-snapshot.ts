@@ -3883,6 +3883,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 140,
+      "externalId": "csv-0140",
+      "problemId": 101,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "对称二叉树",
+      "recordedTopic": "二叉树",
+      "recordedDifficulty": "简单",
+      "status": "绿",
+      "independentWrite": true,
+      "errorReason": "无；第二学习时段额外红题复测从空白独立写出并通过，已恢复成对接收镜像节点、处理空节点和节点值不同的边界，并正确交叉比较外侧与内侧子树",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "绿｜额外红题复测独立通过｜红→绿；今日较早的失败已打断原连续通过记录，本次作为新的第一次独立通过，后续再在不同实际作答日独立通过一次即可永久退役",
+      "sourceRow": 142,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
