@@ -3943,6 +3943,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 143,
+      "externalId": "csv-0143",
+      "problemId": 118,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "杨辉三角",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "第二学习时段 D+3 重写已独立恢复逐行构造二维 DP 以及当前元素由相邻位置递推的总体方向；但仍在空列表上直接执行 dp[i] 赋值而越界，第 i 行长度误写为 i 而不是 i+1，内层遍历包含首尾边界，并把右上方来源误写成尚未计算的当前行元素而不是上一行同列元素",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "黄｜D+3 重写仍掌握逐行递推但行构造和父节点来源未通过｜黄→黄；输出 ans 本身就是 DP 表，每轮创建长度 row+1 的全 1 当前行，仅计算 column 从 1 到 row-1，内部值取上一行 column-1 与 column 两项之和后再追加当前行",
+      "sourceRow": 145,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
