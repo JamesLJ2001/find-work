@@ -3423,9 +3423,29 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-23T12:00:00+08:00"
+    },
+    {
+      "id": 117,
+      "externalId": "csv-0117",
+      "problemId": 300,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "最长递增子序列",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答看不出本题如何使用动态规划；无法理解为什么状态要定义为以当前数字结尾的最长递增子序列；尚未建立该状态用于判断当前数字能接在哪些先前序列之后的模型",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答未建立结尾状态定义｜未开始→红；dp[i] 表示必须以 nums[i] 结尾的最长递增子序列长度，转移只从 j<i 且 nums[j]<nums[i] 的状态接入",
+      "sourceRow": 119,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
-  "syncedAt": "2026-08-23T23:59:59+08:00",
+  "syncedAt": "2026-08-24T23:59:59+08:00",
   "source": "snapshot",
   "stale": false
 };
