@@ -3523,6 +3523,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 122,
+      "externalId": "csv-0122",
+      "problemId": 101,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "对称二叉树",
+      "recordedTopic": "二叉树",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "D+7 完整盲写时无法从空白写出代码，未恢复递归函数必须同时接收左右两个镜像节点，也未能写出空节点边界、节点值比较以及左左对右右和左右对右左的交叉递归",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "红｜D+7 复测完全遗忘且未通过｜绿→红；mirror(left right) 的职责是判断两棵子树是否互为镜像，递归比较 left.left 与 right.right、left.right 与 right.left",
+      "sourceRow": 124,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
