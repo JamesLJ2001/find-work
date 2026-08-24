@@ -3723,6 +3723,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 132,
+      "externalId": "csv-0132",
+      "problemId": 139,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "单词拆分",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "红题复测仍只记得将 wordDict 转成 set，并误以为需要二维 dp[i][j] 记录截断区间；未恢复 dp[end] 表示前 end 个字符能否完整拆分，也未推出枚举最后一个单词起点 start 的布尔转移",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "红｜红题复测仍未建立一维前缀 DP｜红→红；dp[0]=True，若 dp[start] 为真且 s[start:end] 在单词集合中则 dp[end]=True",
+      "sourceRow": 134,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
