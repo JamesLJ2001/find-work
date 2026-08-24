@@ -3683,6 +3683,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 130,
+      "externalId": "csv-0130",
+      "problemId": 236,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "二叉树的最近公共祖先",
+      "recordedTopic": "树、图与 Trie",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "红题复测只能写出 dfs 的空节点或命中 p、q 的出口以及左右递归调用，仍未写出命中时返回 node、左右结果都非空时返回当前节点、否则向上传递非空结果的汇合逻辑",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "红｜红题复测仍未完成后序汇合｜红→红；dfs 返回当前子树中找到的 p、q 或最近公共祖先，左右均非空返回 node，否则返回非空的一侧",
+      "sourceRow": 132,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
