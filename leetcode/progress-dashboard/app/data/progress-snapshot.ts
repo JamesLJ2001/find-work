@@ -3463,6 +3463,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 119,
+      "externalId": "csv-0119",
+      "problemId": 1143,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "最长公共子序列",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答只能模糊感知本题与 300、5 一样可用动态规划避免重复遍历，但无法独立定义子问题；未想到用 dp[i][j] 表示 text1 前 i 个字符与 text2 前 j 个字符的最长公共子序列长度，也无法推出末尾字符相同时取左上角加一、末尾字符不同时取上方和左方最大值的转移",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答只识别出动态规划方向但未建立二维前缀状态｜未开始→红；dp[i][j] 代表两个前缀的答案，相同字符时 dp[i-1][j-1]+1，不同字符时 max(dp[i-1][j], dp[i][j-1])",
+      "sourceRow": 121,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
