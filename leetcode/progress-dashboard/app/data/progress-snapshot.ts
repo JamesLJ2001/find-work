@@ -3703,6 +3703,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 131,
+      "externalId": "csv-0131",
+      "problemId": 279,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "完全平方数",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "红题复测尝试写最小值 DP 但 dp 长度少一个位置且未初始化 dp[0]；j 未定义也未从 1 开始枚举平方数，while 条件没有推进 j，square 可能超过当前总和，min 误写为下标操作，转移中的 dp[i-square] 也没有建立合法边界",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "红｜红题复测仍未建立完全平方数最小值 DP｜红→红；dp[total] 表示凑出 total 的最少平方数个数，dp[0]=0，枚举 total 和 square*square<=total，转移为 min(dp[total-square*square]+1)",
+      "sourceRow": 133,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
