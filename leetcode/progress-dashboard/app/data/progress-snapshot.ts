@@ -3863,6 +3863,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 139,
+      "externalId": "csv-0139",
+      "problemId": 236,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "二叉树的最近公共祖先",
+      "recordedTopic": "树、图与 Trie",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "第二学习时段 D+7 重写已独立恢复空节点出口、命中 p 或 q 时返回当前节点以及递归搜索左右子树的主体，也记得最终需要向上传递 left 或 right；但忘记用 left 和 right 接住递归返回值，未写出左右均非空时返回当前 node 的交汇判断，也漏掉最外层 return dfs(root)",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "黄｜D+7 重写已恢复后序 DFS 返回值主模型但汇合代码不完整｜红→黄；left = dfs(node.left) 与 right = dfs(node.right)，两边均非空返回 node，否则 return left if left else right，最外层返回 dfs(root)",
+      "sourceRow": 141,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
