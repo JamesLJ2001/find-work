@@ -4023,6 +4023,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 147,
+      "externalId": "csv-0147",
+      "problemId": 32,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "最长有效括号",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "困难",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "第二学习时段 D+1 复习能够感觉本题与 300 都应使用以当前位置结尾的状态，但仍需要直接讲解才能确定 dp[i] 表示以 s[i] 结尾的最长有效括号长度；未独立恢复有效段只能以右括号结尾、前一位为左括号时拼接 i-2 状态，以及前一位为右括号时跨过上一有效段寻找匹配左括号的两类转移",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "红｜D+1 仍需讲解一维结尾状态和全部转移｜红→红；当前为右括号时分为直接组成括号对与跨过前一有效段两类，后一类还需拼接匹配左括号之前紧邻的有效段",
+      "sourceRow": 149,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
