@@ -3823,6 +3823,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 137,
+      "externalId": "csv-0137",
+      "problemId": 25,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "K 个一组翻转链表",
+      "recordedTopic": "链表基础与进阶",
+      "recordedDifficulty": "困难",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "第二学习时段首次作答明确表示没有思路，只能猜测是否与上一题反转链表 II 相同；尚未独立建立每组开始前先向后检查是否存在完整 k 个节点、不足 k 个保持原样、对完整分组执行 k-1 次头插反转以及把当前组尾部作为下一组前驱的完整流程",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答尚未建立分组检查与循环反转模型｜未作答→红；复用 92 的 pre、cur、tmp 头插法，每组先从 pre 向后确认 k 个节点，固定 cur = pre.next 后头插 k-1 次，最后令 pre = cur 进入下一组",
+      "sourceRow": 139,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
