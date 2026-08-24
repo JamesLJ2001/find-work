@@ -3443,6 +3443,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 118,
+      "externalId": "csv-0118",
+      "problemId": 5,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "最长回文子串",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答只能想到枚举候选子串并编写函数判断是否回文，该方案为 O(n³)；未独立确定可接受的中心扩散主解，未想到奇偶两类中心，也未独立写出从中心向两侧扩展并维护最长区间的代码，需要查看完整代码",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答未独立确定中心扩散主解且完整代码依赖讲解｜未开始→红；枚举每个位置作为奇数中心 expand(center, center) 和偶数中心 expand(center, center+1)，持续向两侧扩展并更新最长回文区间",
+      "sourceRow": 120,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
