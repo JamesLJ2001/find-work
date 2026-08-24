@@ -1,50 +1,50 @@
 {
   "schemaVersion": 1,
-  "planVersion": "2026-08-24.2",
-  "date": "2026-08-24",
+  "planVersion": "2026-08-25.1",
+  "date": "2026-08-25",
   "timezone": "Asia/Shanghai",
-  "generatedAt": "2026-08-24T15:58:34+08:00",
-  "generator": "Codex accelerated second-session planner",
+  "generatedAt": "2026-08-24T21:04:20+08:00",
+  "generator": "Codex custom learning-batch planner",
   "source": {
     "repository": "JamesLJ2001/find-work",
     "branch": "main",
     "planFile": "leetcode/2026-08-bytedance-100-plan.md",
     "progressFile": "leetcode/progress.csv",
-    "sourceCommit": "f7614d6b9ce112149ecfe13cfbc45c12125ee097"
+    "sourceCommit": "66bac2e3625db303fa329cc75a8914a6fea8e389"
   },
   "completionSource": "leetcode/progress.csv",
-  "completionAfterSourceRow": 134,
-  "newProblemIds": [21, 19, 24, 92, 25],
+  "completionAfterSourceRow": 151,
+  "newProblemIds": [148, 104, 110, 108, 98],
   "reviewQueues": {
     "d1": {
       "label": "D+1",
       "sourceDate": "2026-08-24",
-      "problemIds": [300, 32, 5, 1143, 31],
-      "instruction": "按模拟 8/25 的 D+1 执行：口述思路和关键代码；绿色题无需完整重写。完成度只统计本次重启后新增的作答记录。"
+      "problemIds": [21, 19, 24, 92, 25, 236, 101, 543, 198, 118, 279, 139, 300, 32, 5, 1143],
+      "instruction": "来源为 8/24 第二学习时段实际完成的 17 题；永久退役的 136 已排除。口述思路和关键代码，红黄题必须明确卡点。"
     },
     "d3": {
       "label": "D+3",
-      "sourceDate": "2026-08-19",
-      "problemIds": [118, 136, 198, 279, 139],
-      "instruction": "红黄题从空白重写；绿色题抽查边界。"
+      "sourceDate": "2026-08-23",
+      "problemIds": [],
+      "instruction": "来源批次的 136 已永久退役，198、118、279、139 均已进入更近的 D+1，按跨队列去重后为空。"
     },
     "d7": {
       "label": "D+7",
-      "sourceDate": "2026-08-14",
-      "problemIds": [236, 200],
-      "poolProblemIds": [236, 200, 994, 207, 208],
-      "instruction": "从来源题池选两题完整盲写；先永久排除退役题，同优先级按计划原始题序稳定取前两题。"
+      "sourceDate": "2026-08-16",
+      "problemIds": [560, 41],
+      "poolProblemIds": [560, 41],
+      "instruction": "从 D-7 来源批次抽取全部两题，从空白完整盲写；两题均未退役。"
     },
     "red": {
       "label": "红题复测",
       "sourceDate": null,
-      "problemIds": [146, 101, 543, 994, 207, 208, 51, 215],
-      "instruction": "复测今日开始前最新有效状态仍为红色且未进入 D+1、D+3、D+7 的题；机械抄写、跳过和只看答案不算掌握。"
+      "problemIds": [146, 994, 207, 208, 51, 215, 31],
+      "instruction": "复测日初仍为红色且未进入 D+1、D+3、D+7 的题；5、25、32、279、1143 已在 D+1，不重复。"
     }
   },
   "totals": {
     "newProblems": 5,
-    "reviewProblems": 20,
-    "totalTasks": 25
+    "reviewProblems": 25,
+    "totalTasks": 30
   }
 }
