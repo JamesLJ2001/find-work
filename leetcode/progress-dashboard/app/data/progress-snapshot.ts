@@ -3763,6 +3763,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 134,
+      "externalId": "csv-0134",
+      "problemId": 19,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "删除链表的倒数第 N 个结点",
+      "recordedTopic": "链表基础与进阶",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "第二学习时段首次作答已建立先统计长度再定位待删除节点前驱的可行模型，对 n 小于链表长度的普通情况基本正确；但从 head 出发无法表示头节点的前驱，因此 n 等于链表长度时会误删第二个节点，单节点场景还会访问 None.next；删除尾节点与中间节点也被不必要地分支处理",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答定位前驱的主模型正确但未统一头节点边界｜未作答→黄；引入 dummy 作为头节点前驱，推荐 fast 先走 n 步后与 slow 同行，fast 到尾节点时 slow 位于待删节点前方，统一执行 slow.next = slow.next.next",
+      "sourceRow": 136,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
