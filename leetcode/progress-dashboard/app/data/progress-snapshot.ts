@@ -3583,6 +3583,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 125,
+      "externalId": "csv-0125",
+      "problemId": 20,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "有效的括号",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+3 重写时只恢复了右括号映射和遍历入口，尚未独立写出左括号入栈、右括号检查栈非空与栈顶匹配后弹出、遍历结束检查栈为空的完整代码",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "黄｜D+3 重写未完成但栈主模型仍在｜黄→黄；左括号入栈，右括号必须匹配栈顶并弹出，遇到空栈或错配立即返回 False，最后 return not stack",
+      "sourceRow": 127,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
