@@ -26,6 +26,7 @@ test("ships the finished command center instead of the starter", async () => {
   assert.match(dashboard, /今日任务已完成/);
   assert.match(dashboard, /todayAttemptedCount \+ reviewCompletedCount/);
   assert.match(dashboard, /todayProblems\.length \+ reviewProblems\.length/);
+  assert.match(dashboard, /completionAfterSourceRow/);
   assert.match(dashboard, /queue-state__done/);
   assert.match(dashboard, /redReview/);
   assert.match(dashboard, /完整题库/);
@@ -69,6 +70,10 @@ test("validates the single GitHub-backed daily execution sheet", async () => {
   assert.equal(plan.totals.reviewProblems, new Set(reviewIds).size);
   assert.equal(reviewIds.length, new Set(reviewIds).size);
   assert.equal(plan.totals.totalTasks, plan.totals.newProblems + plan.totals.reviewProblems);
+  assert.ok(
+    plan.completionAfterSourceRow === undefined ||
+      (Number.isInteger(plan.completionAfterSourceRow) && plan.completionAfterSourceRow > 0),
+  );
   assert.ok(allPlannedIds.every((id) => catalogIds.has(id)));
   assert.match(loader, /raw\.githubusercontent\.com/);
   assert.match(loader, /isDailyPlan/);

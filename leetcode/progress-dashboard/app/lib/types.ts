@@ -56,6 +56,7 @@ export type DailyPlanDocument = {
     sourceCommit: string;
   };
   completionSource: string;
+  completionAfterSourceRow?: number;
   newProblemIds: number[];
   reviewQueues: {
     d1: DailyPlanQueue;
