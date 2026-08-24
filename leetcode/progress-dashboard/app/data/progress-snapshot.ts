@@ -3563,6 +3563,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 124,
+      "externalId": "csv-0124",
+      "problemId": 121,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "买卖股票的最佳时机",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "简单",
+      "status": "绿",
+      "independentWrite": true,
+      "errorReason": "无；D+3 从空白独立作答并秒过，能够按时间顺序维护历史最低买入价格，并用当前价格减去历史最低价持续更新最大利润",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "绿｜D+3 闭卷秒过｜黄→绿；已完成首次间隔独立通过，后续再独立通过一次即可永久退出自动复习",
+      "sourceRow": 126,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
