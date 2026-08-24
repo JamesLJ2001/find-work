@@ -3483,6 +3483,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 120,
+      "externalId": "csv-0120",
+      "problemId": 32,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "最长有效括号",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "困难",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答想到用二维区间 dp[i][j] 表示 s[i:j+1] 是否为有效括号，但未考虑题目长度达到 30000 时二维状态无法承受，也未独立推出可接受复杂度的状态转移；尚未建立 dp[right] 表示必须以下标 right 结尾的最长有效括号长度，以及末尾为 () 和末尾为 )) 时的两类转移",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答有区间 DP 联想但未独立确定一维结尾状态与转移｜未开始→红；s[right] 为右括号时分类：前一位为左括号则 dp[right]=dp[right-2]+2，前一位为右括号则跳过 dp[right-1] 找匹配左括号并拼接更早的有效段",
+      "sourceRow": 122,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
