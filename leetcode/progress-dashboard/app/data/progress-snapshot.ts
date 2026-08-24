@@ -3623,6 +3623,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 127,
+      "externalId": "csv-0127",
+      "problemId": 4,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "寻找两个正序数组的中位数",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "困难",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+3 重写时只能模糊判断本题与 215 都有分区和保留一侧的感觉，未独立推出在较短数组上二分切点、由总左半长度计算另一数组切点、四个边界值判断以及奇偶长度中位数公式",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "黄｜D+3 重写未完成但二分分区主方向仍有印象｜黄→黄；在较短数组二分 cut1，cut2=left_size-cut1，满足 left1<=right2 且 left2<=right1 后按总长度奇偶取边界值",
+      "sourceRow": 129,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
