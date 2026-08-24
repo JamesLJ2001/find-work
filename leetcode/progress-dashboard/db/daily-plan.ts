@@ -61,6 +61,9 @@ function isDailyPlan(value: unknown): value is DailyPlanDocument {
     typeof value.generatedAt === "string" &&
     typeof value.generator === "string" &&
     typeof value.completionSource === "string" &&
+    (value.completionAfterSourceRow === undefined ||
+      (Number.isInteger(value.completionAfterSourceRow) &&
+        Number(value.completionAfterSourceRow) > 0)) &&
     isNumberArray(value.newProblemIds) &&
     typeof value.source.repository === "string" &&
     typeof value.source.branch === "string" &&

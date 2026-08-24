@@ -301,22 +301,32 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     const todayProblems = planIsCurrent
       ? problemsFromIds(data.dailyPlan.newProblemIds)
       : [];
+    const completionAfterSourceRow = planIsCurrent
+      ? data.dailyPlan.completionAfterSourceRow
+      : undefined;
+    const currentSessionAttempts = activeAttempts.filter(
+      (attempt) =>
+        attempt.attemptedOn === today &&
+        (completionAfterSourceRow === undefined ||
+          attempt.sourceRow > completionAfterSourceRow),
+    );
     const attemptedToday = new Set(
-      activeAttempts
-        .filter((attempt) => attempt.attemptedOn === today)
-        .map((attempt) => attempt.problemId),
+      currentSessionAttempts.map((attempt) => attempt.problemId),
     );
     const todayAttemptedCount = todayProblems.filter((problem) =>
       attemptedToday.has(problem.id),
     ).length;
     const reviewedToday = new Set(
-      activeAttempts
-        .filter((attempt) => attempt.attemptedOn === today && attempt.isReview)
+      currentSessionAttempts
+        .filter((attempt) => attempt.isReview)
         .map((attempt) => attempt.problemId),
     );
     const beforeReviewByProblem = new Map<number, AttemptRecord>();
     for (const attempt of activeAttempts) {
-      if (attempt.attemptedOn < today) {
+      const happenedBeforeSession = completionAfterSourceRow === undefined
+        ? attempt.attemptedOn < today
+        : attempt.sourceRow <= completionAfterSourceRow;
+      if (happenedBeforeSession) {
         beforeReviewByProblem.set(attempt.problemId, attempt);
       }
     }
