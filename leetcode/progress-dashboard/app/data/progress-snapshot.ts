@@ -3643,6 +3643,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 128,
+      "externalId": "csv-0128",
+      "problemId": 215,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "数组中的第 K 个最大元素",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次查看并抄写快速选择模板后仍未理解 pivot 分区如何确定目标排名，也未能独立解释为什么只保留目标下标所在的一侧；复制代码不算独立作答",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "红｜复测后仍未建立快速选择模型｜红→红；第 K 大先转为升序下标 n-k，partition 只保证 pivot 左右的相对分区，比较 pivot 下标与目标下标后继续一侧",
+      "sourceRow": 130,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
