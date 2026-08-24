@@ -3783,6 +3783,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 135,
+      "externalId": "csv-0135",
+      "problemId": 24,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "两两交换链表中的节点",
+      "recordedTopic": "链表基础与进阶",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "第二学习时段首次作答知道使用 dummy 并保存当前一对后面的节点，也写出了第二节点指向第一节点和第一节点指向后续节点的部分交换关系；但循环条件错误地要求当前一对之后还存在第三个节点，导致双节点和末尾完整一对无法处理；更关键的是没有让当前一对的前驱指向交换后的第二节点，因此第二节点会与结果链表断开，交换后也未正确推进前驱",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答理解局部换线但缺少前驱连接与迭代推进｜未作答→黄；固定维护 previous、first、second，依次执行 first.next = second.next、second.next = first、previous.next = second，再令 previous = first",
+      "sourceRow": 137,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
