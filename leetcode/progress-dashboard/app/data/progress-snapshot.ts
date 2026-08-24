@@ -3803,6 +3803,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 136,
+      "externalId": "csv-0136",
+      "problemId": 92,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "反转链表 II",
+      "recordedTopic": "链表基础与进阶",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "第二学习时段首次作答知道 left 等于 right 时无需处理，也想到使用 dummy、先定位反转区间并临时保存后续节点；但从 dummy 走 left 步会停在第 left 个节点而不是区间前驱，存在一位偏差；代码尚未完成区间内部反转，也未建立反转区间与前后链表的重新连接",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答已有区间定位与反转方向但换线模型未完成｜未作答→黄；before 从 dummy 走 left-1 步，固定 tail = before.next，每轮摘下 moving = tail.next 并依次执行 tail.next = moving.next、moving.next = before.next、before.next = moving",
+      "sourceRow": 138,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
