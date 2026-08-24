@@ -3663,6 +3663,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 129,
+      "externalId": "csv-0129",
+      "problemId": 543,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "二叉树的直径",
+      "recordedTopic": "二叉树",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "D+7 闭卷作答写出了 DFS 外壳和 nonlocal ans，但把空节点或任一缺失孩子直接作为无返回值出口，未定义 dfs 返回子树高度；没有用 left_height+right_height 更新全局直径，也错误地返回 dfs(root) 而不是 ans",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "红｜D+7 复测仍未建立后序 DFS 返回值模型｜红→红；dfs(None)=0，dfs 返回 max(left_height right_height)+1，当前节点直径用 left_height+right_height 更新，调用 dfs(root) 后返回全局 ans",
+      "sourceRow": 131,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
