@@ -3503,6 +3503,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 121,
+      "externalId": "csv-0121",
+      "problemId": 31,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "下一个排列",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答只判断出本题属于技巧题，未独立复原寻找最长非递增后缀、确定枢轴、选择最小增幅后继以及反转后缀的完整模型，也未尝试闭卷代码，明确要求直接获得模板背诵",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答未独立恢复字典序后继算法｜未开始→红；口诀为从右找降序断点、从右找首个更大值、交换、反转后缀；若不存在断点则反转整个数组",
+      "sourceRow": 123,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
