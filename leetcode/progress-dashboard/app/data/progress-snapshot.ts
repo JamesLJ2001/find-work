@@ -3743,6 +3743,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 133,
+      "externalId": "csv-0133",
+      "problemId": 21,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "合并两个有序链表",
+      "recordedTopic": "链表基础与进阶",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "第二学习时段首次作答已建立 dummy 尾指针和双指针比较模型，但把 cur 直接改指向 l1 或 l2 而没有通过 cur.next 接入结果链表；也没有在接入后推进 cur；某一链表为空时只令 cur 指向剩余链表且没有结束循环，会造成死循环，最终 dummy.next 仍为空",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答核心归并模型正确但链表连接未完成｜未作答→黄；循环比较时执行 cur.next = l1 或 l2 并推进对应指针，再令 cur = cur.next；主循环结束后用 cur.next = l1 if l1 else l2 一次接上剩余部分",
+      "sourceRow": 135,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
