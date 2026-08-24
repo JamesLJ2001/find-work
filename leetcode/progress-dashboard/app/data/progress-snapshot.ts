@@ -3923,6 +3923,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 142,
+      "externalId": "csv-0142",
+      "problemId": 198,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "打家劫舍",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "第二学习时段 D+3 重写已独立写出一维 DP 数组、第二项初始化、完整遍历范围以及不偷当前家和偷当前家两种选择取最大值的正确转移；但把 dp[0] 误初始化为 1 而不是第一家的金额，并且没有处理只有一间房时访问 dp[1] 越界的边界",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "黄｜D+3 重写状态定义与转移已正确但初始化边界未通过｜黄→黄；dp[0] 应为 nums[0]，长度为 1 时直接返回 nums[0]，其余转移和返回 dp[-1] 已正确",
+      "sourceRow": 144,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
