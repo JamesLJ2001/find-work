@@ -4003,6 +4003,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 146,
+      "externalId": "csv-0146",
+      "problemId": 300,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "最长递增子序列",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "第二学习时段 D+1 口述已独立恢复 dp[i] 表示以 nums[i] 作为子序列末尾的最长递增子序列长度这一关键状态定义；但尚未独立继续推出枚举所有 j 小于 i、仅在 nums[j] 小于 nums[i] 时由 dp[j] 加一转移，也未说明最终答案应取所有 dp 状态的最大值",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "黄｜D+1 已恢复结尾状态但前驱枚举与转移尚未完整口述｜红→黄；dp 初始全为 1，对每个 i 枚举左侧 j，满足递增条件时用 dp[j]+1 更新 dp[i]，最终返回 max(dp)",
+      "sourceRow": 148,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
