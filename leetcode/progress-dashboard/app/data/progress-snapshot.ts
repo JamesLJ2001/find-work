@@ -3903,6 +3903,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 141,
+      "externalId": "csv-0141",
+      "problemId": 543,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "二叉树的直径",
+      "recordedTopic": "二叉树",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "第二学习时段额外红题复测已独立恢复 nonlocal ans、空节点返回 0、递归取得左右子树高度以及向父节点返回较大高度加一的核心后序 DFS 模型；但把高度返回语句缩进到了 dfs 外部，未调用 dfs(root)，直径误写为 left+right+1 且直接覆盖 ans 而没有保留全局最大值",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "黄｜额外红题复测已恢复高度与直径双重职责但边数和作用域仍有错误｜红→黄；dfs 内让 ans 取自身与 left+right 的较大值并返回左右高度的较大值加一，外层调用 dfs(root) 后返回 ans",
+      "sourceRow": 143,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
