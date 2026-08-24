@@ -3843,6 +3843,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 138,
+      "externalId": "csv-0138",
+      "problemId": 136,
+      "attemptedOn": "2026-08-24",
+      "recordedTitle": "只出现一次的数字",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "简单",
+      "status": "绿",
+      "independentWrite": true,
+      "errorReason": "无；第二学习时段 D+3 复测再次从空白独立秒过，能够直接使用从 0 开始的累积异或并说明相同数字两两抵消后只剩唯一元素",
+      "isReview": true,
+      "reviewDate": "2026-08-24",
+      "notes": "绿｜D+3 闭卷再次秒过｜绿→绿；已于 8/23 和 8/24 两个不同实际作答日连续两次间隔独立通过，永久退役，后续 D+1、D+3、D+7、额外红题及所有自动复习队列永不再出现",
+      "sourceRow": 140,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-24T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-24T23:59:59+08:00",
