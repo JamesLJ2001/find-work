@@ -27,6 +27,8 @@ test("ships the finished command center instead of the starter", async () => {
   assert.match(dashboard, /todayAttemptedCount \+ reviewCompletedCount/);
   assert.match(dashboard, /todayProblems\.length \+ reviewProblems\.length/);
   assert.match(dashboard, /completionAfterSourceRow/);
+  assert.match(dashboard, /planIsUpcoming/);
+  assert.match(dashboard, /明日执行单已生成/);
   assert.match(dashboard, /queue-state__done/);
   assert.match(dashboard, /redReview/);
   assert.match(dashboard, /完整题库/);

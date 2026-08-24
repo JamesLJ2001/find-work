@@ -290,18 +290,21 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
       return { difficulty, total: problems.length, answered, green };
     });
 
-    const today = dateInChina();
-    const planIsCurrent = data.dailyPlan.date === today;
+    const actualToday = dateInChina();
+    const planIsCurrent = data.dailyPlan.date === actualToday;
+    const planIsUpcoming = data.dailyPlan.date > actualToday;
+    const planIsVisible = planIsCurrent || planIsUpcoming;
+    const today = planIsVisible ? data.dailyPlan.date : actualToday;
     const problemById = new Map(data.problems.map((problem) => [problem.id, problem]));
     const problemsFromIds = (ids: number[]) =>
       ids.flatMap((id) => {
         const problem = problemById.get(id);
         return problem ? [problem] : [];
       });
-    const todayProblems = planIsCurrent
+    const todayProblems = planIsVisible
       ? problemsFromIds(data.dailyPlan.newProblemIds)
       : [];
-    const completionAfterSourceRow = planIsCurrent
+    const completionAfterSourceRow = planIsVisible
       ? data.dailyPlan.completionAfterSourceRow
       : undefined;
     const currentSessionAttempts = activeAttempts.filter(
@@ -334,16 +337,16 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     studyDays.sort();
 
     const queues = data.dailyPlan.reviewQueues;
-    const d1Date = planIsCurrent ? queues.d1.sourceDate ?? undefined : undefined;
-    const d3Date = planIsCurrent ? queues.d3.sourceDate ?? undefined : undefined;
-    const d7Date = planIsCurrent ? queues.d7.sourceDate ?? undefined : undefined;
-    const d1 = planIsCurrent ? problemsFromIds(queues.d1.problemIds) : [];
-    const d3 = planIsCurrent ? problemsFromIds(queues.d3.problemIds) : [];
-    const d7 = planIsCurrent ? problemsFromIds(queues.d7.problemIds) : [];
-    const d7Pool = planIsCurrent
+    const d1Date = planIsVisible ? queues.d1.sourceDate ?? undefined : undefined;
+    const d3Date = planIsVisible ? queues.d3.sourceDate ?? undefined : undefined;
+    const d7Date = planIsVisible ? queues.d7.sourceDate ?? undefined : undefined;
+    const d1 = planIsVisible ? problemsFromIds(queues.d1.problemIds) : [];
+    const d3 = planIsVisible ? problemsFromIds(queues.d3.problemIds) : [];
+    const d7 = planIsVisible ? problemsFromIds(queues.d7.problemIds) : [];
+    const d7Pool = planIsVisible
       ? problemsFromIds(queues.d7.poolProblemIds ?? queues.d7.problemIds)
       : [];
-    const redReview = planIsCurrent ? problemsFromIds(queues.red.problemIds) : [];
+    const redReview = planIsVisible ? problemsFromIds(queues.red.problemIds) : [];
     const reviewProblems = Array.from(
       new Map(
         [...d1, ...d3, ...d7, ...redReview].map((problem) => [problem.id, problem]),
@@ -358,7 +361,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     const redProblems = data.problems.filter((problem) => latestByProblem.get(problem.id)?.status === "红");
 
     const dayStats = studyDays
-      .filter((date) => date <= today)
+      .filter((date) => date <= actualToday)
       .map((date) => ({
         date,
         attempts: activeAttempts.filter((attempt) => attempt.attemptedOn === date).length,
@@ -376,6 +379,8 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
       topics,
       today,
       planIsCurrent,
+      planIsUpcoming,
+      planIsVisible,
       todayProblems,
       attemptedToday,
       todayAttemptedCount,
@@ -541,16 +546,16 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
           <aside className="today-brief panel">
             <div className="panel-title-row">
               <div>
-                <span className="eyebrow">TODAY · {model.today}</span>
-                <h2>今日战情</h2>
+                <span className="eyebrow">{model.planIsUpcoming ? "NEXT" : "TODAY"} · {model.today}</span>
+                <h2>{model.planIsUpcoming ? "明日战情" : "今日战情"}</h2>
               </div>
-              <span className={`live-dot ${model.planIsCurrent ? "" : "is-stale"}`}>
-                {model.planIsCurrent ? "LIVE" : "WAIT"}
+              <span className={`live-dot ${model.planIsVisible ? "" : "is-stale"}`}>
+                {model.planIsCurrent ? "LIVE" : model.planIsUpcoming ? "PREVIEW" : "WAIT"}
               </span>
             </div>
             <div className="brief-number">
               <strong>{model.todayCompletedCount}/{model.todayTaskCount}</strong>
-              <span>项今日任务已完成</span>
+              <span>{model.planIsUpcoming ? "项明日任务已完成" : "项今日任务已完成"}</span>
             </div>
             <dl className="brief-list">
               <div><dt>新题</dt><dd>{model.todayAttemptedCount} / {model.todayProblems.length} 已作答</dd></div>
@@ -579,10 +584,12 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
 
         {(data.dailyPlan.warning || !model.planIsCurrent) && (
           <section className="plan-alert" role="status">
-            <b>{model.planIsCurrent ? "执行单同步提示" : "今日执行单尚未生成"}</b>
+            <b>{model.planIsCurrent ? "执行单同步提示" : model.planIsUpcoming ? "明日执行单已生成" : "今日执行单尚未生成"}</b>
             <span>
               {data.dailyPlan.warning ??
-                `当前读取到 ${data.dailyPlan.date} 的执行单，请等待早上 8:30 任务写入今天的版本。`}
+                (model.planIsUpcoming
+                  ? `当前预览 ${data.dailyPlan.date} 的执行单；到达该日期后会自动转为 LIVE。`
+                  : `当前读取到 ${data.dailyPlan.date} 的执行单，请等待早上 8:30 任务写入今天的版本。`)}
             </span>
           </section>
         )}
@@ -591,9 +598,9 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
           <div className="section-heading">
             <div>
               <span className="eyebrow">
-                TODAY&apos;S MISSION · {model.today} · {data.dailyPlan.planVersion}
+                {model.planIsUpcoming ? "NEXT" : "TODAY"}&apos;S MISSION · {model.today} · {data.dailyPlan.planVersion}
               </span>
-              <h2>今日新题 · {model.todayProblems.length}</h2>
+              <h2>{model.planIsUpcoming ? "明日新题" : "今日新题"} · {model.todayProblems.length}</h2>
             </div>
             <p>题单由早上 8:30 任务写入 GitHub；“已作答”与颜色仍按真实作答记录判断。</p>
           </div>
@@ -627,7 +634,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               })
             ) : (
               <div className="today-empty panel">
-                {model.planIsCurrent ? "今天的执行单没有新题。" : "等待今天的执行单同步后显示。"}
+                {model.planIsVisible ? "这份执行单没有新题。" : "等待今天的执行单同步后显示。"}
               </div>
             )}
           </div>
