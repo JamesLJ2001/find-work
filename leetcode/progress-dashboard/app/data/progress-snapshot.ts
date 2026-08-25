@@ -4563,6 +4563,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 174,
+      "externalId": "csv-0174",
+      "problemId": 5,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "最长回文子串",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次 D+1 复习已独立恢复字符串长度、二维 DP 表以及按右端点和左端点枚举区间的基本框架；但仍未定义 dp[start][end] 为闭区间子串是否回文，未想起首尾相同且内部区间为回文的布尔转移，也没有处理长度不超过 3 的基础情况或维护最长区间，完整实现依赖讲解",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "红｜D+1 二维区间框架有所恢复但状态转移和答案维护仍依赖讲解｜红→红；dp 保存区间是否回文，首尾相同且短区间或内部区间为真时更新，并维护最长起点与长度",
+      "sourceRow": 176,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
