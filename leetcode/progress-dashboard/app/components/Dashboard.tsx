@@ -29,16 +29,11 @@ function dateInChina() {
   }).format(new Date());
 }
 
-function isPastMorningPlanSync() {
-  const now = new Date();
-  return now.getHours() > 8 || (now.getHours() === 8 && now.getMinutes() >= 30);
-}
-
-function millisecondsUntilNextMorningPlanSync() {
+function millisecondsUntilNextDayBoundary() {
   const now = new Date();
   const next = new Date(now);
-  next.setHours(8, 30, 15, 0);
-  if (next <= now) next.setDate(next.getDate() + 1);
+  next.setDate(next.getDate() + 1);
+  next.setHours(0, 0, 15, 0);
   return next.getTime() - now.getTime();
 }
 
@@ -461,29 +456,17 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
 
   useEffect(() => {
     const syncInBackground = () => void refresh(false);
-    let morningTimeout: number | undefined;
-    let retryInterval: number | undefined;
-    const startMorningPlanSync = () => {
-      syncInBackground();
-      retryInterval = window.setInterval(syncInBackground, 60_000);
-    };
-
-    if (data.dailyPlan.date !== dateInChina() && isPastMorningPlanSync()) {
-      startMorningPlanSync();
-    } else {
-      morningTimeout = window.setTimeout(
-        startMorningPlanSync,
-        millisecondsUntilNextMorningPlanSync(),
-      );
-    }
+    const dayBoundaryTimeout = window.setTimeout(
+      syncInBackground,
+      millisecondsUntilNextDayBoundary(),
+    );
 
     const syncWhenVisible = () => {
       if (document.visibilityState === "visible") syncInBackground();
     };
     document.addEventListener("visibilitychange", syncWhenVisible);
     return () => {
-      if (morningTimeout !== undefined) window.clearTimeout(morningTimeout);
-      if (retryInterval !== undefined) window.clearInterval(retryInterval);
+      window.clearTimeout(dayBoundaryTimeout);
       document.removeEventListener("visibilitychange", syncWhenVisible);
     };
   }, [data.dailyPlan.date, refresh]);
@@ -530,7 +513,9 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               <h1>字节最近 100<br />刷题作战台</h1>
               <p>只认真实作答记录。红色是尚未建立模型，黄色是已有思路但代码不稳，绿色是独立通过。</p>
               <div className="hero-actions">
-                <a className="primary-button" href="#today">执行今日任务</a>
+                <a className="primary-button" href="#today">
+                  {model.planIsUpcoming ? "查看明日任务" : "执行今日任务"}
+                </a>
                 <a className="secondary-button" href="#problem-bank">查看完整题库</a>
               </div>
             </div>
@@ -562,10 +547,13 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               <div><dt>D+1</dt><dd>{model.d1.length ? `${model.d1.length} 题口述` : "来源日无首次题"}</dd></div>
               <div><dt>D+3</dt><dd>{model.d3.length} 题按状态复写</dd></div>
               <div><dt>D+7</dt><dd>{model.d7.length} / {model.d7Pool.length} 题盲写抽查</dd></div>
-              <div><dt>红题</dt><dd>{model.redReview.length} 道额外复测</dd></div>
+              <div>
+                <dt>{data.dailyPlan.reviewQueues.red.label === "红题复测" ? "红题" : "专项"}</dt>
+                <dd>{model.redReview.length} 道待处理</dd>
+              </div>
             </dl>
             <p className="freshness">
-              执行单生成：{formatSyncTime(data.dailyPlan.generatedAt)} · 每日 08:30 单独同步
+              执行单生成：{formatSyncTime(data.dailyPlan.generatedAt)} · 当天收口后由当前对话生成
               <br />
               作答数据同步：{formatSyncTime(data.syncedAt)} · 对话记录写入后即时更新
             </p>
@@ -589,7 +577,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               {data.dailyPlan.warning ??
                 (model.planIsUpcoming
                   ? `当前预览 ${data.dailyPlan.date} 的执行单；到达该日期后会自动转为 LIVE。`
-                  : `当前读取到 ${data.dailyPlan.date} 的执行单，请等待早上 8:30 任务写入今天的版本。`)}
+                  : `当前读取到 ${data.dailyPlan.date} 的执行单，请在当前对话中生成今天的版本。`)}
             </span>
           </section>
         )}
@@ -602,7 +590,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               </span>
               <h2>{model.planIsUpcoming ? "明日新题" : "今日新题"} · {model.todayProblems.length}</h2>
             </div>
-            <p>题单由早上 8:30 任务写入 GitHub；“已作答”与颜色仍按真实作答记录判断。</p>
+            <p>题单由当前对话在上一学习日收口时写入 GitHub；“已作答”与颜色仍按真实作答记录判断。</p>
           </div>
           <div className="today-task-grid">
             {model.todayProblems.length ? (
@@ -644,7 +632,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
           <div className="section-heading">
             <div>
               <span className="eyebrow">SPACED REPETITION</span>
-              <h2>今日复习队列</h2>
+              <h2>{model.planIsUpcoming ? "明日复习队列" : "今日复习队列"}</h2>
             </div>
             <p>右侧标签表示今天是否复习；左侧圆点表示当前掌握程度，两种状态互不替代。</p>
           </div>
@@ -652,7 +640,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
             <QueueCard label="D+1" sourceDate={model.d1Date} description={data.dailyPlan.reviewQueues.d1.instruction} problems={model.d1} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
             <QueueCard label="D+3" sourceDate={model.d3Date} description={data.dailyPlan.reviewQueues.d3.instruction} problems={model.d3} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
             <QueueCard label="D+7" sourceDate={model.d7Date} description={`${data.dailyPlan.reviewQueues.d7.instruction} 来源题池共 ${model.d7Pool.length} 题。`} problems={model.d7} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
-            <QueueCard label="红题复测" title="日初红题池" description={data.dailyPlan.reviewQueues.red.instruction} problems={model.redReview} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
+            <QueueCard label={data.dailyPlan.reviewQueues.red.label} title={data.dailyPlan.reviewQueues.red.label === "红题复测" ? "日初红题池" : "专项与日初红题池"} description={data.dailyPlan.reviewQueues.red.instruction} problems={model.redReview} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
           </div>
         </section>
 

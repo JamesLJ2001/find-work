@@ -34,7 +34,7 @@ export type AttemptRecord = {
 };
 
 export type DailyPlanQueue = {
-  label: "D+1" | "D+3" | "D+7" | "红题复测";
+  label: "D+1" | "D+3" | "D+7" | "红题复测" | "专项预热与额外复测";
   sourceDate: string | null;
   problemIds: number[];
   poolProblemIds?: number[];

@@ -19,8 +19,9 @@ test("ships the finished command center instead of the starter", async () => {
   assert.doesNotMatch(dashboard, /120_000/);
   assert.match(dashboard, /progressVersion/);
   assert.match(dashboard, /对话记录写入后即时更新/);
-  assert.match(dashboard, /每日 08:30 单独同步/);
-  assert.match(dashboard, /millisecondsUntilNextMorningPlanSync/);
+  assert.match(dashboard, /当天收口后由当前对话生成/);
+  assert.match(dashboard, /millisecondsUntilNextDayBoundary/);
+  assert.doesNotMatch(dashboard, /setInterval|08:30/);
   assert.match(dashboard, /visibilitychange/);
   assert.match(dashboard, /今日复习队列/);
   assert.match(dashboard, /今日任务已完成/);
@@ -38,6 +39,7 @@ test("ships the finished command center instead of the starter", async () => {
   assert.match(dashboard, /beforeReviewByProblem/);
   assert.match(dashboard, /掌握状态由/);
   assert.match(dashboard, /queue-status-chip/);
+  assert.match(dashboard, /reviewQueues\.red\.label/);
   assert.match(css, /\.queue-status-红/);
   assert.match(css, /\.queue-status-黄/);
   assert.match(css, /\.queue-status-绿/);
@@ -81,7 +83,8 @@ test("validates the single GitHub-backed daily execution sheet", async () => {
   assert.match(loader, /isDailyPlan/);
   assert.match(loader, /AbortSignal\.timeout\(5_000\)/);
   assert.match(prompt, /唯一每日排程者/);
-  assert.match(prompt, /不要创建或调用 GitHub Action/);
+  assert.match(prompt, /只有用户在当前对话明确说/);
+  assert.match(prompt, /不要创建定时任务、GitHub Action 或晚上提醒/);
 });
 
 test("ships the data and storage surfaces", async () => {
