@@ -8,7 +8,7 @@
 - `problems` 保存 100 道核心题目录，`attempts` 保存每次作答和修正历史。
 - 每题最新一条未作废记录决定当前颜色，不自动升级。
 - 错误记录通过 `is_void`、`supersedes_attempt_id` 和 `correction_reason` 作废或替代，不物理删除。
-- 早上 8:30 的 ChatGPT 定时任务是每日排程的唯一计算者，把新题和 D+1/D+3/D+7/红题复测写入 GitHub 上的 `../daily-plan.json`。
+- 早晚定时任务均已删除。用户在当天学习结束或接近结束时通知当前 Codex 对话，由该对话计算下一学习日的新题和 D+1/D+3/D+7/专项与红题复测，并写入 GitHub 上的 `../daily-plan.json`。
 - GitHub 只保存和同步执行单，不负责计算；网页不再自行计算另一套队列。
 - 对话新增作答记录后，`data:sync` 会更新本地进度版本，开发页面通过热更新立即重新读取数据，不做全天定时轮询。
 - 执行单只决定“今天做什么”，是否完成仍由真实作答记录判断。
@@ -29,11 +29,11 @@ npm run local
 - `npm run build`：生成 Cloudflare Worker 兼容构建。
 - `npm test`：构建并运行服务端渲染与数据结构检查。
 
-## 每日自动同步
+## 每日手动收口
 
-现有早上 8:30 定时任务应使用 [`../daily-plan-automation-prompt.md`](../daily-plan-automation-prompt.md) 中的完整提示词。任务每天读取 GitHub main 的最新计划与 `progress.csv`，更新 `daily-plan.json`，回读校验后再发送聊天提醒。
+用户说“今天结束”“差不多了”或“安排明天”后，当前 Codex 对话按 [`../daily-plan-automation-prompt.md`](../daily-plan-automation-prompt.md) 中保留的计算规则读取 GitHub main 最新计划与 `progress.csv`，更新下一学习日的 `daily-plan.json`，回读校验后再返回唯一清单。
 
-网页服务保持运行时会在每天 8:30 单独检查 GitHub 最新执行单；如果任务尚未写完则每分钟重试，读取到当天版本后停止。切回网页标签页时也会立即刷新。无需晚上任务，也无需 GitHub Action。
+网页不做全天轮询，也不等待固定时刻。对话修改本地数据后通过开发热更新即时显示；切回网页标签页时会刷新一次，预先生成的明日执行单会在跨过零点后自动转为 LIVE。无需任何定时任务或 GitHub Action。
 
 ## 写入接口
 
