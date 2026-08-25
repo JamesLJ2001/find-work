@@ -4503,6 +4503,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 171,
+      "externalId": "csv-0171",
+      "problemId": 300,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "最长递增子序列",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "本次 D+1 复习已独立恢复一维 DP 以及对每个结尾位置枚举左侧前驱位置的双层循环框架，也延续了此前已掌握的以当前数字结尾的状态方向；但忘记只有 nums[start] 小于 nums[end] 时才能接入，未写出由 dp[start]+1 更新 dp[end] 的转移，并将状态错误初始化为长度 n+1 的负无穷数组且遗漏 n 的定义",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "黄｜D+1 结尾状态与前驱枚举已恢复但条件和转移未完整写出｜黄→黄；dp 初始全为 1，若左侧数字更小则用 dp[start]+1 更新当前状态，最终返回所有状态的最大值",
+      "sourceRow": 173,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
