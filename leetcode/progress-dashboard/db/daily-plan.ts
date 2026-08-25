@@ -99,6 +99,16 @@ function snapshot(
 }
 
 export async function loadDailyPlan(): Promise<DailyPlanSnapshot> {
+  const fallback: unknown = repositoryPlan;
+  if (!isDailyPlan(fallback)) {
+    throw new Error("仓库内置执行单结构无效");
+  }
+
+  // 本地作战台由当前 Codex 对话直接更新仓库文件，不必等待 GitHub 网络请求。
+  if (process.env.NODE_ENV === "development") {
+    return snapshot(fallback, "repository-local");
+  }
+
   try {
     const response = await fetch(`${REMOTE_PLAN_URL}?t=${Date.now()}`, {
       cache: "no-store",
@@ -115,10 +125,6 @@ export async function loadDailyPlan(): Promise<DailyPlanSnapshot> {
     }
     return snapshot(plan, "github");
   } catch (error) {
-    const fallback: unknown = repositoryPlan;
-    if (!isDailyPlan(fallback)) {
-      throw new Error("仓库内置执行单结构无效");
-    }
     return snapshot(
       fallback,
       "repository-fallback",

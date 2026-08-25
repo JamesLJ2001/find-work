@@ -73,7 +73,7 @@ export type DailyPlanDocument = {
 
 export type DailyPlanSnapshot = DailyPlanDocument & {
   fetchedAt: string;
-  syncSource: "github" | "repository-fallback";
+  syncSource: "github" | "repository-local" | "repository-fallback";
   stale: boolean;
   warning?: string;
 };
