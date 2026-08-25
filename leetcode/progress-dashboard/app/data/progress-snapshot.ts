@@ -4203,6 +4203,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 156,
+      "externalId": "csv-0156",
+      "problemId": 101,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "对称二叉树",
+      "recordedTopic": "二叉树",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 复习已独立写出成对递归、节点值不同时返回假以及左左对右右、左右对右左的正确镜像关系；但先判断只要有一边为空就返回假，导致两边同时为空时也提前返回假，永远无法到达两空为真的出口",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "黄｜D+1 镜像递归主模型完全正确但两个空节点出口顺序写反｜绿→黄；必须先处理 left 和 right 同时为空时返回真，再处理只有一边为空时返回假；本次失败打断上一次独立通过记录",
+      "sourceRow": 158,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
