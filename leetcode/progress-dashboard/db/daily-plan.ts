@@ -86,7 +86,7 @@ function snapshot(
   syncSource: DailyPlanSnapshot["syncSource"],
   warning?: string,
 ): DailyPlanSnapshot {
-  const stale = plan.date !== dateInChina();
+  const stale = plan.date < dateInChina();
   return {
     ...plan,
     fetchedAt: new Date().toISOString(),
