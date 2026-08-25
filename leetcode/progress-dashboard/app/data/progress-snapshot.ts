@@ -4263,6 +4263,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 159,
+      "externalId": "csv-0159",
+      "problemId": 104,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "二叉树的最大深度",
+      "recordedTopic": "链表与 BST",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "首次作答已独立写出空节点返回 0、递归取得左右子树深度以及当前深度应由较大子树深度加一得到的核心模型；但将整数深度 0 误当成 None 分类讨论，导致叶子节点左右均为 0 时所有分支都不执行而隐式返回 None，单侧子树情况也无法正确返回",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答已建立后序 DFS 深度状态，但多余的 0 与 None 分支导致代码未通过｜未作答→黄；dfs(None) = 0 后无需分类讨论，对任意非空节点统一返回 max(left_depth right_depth)+1",
+      "sourceRow": 161,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
