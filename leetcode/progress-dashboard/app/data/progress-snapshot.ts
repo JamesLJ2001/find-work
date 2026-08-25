@@ -4523,6 +4523,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 172,
+      "externalId": "csv-0172",
+      "problemId": 32,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "最长有效括号",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "困难",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次 D+1 复习能够回忆起有效段可能以直接配对的右括号结尾，也可能以连续两个右括号的形态结尾，并主动询问状态是否需要二维；但仍未独立定义一维 dp[i] 为必须以 s[i] 结尾的最长有效括号长度，也无法写出直接配对时拼接 dp[i-2] 以及越过 dp[i-1] 寻找匹配左括号的两类转移，完整代码依赖讲解",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "红｜D+1 只恢复两类结尾的模糊记忆，状态和转移仍依赖讲解｜红→红；使用一维结尾状态，当前字符为右括号时按前一字符为左括号或右括号分类，后一类需要跳过上一有效段并拼接更早状态",
+      "sourceRow": 174,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
