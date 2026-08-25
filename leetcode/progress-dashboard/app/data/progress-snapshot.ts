@@ -4183,6 +4183,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 155,
+      "externalId": "csv-0155",
+      "problemId": 148,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "排序链表",
+      "recordedTopic": "链表与 BST",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "首次作答误以为需要使用双向链表并将小值向前、大值向后连接；尚未独立识别单向链表应使用归并排序，也未建立快慢指针找中点切断、递归排序两半以及复用第 21 题合并两条有序链表的完整模型",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答尚未建立链表归并排序模型｜未作答→红；sortList 返回已排好序的当前链表头节点，通过快慢指针切成两半、递归排序左右子链表，最后使用 dummy 双指针归并",
+      "sourceRow": 157,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
