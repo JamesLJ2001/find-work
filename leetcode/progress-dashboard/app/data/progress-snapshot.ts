@@ -4123,6 +4123,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 152,
+      "externalId": "csv-0152",
+      "problemId": 24,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "两两交换链表中的节点",
+      "recordedTopic": "链表基础与进阶",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 复习已独立写出 dummy、每组 first 与 second 的定位、正确循环条件以及交换后把 cur 推进到 first 的总体框架；但 tmp 误保存为 first 节点本身而非 second.next 后续链表，first.next = second 没有改变原链接，随后 second.next = first 导致两节点成环，且缺少 cur.next = second 使前驱改接交换后的组头",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "黄｜D+1 每组定位与迭代框架已掌握但三根指针未正确重连｜黄→黄；依次执行 first.next = second.next、second.next = first、cur.next = second，再令 cur = first",
+      "sourceRow": 154,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
