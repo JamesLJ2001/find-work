@@ -4363,6 +4363,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 164,
+      "externalId": "csv-0164",
+      "problemId": 124,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "二叉树中的最大路径和",
+      "recordedTopic": "建树、图与回溯",
+      "recordedDifficulty": "困难",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "首次作答明确表示完全没有思路，尚未建立后序 DFS 应向父节点返回从当前节点出发向下的最大单边贡献，同时用当前节点值加左右两边的非负贡献更新全局最大路径和的双重职责，也未想到负数子路径应与 0 取较大值以便直接丢弃",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答尚未建立最大路径和的后序 DFS 单边返回与双边更新模型｜未作答→红；dfs(node) 返回 node.val 加左右非负贡献中的较大值，全局答案用 node.val+left_gain+right_gain 更新，两个子树返回负数时按 0 处理，全局初值必须为负无穷以覆盖全负数树",
+      "sourceRow": 166,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
