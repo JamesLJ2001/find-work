@@ -4103,6 +4103,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 151,
+      "externalId": "csv-0151",
+      "problemId": 19,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "删除链表的倒数第 N 个结点",
+      "recordedTopic": "链表基础与进阶",
+      "recordedDifficulty": "中等",
+      "status": "绿",
+      "independentWrite": true,
+      "errorReason": "无；D+1 复习从空白独立秒过并提交通过，首次作答时的头节点前驱与删除边界问题已修正",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "绿｜D+1 闭卷独立秒过｜黄→绿；本次是失败后新的第一次跨日独立通过，再于另一实际作答日独立通过一次后才永久退役",
+      "sourceRow": 153,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
