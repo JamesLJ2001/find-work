@@ -489,12 +489,18 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
           </span>
           <span
             className={`source-badge ${
-              data.dailyPlan.stale || data.dailyPlan.syncSource !== "github"
+              data.dailyPlan.stale || data.dailyPlan.syncSource === "repository-fallback"
                 ? "is-stale"
                 : ""
             }`}
           >
-            <i /> 执行单 · {data.dailyPlan.syncSource === "github" ? "GitHub" : "仓库回退"}
+            <i /> 执行单 · {
+              data.dailyPlan.syncSource === "github"
+                ? "GitHub"
+                : data.dailyPlan.syncSource === "repository-local"
+                  ? "本机仓库"
+                  : "仓库回退"
+            }
           </span>
           <button className="text-button" type="button" onClick={() => void refresh()} disabled={isRefreshing}>
             {isRefreshing ? "同步中…" : "同步"}
