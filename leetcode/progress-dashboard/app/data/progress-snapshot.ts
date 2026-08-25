@@ -4083,9 +4083,29 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-24T12:00:00+08:00"
+    },
+    {
+      "id": 150,
+      "externalId": "csv-0150",
+      "problemId": 21,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "合并两个有序链表",
+      "recordedTopic": "链表基础与进阶",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 复习仍能独立写出 dummy、尾指针、双指针比较和剩余链表接入的总体模型；但主循环误用 p1 or p2 导致某一指针为空时仍访问 val，选中节点时仍把 cur 直接改指向 p1 或 p2 而没有通过 cur.next 连入结果链表，剩余链表的条件也写反",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "黄｜D+1 仍掌握双指针归并框架但链接和空指针细节未通过｜黄→黄；主循环用 p1 and p2，选中节点时先赋给 cur.next 再令 cur = cur.next，结束后用 cur.next = p1 if p1 else p2 接上剩余部分",
+      "sourceRow": 152,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
-  "syncedAt": "2026-08-24T23:59:59+08:00",
+  "syncedAt": "2026-08-25T23:59:59+08:00",
   "source": "snapshot",
   "stale": false
 };
