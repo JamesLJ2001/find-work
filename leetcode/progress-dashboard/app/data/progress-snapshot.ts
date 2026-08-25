@@ -4163,6 +4163,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 154,
+      "externalId": "csv-0154",
+      "problemId": 25,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "K 个一组翻转链表",
+      "recordedTopic": "链表基础与进阶",
+      "recordedDifficulty": "困难",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 复习已独立写出 dummy、每组先检查 k 个节点、不足时直接返回以及复用 pre、cur、tmp 头插反转的完整主体框架；但把 kth = pre 写在检查循环内导致每轮重置而只检查 pre.next，组内头插误执行 k 次而非 k-1 次，并缺少反转后用 pre = cur 推进到下一组",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "黄｜D+1 已建立分组检查与复用局部头插的核心模型，仅循环边界与组间推进未通过｜红→黄；kth 在循环外初始化并连续后移 k 次，组内头插 k-1 次，完成后令 pre = cur",
+      "sourceRow": 156,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
