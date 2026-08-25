@@ -4583,6 +4583,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 175,
+      "externalId": "csv-0175",
+      "problemId": 31,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "下一个排列",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日额外红题复测明确表示已经忘记解法并直接请求重新讲解；未独立恢复从右寻找最长非递增后缀与枢轴、从右选择最小增幅后继、交换以及反转后缀的四步字典序后继算法，完整代码依赖讲解",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "红｜额外红题复测完全忘记并依赖重新讲解｜红→红；口诀为找下降点、找刚大一点的后继、交换、反转后缀，不存在枢轴时反转整个数组",
+      "sourceRow": 177,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
