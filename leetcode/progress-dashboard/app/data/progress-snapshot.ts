@@ -4463,6 +4463,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 169,
+      "externalId": "csv-0169",
+      "problemId": 279,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "完全平方数",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "本次 D+1 复习已独立恢复 dp 表、无穷大初始化、从 1 枚举平方数以及由 dp[total-square]+1 更新最小值的正确核心转移；但数组长度仍少一个位置，初始状态误设为 dp[1]=1 而不是 dp[0]=0，外层没有计算到 n，并让平方数只受 n 限制而可能超过当前 total 导致读取负下标",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "黄｜D+1 已恢复完整状态转移但初始化与枚举边界未通过｜红→黄；dp 长度为 n+1 且 dp[0]=0，total 遍历到 n，平方数必须不超过当前 total",
+      "sourceRow": 171,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
