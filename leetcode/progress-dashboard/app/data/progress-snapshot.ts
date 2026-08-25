@@ -4443,6 +4443,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 168,
+      "externalId": "csv-0168",
+      "problemId": 118,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "杨辉三角",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "本次 D+1 复习已独立恢复逐行创建当前行、使用上一行左上与正上元素相加并把当前行追加到 DP 表的完整主模型；但当前行长度仍误写为 row 而不是 row+1，内部循环包含首尾位置，并将结果写入 cur[row] 而不是当前 column，代码未通过",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "黄｜D+1 递推模型正确但行长度与循环下标仍未通过｜黄→黄；当前行创建为 [1] 乘 row+1，只遍历 column=1 到 row-1，并写入 cur[column]",
+      "sourceRow": 170,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
