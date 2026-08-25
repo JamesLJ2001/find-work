@@ -4143,6 +4143,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 153,
+      "externalId": "csv-0153",
+      "problemId": 92,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "反转链表 II",
+      "recordedTopic": "链表基础与进阶",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "D+1 复习仍记得使用 dummy 并先定位反转区间，也知道需要使用 pre、cur、tmp 完成局部反转；但从 dummy 误走 left 步而非 left-1 步，循环次数误写为 right-left+2，tmp 未定义，并再次未独立恢复头插法中摘下 cur 后方节点并改接区间前驱的三次连线",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "黄｜D+1 仍保留 dummy 与区间定位框架但头插法核心换线未独立恢复｜黄→黄；pre 固定在区间前一个节点，cur = pre.next，每轮用 tmp = cur.next、cur.next = tmp.next、tmp.next = pre.next、pre.next = tmp 将 cur 后的节点头插",
+      "sourceRow": 155,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
