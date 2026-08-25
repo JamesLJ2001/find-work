@@ -4423,6 +4423,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 167,
+      "externalId": "csv-0167",
+      "problemId": 198,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "打家劫舍",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "中等",
+      "status": "绿",
+      "independentWrite": true,
+      "errorReason": "无；D+1 复习从空白独立秒过并提交通过，已稳定掌握 dp 表示考虑前若干家时的最大金额以及不偷当前家与偷当前家两种选择取最大值的状态转移",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "绿｜D+1 闭卷独立秒过｜黄→绿；这是上次失败后的第一次跨日独立通过，再于另一个实际作答日独立通过一次后永久退役",
+      "sourceRow": 169,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
