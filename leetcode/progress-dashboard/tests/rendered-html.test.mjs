@@ -84,6 +84,7 @@ test("validates the single GitHub-backed daily execution sheet", async () => {
   assert.match(loader, /AbortSignal\.timeout\(5_000\)/);
   assert.match(loader, /process\.env\.NODE_ENV === "development"/);
   assert.match(loader, /repository-local/);
+  assert.match(loader, /plan\.date < dateInChina\(\)/);
   assert.match(prompt, /唯一每日排程者/);
   assert.match(prompt, /只有用户在当前对话明确说/);
   assert.match(prompt, /不要创建定时任务、GitHub Action 或晚上提醒/);
