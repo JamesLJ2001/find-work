@@ -4283,6 +4283,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 160,
+      "externalId": "csv-0160",
+      "problemId": 110,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "平衡二叉树",
+      "recordedTopic": "链表与 BST",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "首次作答已独立想到使用 DFS 计算每个节点左右子树高度，并在两者之差大于 1 时判定不平衡；但卡在如何同时保存高度与不平衡状态，未独立设计出 DFS 正常时返回高度、子树不平衡时返回特殊值 -1 并向上传播失败的单一返回值模型",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答已建立高度差判定的正确核心思路，但未完成高度与失败信号的统一返回设计｜未作答→黄；dfs 对平衡子树返回非负高度，对不平衡子树返回 -1，左右任一为 -1 或高度差超过 1 时立即继续向上返回 -1",
+      "sourceRow": 162,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
