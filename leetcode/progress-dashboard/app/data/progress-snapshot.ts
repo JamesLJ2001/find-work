@@ -4543,6 +4543,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 173,
+      "externalId": "csv-0173",
+      "problemId": 1143,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "最长公共子序列",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次 D+1 复习已独立写出两个字符串长度、二维零值 DP 表以及遍历两个字符串位置的双层循环，并能从字符是否相同开始分类；但二维表行列尺寸与循环方向不一致且没有为空前缀预留一行一列，在字符相同后仍无法独立写出左上角加一，字符不同时也未恢复上方与左方取最大值的完整转移，后续代码依赖讲解",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "红｜D+1 二维框架有所恢复但状态边界和三方向转移仍依赖讲解｜红→红；dp 使用 len1+1 行和 len2+1 列，相同末尾取左上加一，不同末尾取上方与左方最大值",
+      "sourceRow": 175,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
