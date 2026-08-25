@@ -4483,6 +4483,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 170,
+      "externalId": "csv-0170",
+      "problemId": 139,
+      "attemptedOn": "2026-08-25",
+      "recordedTitle": "单词拆分",
+      "recordedTopic": "基础 DP 与位运算",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "本次 D+1 复习已独立恢复词典集合、一维布尔 DP、end 与 start 两层切分枚举以及使用 s[start:end] 检查最后一个单词的主体框架；但仍未初始化 dp[0] 为真，end 没有遍历到 n，并且转移只判断最后一段在词典中而没有同时要求前缀 dp[start] 已经可以完整拆分",
+      "isReview": true,
+      "reviewDate": "2026-08-25",
+      "notes": "黄｜D+1 字符串前缀 DP 框架已基本恢复但起点与联合转移未通过｜黄→黄；dp[0] 为真，end 从 1 遍历到 n，只有 dp[start] 为真且最后一段在词典中时才能令 dp[end] 为真",
+      "sourceRow": 172,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-25T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-25T23:59:59+08:00",
