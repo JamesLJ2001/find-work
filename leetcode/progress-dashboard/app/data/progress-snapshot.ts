@@ -4623,6 +4623,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 177,
+      "externalId": "csv-0177",
+      "problemId": 22,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "括号生成",
+      "recordedTopic": "回溯与二分入门",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "本次 D+7 复习已独立恢复 ans、path、递归函数、终止判断以及 append-递归-pop 的回溯外壳；但只设计了含义不明确的单参数 num 并错误地从 n 开始递减，未恢复 left 与 right 两个已使用数量状态、left 小于 n 和 right 小于 left 的两项分支约束，也未写出具体括号选择且仍使用 path.copy 收集字符列表，完整实现依赖讲解",
+      "isReview": true,
+      "reviewDate": "2026-08-26",
+      "notes": "黄｜D+7 回溯外壳可独立恢复但状态参数与合法约束仍未写出｜黄→黄；递归参数为 left 和 right，分别在 left<n 与 right<left 时选择对应括号，完成后使用 join(path) 收集字符串",
+      "sourceRow": 179,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
