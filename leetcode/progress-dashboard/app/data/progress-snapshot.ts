@@ -4863,6 +4863,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 189,
+      "externalId": "csv-0189",
+      "problemId": 35,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "搜索插入位置",
+      "recordedTopic": "回溯与二分查找",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已独立写出左右边界、中点计算和依据大小关系缩小区间的二分外壳；但错误地用中点下标 middle 与目标值比较而不是使用 nums[middle]，边界只执行 left 加一和 right 减一而没有一次排除半个区间，闭区间循环误写为 left < right 从而漏查最后一个候选，并且循环结束后缺少返回插入位置 left",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答已建立二分方向但比较对象、边界更新和最终返回均未通过｜灰→黄；复用 704 闭区间模板，找到时返回 middle，未找到时 left 恰好是第一个大于等于目标值的位置并作为插入下标返回",
+      "sourceRow": 191,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
