@@ -4823,6 +4823,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 187,
+      "externalId": "csv-0187",
+      "problemId": 207,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "课程表",
+      "recordedTopic": "树、图与 Trie",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日额外红题复测再次直接要求讲解，未先独立口述或实现；讲解覆盖将先修关系建成 prerequisite 指向 course 的有向边、用 indegree 表示课程剩余先修数量、把全部入度为 0 的课程加入队列、每完成一门课就降低后续课程入度，以及最终通过 learned 是否等于 numCourses 判断有向图中是否存在环，但本次仍未自行写出代码并提交验证",
+      "isReview": true,
+      "reviewDate": "2026-08-26",
+      "notes": "红｜额外红题再次依赖完整讲解且拓扑排序尚未独立恢复｜红→红；Kahn BFS 的队列保存当前已满足全部先修条件的课程，环内节点的入度无法降为 0，因此最终完成课程数会小于课程总数",
+      "sourceRow": 189,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
