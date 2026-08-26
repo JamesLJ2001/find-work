@@ -4803,6 +4803,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 186,
+      "externalId": "csv-0186",
+      "problemId": 323,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "无向图中连通分量的数目",
+      "recordedTopic": "建树、图与回溯",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答未进行独立实现而是直接要求讲解，并明确表示尚未看出本题与 200 岛屿数量的关系；讲解覆盖根据无向边建立双向邻接表、遍历全部节点、遇到未访问节点时计数一次、使用 DFS 标记整个连通分量，以及网格隐式邻接关系与普通图显式边的一一对应，但本次尚未自行写出代码并提交验证",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答直接依赖完整讲解且图的邻接表表示尚未独立掌握｜灰→红；本题与 200 共用遍历全部节点并在发现未访问节点时计数和 DFS 标记整个连通块的模板，区别仅在于本题需要先由 edges 建立邻接表",
+      "sourceRow": 188,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
