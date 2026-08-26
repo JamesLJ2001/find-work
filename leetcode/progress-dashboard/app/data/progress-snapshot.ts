@@ -4643,6 +4643,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 178,
+      "externalId": "csv-0178",
+      "problemId": 46,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "全排列",
+      "recordedTopic": "建树、图与回溯",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已明确识别本题使用回溯，并能从连续完成 39 与 22 的过程中发现难点在于推导递归函数状态；但尚未独立判断排列题不需要 start 而需要记录哪些下标已经使用，也未写出 used 数组、全量候选遍历、完成条件与选择撤销代码，完整实现依赖讲解",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答已建立回溯方向但状态设计和代码尚未独立完成｜先定义当前子问题并判断下一步合法选择需要哪些信息；path 和 used 可作为外层共享状态，因此标准 backtrack 可以不带参数",
+      "sourceRow": 180,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
