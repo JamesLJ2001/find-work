@@ -4883,6 +4883,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 190,
+      "externalId": "csv-0190",
+      "problemId": 153,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "旋转数组最小值",
+      "recordedTopic": "回溯与二分查找",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答明确表示没有思路并询问本题与二分查找的关系，未先独立编写代码；讲解覆盖旋转数组由较大升序段和较小升序段组成、通过比较 nums[middle] 与 nums[right] 判断最小值所在半区、中间值大于最右值时将 left 移到 middle+1、否则保留仍可能为答案的 middle 并令 right=middle，以及区间收缩到单个候选时返回该值，但本次尚未自行实现并提交验证",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答直接依赖完整讲解且旋转数组的二分判边依据尚未独立掌握｜灰→红；中间值大于最右值说明最小值严格位于右侧，否则最小值位于含 middle 的左半区，使用 left < right 直到两个边界重合",
+      "sourceRow": 192,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
