@@ -4903,6 +4903,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 191,
+      "externalId": "csv-0191",
+      "problemId": 162,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "寻找峰值",
+      "recordedTopic": "回溯与二分查找",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答直接询问本题如何使用二分，未先独立口述或实现；讲解覆盖峰值定义与数组两端视为负无穷、通过比较 nums[middle] 和 nums[middle+1] 判断局部坡度、上坡时右侧必然存在峰值并令 left=middle+1、下坡时 middle 本身仍可能为峰值所以令 right=middle，以及边界重合后返回任意一个峰值下标，但本次尚未自行写出代码并提交验证",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答直接依赖完整讲解且利用坡度保留峰值候选区间的模型尚未独立掌握｜灰→红；上坡向右移动，下坡保留 middle 并收缩右边界，while left < right 同时保证 middle+1 不会越界",
+      "sourceRow": 193,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
