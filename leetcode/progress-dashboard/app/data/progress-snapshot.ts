@@ -5023,6 +5023,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 197,
+      "externalId": "csv-0197",
+      "problemId": 124,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "二叉树中的最大路径和",
+      "recordedTopic": "建树、图与回溯",
+      "recordedDifficulty": "困难",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日 D+1 复习再次直接要求讲解，未先独立口述或实现；讲解覆盖后序 DFS 向父节点只返回从当前节点出发选择一侧向下延伸的最大贡献、使用当前节点值加左右两侧非负贡献更新可在当前节点拐弯的全局答案、负贡献与 0 取较大值以便丢弃，以及全局答案必须初始化为负无穷以处理全负数树，但本次尚未自行写出代码并提交验证",
+      "isReview": true,
+      "reviewDate": "2026-08-26",
+      "notes": "红｜D+1 再次依赖完整讲解且单边返回与双边更新的双重职责尚未独立恢复｜红→红；dfs 向父节点返回 node.val 加左右较大非负贡献，全局 ans 用 node.val 加左右两边非负贡献共同更新",
+      "sourceRow": 199,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
