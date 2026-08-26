@@ -4783,6 +4783,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 185,
+      "externalId": "csv-0185",
+      "problemId": 200,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "岛屿数量",
+      "recordedTopic": "树、图与 Trie",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日专项预热未进行独立重写而是直接要求讲解；讲解覆盖遍历网格遇到未访问陆地计数一次、使用 dfs(row、column) 沉掉整座岛、四项越界与水面终止条件、先把当前陆地改为 0 防止重复访问以及上下左右搜索，但本次尚未自行写出代码并提交验证",
+      "isReview": true,
+      "reviewDate": "2026-08-26",
+      "notes": "黄｜专项预热依赖完整讲解且尚未独立重写｜黄→黄；一次 DFS 对应一整座岛，遇到 1 时答案加一并永久标记整片连通陆地，和 323 的图连通分量模型相同",
+      "sourceRow": 187,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
