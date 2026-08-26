@@ -4683,6 +4683,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 180,
+      "externalId": "csv-0180",
+      "problemId": 17,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "电话号码的字母组合",
+      "recordedTopic": "建树、图与回溯",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已独立写出数字到字母的完整映射、ans、path 以及 backtrack 回溯外壳，但字典使用整数键而 digits 下标取得字符串键，并且卡在递归函数参数与主体；尚未独立推导 index 表示当前处理的数字位置、遍历当前数字对应字母、递归 index+1、撤销选择以及处理完全部数字后 join(path) 收集答案的完整实现",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答回溯外壳和映射已写出但层级状态与递归主体依赖讲解｜当前层只处理 digits[index] 对应的字母集合，index 到达字符串长度时收集结果；不同层候选集合天然分离因此不需要 used",
+      "sourceRow": 182,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
