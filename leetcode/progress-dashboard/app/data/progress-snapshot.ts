@@ -4943,6 +4943,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 193,
+      "externalId": "csv-0193",
+      "problemId": 110,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "平衡二叉树",
+      "recordedTopic": "链表与 BST",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日 D+1 复习未进行独立重写而是直接要求讲解；讲解在 104 子树高度 DFS 基础上引入 -1 作为不平衡特殊信号，覆盖左右子树任一返回 -1 时立即向上传播、左右高度差超过 1 时返回 -1、平衡时返回当前子树高度，以及最终通过 dfs(root) 是否不等于 -1 判断整棵树，但本次尚未自行写出代码并提交验证",
+      "isReview": true,
+      "reviewDate": "2026-08-26",
+      "notes": "黄｜D+1 已再次理解高度与失败信号合并为单一返回值的模型但尚未独立实现｜黄→黄；dfs 对平衡子树返回非负高度，对不平衡子树返回 -1，父节点收到 -1 后直接继续向上传播",
+      "sourceRow": 195,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
