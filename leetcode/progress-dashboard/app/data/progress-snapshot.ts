@@ -4703,6 +4703,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 181,
+      "externalId": "csv-0181",
+      "problemId": 17,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "电话号码的字母组合",
+      "recordedTopic": "建树、图与回溯",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "同日修正后已独立写出空输入处理、字符串键映射、index 递归状态、完成条件、当前数字字母枚举以及 append-递归-pop 的完整正确逻辑；仅将形参误拼为 inedx 而递归调用使用 index，导致 index 解析为非整数对象并在加一时报 TypeError，尚未确认修正后提交通过",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜完整算法模型已恢复且仅剩变量拼写错误｜黄→黄；统一使用 index 后代码逻辑正确，待实际提交通过再升级为绿色",
+      "sourceRow": 183,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
