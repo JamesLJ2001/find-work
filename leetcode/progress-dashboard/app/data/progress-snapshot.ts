@@ -4663,6 +4663,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 179,
+      "externalId": "csv-0179",
+      "problemId": 46,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "全排列",
+      "recordedTopic": "建树、图与回溯",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "同日继续贴出一份完整正确的原地交换回溯代码并询问该写法；代码使用 first 划分已确定前缀与待选后缀，通过把候选数字交换到 first、递归 first+1 后再交换恢复来枚举排列，但未说明该实现为闭卷独立写出，也仍需要讲解 first 参数如何由状态表示推导，因此不能按独立通过升级",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜已接触并理解原地交换状态表示但尚未完成独立验收｜黄→黄；nums 的 first 左侧是已确定前缀，first 及右侧是待选池，交换表示选择而换回表示撤销，保存答案必须使用 nums 的切片副本",
+      "sourceRow": 181,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
