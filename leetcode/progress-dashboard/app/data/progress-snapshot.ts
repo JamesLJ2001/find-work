@@ -4983,6 +4983,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 195,
+      "externalId": "csv-0195",
+      "problemId": 98,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "验证二叉搜索树",
+      "recordedTopic": "链表与 BST",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日 D+1 复习未进行独立重写而是直接要求讲解；讲解再次说明不能只比较当前节点与直接孩子，并通过反例展示右子树中的较深节点仍必须大于根节点，随后覆盖 dfs(node、lower、upper) 的全局范围模型、左子树收紧上限、右子树抬高下限、空树返回 True 以及严格不等式排除重复值，但本次尚未自行写出代码并提交验证",
+      "isReview": true,
+      "reviewDate": "2026-08-26",
+      "notes": "黄｜D+1 已再次理解祖先上下界约束但尚未独立实现完整验证代码｜黄→黄；每个节点必须同时满足所有祖先传下来的开区间限制，左边更新 upper 为当前值，右边更新 lower 为当前值",
+      "sourceRow": 197,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
