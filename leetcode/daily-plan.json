@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "planVersion": "2026-08-26.1",
+  "planVersion": "2026-08-26.2",
   "date": "2026-08-26",
   "timezone": "Asia/Shanghai",
-  "generatedAt": "2026-08-25T19:13:51+08:00",
-  "generator": "Codex manual next-day planner",
+  "generatedAt": "2026-08-26T20:10:03+08:00",
+  "generator": "Codex same-day manual adjustment",
   "source": {
     "repository": "JamesLJ2001/find-work",
     "branch": "main",
     "planFile": "leetcode/2026-08-bytedance-100-plan.md",
     "progressFile": "leetcode/progress.csv",
-    "sourceCommit": "eb4571f147d1ed7a670b26b4cc7cc8b03a815b6a"
+    "sourceCommit": "7d05b70622b5d96ad393436983956fa9815cd8fa"
   },
   "completionSource": "leetcode/progress.csv",
   "completionAfterSourceRow": 177,
-  "newProblemIds": [323, 46, 17, 47, 35, 704, 153, 162, 155, 394],
+  "newProblemIds": [323, 46, 17, 47, 35, 704, 153, 162],
   "reviewQueues": {
     "d1": {
       "label": "D+1",
@@ -43,8 +43,8 @@
     }
   },
   "totals": {
-    "newProblems": 10,
+    "newProblems": 8,
     "reviewProblems": 20,
-    "totalTasks": 30
+    "totalTasks": 28
   }
 }
