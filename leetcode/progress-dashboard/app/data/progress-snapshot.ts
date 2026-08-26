@@ -4923,6 +4923,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 192,
+      "externalId": "csv-0192",
+      "problemId": 104,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "二叉树的最大深度",
+      "recordedTopic": "链表与 BST",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日 D+1 复习已独立写出空节点返回 0、递归取得左右子树深度以及 dfs 返回 max(left、right)+1 的正确高度模型，修复了首次作答中把深度 0 与 None 混淆的问题；但又加入 nonlocal ans 并用 left+right 维护经过当前节点的直径，最后返回 ans 而不是返回 dfs(root)，实际把 104 与 543 的解法混在一起，因此代码仍未通过",
+      "isReview": true,
+      "reviewDate": "2026-08-26",
+      "notes": "黄｜D+1 已稳定恢复子树高度返回值但最终答案误写成二叉树直径｜黄→黄；104 的 dfs 返回值本身就是答案，直接 return dfs(root)，不需要全局 ans；left+right 与 nonlocal ans 属于 543",
+      "sourceRow": 194,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
