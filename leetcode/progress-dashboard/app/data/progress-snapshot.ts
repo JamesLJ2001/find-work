@@ -4723,6 +4723,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 182,
+      "externalId": "csv-0182",
+      "problemId": 47,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "全排列 II",
+      "recordedTopic": "回溯与二分查找",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已主动识别本题应复用 46 全排列框架并提出先去重后照写的方向；但最初想对输入数组整体去重，会错误丢失重复数字的实际数量，尚未独立建立应保留全部元素并只对当前递归层候选去重的剪枝模型，也未写出原地交换加 level_used 集合的完整实现",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答已识别与 46 的继承关系但同层去重模型依赖讲解｜47 可复用 46 原地交换框架并在每层创建集合，已在该层放到 first 位置的相同数直接跳过；不能对原数组全局去重",
+      "sourceRow": 184,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
