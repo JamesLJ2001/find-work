@@ -4603,9 +4603,29 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-25T12:00:00+08:00"
+    },
+    {
+      "id": 176,
+      "externalId": "csv-0176",
+      "problemId": 39,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "组合总和",
+      "recordedTopic": "回溯与二分入门",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "本次 D+7 复习未进行完整盲写而是直接要求以 39 为例讲解回溯；讲解后理解 path 表示当前选择路径、remaining 表示剩余目标、start 限制下一选择范围以及 append-递归-pop 的选择与撤销过程，但尚未独立提交代码验证",
+      "isReview": true,
+      "reviewDate": "2026-08-26",
+      "notes": "黄｜D+7 依赖完整讲解且尚未独立盲写｜黄→黄；同一数字可重复使用时递归传 i，start 防止组合的不同排列重复，remaining 为零时复制 path 记录答案",
+      "sourceRow": 178,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
-  "syncedAt": "2026-08-25T23:59:59+08:00",
+  "syncedAt": "2026-08-26T23:59:59+08:00",
   "source": "snapshot",
   "stale": false
 };
