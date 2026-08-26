@@ -1,50 +1,50 @@
 {
   "schemaVersion": 1,
-  "planVersion": "2026-08-26.2",
-  "date": "2026-08-26",
+  "planVersion": "2026-08-27.1",
+  "date": "2026-08-27",
   "timezone": "Asia/Shanghai",
-  "generatedAt": "2026-08-26T20:10:03+08:00",
-  "generator": "Codex same-day manual adjustment",
+  "generatedAt": "2026-08-26T20:59:28+08:00",
+  "generator": "Codex manual next-day planner",
   "source": {
     "repository": "JamesLJ2001/find-work",
     "branch": "main",
     "planFile": "leetcode/2026-08-bytedance-100-plan.md",
     "progressFile": "leetcode/progress.csv",
-    "sourceCommit": "7d05b70622b5d96ad393436983956fa9815cd8fa"
+    "sourceCommit": "baf5752304a766580bba6a4c394f054bb9ed12fb"
   },
   "completionSource": "leetcode/progress.csv",
-  "completionAfterSourceRow": 177,
-  "newProblemIds": [323, 46, 17, 47, 35, 704, 153, 162],
+  "completionAfterSourceRow": 199,
+  "newProblemIds": [155, 394, 739, 456, 636, 912, 763, 122, 322, 416, 64, 221],
   "reviewQueues": {
     "d1": {
       "label": "D+1",
-      "sourceDate": "2026-08-25",
-      "problemIds": [148, 104, 110, 108, 98, 105, 124],
-      "instruction": "来源为 8/25 首次作答的 7 道题。逐题口述状态定义或递归返回值与关键代码；红黄题必须明确卡点。"
+      "sourceDate": "2026-08-26",
+      "problemIds": [46, 17, 47, 323, 704, 35, 153, 162],
+      "instruction": "来源为 8/26 首次作答的 8 道题。逐题口述核心模型和关键代码；红黄题必须明确卡点，绿色题无需完整重写。"
     },
     "d3": {
       "label": "D+3",
-      "sourceDate": "2026-08-23",
-      "problemIds": [],
-      "instruction": "8/23 只有既有题复测，没有题目在当天首次作答，因此 D+3 为空。"
+      "sourceDate": "2026-08-24",
+      "problemIds": [300, 5, 1143, 32, 31, 21, 19, 24, 92, 25],
+      "instruction": "来源为 8/24 当天首次作答的 10 道题。红黄题从空白完整重写，绿色题抽查状态定义、边界与关键换线。"
     },
     "d7": {
       "label": "D+7",
-      "sourceDate": "2026-08-17",
-      "problemIds": [39, 22],
-      "poolProblemIds": [39, 22, 131, 51, 74],
-      "instruction": "从 8/17 首次题池稳定抽取 39、22 完整盲写；39 同时承担今日回溯专项预热，不再放入其他队列。"
+      "sourceDate": "2026-08-18",
+      "problemIds": [4, 20],
+      "poolProblemIds": [4, 20, 215, 121, 70],
+      "instruction": "8/18 首次题池为 4、20、215、121、70；排除永久退役题后稳定抽取前两题 4、20，从空白完整盲写。"
     },
     "red": {
-      "label": "专项预热与额外复测",
+      "label": "红题复测",
       "sourceDate": null,
-      "problemIds": [200, 5, 31, 32, 51, 146, 207, 208, 215, 994, 1143],
-      "instruction": "执行时先做 D+7 中的 39，再复习 200 岛屿数量，恢复回溯与网格 DFS 模板；随后复测日初仍为红色且未进入其他队列的 10 道题。200 当前为黄色，只是专项预热，不冒充红题。"
+      "problemIds": [146, 208, 994, 215, 148, 51, 207, 108, 105, 124],
+      "instruction": "完整复测 8/26 收口时仍为红色且未进入 D+1、D+3、D+7 的全部题；机械抄写、跳过或只看答案不算通过。"
     }
   },
   "totals": {
-    "newProblems": 8,
-    "reviewProblems": 20,
-    "totalTasks": 28
+    "newProblems": 12,
+    "reviewProblems": 30,
+    "totalTasks": 42
   }
 }
