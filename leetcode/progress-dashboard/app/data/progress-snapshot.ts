@@ -4763,6 +4763,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 184,
+      "externalId": "csv-0184",
+      "problemId": 51,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "N 皇后",
+      "recordedTopic": "回溯与二分入门",
+      "recordedDifficulty": "困难",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日额外红题复测未进行独立作答而是直接要求完整讲解；讲解覆盖逐行放置、row 递归参数、columns 列集合、row-column 与 row+column 两类对角线集合、棋盘选择与撤销以及完成时复制字符串棋盘，但本次尚未自行口述或写出这些状态与代码",
+      "isReview": true,
+      "reviewDate": "2026-08-26",
+      "notes": "红｜额外红题直接依赖完整讲解且未独立恢复模型｜红→红；每层只处理一行所以无需记录行，使用一列和两条对角线标识判断冲突，放置后递归 row+1 并在返回时撤销全部状态",
+      "sourceRow": 186,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
