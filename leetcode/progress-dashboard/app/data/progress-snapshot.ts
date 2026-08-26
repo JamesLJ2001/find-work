@@ -4843,6 +4843,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 188,
+      "externalId": "csv-0188",
+      "problemId": 704,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "二分查找",
+      "recordedTopic": "回溯与二分查找",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答未先口述思路或编写代码而是直接要求从头讲解；讲解覆盖闭区间 left 到 right 的含义、中点计算、根据中间值与目标值大小排除一半区间、使用 while left <= right 保留最后一个候选、用 middle 加一或减一彻底排除已检查位置以及查找失败返回 -1，但本次尚未自行写出并提交代码验证",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答直接依赖完整讲解且闭区间二分模板尚未独立验收｜灰→红；每轮开始时若目标存在则一定仍在闭区间内，中间值太小时移动左边界到 middle+1，太大时移动右边界到 middle-1",
+      "sourceRow": 190,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
