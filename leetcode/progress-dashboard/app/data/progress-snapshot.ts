@@ -4743,6 +4743,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 183,
+      "externalId": "csv-0183",
+      "problemId": 47,
+      "attemptedOn": "2026-08-26",
+      "recordedTitle": "全排列 II",
+      "recordedTopic": "回溯与二分查找",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "同日继续询问非原地交换的更优实现并学习频次表回溯；现已理解 Counter 不是删除重复元素而是保存每个不同数字的剩余次数，当前层只枚举剩余次数大于零的不同值，选择时减一并在递归返回后加一恢复，从而直接生成唯一排列，但尚未独立写出或提交该实现",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜已理解频次状态与输出敏感的最优级别方案但尚未独立验收｜黄→黄；path 保存当前排列而 count 保存各值剩余数量，两者作为外层状态时 backtrack 无需参数，最坏时间复杂度为 O(n乘n的阶乘)",
+      "sourceRow": 185,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-26T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-26T23:59:59+08:00",
