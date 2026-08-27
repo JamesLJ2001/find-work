@@ -5043,9 +5043,29 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-26T12:00:00+08:00"
+    },
+    {
+      "id": 198,
+      "externalId": "csv-0198",
+      "problemId": 300,
+      "attemptedOn": "2026-08-27",
+      "recordedTitle": "最长递增子序列",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日 D+3 从空白重写已独立恢复 n、以 end 表示当前结尾位置的一维 dp 外壳，以及对每个 end 枚举左侧 start 的双层循环；但再次忘记 dp 应初始化为全 1、只有 nums[start] 小于 nums[end] 时才能接入、使用 dp[start]+1 更新 dp[end]，也尚未写出最终返回所有结尾状态最大值的代码",
+      "isReview": true,
+      "reviewDate": "2026-08-27",
+      "notes": "黄｜D+3 结尾状态与双层前驱枚举仍在但条件、转移、初始化和答案均未完成｜黄→黄；dp[end] 表示必须以 nums[end] 结尾的最长递增子序列，左侧值更小时用 dp[start]+1 更新，最终返回 max(dp)",
+      "sourceRow": 200,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-27T12:00:00+08:00"
     }
   ],
-  "syncedAt": "2026-08-26T23:59:59+08:00",
+  "syncedAt": "2026-08-27T23:59:59+08:00",
   "source": "snapshot",
   "stale": false
 };
