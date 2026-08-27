@@ -5083,6 +5083,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-27T12:00:00+08:00"
+    },
+    {
+      "id": 200,
+      "externalId": "csv-0200",
+      "problemId": 1143,
+      "attemptedOn": "2026-08-27",
+      "recordedTitle": "最长公共子序列",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日 D+3 从空白重写已独立恢复两个字符串长度、二维零值 DP、双层遍历及末尾字符相等时分类的主体框架，并主动识别出自己卡在状态转移公式；但仍未给空前缀预留一行一列，字符相等分支未写出左上角加一，且误以为字符不等时答案需要做减法，正确做法是分别丢弃任一末尾字符并取上方与左方状态的较大值",
+      "isReview": true,
+      "reviewDate": "2026-08-27",
+      "notes": "黄｜D+3 已恢复二维前缀 DP 框架与相等分支但两条转移和空前缀边界仍未独立完成｜红→黄；dp[i][j] 表示两个字符串前缀的最长公共子序列长度，相同末尾取 dp[i-1][j-1]+1，不同末尾取 max(dp[i-1][j]、dp[i][j-1])",
+      "sourceRow": 202,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-27T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-27T23:59:59+08:00",
