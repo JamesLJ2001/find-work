@@ -5163,6 +5163,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-27T12:00:00+08:00"
+    },
+    {
+      "id": 204,
+      "externalId": "csv-0204",
+      "problemId": 64,
+      "attemptedOn": "2026-08-27",
+      "recordedTitle": "最小路径和",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已独立写出网格行列数、带额外边界的二维 DP，并正确想到当前位置应从上方与左方状态中取较小值；但尚未在转移中加上当前网格值，使用额外一圈无穷大时错误地设置 dp[0][0]=grid[0][0] 且循环范围漏掉最后一行和最后一列，也未完成答案返回，后续经讲解补充用 dp[0][1]=0 启动并返回 dp[rows][columns]",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答已掌握二维网格 DP 与上左取小的核心转移，仅边界、当前代价和答案未完成｜未开始→黄；带一圈无穷大时令 dp[0][1]=0，dp[row][column]=min(上方、左方)+grid[row-1][column-1]，返回右下角状态",
+      "sourceRow": 206,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-27T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-27T23:59:59+08:00",
