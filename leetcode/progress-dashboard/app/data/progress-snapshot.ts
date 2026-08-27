@@ -5063,6 +5063,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-27T12:00:00+08:00"
+    },
+    {
+      "id": 199,
+      "externalId": "csv-0199",
+      "problemId": 5,
+      "attemptedOn": "2026-08-27",
+      "recordedTitle": "最长回文子串",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日 D+3 从空白重写已独立写出字符串长度、二维布尔 DP、按右端点和左端点枚举区间以及首尾字符相等的必要条件，较此前只恢复二维外壳已有进步；但错误地用尚未计算的 dp[start][end] 判断自身，正确依赖应为内部区间 dp[start+1][end-1]，内层 range(end) 也漏掉单字符区间，并且仍缺少长度不超过 3 的基础情况与最长起点和长度维护",
+      "isReview": true,
+      "reviewDate": "2026-08-27",
+      "notes": "黄｜D+3 已恢复区间 DP 与首尾相等条件但内部转移、基础边界和答案维护未完成｜红→黄；dp[start][end] 表示闭区间子串是否回文，首尾相同且区间长度不超过 3 或内部区间为真时成立，并在成立时更新最长答案",
+      "sourceRow": 201,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-27T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-27T23:59:59+08:00",
