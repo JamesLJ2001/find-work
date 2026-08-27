@@ -5103,6 +5103,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-27T12:00:00+08:00"
+    },
+    {
+      "id": 201,
+      "externalId": "csv-0201",
+      "problemId": 32,
+      "attemptedOn": "2026-08-27",
+      "recordedTitle": "最长有效括号",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "困难",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日 D+3 从空白重写已独立恢复一维 DP 外壳、仅在当前字符为右括号时更新，以及按前一字符为左括号或右括号划分两类结尾；但将 dp 错误初始化为布尔数组，尚未独立写出直接配对时拼接 dp[end-2]，也忘记连续右括号情形需先跨过 dp[end-1] 对应的完整有效段、检查更前方左括号并继续拼接匹配位置之前的有效段",
+      "isReview": true,
+      "reviewDate": "2026-08-27",
+      "notes": "黄｜D+3 已恢复一维方向、右括号条件和两类结尾，但长度状态及跨段转移尚未完成｜红→黄；dp[end] 表示必须以当前位置结尾的最长有效括号长度，() 结尾拼接 dp[end-2]，)) 结尾用 end-dp[end-1]-1 寻找匹配左括号并拼接更早状态",
+      "sourceRow": 203,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-27T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-27T23:59:59+08:00",
