@@ -5143,6 +5143,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-27T12:00:00+08:00"
+    },
+    {
+      "id": 203,
+      "externalId": "csv-0203",
+      "problemId": 416,
+      "attemptedOn": "2026-08-27",
+      "recordedTitle": "分割等和子集",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答只识别出本题使用 DP 并直接询问状态含义，尚未独立完成将问题转化为从数组中选择若干元素凑出总和一半，也未建立 dp[current] 表示使用已处理数字能否凑出当前和的布尔状态、dp[0]=True 的边界、选择或不选择当前数字的转移，以及为避免同一数字重复使用而倒序枚举目标和；随后依赖完整讲解",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答仅知道 DP 方向，等和转化、状态、边界和 0/1 背包转移均依赖讲解｜未开始→红；总和为奇数时直接失败，否则令 target=total//2，dp[current] 表示能否凑出 current，倒序使用 dp[current] 或 dp[current-num] 更新",
+      "sourceRow": 205,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-27T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-27T23:59:59+08:00",
