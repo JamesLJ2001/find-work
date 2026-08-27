@@ -5123,6 +5123,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-27T12:00:00+08:00"
+    },
+    {
+      "id": 202,
+      "externalId": "csv-0202",
+      "problemId": 322,
+      "attemptedOn": "2026-08-27",
+      "recordedTitle": "零钱兑换",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答识别出应使用一维 DP 并尝试按金额遍历，但将数组长度写成 amount、默认值设为 1，未建立 dp[total] 表示凑出当前金额所需最少硬币数的状态，也未想到 dp[0]=0、不可达状态初始化为无穷大，以及枚举最后一枚 coin 后用 dp[total-coin]+1 更新最小值；随后请求完整讲解",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答仅识别 DP 方向，状态、边界与完全背包式转移均依赖讲解｜未开始→红；dp[total] 表示凑出 total 的最少硬币数，dp[0]=0，对每种不超过 total 的 coin 使用 dp[total-coin]+1 取最小值，不可达时返回 -1",
+      "sourceRow": 204,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-27T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-27T23:59:59+08:00",
