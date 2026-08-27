@@ -5183,6 +5183,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-27T12:00:00+08:00"
+    },
+    {
+      "id": 205,
+      "externalId": "csv-0205",
+      "problemId": 221,
+      "attemptedOn": "2026-08-27",
+      "recordedTitle": "最大正方形",
+      "recordedTopic": "动态规划与技巧",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答未尝试独立定义状态或编写代码，直接请求完整讲解；讲解建立 dp[row][column] 表示以当前原矩阵格子为右下角的最大全 1 正方形边长，当前格子为 1 时由上方、左方和左上角三个状态的最小值加一转移，并说明三者中的短板限制扩展边长，最终用最大边长平方得到面积",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答直接依赖完整讲解，右下角边长状态和三邻居转移尚未独立建立｜未开始→红；当前格子为 1 时 dp[row][column]=min(上方、左方、左上角)+1，维护最大边长并返回其平方",
+      "sourceRow": 207,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-08-27T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-08-27T23:59:59+08:00",
