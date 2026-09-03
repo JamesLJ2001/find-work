@@ -5363,6 +5363,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-03T12:00:00+08:00"
+    },
+    {
+      "id": 214,
+      "externalId": "csv-0214",
+      "problemId": 98,
+      "attemptedOn": "2026-09-03",
+      "recordedTitle": "验证二叉搜索树",
+      "recordedTopic": "链表与 BST",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日 D+3 复习未独立口述或重写代码而直接进入讲解，尚未自行恢复祖先上下界的完整递归实现；讲解再次通过右子树深层节点仍必须大于根节点的反例说明不能只比较直接父子，并重建 dfs(node、lower、upper) 模型、左子树收紧上限、右子树抬高下限、空树返回 True 以及严格不等式排除重复值",
+      "isReview": true,
+      "reviewDate": "2026-09-03",
+      "notes": "黄｜D+3 仍理解 BST 全局约束方向但上下界递归代码未独立恢复｜黄→黄；每个节点必须位于所有祖先共同传下的开区间内，左边更新 upper 为当前值，右边更新 lower 为当前值",
+      "sourceRow": 216,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-03T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-03T23:59:59+08:00",
