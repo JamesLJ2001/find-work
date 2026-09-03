@@ -5423,6 +5423,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-03T12:00:00+08:00"
+    },
+    {
+      "id": 217,
+      "externalId": "csv-0217",
+      "problemId": 105,
+      "attemptedOn": "2026-09-03",
+      "recordedTitle": "从前序与中序遍历序列构造二叉树",
+      "recordedTopic": "建树、图与回溯",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "在同日讲解后重新编写时已完整恢复中序值到下标的哈希表、前序全局指针、闭区间递归边界、按根左右顺序连接子树及返回根节点；仅在先把整数 root 覆盖为 TreeNode 后继续使用 inorder_index[root]，混淆节点对象与节点值导致查表失败，末尾另有多余的 nacuol 文本，经指出应保留 root_value 并用 inorder_index[root_value] 定位",
+      "isReview": true,
+      "reviewDate": "2026-09-03",
+      "notes": "黄｜建树核心模型已恢复，仅节点值与节点对象变量混用导致代码未通过｜红→黄；用 root_value 保存前序取出的整数，root=TreeNode(root_value) 创建节点，middle 必须通过 inorder_index[root_value] 查询",
+      "sourceRow": 219,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-03T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-03T23:59:59+08:00",
