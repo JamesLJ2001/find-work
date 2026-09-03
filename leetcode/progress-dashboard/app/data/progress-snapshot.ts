@@ -5263,6 +5263,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-03T12:00:00+08:00"
+    },
+    {
+      "id": 209,
+      "externalId": "csv-0209",
+      "problemId": 739,
+      "attemptedOn": "2026-09-03",
+      "recordedTitle": "每日温度",
+      "recordedTopic": "栈与单调栈",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答明确表示没有思路并直接请求算法讲解，尚未独立识别单调递减栈；讲解后理解栈保存尚未找到更暖日期的下标，当前温度高于栈顶下标对应温度时持续弹栈，并使用当前下标减去被弹下标填写等待天数，遍历结束仍在栈中的位置保持答案零",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答无独立思路，单调栈模型与完整代码均依赖讲解｜未开始→红；维护温度从栈底到栈顶非递增的待解决下标，每个下标最多入栈和出栈一次，时间复杂度 O(n)",
+      "sourceRow": 211,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-03T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-03T23:59:59+08:00",
