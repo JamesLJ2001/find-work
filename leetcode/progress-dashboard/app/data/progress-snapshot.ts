@@ -5283,6 +5283,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-03T12:00:00+08:00"
+    },
+    {
+      "id": 210,
+      "externalId": "csv-0210",
+      "problemId": 456,
+      "attemptedOn": "2026-09-03",
+      "recordedTitle": "132 模式",
+      "recordedTopic": "栈与单调栈",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日首次作答明确表示没有思路并直接请求讲解，尚未独立识别从右向左扫描与单调递减栈模型；讲解后理解先由当前较大值和从栈中弹出的右侧较小值建立 3 大于 2 的关系并保存最佳 2，再继续向左寻找严格小于该 2 的数字作为 1，从而同时保证数值关系与下标顺序",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜首次作答无独立思路，反向单调栈与 2 候选状态均依赖讲解｜未开始→红；从右向左遍历，当前值小于已确认的 two 即成功，当前值大于栈顶时持续弹出并更新 two，严格不等号保证真正的 132 模式",
+      "sourceRow": 212,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-03T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-03T23:59:59+08:00",
