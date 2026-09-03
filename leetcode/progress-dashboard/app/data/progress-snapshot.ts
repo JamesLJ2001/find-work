@@ -5203,9 +5203,29 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-08-27T12:00:00+08:00"
+    },
+    {
+      "id": 206,
+      "externalId": "csv-0206",
+      "problemId": 20,
+      "attemptedOn": "2026-09-03",
+      "recordedTitle": "有效的括号",
+      "recordedTopic": "二分、栈、堆与基础 DP",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日复测已独立恢复右括号到左括号的映射、栈结构和逐字符遍历；但左括号没有入栈且 stack.append 位于 return 后永远无法执行，匹配第一对括号后又过早返回 True，也遗漏右括号遇到空栈时失败、成功匹配后弹栈以及遍历结束检查栈为空",
+      "isReview": true,
+      "reviewDate": "2026-09-03",
+      "notes": "黄｜今日复测核心栈模型仍在但完整控制流程未独立写对｜黄→黄；左括号入栈，右括号遇空栈或栈顶不匹配立即失败，匹配则弹栈，全部遍历后 return not stack",
+      "sourceRow": 208,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-03T12:00:00+08:00"
     }
   ],
-  "syncedAt": "2026-08-27T23:59:59+08:00",
+  "syncedAt": "2026-09-03T23:59:59+08:00",
   "source": "snapshot",
   "stale": false
 };
