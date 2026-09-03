@@ -5303,6 +5303,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-03T12:00:00+08:00"
+    },
+    {
+      "id": 211,
+      "externalId": "csv-0211",
+      "problemId": 104,
+      "attemptedOn": "2026-09-03",
+      "recordedTitle": "二叉树的最大深度",
+      "recordedTopic": "链表与 BST",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日 D+3 重写已独立恢复后序 DFS、递归取得左右子树高度以及当前高度等于左右较大值加一的核心公式；但空节点仍直接 return 导致递归结果为 None，并继续保留未实际更新的全局 ans，最终也错误返回 ans 而不是根节点 DFS 的结果，经指出后确认本题无需全局答案",
+      "isReview": true,
+      "reviewDate": "2026-09-03",
+      "notes": "黄｜D+3 已恢复高度状态与转移但空节点边界和最终返回未独立写对｜黄→黄；dfs(node) 直接返回当前子树最大深度，空节点返回 0，当前节点返回 max(left、right)+1，最终 return dfs(root)",
+      "sourceRow": 213,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-03T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-03T23:59:59+08:00",
