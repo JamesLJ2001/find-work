@@ -5243,6 +5243,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-03T12:00:00+08:00"
+    },
+    {
+      "id": 208,
+      "externalId": "csv-0208",
+      "problemId": 394,
+      "attemptedOn": "2026-09-03",
+      "recordedTitle": "字符串解码",
+      "recordedTopic": "栈与单调栈",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已想到使用栈收集方括号内部字符并根据括号前数字重复，但采用从左括号向后寻找第一个右括号的单层模型，无法处理嵌套结构与多位次数；代码还存在 k 为字符串、内层 while 未递增 j 导致死循环、ans 未定义以及把整个列表追加到答案等问题，经讲解后建立遇到左括号保存外层字符串与次数、遇到右括号弹栈恢复现场的模型",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答已识别栈和重复语义但嵌套现场模型与完整实现依赖讲解｜未开始→黄；数字逐位累积，左括号压入当前字符串与次数并重置当前层，右括号弹出 previous 和 repeat 后令 current=previous+current*repeat",
+      "sourceRow": 210,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-03T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-03T23:59:59+08:00",
