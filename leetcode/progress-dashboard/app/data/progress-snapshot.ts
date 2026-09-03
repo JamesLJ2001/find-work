@@ -5383,6 +5383,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-03T12:00:00+08:00"
+    },
+    {
+      "id": 215,
+      "externalId": "csv-0215",
+      "problemId": 108,
+      "attemptedOn": "2026-09-03",
+      "recordedTitle": "将有序数组转换为二叉搜索树",
+      "recordedTopic": "链表与 BST",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日 D+3 复习未独立口述或重写代码而直接进入完整讲解，仍未自行恢复区间递归建树模型；讲解再次说明 build(left、right) 返回当前闭区间构造出的子树根节点，区间为空时返回 None，选择中间元素创建根节点并分别连接左右半区间的递归结果，中点切分同时保证 BST 大小关系与左右高度平衡",
+      "isReview": true,
+      "reviewDate": "2026-09-03",
+      "notes": "红｜D+3 仍依赖完整讲解，区间参数和返回子树根节点的递归模型尚未独立恢复｜红→红；每次选区间中点为根，左半区递归构造左子树，右半区递归构造右子树，最后返回当前根节点",
+      "sourceRow": 217,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-03T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-03T23:59:59+08:00",
