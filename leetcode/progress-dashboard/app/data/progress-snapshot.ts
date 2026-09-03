@@ -5223,6 +5223,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-03T12:00:00+08:00"
+    },
+    {
+      "id": 207,
+      "externalId": "csv-0207",
+      "problemId": 155,
+      "attemptedOn": "2026-09-03",
+      "recordedTitle": "最小栈",
+      "recordedTopic": "栈与单调栈",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日首次作答已独立完成普通栈的初始化、push、pop 和 top 接口，但 getMin 留空，尚未建立额外最小值栈以在常数时间维护当前最小值；经提示后理解压入不大于当前最小值的元素时同步入最小栈、弹出值等于当前最小值时同步弹出，以及重复最小值必须分别记录",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜首次作答普通栈实现完整但 O(1) 最小值维护依赖讲解｜未开始→黄；主栈保存全部元素，最小栈保存历次最小值，getMin 直接返回最小栈顶，push 时使用小于等于以正确处理重复最小值",
+      "sourceRow": 209,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-03T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-03T23:59:59+08:00",
