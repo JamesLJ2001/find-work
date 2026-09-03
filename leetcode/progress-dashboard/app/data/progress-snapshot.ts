@@ -5403,6 +5403,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-03T12:00:00+08:00"
+    },
+    {
+      "id": 216,
+      "externalId": "csv-0216",
+      "problemId": 105,
+      "attemptedOn": "2026-09-03",
+      "recordedTitle": "从前序与中序遍历序列构造二叉树",
+      "recordedTopic": "建树、图与回溯",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "今日 D+3 复习未独立口述或重写代码而直接进入完整讲解，仍未自行恢复前序与中序遍历的分工及递归建树实现；讲解再次说明前序数组的下一个未使用值确定当前根节点，中序数组中根的位置切分左右子树范围，使用哈希表常数时间定位根，并让 build(left、right) 返回当前中序闭区间构造出的子树根节点，按照前序顺序先构造左子树再构造右子树",
+      "isReview": true,
+      "reviewDate": "2026-09-03",
+      "notes": "红｜D+3 仍依赖完整讲解，前序指针与中序区间切分模型尚未独立恢复｜红→红；前序指针依次提供根，中序下标划分左右子树，build 返回建好的子树根节点且必须先左后右递归",
+      "sourceRow": 218,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-03T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-03T23:59:59+08:00",
