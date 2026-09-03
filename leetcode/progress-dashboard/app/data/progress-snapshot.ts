@@ -5323,6 +5323,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-03T12:00:00+08:00"
+    },
+    {
+      "id": 212,
+      "externalId": "csv-0212",
+      "problemId": 110,
+      "attemptedOn": "2026-09-03",
+      "recordedTitle": "平衡二叉树",
+      "recordedTopic": "链表与 BST",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "今日 D+3 复习仍记得应比较左右子树高度，但询问如何表达相差不超过 1，未从空白写出完整实现；经讲解再次确认使用 abs(left_height-right_height) 判断高度差，并用 -1 同时表示当前子树已经不平衡，使左右任一失败或当前高度差超过 1 时均向父节点传播失败",
+      "isReview": true,
+      "reviewDate": "2026-09-03",
+      "notes": "黄｜D+3 高度比较方向仍在但条件表达和失败信号模板尚未独立恢复｜黄→黄；平衡子树返回高度，不平衡子树返回 -1，abs(left_height-right_height)>1 时失败，最终用 dfs(root)!=-1 判断整树",
+      "sourceRow": 214,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-03T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-03T23:59:59+08:00",
