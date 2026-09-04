@@ -114,3 +114,75 @@ test("runs the private local dashboard through the live development server", asy
     "vinext dev --hostname 127.0.0.1 --port 4173",
   );
 });
+
+test("balances the September 4–6 sprint against real attempts without losing unfinished work", async () => {
+  const [markdown, rawSnapshot, rawDaily] = await Promise.all([
+    readFile(new URL("../../2026-08-bytedance-100-plan.md", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/progress-snapshot.ts", import.meta.url), "utf8"),
+    readFile(new URL("../../daily-plan.json", import.meta.url), "utf8"),
+  ]);
+  const snapshot = JSON.parse(
+    rawSnapshot.slice(rawSnapshot.indexOf("= {") + 2, rawSnapshot.lastIndexOf(";")).trim(),
+  );
+  const baseline = snapshot.attempts.filter((attempt) => !attempt.isVoid && attempt.sourceRow <= 219);
+  const latest = new Map(baseline.map((attempt) => [attempt.problemId, attempt]));
+  const first = new Map();
+  for (const attempt of baseline) {
+    if (!first.has(attempt.problemId)) first.set(attempt.problemId, attempt.attemptedOn);
+  }
+  const section = markdown.split("## 9 月 4 日至 6 日均衡收官（最新显式覆盖）")[1]
+    ?.split("## 核心 100 之外")[0];
+  assert.ok(section, "the latest explicit sprint override must exist");
+  const blocks = section.split(/### 9 月 [456] 日[^\n]*\n/).slice(1);
+  assert.equal(blocks.length, 3);
+  const idsFrom = (block, label) => {
+    const line = block.split(/\r?\n/).find((value) => value.startsWith(`- ${label}（`));
+    assert.ok(line, `missing ${label}`);
+    return line.slice(line.indexOf("：") + 1).split(/[。；]/)[0].split("、")
+      .map((part) => part.trim().match(/^(\d+)/)?.[1]).filter(Boolean).map(Number);
+  };
+  const days = blocks.map((block) => ({
+    newIds: idsFrom(block, "新题"),
+    queues: Object.fromEntries(["D+1", "D+3", "D+7", "额外复测"].map((label) => [label, idsFrom(block, label)])),
+  }));
+  const newIds = days.flatMap((day) => day.newIds);
+  const unstarted = snapshot.problems.filter((problem) => !latest.has(problem.id)).map((problem) => problem.id);
+  assert.equal(baseline.length, 217);
+  assert.equal(latest.size, 81);
+  assert.equal(new Set(newIds).size, 19);
+  assert.deepEqual([...newIds].sort((a, b) => a - b), unstarted.sort((a, b) => a - b));
+  const retired = new Set([42, 73, 136]);
+  const catalog = new Set(snapshot.problems.map((problem) => problem.id));
+  const allReviews = days.flatMap((day) => Object.values(day.queues).flat());
+  const weak = [...latest.values()].filter((attempt) => attempt.status !== "绿");
+  assert.equal(weak.length, 69);
+  assert.ok(weak.every((attempt) => allReviews.includes(attempt.problemId)));
+  for (const [index, day] of days.entries()) {
+    const review = Object.values(day.queues).flat();
+    const all = [...day.newIds, ...review];
+    assert.equal(review.length, 29);
+    assert.equal(day.newIds.length, [7, 6, 6][index]);
+    assert.equal(all.length, [36, 35, 35][index]);
+    assert.equal(new Set(all).size, all.length, "a day must not contain duplicate tasks");
+    assert.ok(all.every((id) => catalog.has(id)));
+    assert.ok(review.every((id) => !retired.has(id)));
+  }
+  const firstOn = (date) => [...first].filter(([, day]) => day === date).map(([id]) => id).filter((id) => !retired.has(id));
+  assert.deepEqual(days[0].queues["D+1"], firstOn("2026-09-03"));
+  assert.deepEqual(days[0].queues["D+3"], firstOn("2026-08-26"));
+  assert.deepEqual(days[0].queues["D+7"], firstOn("2026-08-19").slice(0, 2));
+  assert.deepEqual(days[1].queues["D+1"], days[0].newIds);
+  assert.deepEqual(days[1].queues["D+3"], firstOn("2026-08-27"));
+  assert.deepEqual(days[1].queues["D+7"], firstOn("2026-08-23").slice(0, 2));
+  assert.deepEqual(days[2].queues["D+1"], days[1].newIds);
+  assert.deepEqual(days[2].queues["D+3"], firstOn("2026-09-03"));
+  assert.deepEqual(days[2].queues["D+7"], firstOn("2026-08-24").slice(0, 2));
+  const daily = JSON.parse(rawDaily);
+  if (daily.date === "2026-09-04") {
+    assert.equal(daily.completionAfterSourceRow, 219);
+    assert.deepEqual(daily.newProblemIds, days[0].newIds);
+    for (const [key, label] of Object.entries({ d1: "D+1", d3: "D+3", d7: "D+7", red: "额外复测" })) {
+      assert.deepEqual(daily.reviewQueues[key].problemIds, days[0].queues[label]);
+    }
+  }
+});

@@ -1,50 +1,50 @@
 {
   "schemaVersion": 1,
-  "planVersion": "2026-09-03.1",
-  "date": "2026-09-03",
+  "planVersion": "2026-09-04.1",
+  "date": "2026-09-04",
   "timezone": "Asia/Shanghai",
-  "generatedAt": "2026-09-02T23:35:12+08:00",
-  "generator": "Codex manual next-day planner",
+  "generatedAt": "2026-09-04T10:32:35+08:00",
+  "generator": "Codex manual balanced three-day planner",
   "source": {
     "repository": "JamesLJ2001/find-work",
     "branch": "main",
     "planFile": "leetcode/2026-08-bytedance-100-plan.md",
     "progressFile": "leetcode/progress.csv",
-    "sourceCommit": "93f716dc3002994e54fe2cc985f430d23859fa04"
+    "sourceCommit": "e93c08c592eea6d9768a40c4752b9e07b8067d3d"
   },
   "completionSource": "leetcode/progress.csv",
-  "completionAfterSourceRow": 207,
-  "newProblemIds": [155, 394, 739, 456, 636, 912, 763, 122],
+  "completionAfterSourceRow": 219,
+  "newProblemIds": [636, 912, 763, 122, 283, 977, 80],
   "reviewQueues": {
     "d1": {
       "label": "D+1",
-      "sourceDate": "2026-08-27",
-      "problemIds": [322, 416, 64, 221],
-      "instruction": "来源为 8/27 首次作答的 4 道题。逐题口述状态定义、转移或核心模型和关键边界；红黄卡点必须说清，今天无需因 D+1 再抄整段答案。"
+      "sourceDate": "2026-09-03",
+      "problemIds": [155, 394, 739, 456],
+      "instruction": "只复习昨天真实首次作答的 4 题，不把未做的 636、912、763、122 算进 D+1。闭卷口述模型、关键代码和边界，重点恢复最小栈、嵌套解码和单调栈；讲不清再完整重写，不抄答案计完成。"
     },
     "d3": {
       "label": "D+3",
-      "sourceDate": "2026-08-25",
-      "problemIds": [148, 104, 110, 108, 98, 105, 124],
-      "instruction": "来源为 8/25 首次作答的 7 道题。当前均为红黄，从空白重写；先讲清递归返回值、不变量和复杂度，再运行测试。"
+      "sourceDate": "2026-08-26",
+      "problemIds": [46, 17, 47, 323, 704, 35, 153, 162],
+      "instruction": "来源为 8/26 首次作答的 8 题，按有效学习日回溯。当前均为红黄，从空白完整重写；回溯先说明选择与撤销，并查集先说明根与合并，二分先说明区间和边界。"
     },
     "d7": {
       "label": "D+7",
-      "sourceDate": "2026-08-18",
-      "problemIds": [4, 20],
-      "poolProblemIds": [4, 20, 215, 121, 70],
-      "instruction": "8/18 首次题池为 4、20、215、121、70；排除永久退役题后稳定抽取前两题 4、20，从空白完整盲写并补边界测试。"
+      "sourceDate": "2026-08-19",
+      "problemIds": [118, 198],
+      "poolProblemIds": [118, 198, 279, 139],
+      "instruction": "8/19 原始首次题池为 118、136、198、279、139；136 已永久退役，从其余题中稳定抽取 118、198 完整盲写。198 目前仅一次跨日独立通过，不提前退役。"
     },
     "red": {
       "label": "专项预热与额外复测",
       "sourceDate": null,
-      "problemIds": [146, 994, 207, 208, 51, 215, 31, 323, 704, 153, 162, 1, 49, 128, 11, 15, 3],
-      "instruction": "三日收官第 1 组，共 17 题。前 11 道是日初仍红且未进入今日 D 队列的全部红题，必须从空白完整重写；后 6 道黄色题闭卷口述模型并写关键代码，任何失败立即升级为完整重写。"
+      "problemIds": [215, 20, 4, 1, 49, 128, 11, 15, 3, 560, 41, 239, 53, 56, 238],
+      "instruction": "9/4—9/6 均衡收官第 1 组，共 15 题。215 为红题，先完整重写再衔接排序数组；其余黄色题闭卷口述模型、边界并写关键代码，失败则完整重写。这三天按计划分摊额外红题，不把全部红题每天重复追加；颜色仍只根据真实表现更新。"
     }
   },
   "totals": {
-    "newProblems": 8,
-    "reviewProblems": 30,
-    "totalTasks": 38
+    "newProblems": 7,
+    "reviewProblems": 29,
+    "totalTasks": 36
   }
 }
