@@ -115,7 +115,7 @@ test("runs the private local dashboard through the live development server", asy
   );
 });
 
-test("balances the September 4–6 sprint against real attempts without losing unfinished work", async () => {
+test("balances the September 5–7 sprint while skipping the September 4 pause", async () => {
   const [markdown, rawSnapshot, rawDaily] = await Promise.all([
     readFile(new URL("../../2026-08-bytedance-100-plan.md", import.meta.url), "utf8"),
     readFile(new URL("../app/data/progress-snapshot.ts", import.meta.url), "utf8"),
@@ -130,10 +130,12 @@ test("balances the September 4–6 sprint against real attempts without losing u
   for (const attempt of baseline) {
     if (!first.has(attempt.problemId)) first.set(attempt.problemId, attempt.attemptedOn);
   }
-  const section = markdown.split("## 9 月 4 日至 6 日均衡收官（最新显式覆盖）")[1]
+  const section = markdown.split("## 9 月 5 日至 7 日均衡收官（最新显式覆盖）")[1]
     ?.split("## 核心 100 之外")[0];
   assert.ok(section, "the latest explicit sprint override must exist");
-  const blocks = section.split(/### 9 月 [456] 日[^\n]*\n/).slice(1);
+  assert.match(section, /9 月 4 日暂停（非有效学习日）/);
+  assert.ok(baseline.every((attempt) => attempt.attemptedOn !== "2026-09-04"));
+  const blocks = section.split(/### 9 月 [567] 日[^\n]*\n/).slice(1);
   assert.equal(blocks.length, 3);
   const idsFrom = (block, label) => {
     const line = block.split(/\r?\n/).find((value) => value.startsWith(`- ${label}（`));
@@ -168,6 +170,16 @@ test("balances the September 4–6 sprint against real attempts without losing u
     assert.ok(review.every((id) => !retired.has(id)));
   }
   const firstOn = (date) => [...first].filter(([, day]) => day === date).map(([id]) => id).filter((id) => !retired.has(id));
+  const studyDays = [...new Set(baseline.map((attempt) => attempt.attemptedOn))].sort();
+  for (const [index, date] of ["2026-09-05", "2026-09-06", "2026-09-07"].entries()) {
+    studyDays.push(date);
+    const sourceDates = [1, 3, 7].map((distance) => studyDays.at(-1 - distance));
+    assert.deepEqual(sourceDates, [
+      ["2026-09-03", "2026-08-26", "2026-08-19"],
+      ["2026-09-05", "2026-08-27", "2026-08-23"],
+      ["2026-09-06", "2026-09-03", "2026-08-24"],
+    ][index]);
+  }
   assert.deepEqual(days[0].queues["D+1"], firstOn("2026-09-03"));
   assert.deepEqual(days[0].queues["D+3"], firstOn("2026-08-26"));
   assert.deepEqual(days[0].queues["D+7"], firstOn("2026-08-19").slice(0, 2));
@@ -178,7 +190,7 @@ test("balances the September 4–6 sprint against real attempts without losing u
   assert.deepEqual(days[2].queues["D+3"], firstOn("2026-09-03"));
   assert.deepEqual(days[2].queues["D+7"], firstOn("2026-08-24").slice(0, 2));
   const daily = JSON.parse(rawDaily);
-  if (daily.date === "2026-09-04") {
+  if (daily.date === "2026-09-05") {
     assert.equal(daily.completionAfterSourceRow, 219);
     assert.deepEqual(daily.newProblemIds, days[0].newIds);
     for (const [key, label] of Object.entries({ d1: "D+1", d3: "D+3", d7: "D+7", red: "额外复测" })) {
