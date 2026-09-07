@@ -5483,6 +5483,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-07T12:00:00+08:00"
+    },
+    {
+      "id": 220,
+      "externalId": "csv-0220",
+      "problemId": 763,
+      "attemptedOn": "2026-09-07",
+      "recordedTitle": "划分字母区间",
+      "recordedTopic": "排序、贪心与背包",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次直接请求完整讲解，尚未提供独立思路、代码或通过结果；已讲解先记录每个字母最后出现的位置，再扫描维护当前段必须覆盖的最远边界，以 abacbd 分成 abacb 和 d 为例解释边界只能扩展、不能收缩，以及扫描下标等于边界时立即切分的贪心理由，并给出完整 Python 3 代码。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成最后出现位置与贪心分段讲解，尚未独立通过｜未开始→红；last 保存字母最后下标，end=max(end、last[ch]) 维护当前段最远边界，i==end 时追加 i-start+1 并令 start=i+1，时间 O(n)。参考代码经本地验证，不计用户独立掌握。",
+      "sourceRow": 222,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-07T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-07T23:59:59+08:00",
