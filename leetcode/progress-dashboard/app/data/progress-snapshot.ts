@@ -5503,6 +5503,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-07T12:00:00+08:00"
+    },
+    {
+      "id": 221,
+      "externalId": "csv-0221",
+      "problemId": 122,
+      "attemptedOn": "2026-09-07",
+      "recordedTitle": "买卖股票的最佳时机 II",
+      "recordedTopic": "排序、贪心与背包",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次直接请求完整讲解，尚未提供独立思路、代码或运行通过结果；已讲解允许多次交易且最多持有一股时，累计相邻两天所有正差值即可获得最大利润，并用连续上涨区间的差值相加等于最低点买入最高点卖出的收益解释贪心依据，提供完整 Python 3 实现。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成累计正向涨幅的贪心讲解，尚未独立通过｜未开始→红；从下标 1 开始，prices[i]>prices[i-1] 时累加差值，下跌或相等时跳过，时间 O(n)、额外空间 O(1)。参考代码通过本地验证，不计用户独立掌握。",
+      "sourceRow": 223,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-07T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-07T23:59:59+08:00",
