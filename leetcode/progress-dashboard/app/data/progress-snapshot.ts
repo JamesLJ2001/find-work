@@ -5523,6 +5523,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-07T12:00:00+08:00"
+    },
+    {
+      "id": 222,
+      "externalId": "csv-0222",
+      "problemId": 283,
+      "attemptedOn": "2026-09-07",
+      "recordedTitle": "移动零",
+      "recordedTopic": "哈希、双指针与字符串",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "用户表示之前写过本题但现在忘记算法，提供的 right 扫描、left 定位非零数并交换的完整实现正确，本地验证通过；本次请求帮助回忆，尚未证明闭卷独立恢复思路。已解释快慢双指针、nums[:left] 保存已整理非零数、nums[left:right] 为已扫描的零、遇到非零数才推进 left，以及两指针重合时自交换仍然正确。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜提供的代码正确，但双指针含义和不变量需要讲解帮助回忆｜未开始→黄；right 依次向右扫描，left 指向下一个非零数应放的位置，交换后 left+=1，保持非零元素原顺序，原地修改且不返回新数组。用户表示此前做过，本仓库此前无记录；本次不计闭卷或间隔独立通过。",
+      "sourceRow": 224,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-07T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-07T23:59:59+08:00",
