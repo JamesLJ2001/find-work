@@ -5583,6 +5583,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-07T12:00:00+08:00"
+    },
+    {
+      "id": 225,
+      "externalId": "csv-0225",
+      "problemId": 636,
+      "attemptedOn": "2026-09-07",
+      "recordedTitle": "函数的独占时间",
+      "recordedTopic": "栈与单调栈",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "用户认为题面看起来复杂并请求完整讲解，尚未提供独立算法、代码或通过结果；已讲解使用调用栈保存尚未结束的函数、栈顶代表当前运行者，prev 代表下一段尚未结算时间的起点。以函数 0 在 0 开始、函数 1 在 2 开始和 5 结束、函数 0 在 6 结束为例，说明独占时间为 [3,4]，并解释 start 在时刻开头、end 在时刻末尾的语义。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成调用栈与时间段结算讲解，尚未独立通过｜未开始→红；遇到 start 先给旧栈顶增加 timestamp-prev，再入栈并令 prev=timestamp；遇到 end 给出栈函数增加 timestamp-prev+1，再令 prev=timestamp+1。完整参考实现已验证嵌套、递归、单时刻调用和空闲间隔，不计用户独立掌握。",
+      "sourceRow": 227,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-07T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-07T23:59:59+08:00",
