@@ -5463,6 +5463,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-07T12:00:00+08:00"
+    },
+    {
+      "id": 219,
+      "externalId": "csv-0219",
+      "problemId": 912,
+      "attemptedOn": "2026-09-07",
+      "recordedTitle": "排序数组",
+      "recordedTopic": "排序、贪心与背包",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "用户提交同日讲解后重写的代码，在比较 left[i] 与 right[j] 时尚未初始化 i，输入 [2,1] 可复现 UnboundLocalError；代码还缺少右半边递归、ans 和 j 的初始化以及合并 while 循环，存在 appen 拼写错误和 extend(left[i]) 传入单个整数的问题。已逐项说明并提供经本地测试通过的完整参考实现，用户本次提交尚未通过。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜同日讲解后重写仍未通过，合并流程与指针初始化尚未完整恢复｜红→红；先递归得到 left 和 right，再初始化 ans、i、j，使用 while 比较两边当前元素，最后 extend(left[i:]) 和 extend(right[j:])。本次为同日尝试，不计间隔独立通过，今日任务不重复计数。",
+      "sourceRow": 221,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-07T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-07T23:59:59+08:00",
