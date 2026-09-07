@@ -5443,9 +5443,29 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-03T12:00:00+08:00"
+    },
+    {
+      "id": 218,
+      "externalId": "csv-0218",
+      "problemId": 912,
+      "attemptedOn": "2026-09-07",
+      "recordedTitle": "排序数组",
+      "recordedTopic": "排序、贪心与背包",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次直接请求完整讲解，尚未提供独立思路、代码或运行通过结果；已讲解归并排序的递归拆分、递归返回有序数组、双指针合并与接上剩余元素，并提供 Python 3 完整实现。用户明确要求本题记为红色，后续需要从空白独立复写验证。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成归并排序讲解，尚未独立通过，用户明确确认为红色｜未开始→红；merge_sort 返回当前数组排好序后的结果，左右两半递归有序后用双指针合并，循环结束接上剩余元素，时间 O(n log n)、额外空间 O(n)。",
+      "sourceRow": 220,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-07T12:00:00+08:00"
     }
   ],
-  "syncedAt": "2026-09-03T23:59:59+08:00",
+  "syncedAt": "2026-09-07T23:59:59+08:00",
   "source": "snapshot",
   "stale": false
 };

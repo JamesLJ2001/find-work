@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "planVersion": "2026-09-05.1",
-  "date": "2026-09-05",
+  "planVersion": "2026-09-07.1",
+  "date": "2026-09-07",
   "timezone": "Asia/Shanghai",
-  "generatedAt": "2026-09-04T22:39:45+08:00",
-  "generator": "Codex manual balanced three-day planner",
+  "generatedAt": "2026-09-07T16:29:46+08:00",
+  "generator": "Codex manual day-one reschedule",
   "source": {
     "repository": "JamesLJ2001/find-work",
     "branch": "main",
     "planFile": "leetcode/2026-08-bytedance-100-plan.md",
     "progressFile": "leetcode/progress.csv",
-    "sourceCommit": "fc0946bfdd21c248d4211a474e88ac447336c0e1"
+    "sourceCommit": "c07adcb15d1f461dd269681e9819e1c53ce665f3"
   },
   "completionSource": "leetcode/progress.csv",
   "completionAfterSourceRow": 219,
@@ -20,7 +20,7 @@
       "label": "D+1",
       "sourceDate": "2026-09-03",
       "problemIds": [155, 394, 739, 456],
-      "instruction": "9/4 暂停且无作答记录，不计有效学习日；D+1 来源仍为最近有效学习日 9/3 的 4 道真实首次题，不把未做的 636、912、763、122 算进 D+1。闭卷口述模型、关键代码和边界，重点恢复最小栈、嵌套解码和单调栈；讲不清再完整重写，不抄答案计完成。"
+      "instruction": "9/7 按用户要求执行均衡收官第一天；9/4—9/6 无作答记录，不计有效学习日。D+1 来源仍为最近有效学习日 9/3 的 4 道真实首次题，不把未做的 636、912、763、122 算进 D+1。闭卷口述模型、关键代码和边界，重点恢复最小栈、嵌套解码和单调栈；讲不清再完整重写，不抄答案计完成。"
     },
     "d3": {
       "label": "D+3",
@@ -39,7 +39,7 @@
       "label": "专项预热与额外复测",
       "sourceDate": null,
       "problemIds": [215, 20, 4, 1, 49, 128, 11, 15, 3, 560, 41, 239, 53, 56, 238],
-      "instruction": "9/5—9/7 均衡收官第 1 组，共 15 题。215 为红题，先完整重写再衔接排序数组；其余黄色题闭卷口述模型、边界并写关键代码，失败则完整重写。这三天按计划分摊额外红题，不把全部红题每天重复追加；颜色仍只根据真实表现更新。"
+      "instruction": "9/7 执行均衡收官第 1 组，共 15 题。215 为红题，先完整重写再衔接排序数组；其余黄色题闭卷口述模型、边界并写关键代码，失败则完整重写。本轮按计划分摊额外红题，不把全部红题每天重复追加；颜色仍只根据真实表现更新，后续分组在当天收口后按实际记录安排。"
     }
   },
   "totals": {

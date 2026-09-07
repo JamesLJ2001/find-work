@@ -306,7 +306,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
       (attempt) =>
         attempt.attemptedOn === today &&
         (completionAfterSourceRow === undefined ||
-          attempt.sourceRow > completionAfterSourceRow),
+          (attempt.sourceRow ?? 0) > completionAfterSourceRow),
     );
     const attemptedToday = new Set(
       currentSessionAttempts.map((attempt) => attempt.problemId),
@@ -323,7 +323,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     for (const attempt of activeAttempts) {
       const happenedBeforeSession = completionAfterSourceRow === undefined
         ? attempt.attemptedOn < today
-        : attempt.sourceRow <= completionAfterSourceRow;
+        : (attempt.sourceRow ?? 0) <= completionAfterSourceRow;
       if (happenedBeforeSession) {
         beforeReviewByProblem.set(attempt.problemId, attempt);
       }
