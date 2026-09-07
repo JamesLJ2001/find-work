@@ -5563,6 +5563,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-07T12:00:00+08:00"
+    },
+    {
+      "id": 224,
+      "externalId": "csv-0224",
+      "problemId": 80,
+      "attemptedOn": "2026-09-07",
+      "recordedTitle": "删除有序数组中的重复项 II",
+      "recordedTopic": "哈希、双指针与字符串",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "用户主动提出按重复次数删除多余元素的方向，但将条件表述为重复大于 3 才删除；已纠正为每个数字最多保留 2 个，从第 3 次出现起跳过。随后讲解快慢双指针原地覆盖，left 表示有效前缀长度，left<2 或当前值不同于已保留部分倒数第二个时才写入，最终返回 left；用户尚未提供完整实现或通过结果。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜已有按重复次数筛选的方向，但保留数量边界理解错误，双指针实现仍需讲解｜未开始→黄；利用有序性判断 nums[right]!=nums[left-2]，首两个直接保留，写入后 left+=1，只检查返回长度对应的有效前缀。参考代码通过本地验证，不计用户独立掌握。",
+      "sourceRow": 226,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-07T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-07T23:59:59+08:00",
