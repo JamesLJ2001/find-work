@@ -5543,6 +5543,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-07T12:00:00+08:00"
+    },
+    {
+      "id": 223,
+      "externalId": "csv-0223",
+      "problemId": 977,
+      "attemptedOn": "2026-09-07",
+      "recordedTitle": "有序数组的平方",
+      "recordedTopic": "哈希、双指针与字符串",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "用户请求本题的 O(n) 解法，尚未提供独立思路、代码或运行通过结果；已讲解有序数组剩余元素中绝对值最大者必在两端，使用左右双指针比较端点平方，把较大者放入答案数组剩余位置的最右端，再移动取出元素对应的指针，逐步演示 [-4,-1,0,3,10] 得到 [0,1,9,16,100]。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成两端比较、从后向前填答案的双指针讲解，尚未独立通过｜未开始→红；每轮确定一个最大平方并移动对应端点，n 轮完成，时间 O(n)，答案数组空间 O(n)，其余变量空间 O(1)。参考实现通过本地验证，不计用户独立掌握。",
+      "sourceRow": 225,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-07T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-07T23:59:59+08:00",
