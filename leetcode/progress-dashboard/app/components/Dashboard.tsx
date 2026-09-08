@@ -350,8 +350,12 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     const reviewCompletedCount = reviewProblems.filter((problem) =>
       reviewedToday.has(problem.id),
     ).length;
-    const todayCompletedCount = todayAttemptedCount + reviewCompletedCount;
-    const todayTaskCount = todayProblems.length + reviewProblems.length;
+    const todayCompletedCount = data.dailyPlan.reviewsOptional
+      ? todayAttemptedCount
+      : todayAttemptedCount + reviewCompletedCount;
+    const todayTaskCount = data.dailyPlan.reviewsOptional
+      ? todayProblems.length
+      : todayProblems.length + reviewProblems.length;
 
     const redProblems = data.problems.filter((problem) => latestByProblem.get(problem.id)?.status === "红");
 
@@ -546,10 +550,15 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
             </div>
             <div className="brief-number">
               <strong>{model.todayCompletedCount}/{model.todayTaskCount}</strong>
-              <span>{model.planIsUpcoming ? "项明日任务已完成" : "项今日任务已完成"}</span>
+              <span>{data.dailyPlan.reviewsOptional
+                ? (model.planIsUpcoming ? "道明日新题已作答" : "道今日新题已作答")
+                : (model.planIsUpcoming ? "项明日任务已完成" : "项今日任务已完成")}</span>
             </div>
             <dl className="brief-list">
               <div><dt>新题</dt><dd>{model.todayAttemptedCount} / {model.todayProblems.length} 已作答</dd></div>
+              {data.dailyPlan.reviewsOptional && (
+                <div><dt>选做复习</dt><dd>{model.reviewCompletedCount} / {model.reviewProblems.length} 已复习，不计入主进度</dd></div>
+              )}
               <div><dt>D+1</dt><dd>{model.d1.length ? `${model.d1.length} 题口述` : "来源日无首次题"}</dd></div>
               <div><dt>D+3</dt><dd>{model.d3.length} 题按状态复写</dd></div>
               <div><dt>D+7</dt><dd>{model.d7.length} / {model.d7Pool.length} 题盲写抽查</dd></div>
@@ -596,7 +605,9 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               </span>
               <h2>{model.planIsUpcoming ? "明日新题" : "今日新题"} · {model.todayProblems.length}</h2>
             </div>
-            <p>题单由当前对话在上一学习日收口时写入 GitHub；“已作答”与颜色仍按真实作答记录判断。</p>
+            <p>{data.dailyPlan.reviewsOptional
+              ? `先完成 ${model.todayProblems.length} 道新题，复习有余力再选做；已作答不等于已掌握。`
+              : "题单由当前对话在上一学习日收口时写入 GitHub；“已作答”与颜色仍按真实作答记录判断。"}</p>
           </div>
           <div className="today-task-grid">
             {model.todayProblems.length ? (
@@ -638,9 +649,11 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
           <div className="section-heading">
             <div>
               <span className="eyebrow">SPACED REPETITION</span>
-              <h2>{model.planIsUpcoming ? "明日复习队列" : "今日复习队列"}</h2>
+              <h2>{model.planIsUpcoming ? "明日复习队列" : "今日复习队列"}{data.dailyPlan.reviewsOptional ? "（选做）" : ""}</h2>
             </div>
-            <p>右侧标签表示今天是否复习；左侧圆点表示当前掌握程度，两种状态互不替代。</p>
+            <p>{data.dailyPlan.reviewsOptional
+              ? "新题完成后按需选做，未做不影响今天的新题目标。右侧记录是否复习，左侧保留真实掌握状态。"
+              : "右侧标签表示今天是否复习；左侧圆点表示当前掌握程度，两种状态互不替代。"}</p>
           </div>
           <div className="queue-grid">
             <QueueCard label="D+1" sourceDate={model.d1Date} description={data.dailyPlan.reviewQueues.d1.instruction} problems={model.d1} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />

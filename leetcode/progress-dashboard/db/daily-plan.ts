@@ -65,6 +65,7 @@ function isDailyPlan(value: unknown): value is DailyPlanDocument {
       (Number.isInteger(value.completionAfterSourceRow) &&
         Number(value.completionAfterSourceRow) > 0)) &&
     isNumberArray(value.newProblemIds) &&
+    (value.reviewsOptional === undefined || typeof value.reviewsOptional === "boolean") &&
     typeof value.source.repository === "string" &&
     typeof value.source.branch === "string" &&
     typeof value.source.planFile === "string" &&

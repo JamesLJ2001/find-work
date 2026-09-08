@@ -58,6 +58,7 @@ export type DailyPlanDocument = {
   completionSource: string;
   completionAfterSourceRow?: number;
   newProblemIds: number[];
+  reviewsOptional?: boolean;
   reviewQueues: {
     d1: DailyPlanQueue;
     d3: DailyPlanQueue;
