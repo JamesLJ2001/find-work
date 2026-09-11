@@ -5683,6 +5683,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 230,
+      "externalId": "csv-0230",
+      "problemId": 167,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "两数之和 II",
+      "recordedTopic": "字符串、窗口、矩阵与链表",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "知道通过 target - numbers[left] 查找补数，但代码把 return 放在外层 for 循环内，第一次 left 扫描后就提前结束；第一轮未找到时 right 会等于 n，返回下标越界；同时没有利用有序数组的左右双指针性质，ans 变量未使用。已说明应根据当前和与 target 的大小移动 left 或 right，并提供 O(n) 参考实现。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜补数查找方向正确，但提前 return、越界边界和有序数组双指针未处理｜新题未开始→黄；总和过小左指针右移，总和过大右指针左移，命中后返回 1-based 下标，本次未通过。",
+      "sourceRow": 232,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
