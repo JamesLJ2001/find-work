@@ -5743,6 +5743,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 233,
+      "externalId": "csv-0233",
+      "problemId": 165,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "比较版本号",
+      "recordedTopic": "字符串、窗口、矩阵与链表",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次请求讲解比较版本号，尚未提供独立思路、代码或运行通过结果；已讲解用点号分割版本段，逐段转为数字比较，缺少的段按 0 处理，并说明前导零和末尾零不影响版本大小，提供完整 Python 3 参考实现。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成版本号分段比较讲解，尚未独立通过｜新题未开始→红；split('.') 后逐段 int 比较，缺失段按 0，不能直接比较字符串，时间 O(n)、额外空间 O(n)。",
+      "sourceRow": 235,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
