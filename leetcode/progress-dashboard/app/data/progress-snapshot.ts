@@ -5763,6 +5763,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 234,
+      "externalId": "csv-0234",
+      "problemId": 43,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "字符串相乘",
+      "recordedTopic": "网格与字符串 DP、模拟",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次请求讲解字符串相乘，尚未提供独立思路、代码或运行通过结果；已讲解不能把完整字符串转整数相乘，而是用竖式乘法逐位相乘，将结果放入长度为 m+n 的数组，按个位和进位位置累加，并提供完整 Python 3 参考实现。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成字符串竖式乘法讲解，尚未独立通过｜新题未开始→红；result[i+j+1] 保存当前个位，result[i+j] 累加进位，最后去除前导零，时间 O(mn)、额外空间 O(m+n)。",
+      "sourceRow": 236,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
