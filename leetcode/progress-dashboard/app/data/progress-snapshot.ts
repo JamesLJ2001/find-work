@@ -5723,6 +5723,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 232,
+      "externalId": "csv-0232",
+      "problemId": 438,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "找到字符串中所有字母异位词",
+      "recordedTopic": "字符串、窗口、矩阵与链表",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "用户提交的固定长度滑动窗口代码整体正确，但移除 s[left] 后漏写 left += 1，导致左边界不移动，后续循环反复扣除同一字符，window 不再表示当前窗口。已指出在删除旧字符后移动左指针，本次代码未通过。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜固定窗口和字符频次正确，但删除窗口左端后忘记移动 left｜红→黄；窗口超长时扣除 s[left] 后必须 left += 1，再比较 window 与 need，本次未独立通过。",
+      "sourceRow": 234,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
