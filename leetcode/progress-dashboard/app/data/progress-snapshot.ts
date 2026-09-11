@@ -5603,9 +5603,29 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-07T12:00:00+08:00"
+    },
+    {
+      "id": 226,
+      "externalId": "csv-0226",
+      "problemId": 125,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "验证回文串",
+      "recordedTopic": "哈希、双指针与字符串",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "整体采用清洗字符串后用左右双指针比较的正确思路，但生成器中写成 s.isalnum()，检查了整个原字符串而不是当前字符 ch；遇到空格或标点时会把所有字符过滤掉，可能将空字符串误判为回文。已指出应改为 ch.isalnum()，本次代码尚未通过。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜回文预处理和双指针方向正确，但字符过滤变量写错｜新题未开始→黄；用 ch.lower() 转小写、ch.isalnum() 保留字母数字，再从两端向中间比较，当前未证明独立通过。",
+      "sourceRow": 228,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
-  "syncedAt": "2026-09-07T23:59:59+08:00",
+  "syncedAt": "2026-09-11T23:59:59+08:00",
   "source": "snapshot",
   "stale": false
 };
