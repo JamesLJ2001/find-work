@@ -5803,6 +5803,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 236,
+      "externalId": "csv-0236",
+      "problemId": 54,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "螺旋矩阵",
+      "recordedTopic": "字符串、窗口、矩阵与链表",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "用户再次提交螺旋矩阵代码，漏遍历右边且上下左右边界更新顺序错误；左边误写为 matrix[bottom][column] 并再次减少 bottom，导致旧变量和重复遍历，本次未通过。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜四边顺序和边界更新仍有错误｜黄→黄；每轮固定上右下左，右边后 right -= 1，下边后 bottom -= 1，左边用 matrix[row][left] 后 left += 1。",
+      "sourceRow": 238,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
