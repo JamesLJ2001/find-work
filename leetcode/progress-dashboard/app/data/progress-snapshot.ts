@@ -5703,6 +5703,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 231,
+      "externalId": "csv-0231",
+      "problemId": 438,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "找到字符串中所有字母异位词",
+      "recordedTopic": "字符串、窗口、矩阵与链表",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次请求讲解找到字符串中所有字母异位词，尚未提供独立思路、代码或运行通过结果；已讲解固定长度滑动窗口与 26 位字符频次数组，窗口超过 p 的长度时移除最左字符，窗口计数与 p 计数相同就记录左端点，并提供完整 Python 3 参考实现。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成固定窗口和字符计数讲解，尚未独立通过｜新题未开始→红；窗口长度始终为 len(p)，每个字符进入和移出至多一次，计数相同的窗口记录起点，时间 O(n)、额外空间 O(1)。",
+      "sourceRow": 233,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
