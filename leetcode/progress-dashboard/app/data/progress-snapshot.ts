@@ -5623,6 +5623,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 227,
+      "externalId": "csv-0227",
+      "problemId": 160,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "相交链表",
+      "recordedTopic": "字符串、窗口、矩阵与链表",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次请求讲解双指针相交链表，尚未提供独立思路、代码或运行通过结果；已讲解两个指针分别走完 A 链和 B 链后切换到另一条链，令二者都走过 A+B 的总长度，从而在相交节点对齐；不相交时同时到达 None。提供了使用节点身份比较的完整 Python 3 参考实现。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成相交链表双指针讲解，尚未独立通过｜新题未开始→红；p 走完 A 后切到 headB，q 走完 B 后切到 headA，使用 p is q 比较同一节点，时间 O(m+n)、额外空间 O(1)。",
+      "sourceRow": 229,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
