@@ -5663,6 +5663,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 229,
+      "externalId": "csv-0229",
+      "problemId": 151,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "反转字符串中的单词",
+      "recordedTopic": "哈希、双指针与字符串",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次围绕空格处理讲解 151 并提供手写左右指针反转单词的实现，尚未提供独立思路、代码或运行通过结果；已说明不带参数的 split 会去掉首尾空格并合并连续空格，随后用左右指针交换单词，最后用单个空格连接。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成空格清洗与手写单词反转讲解，尚未独立通过｜新题未开始→红；使用 s.split() 得到有效单词，左右指针原地交换列表元素，join 统一为单个空格，时间 O(n)、额外空间 O(n)。",
+      "sourceRow": 231,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
