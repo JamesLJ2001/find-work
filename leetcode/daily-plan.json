@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "planVersion": "2026-09-08.1",
-  "date": "2026-09-08",
+  "planVersion": "2026-09-11.1",
+  "date": "2026-09-11",
   "timezone": "Asia/Shanghai",
-  "generatedAt": "2026-09-08T09:09:10+08:00",
-  "generator": "Codex manual new-problem-first planner",
+  "generatedAt": "2026-09-11T15:36:38+08:00",
+  "generator": "Codex manual six-new-problem reschedule",
   "source": {
     "repository": "JamesLJ2001/find-work",
     "branch": "main",
     "planFile": "leetcode/2026-08-bytedance-100-plan.md",
     "progressFile": "leetcode/progress.csv",
-    "sourceCommit": "2db9d0fb7928ae0976e7eecac4064bd68a573a0b"
+    "sourceCommit": "8bdfeca252997f7b30ae716d48daf961d04a989c"
   },
   "completionSource": "leetcode/progress.csv",
   "completionAfterSourceRow": 227,
@@ -35,7 +35,7 @@
         80,
         636
       ],
-      "instruction": "新题完成后选做，不计入今天的新题目标。来源为 9/7 实际首次作答的 7 题，按真实记录顺序排列。闭卷口述模型、关键代码和边界，忘记再补写；没有实际复习记录就保持未复习，不因昨日已讲解自动计完成。"
+      "instruction": "新题完成后选做，不计入今天的新题目标。9/8—9/10 没有有效作答记录，不占学习日序号；重新回溯后，来源仍为 9/7 实际首次作答的 7 题。闭卷口述模型、关键代码和边界，忘记再补写；没有实际复习记录就保持未复习，不因之前已讲解自动计完成。"
     },
     "d3": {
       "label": "D+3",
@@ -78,7 +78,7 @@
         199,
         236
       ],
-      "instruction": "新题完成后按需选做原均衡第 2 组的 18 题，不要求今天全部完成。红题完整重写，黄题口述并写关键代码，失败再补写；不追加昨天未完成的第 1 组或全部红题，颜色只按真实表现更新。"
+      "instruction": "新题完成后按需选做原均衡第 2 组的 18 题，不要求今天全部完成。红题完整重写，黄题口述并写关键代码，失败再补写；不追补以往未完成的整批复习，也不追加全部红题，颜色只按真实表现更新。"
     }
   },
   "totals": {
