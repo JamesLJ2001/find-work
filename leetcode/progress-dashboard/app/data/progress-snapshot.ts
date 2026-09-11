@@ -5843,6 +5843,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 238,
+      "externalId": "csv-0238",
+      "problemId": 166,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "分数到小数",
+      "recordedTopic": "哈希、双指针与字符串",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次直接讲解分数到小数，尚未提供独立思路、代码或运行通过结果；已讲解长除法和余数位置映射，余数为零时结束，重复余数时从首次出现位置插入括号，并说明负号与整数部分处理。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成分数到小数讲解，尚未独立通过｜新题未开始→红；用 seen 记录余数对应的小数位下标，重复余数标记循环区间，时间和额外空间 O(|denominator|)。",
+      "sourceRow": 240,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
