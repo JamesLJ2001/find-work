@@ -5823,6 +5823,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 237,
+      "externalId": "csv-0237",
+      "problemId": 240,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "搜索二维矩阵 II",
+      "recordedTopic": "字符串、窗口、矩阵与链表",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "用户提交右上角搜索代码，起点和循环条件正确，但 value 大于 target 时向下移动、value 小于 target 时向左移动，两个方向都与矩阵单调性相反，因此搜索会错误淘汰候选区域。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜右上角搜索方向写反｜新题未开始→黄；value 大于 target 时 column -= 1，value 小于 target 时 row += 1，时间 O(rows+columns)、额外空间 O(1)。",
+      "sourceRow": 239,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
