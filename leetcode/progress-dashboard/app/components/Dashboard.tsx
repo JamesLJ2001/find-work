@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { progressVersion } from "../data/progress-version";
+import { reviewPlan } from "../data/review-plan";
 import type {
   AttemptRecord,
   DashboardPayload,
@@ -286,9 +287,10 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     });
 
     const actualToday = dateInChina();
+    const categoryMode = data.dailyPlan.mode === "category-review" && Boolean(data.dailyPlan.category);
     const planIsCurrent = data.dailyPlan.date === actualToday;
     const planIsUpcoming = data.dailyPlan.date > actualToday;
-    const planIsVisible = planIsCurrent || planIsUpcoming;
+    const planIsVisible = categoryMode || planIsCurrent || planIsUpcoming;
     const today = planIsVisible ? data.dailyPlan.date : actualToday;
     const problemById = new Map(data.problems.map((problem) => [problem.id, problem]));
     const problemsFromIds = (ids: number[]) =>
@@ -297,7 +299,11 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
         return problem ? [problem] : [];
       });
     const todayProblems = planIsVisible
-      ? problemsFromIds(data.dailyPlan.newProblemIds)
+      ? problemsFromIds(
+          categoryMode
+            ? data.dailyPlan.reviewQueues.red.problemIds
+            : data.dailyPlan.newProblemIds,
+        )
       : [];
     const completionAfterSourceRow = planIsVisible
       ? data.dailyPlan.completionAfterSourceRow
@@ -311,14 +317,16 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     const attemptedToday = new Set(
       currentSessionAttempts.map((attempt) => attempt.problemId),
     );
-    const todayAttemptedCount = todayProblems.filter((problem) =>
-      attemptedToday.has(problem.id),
-    ).length;
     const reviewedToday = new Set(
       currentSessionAttempts
         .filter((attempt) => attempt.isReview)
         .map((attempt) => attempt.problemId),
     );
+    const todayAttemptedCount = todayProblems.filter((problem) =>
+      categoryMode
+        ? reviewedToday.has(problem.id)
+        : attemptedToday.has(problem.id),
+    ).length;
     const beforeReviewByProblem = new Map<number, AttemptRecord>();
     for (const attempt of activeAttempts) {
       const happenedBeforeSession = completionAfterSourceRow === undefined
@@ -350,10 +358,14 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
     const reviewCompletedCount = reviewProblems.filter((problem) =>
       reviewedToday.has(problem.id),
     ).length;
-    const todayCompletedCount = data.dailyPlan.reviewsOptional
+    const todayCompletedCount = categoryMode
+      ? todayAttemptedCount
+      : data.dailyPlan.reviewsOptional
       ? todayAttemptedCount
       : todayAttemptedCount + reviewCompletedCount;
-    const todayTaskCount = data.dailyPlan.reviewsOptional
+    const todayTaskCount = categoryMode
+      ? todayProblems.length
+      : data.dailyPlan.reviewsOptional
       ? todayProblems.length
       : todayProblems.length + reviewProblems.length;
 
@@ -380,6 +392,7 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
       planIsCurrent,
       planIsUpcoming,
       planIsVisible,
+      categoryMode,
       todayProblems,
       attemptedToday,
       todayAttemptedCount,
@@ -433,6 +446,17 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
   ).stops.join(", ");
 
   const selectedProblem = selectedId === null ? undefined : data.problems.find((problem) => problem.id === selectedId);
+  const currentChinaDate = dateInChina();
+  const previewReviewDay =
+    reviewPlan.days.find((day) => day.date >= currentChinaDate) ??
+    reviewPlan.days[reviewPlan.days.length - 1];
+  const previewTiming = previewReviewDay.date === currentChinaDate
+    ? "今天"
+    : currentChinaDate < reviewPlan.startDate
+      ? "明天开始"
+      : currentChinaDate > reviewPlan.endDate
+        ? "计划已结束"
+        : "下一复习日";
 
   const toggleTheme = () => {
     const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
@@ -499,13 +523,16 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
             }`}
           >
             <i /> 执行单 · {
-              data.dailyPlan.syncSource === "github"
+              data.dailyPlan.syncSource === "category-schedule"
+                ? "分类日历"
+                : data.dailyPlan.syncSource === "github"
                 ? "GitHub"
                 : data.dailyPlan.syncSource === "repository-local"
                   ? "本机仓库"
                   : "仓库回退"
             }
           </span>
+          <a className="secondary-button" href="/review">背诵卡</a>
           <button className="text-button" type="button" onClick={() => void refresh()} disabled={isRefreshing}>
             {isRefreshing ? "同步中…" : "同步"}
           </button>
@@ -523,8 +550,8 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               <h1>字节最近 100<br />刷题作战台</h1>
               <p>只认真实作答记录。红色是尚未建立模型，黄色是已有思路但代码不稳，绿色是独立通过。</p>
               <div className="hero-actions">
-                <a className="primary-button" href="#today">
-                  {model.planIsUpcoming ? "查看明日任务" : "执行今日任务"}
+                <a className="primary-button" href={model.categoryMode ? "/review" : "#today"}>
+                  {model.categoryMode ? "开始背诵卡" : model.planIsUpcoming ? "查看明日任务" : "执行今日任务"}
                 </a>
                 <a className="secondary-button" href="#problem-bank">查看完整题库</a>
               </div>
@@ -541,20 +568,28 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
           <aside className="today-brief panel">
             <div className="panel-title-row">
               <div>
-                <span className="eyebrow">{model.planIsUpcoming ? "NEXT" : "TODAY"} · {model.today}</span>
-                <h2>{model.planIsUpcoming ? "明日战情" : "今日战情"}</h2>
+                <span className="eyebrow">{model.categoryMode && data.dailyPlan.stale ? "ARCHIVE" : model.planIsUpcoming ? "NEXT" : "TODAY"} · {model.today}</span>
+                <h2>{model.categoryMode && data.dailyPlan.stale ? "最后类别补练" : model.planIsUpcoming ? "明日战情" : "今日战情"}</h2>
               </div>
-              <span className={`live-dot ${model.planIsVisible ? "" : "is-stale"}`}>
-                {model.planIsCurrent ? "LIVE" : model.planIsUpcoming ? "PREVIEW" : "WAIT"}
+              <span className={`live-dot ${data.dailyPlan.stale || !model.planIsVisible ? "is-stale" : ""}`}>
+                {model.categoryMode && data.dailyPlan.stale ? "ENDED" : model.planIsCurrent ? "LIVE" : model.planIsUpcoming ? "PREVIEW" : "WAIT"}
               </span>
             </div>
             <div className="brief-number">
               <strong>{model.todayCompletedCount}/{model.todayTaskCount}</strong>
-              <span>{data.dailyPlan.reviewsOptional
+              <span>{model.categoryMode
+                ? "道已留下真实代码复习记录"
+                : data.dailyPlan.reviewsOptional
                 ? (model.planIsUpcoming ? "道明日新题已作答" : "道今日新题已作答")
                 : (model.planIsUpcoming ? "项明日任务已完成" : "项今日任务已完成")}</span>
             </div>
-            <dl className="brief-list">
+            {model.categoryMode && data.dailyPlan.category ? (
+              <dl className="brief-list">
+                <div><dt>今日类别</dt><dd>{data.dailyPlan.category.title} · 第 {data.dailyPlan.category.day}/{data.dailyPlan.category.totalDays} 天</dd></div>
+                <div><dt>口述背诵</dt><dd>{model.todayProblems.length} 张卡；自评只保存在当前浏览器</dd></div>
+                <div><dt>代码复写</dt><dd>{model.todayAttemptedCount} / {model.todayProblems.length} 已写入真实作答历史</dd></div>
+              </dl>
+            ) : <dl className="brief-list">
               <div><dt>新题</dt><dd>{model.todayAttemptedCount} / {model.todayProblems.length} 已作答</dd></div>
               {data.dailyPlan.reviewsOptional && (
                 <div><dt>选做复习</dt><dd>{model.reviewCompletedCount} / {model.reviewProblems.length} 已复习，不计入主进度</dd></div>
@@ -566,13 +601,21 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
                 <dt>{data.dailyPlan.reviewQueues.red.label === "红题复测" ? "红题" : "专项"}</dt>
                 <dd>{model.redReview.length} 道待处理</dd>
               </div>
-            </dl>
+            </dl>}
             <p className="freshness">
-              执行单生成：{formatSyncTime(data.dailyPlan.generatedAt)} · 当天收口后由当前对话生成
+              执行单生成：{formatSyncTime(data.dailyPlan.generatedAt)} · {model.categoryMode ? "固定分类日历自动切换" : "当天收口后由当前对话生成"}
               <br />
               作答数据同步：{formatSyncTime(data.syncedAt)} · 对话记录写入后即时更新
             </p>
           </aside>
+        </section>
+
+        <section className="plan-alert" role="status">
+          <b>{previewTiming}：{previewReviewDay.title}</b>
+          <span>
+            {shortDate(previewReviewDay.date)} · {previewReviewDay.problemIds.length} 张背诵卡。先看题名和题干口述思路，再翻面核对；浏览器自评不会改变代码掌握颜色。{" "}
+            <a href={`/review?date=${previewReviewDay.date}`}>进入每日分类复习 →</a>
+          </span>
         </section>
 
         <section className="status-grid" aria-label="掌握状态统计">
@@ -587,7 +630,13 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
 
         {(data.dailyPlan.warning || !model.planIsCurrent) && (
           <section className="plan-alert" role="status">
-            <b>{model.planIsCurrent ? "执行单同步提示" : model.planIsUpcoming ? "明日执行单已生成" : "今日执行单尚未生成"}</b>
+            <b>{model.categoryMode && data.dailyPlan.stale
+              ? "分类复习一轮已结束"
+              : model.planIsCurrent
+                ? "执行单同步提示"
+                : model.planIsUpcoming
+                  ? "明日执行单已生成"
+                  : "今日执行单尚未生成"}</b>
             <span>
               {data.dailyPlan.warning ??
                 (model.planIsUpcoming
@@ -603,9 +652,13 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
               <span className="eyebrow">
                 {model.planIsUpcoming ? "NEXT" : "TODAY"}&apos;S MISSION · {model.today} · {data.dailyPlan.planVersion}
               </span>
-              <h2>{model.planIsUpcoming ? "明日新题" : "今日新题"} · {model.todayProblems.length}</h2>
+              <h2>{model.categoryMode && data.dailyPlan.category
+                ? `${data.dailyPlan.stale ? "补练" : model.planIsUpcoming ? "明日" : "今日"}分类复习 · ${data.dailyPlan.category.title} · ${model.todayProblems.length}`
+                : `${model.planIsUpcoming ? "明日新题" : "今日新题"} · ${model.todayProblems.length}`}</h2>
             </div>
-            <p>{data.dailyPlan.reviewsOptional
+            <p>{model.categoryMode
+              ? "这里显示真实代码复习进度。口述背诵的会了／模糊／忘了保存在背诵卡页面，不会自动修改红黄绿。"
+              : data.dailyPlan.reviewsOptional
               ? `先完成 ${model.todayProblems.length} 道新题，复习有余力再选做；已作答不等于已掌握。`
               : "题单由当前对话在上一学习日收口时写入 GitHub；“已作答”与颜色仍按真实作答记录判断。"}</p>
           </div>
@@ -613,13 +666,15 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
             {model.todayProblems.length ? (
               model.todayProblems.map((problem, index) => {
                 const status = statusFrom(model.latestByProblem.get(problem.id));
-                const attempted = model.attemptedToday.has(problem.id);
+                const attempted = model.categoryMode
+                  ? model.reviewedToday.has(problem.id)
+                  : model.attemptedToday.has(problem.id);
                 return (
                   <a
                     className={`today-task-card panel ${attempted ? "is-attempted" : "is-pending"}`}
-                    href={problem.url}
-                    target="_blank"
-                    rel="noreferrer"
+                    href={model.categoryMode ? `/review?date=${model.today}&problem=${problem.id}` : problem.url}
+                    target={model.categoryMode ? undefined : "_blank"}
+                    rel={model.categoryMode ? undefined : "noreferrer"}
                     key={problem.id}
                   >
                     <div className="today-task-card__top">
@@ -632,7 +687,9 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
                     <p>{problem.topic}</p>
                     <div className="today-task-card__foot">
                       <span className={`difficulty difficulty-${problem.difficulty}`}>{problem.difficulty}</span>
-                      <strong>{attempted ? "今日已作答" : "待作答 →"}</strong>
+                      <strong>{model.categoryMode
+                        ? attempted ? "代码复习已记录" : "打开背诵卡 →"
+                        : attempted ? "今日已作答" : "待作答 →"}</strong>
                     </div>
                   </a>
                 );
@@ -649,18 +706,58 @@ export function Dashboard({ initialData }: { initialData: DashboardPayload }) {
           <div className="section-heading">
             <div>
               <span className="eyebrow">SPACED REPETITION</span>
-              <h2>{model.planIsUpcoming ? "明日复习队列" : "今日复习队列"}{data.dailyPlan.reviewsOptional ? "（选做）" : ""}</h2>
+              <h2>{model.categoryMode && data.dailyPlan.category
+                ? `${data.dailyPlan.category.title}背诵卡`
+                : `${model.planIsUpcoming ? "明日复习队列" : "今日复习队列"}${data.dailyPlan.reviewsOptional ? "（选做）" : ""}`}</h2>
             </div>
-            <p>{data.dailyPlan.reviewsOptional
+            <p>{model.categoryMode
+              ? "逐题先口述模型、步骤、边界和复杂度，再翻面核对；需要巩固的题当天留在同一类别重练。"
+              : data.dailyPlan.reviewsOptional
               ? "新题完成后按需选做，未做不影响今天的新题目标。右侧记录是否复习，左侧保留真实掌握状态。"
               : "右侧标签表示今天是否复习；左侧圆点表示当前掌握程度，两种状态互不替代。"}</p>
           </div>
-          <div className="queue-grid">
+          {model.categoryMode && data.dailyPlan.category ? (
+            <div className="queue-grid">
+              <article className="queue-card panel">
+                <div className="queue-card__head">
+                  <div>
+                    <span className="eyebrow">DAILY CATEGORY · 第 {data.dailyPlan.category.day}/{data.dailyPlan.category.totalDays} 天</span>
+                    <h3>{data.dailyPlan.category.title}</h3>
+                  </div>
+                  <span className="queue-count">{model.todayAttemptedCount}/{model.todayProblems.length}</span>
+                </div>
+                <p>计数只代表今天写入 CSV 的代码复习；口述卡完成情况在背诵卡页面单独保存。</p>
+                <div className="queue-list">
+                  {model.todayProblems.map((problem) => {
+                    const codeReviewed = model.reviewedToday.has(problem.id);
+                    const status = statusFrom(model.latestByProblem.get(problem.id));
+                    return (
+                      <a
+                        className={codeReviewed ? "is-complete" : "is-pending"}
+                        href={`/review?date=${model.today}&problem=${problem.id}`}
+                        key={problem.id}
+                      >
+                        <span className={`status-dot status-${status}`} aria-hidden="true" />
+                        <b>{problem.id}</b>
+                        <span>{problem.title}</span>
+                        <strong className="queue-state">
+                          <span className={`queue-status-chip queue-status-${status}`}>{status}</span>
+                          <span className={codeReviewed ? "queue-state__done" : "queue-state__pending"}>
+                            {codeReviewed ? "代码已记录 ✓" : "打开卡片 →"}
+                          </span>
+                        </strong>
+                      </a>
+                    );
+                  })}
+                </div>
+              </article>
+            </div>
+          ) : <div className="queue-grid">
             <QueueCard label="D+1" sourceDate={model.d1Date} description={data.dailyPlan.reviewQueues.d1.instruction} problems={model.d1} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
             <QueueCard label="D+3" sourceDate={model.d3Date} description={data.dailyPlan.reviewQueues.d3.instruction} problems={model.d3} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
             <QueueCard label="D+7" sourceDate={model.d7Date} description={`${data.dailyPlan.reviewQueues.d7.instruction} 来源题池共 ${model.d7Pool.length} 题。`} problems={model.d7} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
             <QueueCard label={data.dailyPlan.reviewQueues.red.label} title={data.dailyPlan.reviewQueues.red.label === "红题复测" ? "日初红题池" : "专项与日初红题池"} description={data.dailyPlan.reviewQueues.red.instruction} problems={model.redReview} latestByProblem={model.latestByProblem} beforeReviewByProblem={model.beforeReviewByProblem} reviewedToday={model.reviewedToday} />
-          </div>
+          </div>}
         </section>
 
         <section className="section risk-section">

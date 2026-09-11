@@ -1,4 +1,6 @@
 import repositoryPlan from "../../daily-plan.json";
+import { reviewPlan } from "../app/data/review-plan";
+import { categoryPlanForDate, chinaDate } from "../app/lib/review";
 import type {
   DailyPlanDocument,
   DailyPlanQueue,
@@ -52,6 +54,15 @@ function isDailyPlan(value: unknown): value is DailyPlanDocument {
   const reviewIds = queueValues.flatMap((queue) => queue.problemIds);
   const uniqueReviewIds = new Set(reviewIds);
   const totals = value.totals;
+  const categoryIsValid =
+    value.category === undefined ||
+    (isRecord(value.category) &&
+      typeof value.category.id === "string" &&
+      typeof value.category.title === "string" &&
+      Number.isInteger(value.category.day) &&
+      Number(value.category.day) > 0 &&
+      Number.isInteger(value.category.totalDays) &&
+      Number(value.category.totalDays) >= Number(value.category.day));
 
   return (
     value.schemaVersion === 1 &&
@@ -61,6 +72,9 @@ function isDailyPlan(value: unknown): value is DailyPlanDocument {
     typeof value.generatedAt === "string" &&
     typeof value.generator === "string" &&
     typeof value.completionSource === "string" &&
+    (value.mode === undefined || value.mode === "category-review") &&
+    categoryIsValid &&
+    (value.mode !== "category-review" || value.category !== undefined) &&
     (value.completionAfterSourceRow === undefined ||
       (Number.isInteger(value.completionAfterSourceRow) &&
         Number(value.completionAfterSourceRow) > 0)) &&
@@ -100,6 +114,18 @@ function snapshot(
 }
 
 export async function loadDailyPlan(): Promise<DailyPlanSnapshot> {
+  const today = chinaDate();
+  const categoryPlan = categoryPlanForDate(reviewPlan, today);
+  if (categoryPlan) {
+    return snapshot(
+      categoryPlan,
+      "category-schedule",
+      today > reviewPlan.endDate
+        ? `分类复习日历已于 ${reviewPlan.endDate} 结束，当前保留最后一天供补练。`
+        : undefined,
+    );
+  }
+
   const fallback: unknown = repositoryPlan;
   if (!isDailyPlan(fallback)) {
     throw new Error("仓库内置执行单结构无效");

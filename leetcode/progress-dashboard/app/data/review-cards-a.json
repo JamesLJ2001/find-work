@@ -1,0 +1,452 @@
+[
+  {
+    "id": 1,
+    "prompt": "给定整数数组 nums 和整数 target，返回两个不同元素的下标，使它们之和等于 target。每组输入恰有一个答案，同一元素不能使用两次，下标顺序不限。",
+    "example": {"input": "nums = [2,7,11,15], target = 9", "output": "[0,1]"},
+    "memoryHook": "边走边记：先找补数，再把当前数存进哈希表。",
+    "steps": ["创建 value -> index 的哈希表", "遍历 nums，计算 need = target - nums[i]", "若 need 已存在，返回它的下标和 i", "否则记录 nums[i] = i"],
+    "pitfalls": ["先存再查可能把同一元素使用两次", "题目要返回下标，不是数值"],
+    "complexity": {"time": "O(n)，n 为数组长度", "space": "O(n)"}
+  },
+  {
+    "id": 49,
+    "prompt": "给定字符串数组 strs，把由相同字符以不同顺序组成的字符串分到同一组，组与组的顺序不限。字符串只含小写英文字母。",
+    "example": {"input": "strs = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]", "output": "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]"},
+    "memoryHook": "异位词共享同一把钥匙：排序串或 26 位计数。",
+    "steps": ["为每个单词统计 26 个字母的出现次数", "把计数数组转成可哈希的元组作为键", "将原单词追加到该键对应的列表", "返回哈希表中的所有分组"],
+    "pitfalls": ["列表不能直接作为字典键，要转元组", "输出保留原字符串，不要输出排序后的字符串"],
+    "complexity": {"time": "O(NK)，N 为字符串数，K 为平均长度", "space": "O(NK)"}
+  },
+  {
+    "id": 128,
+    "prompt": "给定未排序整数数组 nums，返回其中数字连续的最长序列长度；连续只要求数值相邻，不要求它们在原数组中相邻。要求 O(n) 时间。",
+    "example": {"input": "nums = [100,4,200,1,3,2]", "output": "4"},
+    "memoryHook": "只从没有前驱的数字开跑，一条连续链只数一次。",
+    "steps": ["把所有数字放入集合去重", "仅当 x-1 不在集合时，把 x 当作序列起点", "不断检查 x+1、x+2 是否存在并累计长度", "更新最长长度"],
+    "pitfalls": ["从每个数字都向后找会退化为 O(n²)", "空数组应返回 0"],
+    "complexity": {"time": "平均 O(n)", "space": "O(n)"}
+  },
+  {
+    "id": 11,
+    "prompt": "给定非负整数数组 height，第 i 个值表示坐标 i 处竖线高度。选两条线与 x 轴围成容器，返回可盛水的最大面积，容器不能倾斜。",
+    "example": {"input": "height = [1,8,6,2,5,4,8,3,7]", "output": "49"},
+    "memoryHook": "面积由短板决定，所以每次移动较短的那一边。",
+    "steps": ["左右指针放在数组两端", "计算宽度乘两端较小高度并更新答案", "左边较矮则 left++，否则 right--", "直到两指针相遇"],
+    "pitfalls": ["面积高度必须取 min(height[left], height[right])", "移动较高边不能改善当前短板"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 15,
+    "prompt": "给定整数数组 nums，返回所有和为 0 且下标互不相同的三元组。答案中不能出现重复三元组。",
+    "example": {"input": "nums = [-1,0,1,2,-1,-4]", "output": "[[-1,-1,2],[-1,0,1]]"},
+    "memoryHook": "排序后固定一个数，剩下两个数从两端夹逼。",
+    "steps": ["排序 nums", "枚举第一个数 i，若与前一个相同则跳过", "用 left=i+1、right=n-1 比较三数之和", "找到答案后同时移动两端并跳过重复值"],
+    "pitfalls": ["去重比较的是相邻值，不能用集合替代全部边界逻辑", "nums[i] > 0 时可直接结束", "答案要求值的三元组，不是下标"],
+    "complexity": {"time": "O(n²)", "space": "O(1)，不计排序和答案占用"}
+  },
+  {
+    "id": 42,
+    "prompt": "给定非负整数数组 height 表示宽度均为 1 的柱子高度，计算下雨后柱子之间最多能接多少单位的水。",
+    "example": {"input": "height = [0,1,0,2,1,0,1,3,2,1,2,1]", "output": "6"},
+    "memoryHook": "哪边的最高墙更矮，哪边的水位就已经确定。",
+    "steps": ["左右指针置于两端，维护 leftMax 和 rightMax", "比较两端高度，处理较矮的一侧", "该侧最高值减当前高度就是当前位置积水", "移动对应指针并累加到答案"],
+    "pitfalls": ["累加的是边界最高值与当前柱高之差", "先正确更新最大值，差值才不会为负"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 3,
+    "prompt": "给定字符串 s，返回其中不含重复字符的最长连续子串长度。s 可能包含字母、数字、符号和空格。",
+    "example": {"input": "s = \"abcabcbb\"", "output": "3"},
+    "memoryHook": "右边扩张，字符重复时左边越过它上次出现的位置。",
+    "steps": ["维护窗口左端 left 和字符最后下标表", "枚举 right 及字符 ch", "若 ch 在当前窗口出现过，令 left=max(left,last[ch]+1)", "更新 last[ch] 和窗口最大长度"],
+    "pitfalls": ["left 只能向右，必须使用 max", "求的是连续子串而非子序列"],
+    "complexity": {"time": "O(n)", "space": "O(k)，k 为字符集或窗口内不同字符数"}
+  },
+  {
+    "id": 560,
+    "prompt": "给定整数数组 nums 和整数 k，返回元素和恰好为 k 的连续非空子数组数量。数组可含负数。",
+    "example": {"input": "nums = [1,1,1], k = 2", "output": "2"},
+    "memoryHook": "当前前缀和减 k 出现过几次，就有几个子数组在这里结束。",
+    "steps": ["初始化前缀和频次 {0:1}", "遍历数字并累加 prefix", "把 count[prefix-k] 加入答案", "再将当前 prefix 的频次加一"],
+    "pitfalls": ["{0:1} 用于统计从下标 0 开始的答案", "有负数，普通伸缩窗口不成立", "必须先查询再记录当前前缀和"],
+    "complexity": {"time": "O(n)", "space": "O(n)"}
+  },
+  {
+    "id": 41,
+    "prompt": "给定未排序整数数组 nums，返回没有出现在数组中的最小正整数。要求 O(n) 时间并且只使用 O(1) 额外空间。",
+    "example": {"input": "nums = [3,4,-1,1]", "output": "2"},
+    "memoryHook": "把值 x 送回下标 x-1，第一处不对位就是答案。",
+    "steps": ["遍历每个位置，反复处理当前值 x", "若 1<=x<=n 且 nums[x-1] != x，就交换到正确位置", "再次扫描，首个 nums[i] != i+1 的答案是 i+1", "若全部对位则返回 n+1"],
+    "pitfalls": ["交换条件要排除重复值，否则死循环", "0、负数和大于 n 的数无需安置", "必须原地完成以满足 O(1) 额外空间"],
+    "complexity": {"time": "O(n)，每个有效值最多被安置一次", "space": "O(1)"}
+  },
+  {
+    "id": 73,
+    "prompt": "给定 m×n 整数矩阵 matrix，只要某个元素为 0，就把它所在的整行和整列都设为 0。必须原地修改矩阵。",
+    "example": {"input": "matrix = [[1,1,1],[1,0,1],[1,1,1]]", "output": "[[1,0,1],[0,0,0],[1,0,1]]"},
+    "memoryHook": "借第一行和第一列做标记，但先单独记住它们原本是否有零。",
+    "steps": ["分别记录第一行、第一列原本是否含 0", "扫描其余格子，遇 0 就标记该行首和列首", "根据首行首列标记清零内部格子", "最后按两个布尔值清零第一行和第一列"],
+    "pitfalls": ["过早清零会丢失后续标记信息", "matrix[0][0] 无法同时表示第一行和第一列状态"],
+    "complexity": {"time": "O(mn)", "space": "O(1)"}
+  },
+  {
+    "id": 206,
+    "prompt": "给定单链表头节点 head，反转链表并返回新的头节点。",
+    "example": {"input": "head = [1,2,3,4,5]", "output": "[5,4,3,2,1]"},
+    "memoryHook": "先保存下一站，再把当前箭头调头。",
+    "steps": ["初始化 prev=None、cur=head", "保存 nxt=cur.next", "令 cur.next=prev", "prev、cur 同时前进，最后返回 prev"],
+    "pitfalls": ["改 next 前必须先保存原来的下一节点", "返回 prev，不是已经变成尾节点的 head"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 234,
+    "prompt": "给定单链表头节点 head，判断从前往后读取的值是否与从后往前相同。",
+    "example": {"input": "head = [1,2,2,1]", "output": "true"},
+    "memoryHook": "快慢指针找中点，反转后半段，再逐个对照。",
+    "steps": ["用快慢指针找到后半段起点", "原地反转后半段链表", "从头和反转后的后半段同步比较", "全部相等返回 true；需要时再恢复链表"],
+    "pitfalls": ["奇数长度要让中间节点不参与成对比较", "比较节点值而非节点对象", "若业务要求结构不变，应比较后恢复"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 141,
+    "prompt": "给定单链表头节点 head，判断链表中是否存在某个节点沿 next 指针可再次到达。内部参数 pos 只描述尾节点连接位置，不作为函数输入。",
+    "example": {"input": "head = [3,2,0,-4], pos = 1", "output": "true"},
+    "memoryHook": "有环的跑道上，快指针最终一定追上慢指针。",
+    "steps": ["slow 和 fast 都从 head 开始", "循环中 slow 走一步，fast 走两步", "若二者相遇则存在环", "若 fast 或 fast.next 为空则无环"],
+    "pitfalls": ["循环条件必须同时检查 fast 和 fast.next", "不能通过节点值判断相遇，值可能重复"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 239,
+    "prompt": "给定整数数组 nums 和窗口大小 k，窗口从左向右每次移动一格，返回每个长度为 k 的窗口中的最大值。",
+    "example": {"input": "nums = [1,3,-1,-3,5,3,6,7], k = 3", "output": "[3,3,5,5,6,7]"},
+    "memoryHook": "单调队列只留仍在窗口、且可能成为最大值的下标。",
+    "steps": ["维护值单调递减的下标双端队列", "移除队首已经离开窗口的下标", "从队尾移除值小于等于当前值的下标", "加入当前下标；窗口形成后记录队首值"],
+    "pitfalls": ["队列存下标才能判断过期", "窗口形成条件是 i>=k-1", "弹队尾要比较 nums[dq[-1]] 与当前值"],
+    "complexity": {"time": "O(n)，每个下标最多进出队一次", "space": "O(k)"}
+  },
+  {
+    "id": 53,
+    "prompt": "给定整数数组 nums，返回和最大的连续非空子数组之和。",
+    "example": {"input": "nums = [-2,1,-3,4,-1,2,1,-5,4]", "output": "6"},
+    "memoryHook": "以前一段拖后腿就重新开始，否则把当前数接上。",
+    "steps": ["令 current 和 best 初始化为 nums[0]", "从第二个数开始遍历", "current=max(x,current+x)", "best=max(best,current)"],
+    "pitfalls": ["数组全负时答案是最大的单个数，不能初始化为 0", "要求连续且非空"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 56,
+    "prompt": "给定若干闭区间 intervals，其中 intervals[i]=[start,end]。合并所有相交区间并返回互不重叠且覆盖原区间集合的结果。",
+    "example": {"input": "intervals = [[1,3],[2,6],[8,10],[15,18]]", "output": "[[1,6],[8,10],[15,18]]"},
+    "memoryHook": "按起点排序，只需看新区间能否接上最后一个结果。",
+    "steps": ["按区间起点升序排序", "遍历区间，结果为空或 start>最后终点时直接加入", "否则把最后终点更新为 max(lastEnd,end)", "返回结果列表"],
+    "pitfalls": ["闭区间端点相等也算相交", "合并时终点要取 max，不能直接覆盖"],
+    "complexity": {"time": "O(n log n)，主要来自排序", "space": "O(n) 用于答案；排序额外空间依实现而定"}
+  },
+  {
+    "id": 189,
+    "prompt": "给定整数数组 nums 和非负整数 k，将数组中的元素整体向右轮转 k 个位置。必须原地修改数组。",
+    "example": {"input": "nums = [1,2,3,4,5,6,7], k = 3", "output": "[5,6,7,1,2,3,4]"},
+    "memoryHook": "整体翻转，再分别翻转前 k 段和后半段。",
+    "steps": ["令 k %= n", "原地翻转整个数组", "翻转下标 0 到 k-1", "翻转下标 k 到 n-1"],
+    "pitfalls": ["k 可能大于数组长度，必须取模", "右轮转的三次翻转顺序不要写成左轮转", "原地交换时区间端点要明确"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 238,
+    "prompt": "给定整数数组 nums，返回数组 answer，其中 answer[i] 等于除 nums[i] 外所有元素的乘积。不能使用除法，要求 O(n) 时间。",
+    "example": {"input": "nums = [1,2,3,4]", "output": "[24,12,8,6]"},
+    "memoryHook": "答案先装左侧乘积，再用一个变量从右侧补乘。",
+    "steps": ["从左到右令 answer[i] 保存 i 左侧所有数的乘积", "初始化 suffix=1", "从右到左将 answer[i] 乘 suffix", "再把 suffix 乘 nums[i]"],
+    "pitfalls": ["前缀和后缀初值都应是乘法单位 1", "不能使用总乘积除当前值，零会破坏做法", "输出数组不计入额外空间时可达 O(1)"],
+    "complexity": {"time": "O(n)", "space": "O(1) 额外空间，不计输出数组"}
+  },
+  {
+    "id": 142,
+    "prompt": "给定可能含环的单链表头节点 head，若存在环则返回环开始的节点，否则返回 null。不得修改链表。",
+    "example": {"input": "head = [3,2,0,-4], pos = 1", "output": "返回值为 2 的入环节点"},
+    "memoryHook": "快慢相遇后，一个回到头；两者同速再遇就是入口。",
+    "steps": ["快慢指针分别走两步和一步寻找相遇点", "若 fast 到空则返回 null", "相遇后把一个指针放回 head", "两个指针每次各走一步，下一次相遇处即环入口"],
+    "pitfalls": ["返回节点对象，不是 pos 或节点值", "第二阶段必须改为同速一步", "第一阶段仍要检查 fast.next"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 2,
+    "prompt": "两个非空链表按逆序存储两个非负整数，每个节点保存一位数字。将两数相加并以同样的逆序链表返回；除数字 0 外没有前导零。",
+    "example": {"input": "l1 = [2,4,3], l2 = [5,6,4]", "output": "[7,0,8]"},
+    "memoryHook": "像小学加法一样逐位相加，链表末尾还要照顾进位。",
+    "steps": ["创建哑节点、尾指针和 carry=0", "任一链表未结束或 carry 非零时循环", "取缺失节点为 0，计算 total 和 divmod(total,10)", "新建个位节点接到尾部并推进非空链表"],
+    "pitfalls": ["循环条件必须包含最终 carry", "两个链表长度可能不同", "返回 dummy.next"],
+    "complexity": {"time": "O(max(m,n))", "space": "O(max(m,n))，用于结果链表"}
+  },
+  {
+    "id": 23,
+    "prompt": "给定 k 个链表，每个链表都按升序排列。把它们合并成一个升序链表并返回。",
+    "example": {"input": "lists = [[1,4,5],[1,3,4],[2,6]]", "output": "[1,1,2,3,4,4,5,6]"},
+    "memoryHook": "把链表两两归并，每一轮链表数量减半。",
+    "steps": ["空列表直接返回 null", "以步长 1 两两合并链表", "每轮结束将步长乘 2", "复用合并两个有序链表的双指针逻辑，最后返回 lists[0]"],
+    "pitfalls": ["k 不是总节点数，复杂度要用总节点数 N", "链表数量为奇数时最后一个留到下一轮", "不要遗漏空链表"],
+    "complexity": {"time": "O(N log k)，N 为总节点数", "space": "O(1) 额外空间，复用原节点"}
+  },
+  {
+    "id": 146,
+    "prompt": "设计容量为 capacity 的 LRUCache：get(key) 在存在时返回值并把该键标为最近使用，否则返回 -1；put(key,value) 插入或更新，超容量时删除最久未使用的键。两种操作要求平均 O(1)。",
+    "example": {"input": "[\"LRUCache\",\"put\",\"put\",\"get\",\"put\",\"get\"] [[2],[1,1],[2,2],[1],[3,3],[2]]", "output": "[null,null,null,1,null,-1]"},
+    "memoryHook": "哈希表负责 O(1) 定位，双向链表负责 O(1) 更新新旧顺序。",
+    "steps": ["用字典保存 key -> 双向链表节点，并设置首尾哑节点", "get 命中后摘下节点并移到最近使用端", "put 已存在则更新并移动；不存在则创建并加入", "若超容量，删除最久使用端节点及字典映射"],
+    "pitfalls": ["更新已有 key 不能增加缓存大小", "淘汰时链表和字典都要删除", "容量边界通过插入后检查统一处理"],
+    "complexity": {"time": "get、put 平均 O(1)", "space": "O(capacity)"}
+  },
+  {
+    "id": 94,
+    "prompt": "给定二叉树根节点 root，返回节点值的中序遍历序列，即按左子树、根节点、右子树的顺序访问。",
+    "example": {"input": "root = [1,null,2,3]", "output": "[1,3,2]"},
+    "memoryHook": "一路向左压栈，没路后弹出访问，再转向右边。",
+    "steps": ["初始化栈、结果和 cur=root", "cur 非空时不断入栈并向左走", "左路结束后弹栈，将节点值加入结果", "令 cur 指向该节点右子树，直到栈和 cur 都为空"],
+    "pitfalls": ["外层条件应是 cur 或 stack 任一非空", "入结果发生在弹栈时，不是首次看到节点时"],
+    "complexity": {"time": "O(n)", "space": "O(h)，h 为树高"}
+  },
+  {
+    "id": 101,
+    "prompt": "给定二叉树根节点 root，判断这棵树是否关于根节点所在的竖直轴镜像对称。",
+    "example": {"input": "root = [1,2,2,3,4,4,3]", "output": "true"},
+    "memoryHook": "镜像比较的是外侧配外侧、内侧配内侧。",
+    "steps": ["定义 compare(a,b)", "两者都空返回 true；仅一个空或值不同返回 false", "递归比较 a.left 与 b.right", "同时比较 a.right 与 b.left，从 root.left 和 root.right 开始"],
+    "pitfalls": ["不能比较同方向孩子", "先处理空节点再读取 val"],
+    "complexity": {"time": "O(n)", "space": "O(h)，递归栈深度为树高 h"}
+  },
+  {
+    "id": 543,
+    "prompt": "给定二叉树根节点，返回任意两个节点之间最长路径所经过的边数。路径可以经过根，也可以不经过根。",
+    "example": {"input": "root = [1,2,3,4,5]", "output": "3"},
+    "memoryHook": "每个节点把左右高度相加竞争直径，再向父亲只汇报较高一边。",
+    "steps": ["后序递归计算空节点高度 0", "取得 leftHeight 和 rightHeight", "用 leftHeight+rightHeight 更新全局最大边数", "向上返回 1+max(leftHeight,rightHeight)"],
+    "pitfalls": ["直径按边数计算，左右高度相加无需再加 1", "最长路径不一定经过根节点"],
+    "complexity": {"time": "O(n)", "space": "O(h)"}
+  },
+  {
+    "id": 102,
+    "prompt": "给定二叉树根节点 root，按从上到下、每层从左到右的顺序返回节点值，每一层单独放在一个列表中。",
+    "example": {"input": "root = [3,9,20,null,null,15,7]", "output": "[[3],[9,20],[15,7]]"},
+    "memoryHook": "每轮先锁定当前队列长度，只处理这一层。",
+    "steps": ["root 为空返回 []，否则入队", "记录本轮 size=len(queue)", "弹出恰好 size 个节点并收集值，同时加入其孩子", "将本层列表加入答案，重复至队列为空"],
+    "pitfalls": ["不能在处理本层时按变化后的队列长度循环", "空树不要把 null 放进队列"],
+    "complexity": {"time": "O(n)", "space": "O(w)，w 为树的最大层宽"}
+  },
+  {
+    "id": 199,
+    "prompt": "给定二叉树根节点 root，想象从树的右侧观察，返回从上到下每一层能看见的节点值。",
+    "example": {"input": "root = [1,2,3,null,5,null,4]", "output": "[1,3,4]"},
+    "memoryHook": "层序遍历时，每层最后出队的节点就是右视图。",
+    "steps": ["root 非空时加入队列", "每轮记录当前层节点数", "依次弹出本层节点并加入左右孩子", "当索引等于 size-1 时把节点值加入答案"],
+    "pitfalls": ["右视图不是一直沿 right 指针走，右子树可能缺失", "必须按层判断最后一个节点"],
+    "complexity": {"time": "O(n)", "space": "O(w)，w 为最大层宽"}
+  },
+  {
+    "id": 114,
+    "prompt": "给定二叉树根节点 root，原地把它展开为只有右指针的单链表。链表顺序必须与原树前序遍历一致，所有 left 指针都应为 null。",
+    "example": {"input": "root = [1,2,5,3,4,null,6]", "output": "[1,null,2,null,3,null,4,null,5,null,6]"},
+    "memoryHook": "倒着做前序：右、左、根，让当前节点接住刚处理好的链。",
+    "steps": ["维护 prev=None", "按右子树、左子树、当前节点的顺序递归", "令 node.right=prev", "令 node.left=None，再令 prev=node"],
+    "pitfalls": ["普通前序中直接改指针容易丢失右子树", "题目要求原地修改且所有 left 置空"],
+    "complexity": {"time": "O(n)", "space": "O(h)，递归栈"}
+  },
+  {
+    "id": 236,
+    "prompt": "给定一棵二叉树及其中两个不同节点 p、q，返回它们的最近公共祖先。节点可以是自己的祖先，且 p、q 均存在于树中。",
+    "example": {"input": "root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1", "output": "3"},
+    "memoryHook": "左右子树各找到一个目标，当前节点就是分叉点。",
+    "steps": ["若 root 为空或等于 p/q，直接返回 root", "递归搜索左子树和右子树", "左右都非空时返回当前 root", "否则返回非空的那一侧"],
+    "pitfalls": ["比较节点身份而非仅比较值", "p 可以就是 q 的祖先，此时命中后应直接返回"],
+    "complexity": {"time": "O(n)", "space": "O(h)"}
+  },
+  {
+    "id": 200,
+    "prompt": "给定由字符 '1'（陆地）和 '0'（水）组成的二维网格，水平或竖直相邻的陆地属于同一岛屿。返回岛屿数量，网格四周均视为水。",
+    "example": {"input": "grid = [[\"1\",\"1\",\"0\"],[\"1\",\"0\",\"0\"],[\"0\",\"0\",\"1\"]]", "output": "2"},
+    "memoryHook": "每发现一块新陆地，岛数加一，并把整座岛淹掉。",
+    "steps": ["遍历所有格子", "遇到 '1' 时答案加一并启动 DFS/BFS", "访问四个方向，把到达的 '1' 标为 '0' 或 visited", "搜索结束后继续扫描"],
+    "pitfalls": ["只连接上下左右，不含对角线", "字符网格要比较 '1'，不是整数 1", "原地标记会修改输入"],
+    "complexity": {"time": "O(mn)", "space": "O(mn)，最坏搜索栈或队列"}
+  },
+  {
+    "id": 994,
+    "prompt": "给定网格：0 为空、1 为新鲜橘子、2 为腐烂橘子。每分钟，腐烂橘子会使上下左右相邻的新鲜橘子腐烂。返回全部腐烂的最少分钟数；若不可能则返回 -1。",
+    "example": {"input": "grid = [[2,1,1],[1,1,0],[0,1,1]]", "output": "4"},
+    "memoryHook": "所有烂橘子同时入队，多源 BFS 的层数就是分钟。",
+    "steps": ["扫描网格，把所有 2 入队并统计新鲜数量", "按层处理队列，每层代表一分钟", "使相邻的 1 变成 2、fresh-- 并入队", "结束后 fresh>0 返回 -1，否则返回实际扩散分钟"],
+    "pitfalls": ["初始没有新鲜橘子应返回 0", "分钟只在本层确实感染了新橘子时增加", "必须多源同时开始"],
+    "complexity": {"time": "O(mn)", "space": "O(mn)"}
+  },
+  {
+    "id": 207,
+    "prompt": "有 numCourses 门课，prerequisites 中 [a,b] 表示学 a 前必须先学 b。判断能否修完所有课程。",
+    "example": {"input": "numCourses = 2, prerequisites = [[1,0]]", "output": "true"},
+    "memoryHook": "不断取走入度为零的课；最终取不完就说明有环。",
+    "steps": ["建立 b -> a 的邻接表和每门课入度", "把所有入度为 0 的课程入队", "出队一门并计数，降低其后继课程入度", "后继入度变 0 时入队，最后判断计数是否等于 numCourses"],
+    "pitfalls": ["边方向应从先修课指向后续课", "课程可能完全不在 prerequisites 中，也要计入", "存在重复边时入度与邻接表必须一致处理"],
+    "complexity": {"time": "O(V+E)，V 为课程数，E 为先修关系数", "space": "O(V+E)"}
+  },
+  {
+    "id": 208,
+    "prompt": "实现 Trie：insert(word) 插入小写单词；search(word) 判断完整单词是否已插入；startsWith(prefix) 判断是否存在以 prefix 开头的已插入单词。",
+    "example": {"input": "insert(\"apple\"); search(\"apple\"); search(\"app\"); startsWith(\"app\")", "output": "null, true, false, true"},
+    "memoryHook": "路径表示前缀，终止标记区分完整单词和仅有前缀。",
+    "steps": ["每个节点保存 children 和 isEnd", "insert 逐字符创建或进入子节点，末尾设 isEnd=true", "search 逐字符走完后检查 isEnd", "startsWith 只需确认整条前缀路径存在"],
+    "pitfalls": ["search 不能只检查路径存在", "多个单词应共享公共前缀节点", "空 children 要为每个节点独立创建"],
+    "complexity": {"time": "每次操作 O(L)，L 为输入字符串长度", "space": "O(T)，T 为所有插入字符节点总数"}
+  },
+  {
+    "id": 39,
+    "prompt": "给定互不相同的正整数数组 candidates 和正整数 target，返回所有元素和为 target 的组合。每个候选数可以不限次数使用，组合顺序不同不算新答案。",
+    "example": {"input": "candidates = [2,3,6,7], target = 7", "output": "[[2,2,3],[7]]"},
+    "memoryHook": "递归时保留当前下标表示可重复选，起点只向后避免排列重复。",
+    "steps": ["可先排序 candidates 便于剪枝", "回溯参数包含 start、remaining 和 path", "从 start 枚举，若值大于 remaining 则停止", "选择后递归仍传 i；remaining=0 时复制 path 加入答案"],
+    "pitfalls": ["递归传 i+1 会错误地禁止重复使用", "答案要复制 path，不能保存同一列表引用", "每次选择后都要撤销"],
+    "complexity": {"time": "指数级，常写 O(N^(T/M))，N 为候选数、T 为目标、M 为最小候选值", "space": "O(T/M)，不计答案"}
+  },
+  {
+    "id": 22,
+    "prompt": "给定整数 n，生成所有由 n 对圆括号组成且格式有效的字符串。",
+    "example": {"input": "n = 3", "output": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]"},
+    "memoryHook": "左括号没用完就能放，右括号只有少于左括号时才能放。",
+    "steps": ["回溯维护已用 left、right 和当前字符列表", "left<n 时可以加入 '('", "right<left 时可以加入 ')'", "长度达到 2n 时保存字符串"],
+    "pitfalls": ["右括号条件是 right<left，保证任意前缀合法", "保存答案前要 join，回溯后撤销字符"],
+    "complexity": {"time": "O(Cn·n)，Cn 为第 n 个卡特兰数", "space": "O(n)，不计答案"}
+  },
+  {
+    "id": 131,
+    "prompt": "给定字符串 s，把它分割成若干连续子串，使每个子串都是回文串。返回所有可能的分割方案。",
+    "example": {"input": "s = \"aab\"", "output": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]"},
+    "memoryHook": "从当前位置枚举切口，只有当前段回文才继续切后面。",
+    "steps": ["建立 pal[i][j]，当 s[i]==s[j] 且区间长度不超过 2 或 pal[i+1][j-1] 为真时，标记 s[i:j+1] 为回文", "回溯参数 start 表示下一段起点", "枚举 end 从 start 到末尾，用 pal[start][end] 常量时间判断当前段", "若为回文，把 s[start:end+1] 加入 path 并递归 end+1", "start 到达末尾时复制 path 保存，每次递归返回后撤销当前段"],
+    "pitfalls": ["分割必须覆盖整个字符串且不能跳字符", "切片右端不包含，注意 end+1", "回溯返回后要弹出当前段"],
+    "complexity": {"time": "O(n²+n·2^n)，前者预处理回文，后者枚举并构造分割方案", "space": "O(n²)，用于回文表和递归路径，不计答案"}
+  },
+  {
+    "id": 51,
+    "prompt": "在 n×n 棋盘上放置 n 个皇后，使任意两个皇后不在同一行、同一列或同一条对角线上。返回所有不同棋盘方案，用 'Q' 和 '.' 表示。",
+    "example": {"input": "n = 4", "output": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]"},
+    "memoryHook": "一行放一个皇后，用列、主对角线和副对角线三个集合排冲突。",
+    "steps": ["按 row 从 0 到 n-1 回溯", "枚举 col，检查 col、row-col、row+col 是否已占用", "安全则放 Q 并把三种标识加入集合", "下一行完成后撤销；row==n 时复制棋盘"],
+    "pitfalls": ["两种对角线标识分别是 row-col 和 row+col", "保存方案时要复制或转成字符串", "撤销棋盘和三个集合必须成对"],
+    "complexity": {"time": "O(n·n!+S·n²)，前者为保守搜索上界，S 为有效方案数，后者为构造 S 个棋盘", "space": "O(n²)，用于工作棋盘、约束集合和递归栈，不计答案"}
+  },
+  {
+    "id": 74,
+    "prompt": "给定 m×n 整数矩阵，每行从左到右递增，且每行第一个数大于上一行最后一个数。判断 target 是否存在。要求 O(log(mn)) 时间。",
+    "example": {"input": "matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3", "output": "true"},
+    "memoryHook": "把矩阵看成一条长度 m×n 的有序数组，用除法和取模还原坐标。",
+    "steps": ["令 left=0、right=m*n-1", "取 mid=(left+right)//2", "用 row=mid//n、col=mid%n 取得值", "按与 target 的比较收缩边界，命中返回 true"],
+    "pitfalls": ["这是整张矩阵全局有序，区别于 240 题", "列数 n 用于除法和取模", "循环边界通常写 left<=right"],
+    "complexity": {"time": "O(log(mn))", "space": "O(1)"}
+  },
+  {
+    "id": 4,
+    "prompt": "给定两个分别升序的整数数组 nums1、nums2，返回合并后数据的中位数。要求整体时间复杂度 O(log(m+n))。",
+    "example": {"input": "nums1 = [1,3], nums2 = [2]", "output": "2.0"},
+    "memoryHook": "在短数组上二分切口，让左半最大值不超过右半最小值。",
+    "steps": ["确保 nums1 是较短数组，在其切分位置 i 上二分", "由左半总长度确定 j=(m+n+1)//2-i", "用正负无穷处理切口位于数组边界", "若 Aleft<=Bright 且 Bleft<=Aright，按总长度奇偶计算中位数；否则移动 i"],
+    "pitfalls": ["必须在较短数组二分，才能保证 j 合法且复杂度更精确", "偶数长度取左半最大与右半最小的平均", "边界哨兵方向不要写反"],
+    "complexity": {"time": "O(log(min(m,n)))", "space": "O(1)"}
+  },
+  {
+    "id": 20,
+    "prompt": "给定只含括号字符 ()[]{} 的字符串 s，判断括号是否按正确类型和顺序闭合。空内部允许，但每个右括号必须对应最近尚未闭合的左括号。",
+    "example": {"input": "s = \"{[]}\"", "output": "true"},
+    "memoryHook": "左括号入栈，右括号必须消掉栈顶的同类型左括号。",
+    "steps": ["建立右括号到左括号的映射", "遍历字符，左括号压栈", "遇右括号时若栈空或栈顶不匹配则返回 false", "匹配则弹栈，结束后检查栈为空"],
+    "pitfalls": ["类型正确但嵌套顺序错误也应失败", "遍历完成仍有左括号时返回 false"],
+    "complexity": {"time": "O(n)", "space": "O(n)"}
+  },
+  {
+    "id": 215,
+    "prompt": "给定整数数组 nums 和整数 k，返回按数值从大到小排列后的第 k 个元素。注意求的是第 k 大，不是第 k 个不同值。",
+    "example": {"input": "nums = [3,2,1,5,6,4], k = 2", "output": "5"},
+    "memoryHook": "维护容量 k 的小顶堆，堆顶始终是当前第 k 大。",
+    "steps": ["创建空小顶堆", "遍历 nums，将每个数压入堆", "若堆大小超过 k，就弹出最小值", "遍历完成返回堆顶"],
+    "pitfalls": ["重复元素仍参与排名", "小顶堆容量是 k，不是 n-k+1", "返回 heap[0] 而非最后入堆元素"],
+    "complexity": {"time": "O(n log k)", "space": "O(k)"}
+  },
+  {
+    "id": 121,
+    "prompt": "给定数组 prices，prices[i] 是第 i 天股价。只能选择一天买入并在之后某一天卖出，返回可获得的最大利润；无利润则返回 0。",
+    "example": {"input": "prices = [7,1,5,3,6,4]", "output": "5"},
+    "memoryHook": "一路记住历史最低买价，用今天价格尝试卖出。",
+    "steps": ["初始化 minPrice 为首日价格、best=0", "从左到右遍历价格", "用 price-minPrice 更新 best", "用当前 price 更新 minPrice"],
+    "pitfalls": ["卖出必须发生在买入之后", "只能完成一次交易", "持续下跌时返回 0"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 70,
+    "prompt": "有 n 级台阶，每次只能爬 1 级或 2 级。返回到达楼顶的不同方法数。",
+    "example": {"input": "n = 3", "output": "3"},
+    "memoryHook": "到第 i 级只可能从 i-1 或 i-2 级迈来。",
+    "steps": ["确定 f(1)=1、f(2)=2", "从第 3 级开始迭代", "计算 current=prev1+prev2", "滚动更新前两个状态并返回 f(n)"],
+    "pitfalls": ["n=1 时要单独返回，避免错误访问第二项", "滚动变量更新顺序不能覆盖旧值"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 118,
+    "prompt": "给定整数 numRows，返回杨辉三角的前 numRows 行。每行首尾为 1，其余位置的值等于上一行相邻两个数之和。",
+    "example": {"input": "numRows = 5", "output": "[[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]"},
+    "memoryHook": "新行先全填 1，只计算中间位置。",
+    "steps": ["从行号 i=0 开始创建长度 i+1、全为 1 的 row", "枚举中间下标 j=1 到 i-1", "令 row[j]=answer[i-1][j-1]+answer[i-1][j]", "把 row 加入答案"],
+    "pitfalls": ["前两行没有中间元素", "第 i 行按零下标长度为 i+1"],
+    "complexity": {"time": "O(numRows²)", "space": "O(numRows²)，用于输出"}
+  },
+  {
+    "id": 136,
+    "prompt": "给定非空整数数组 nums，除一个元素只出现一次外，其余元素都恰好出现两次。找出只出现一次的元素。要求线性时间和常量额外空间。",
+    "example": {"input": "nums = [4,1,2,1,2]", "output": "4"},
+    "memoryHook": "相同数字异或为零，零异或任何数仍是它自己。",
+    "steps": ["初始化 answer=0", "遍历所有数字", "执行 answer ^= x", "返回 answer"],
+    "pitfalls": ["不能用集合或计数字典，否则不满足 O(1) 空间", "异或运算在 Python 中写作 ^，不是 **"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 198,
+    "prompt": "给定非负整数数组 nums，nums[i] 表示第 i 间房的金额。不能偷相邻两间房，返回一夜能偷到的最大金额。",
+    "example": {"input": "nums = [2,7,9,3,1]", "output": "12"},
+    "memoryHook": "到当前房的最优值，是不偷它的旧最优与偷它加隔一间最优的较大者。",
+    "steps": ["维护 prev2 表示处理到前两间的最优，prev1 表示前一间最优", "遍历金额 x", "计算 current=max(prev1,prev2+x)", "滚动更新 prev2=prev1、prev1=current，最后返回 prev1"],
+    "pitfalls": ["允许一间都不偷，空数组应得到 0", "更新变量时要保留旧 prev1"],
+    "complexity": {"time": "O(n)", "space": "O(1)"}
+  },
+  {
+    "id": 279,
+    "prompt": "给定正整数 n，返回和为 n 所需的完全平方数的最少数量。一个完全平方数是某个整数的平方，同一个平方数可以重复使用。",
+    "example": {"input": "n = 12", "output": "3"},
+    "memoryHook": "把平方数当作可重复硬币，dp[i] 从 dp[i-square]+1 转移。",
+    "steps": ["初始化 dp[0]=0，其余为无穷大", "枚举 i 从 1 到 n", "枚举所有 square<=i", "用 dp[i-square]+1 更新 dp[i]，最后返回 dp[n]"],
+    "pitfalls": ["平方数可以重复选", "循环平方根上界要包含 int(sqrt(i))", "求最少数量，初值应为无穷大"],
+    "complexity": {"time": "O(n√n)", "space": "O(n)"}
+  },
+  {
+    "id": 139,
+    "prompt": "给定字符串 s 和字符串列表 wordDict，判断 s 能否由字典中的一个或多个单词按顺序拼接而成。字典单词可以重复使用。",
+    "example": {"input": "s = \"leetcode\", wordDict = [\"leet\",\"code\"]", "output": "true"},
+    "memoryHook": "dp[i] 表示前 i 个字符能切开；找一个可达切点 j 和字典后缀。",
+    "steps": ["把 wordDict 转为集合，初始化 dp[0]=true", "枚举前缀终点 i=1..n", "枚举切点 j<i", "若 dp[j] 且 s[j:i] 在字典中，令 dp[i]=true 并停止内层循环"],
+    "pitfalls": ["dp[0] 必须为 true，代表空前缀可达", "切片是 s[j:i]，右端 i 不包含", "字典集合能避免线性查找"],
+    "complexity": {"time": "最坏 O(n³+W)，n 为字符串长度，Python 切片与哈希会复制/扫描字符，W 为字典总字符数", "space": "O(n+W)"}
+  },
+  {
+    "id": 300,
+    "prompt": "给定整数数组 nums，返回最长严格递增子序列的长度。子序列保持原元素相对顺序，但不要求连续；进阶可尝试 O(n log n) 解法。",
+    "example": {"input": "nums = [10,9,2,5,3,7,101,18]", "output": "4"},
+    "memoryHook": "dp[i] 表示以 nums[i] 结尾的最长严格递增子序列长度。",
+    "steps": ["建立长度为 n 的 dp，并全部初始化为 1", "从左到右枚举结尾位置 i", "枚举所有 j<i", "若 nums[j]<nums[i]，用 dp[j]+1 更新 dp[i]", "返回整个 dp 数组的最大值"],
+    "pitfalls": ["严格递增必须使用 nums[j]<nums[i]，相等不能接入", "dp[i] 表示以 i 结尾的答案，不是前 i 项的全局答案", "最终返回 max(dp)，不能只返回 dp[-1]"],
+    "complexity": {"time": "O(n²)", "space": "O(n)"}
+  },
+  {
+    "id": 32,
+    "prompt": "给定只含 '(' 和 ')' 的字符串 s，返回其中格式有效且连续的最长括号子串长度。",
+    "example": {"input": "s = \"())(())\"", "output": "4"},
+    "memoryHook": "栈底留一个最近失效位置，匹配后用当前位置减新栈顶得到长度。",
+    "steps": ["下标栈初始化为 [-1]", "遇 '(' 时压入其下标", "遇 ')' 时先弹栈；若栈空，把当前下标作为新边界压入", "否则用 i-stack[-1] 更新最大长度"],
+    "pitfalls": ["初始 -1 用于计算从下标 0 开始的有效长度", "无法匹配的右括号要成为新边界", "求的是最长连续子串，结果为字符数量"],
+    "complexity": {"time": "O(n)", "space": "O(n)"}
+  }
+]

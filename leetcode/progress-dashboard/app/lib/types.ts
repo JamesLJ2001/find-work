@@ -57,6 +57,13 @@ export type DailyPlanDocument = {
   };
   completionSource: string;
   completionAfterSourceRow?: number;
+  mode?: "category-review";
+  category?: {
+    id: string;
+    title: string;
+    day: number;
+    totalDays: number;
+  };
   newProblemIds: number[];
   reviewsOptional?: boolean;
   reviewQueues: {
@@ -74,7 +81,7 @@ export type DailyPlanDocument = {
 
 export type DailyPlanSnapshot = DailyPlanDocument & {
   fetchedAt: string;
-  syncSource: "github" | "repository-local" | "repository-fallback";
+  syncSource: "github" | "repository-local" | "repository-fallback" | "category-schedule";
   stale: boolean;
   warning?: string;
 };
