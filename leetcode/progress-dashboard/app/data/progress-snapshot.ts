@@ -5643,6 +5643,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 228,
+      "externalId": "csv-0228",
+      "problemId": 14,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "最长公共前缀",
+      "recordedTopic": "网格与字符串 DP、模拟",
+      "recordedDifficulty": "简单",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次请求讲解最长公共前缀，尚未提供独立思路、代码或运行通过结果；已讲解从第一个字符串开始逐列比较所有字符串，遇到长度不足或字符不一致立即返回此前缀，并提供处理空输入的完整 Python 3 参考实现。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成逐列比较公共前缀讲解，尚未独立通过｜新题未开始→红；按列检查所有字符串，i >= len(word) 或 word[i] != ch 时返回 strs[0][:i]，时间 O(总比较字符数)、额外空间 O(1)。",
+      "sourceRow": 230,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
