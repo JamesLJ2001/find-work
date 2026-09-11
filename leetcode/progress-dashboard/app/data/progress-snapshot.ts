@@ -5783,6 +5783,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 235,
+      "externalId": "csv-0235",
+      "problemId": 54,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "螺旋矩阵",
+      "recordedTopic": "字符串、窗口、矩阵与链表",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "用户已写出上下左右边界变量和顶部遍历，但二维列表索引写成 matrix[top,column]，且未完成右、下、左三条边及边界收缩；本次讲解按四条边逐圈遍历并用条件判断避免单行或单列重复，提供完整 Python 3 参考实现。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "黄｜已尝试边界模拟但代码未完成且索引语法错误｜新题未开始→黄；使用 top/bottom/left/right，按上右下左收缩，单行或单列时用边界判断防重复，时间 O(mn)、额外空间 O(1)（不计返回数组）。",
+      "sourceRow": 237,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
