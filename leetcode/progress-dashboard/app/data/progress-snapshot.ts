@@ -5863,6 +5863,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 239,
+      "externalId": "csv-0239",
+      "problemId": 72,
+      "attemptedOn": "2026-09-11",
+      "recordedTitle": "编辑距离",
+      "recordedTopic": "网格与字符串 DP、模拟",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "本次直接讲解编辑距离，尚未提供独立思路、代码或运行通过结果；已讲解二维 DP 表示两个前缀之间的最少操作数，字符相同沿用左上角，不同则在删除、插入、替换三种操作中取最小值加一，并说明空前缀初始化。",
+      "isReview": false,
+      "reviewDate": null,
+      "notes": "红｜已完成编辑距离讲解，尚未独立通过｜新题未开始→红；dp[i][j] 表示 word1[:i] 到 word2[:j] 的最少操作数，时间 O(mn)、额外空间 O(mn)。",
+      "sourceRow": 241,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-11T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-11T23:59:59+08:00",
