@@ -41,7 +41,7 @@
     "example": {"input": "nums = [0,1,0,3,12]", "output": "[1,3,12,0,0]"},
     "memoryHook": "右指针找非零，左指针指向下一个非零该放的位置。",
     "steps": ["令 left=0", "right 从左到右扫描", "遇到非零就交换 nums[left] 与 nums[right]", "每放好一个非零后 left 加一"],
-    "pitfalls": ["不能打乱非零元素的顺序", "题目要求原地修改且无需返回数组"],
+    "pitfalls": ["不能打乱非零元素的顺序", "题目要求原地修改且无需返回数组", "交换后应 left+=1，不能写 left=right；left 指向下一个非零元素的写入位置，每放好一个只前进一格"],
     "complexity": {"time": "O(n)，n 为数组长度", "space": "O(1)"}
   },
   {

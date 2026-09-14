@@ -5903,6 +5903,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-14T12:00:00+08:00"
+    },
+    {
+      "id": 241,
+      "externalId": "csv-0241",
+      "problemId": 283,
+      "attemptedOn": "2026-09-14",
+      "recordedTitle": "移动零",
+      "recordedTopic": "哈希、双指针与字符串",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "用户二刷提交快慢双指针代码，right 扫描、非零判断和原地交换均正确，但交换后写成 left=right，跳过应连续填充的写入位置。输入 [0,0,1,2] 实际得到 [1,0,2,0]，应为 [1,2,0,0]。已指出应改为 left+=1，并解释 left 是下一个非零元素的写入位置，right 是当前扫描位置；每放好一个非零数，left 只前进一格。",
+      "isReview": true,
+      "reviewDate": "2026-09-14",
+      "notes": "黄｜二刷已恢复扫描与交换框架，写指针更新错误｜黄→黄；修正后保持非零数相对顺序，时间 O(n)、额外空间 O(1)。本次原代码未通过；助手修正版的本地验证不计用户独立通过。",
+      "sourceRow": 243,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-14T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-14T23:59:59+08:00",
