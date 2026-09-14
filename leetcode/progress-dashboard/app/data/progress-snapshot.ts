@@ -6023,6 +6023,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-14T12:00:00+08:00"
+    },
+    {
+      "id": 247,
+      "externalId": "csv-0247",
+      "problemId": 15,
+      "attemptedOn": "2026-09-14",
+      "recordedTitle": "三数之和",
+      "recordedTopic": "双指针与窗口",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "用户二刷已正确恢复排序、固定 i、以 -nums[i] 为目标进行左右夹逼，以及两数和小则 j 右移、大则 k 左移的主框架；但命中时写入 [i,j,k] 下标而非三个数值，命中后 j/k 未移动会反复命中导致死循环，且缺少固定 i 与命中后两端的去重。已指出三处错误并提供保留原框架的修正版，说明这属于排序加双指针 O(n²)，三重枚举暴力是 O(n³)。",
+      "isReview": true,
+      "reviewDate": "2026-09-14",
+      "notes": "黄｜二刷双指针主框架正确，结果内容、命中后移动和去重仍有错误｜黄→黄；记录 [nums[i],nums[j],nums[k]] 后移动两端并跳过重复值，外层跳过相同 nums[i]。参考修正版通过本地穷举对照验证，不计用户独立通过；当前提交未通过。",
+      "sourceRow": 249,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-14T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-14T23:59:59+08:00",
