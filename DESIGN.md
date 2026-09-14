@@ -2,7 +2,7 @@
 
 ## Source of truth
 - Status: Active
-- Last refreshed: 2026-09-11
+- Last refreshed: 2026-09-14
 - Primary product surfaces: `leetcode/progress-dashboard`, especially `/review`.
 - Evidence reviewed: dashboard `README.md`, `app/components/Dashboard.tsx`, `app/globals.css`, `app/lib/types.ts`, `leetcode/progress.csv`, and the user's request for one topic per day and recall cards.
 
@@ -12,7 +12,7 @@
 - Avoid: celebrations that imply mastery from merely opening a solution; decorative dashboards competing with the question.
 
 ## Product goals
-- Goals: review one category each day from September 12; recall from title and task before revealing the approach; keep self-assessments across reloads.
+- Goals: review one topic group each day from September 14 through September 29, with 4–8 problems per day and small related categories combined; recall from title and task before revealing the approach; keep self-assessments across reloads.
 - Non-goals: new exercises, mixed daily spaced-review queues, automatic changes to coding mastery.
 - Success signals: 100 unique cards; 97 scheduled problems plus 3 historically retired; front hides all answer material; ratings survive reload; schedule can be browsed in advance.
 
@@ -28,7 +28,7 @@
 
 ## Design principles
 - Recall before recognition: hide answers until an explicit reveal, and reset reveal when changing cards.
-- One category per day: weak-card repetition stays inside the selected category.
+- One topic group per day: combine related 2–3 problem categories; weak-card repetition stays inside the selected group.
 - Self-assessment is a memory aid; coding mastery still requires an actual code attempt.
 - Assumption: fixed calendar schedule, selectable days for catch-up, around 45–75 minutes daily; no new reminders or scheduled jobs.
 

@@ -214,18 +214,18 @@ export function ReviewWorkspace({
         </Link>
         <nav aria-label="复习导航">
           <Link href="/">作答记录</Link>
-          <a href="#review-calendar">19 天计划</a>
+          <a href="#review-calendar">{reviewPlan.days.length} 天计划</a>
           <button className="icon-button" type="button" onClick={toggleTheme} aria-label="切换深浅主题">◐</button>
         </nav>
       </header>
       <div className="recall-content">
         <section className="recall-hero">
           <div>
-            <span className="eyebrow">第二遍 · 2026.09.12 — 09.30</span>
+            <span className="eyebrow">第二遍 · {reviewPlan.startDate.replaceAll("-", ".")} — {reviewPlan.endDate.slice(5).replace("-", ".")}</span>
             <h1>每天一类，<br className="recall-mobile-break" />把思路讲清楚。</h1>
-            <p>先看题目回忆，再翻面核对。今天只专注一个题型。</p>
+            <p>先看题目回忆，再翻面核对。每天围绕同一主题，题量少的相近题型合并练习。</p>
           </div>
-          <div className="recall-hero-stat"><strong>100</strong><span>张背诵卡</span><small>19 天 · 97 道计划内题</small></div>
+          <div className="recall-hero-stat"><strong>{reviewPlan.catalogSize}</strong><span>张背诵卡</span><small>{reviewPlan.days.length} 天 · {reviewPlan.scheduledProblemCount} 道计划内题</small></div>
         </section>
         <section className="recall-routine" aria-label="每日复习方法">
           <div><b>01</b><span>看题口述<small>每题 1–2 分钟</small></span></div>
@@ -244,7 +244,7 @@ export function ReviewWorkspace({
                 <option value="retired">已退役 3 题（主动查阅）</option>
               </select>
               <span className="eyebrow recall-day-label">
-                {day ? "DAY " + String(day.day).padStart(2, "0") + " / 19 · " + shortDate(day.date) : "CARD LIBRARY"}
+                {day ? "DAY " + String(day.day).padStart(2, "0") + " / " + reviewPlan.days.length + " · " + shortDate(day.date) : "CARD LIBRARY"}
               </span>
               <h2>{selectedTitle}</h2>
               <p>{day?.focus ?? (scope === "retired" ? reviewPlan.retiredReason : "按题号或题名查阅，也可以练习跨类别回忆。")}</p>
@@ -328,7 +328,7 @@ export function ReviewWorkspace({
         </div>
 
         <details className="recall-calendar panel" id="review-calendar">
-          <summary><span>查看完整 19 天计划</span><small>9/12 — 9/30 · 每天一个类别</small></summary>
+          <summary><span>查看完整 {reviewPlan.days.length} 天计划</span><small>{shortDate(reviewPlan.startDate)} — {shortDate(reviewPlan.endDate)} · 每天一个主题</small></summary>
           <p className="recall-calendar-intro">每天先过本类所有背诵卡，再闭卷重写薄弱题，建议预留 45–75 分钟。未完成时可手动选择原类别继续。</p>
           <ol>
             {reviewPlan.days.map((item) => {

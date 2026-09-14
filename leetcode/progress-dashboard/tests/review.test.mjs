@@ -62,34 +62,38 @@ test("the category calendar schedules 97 problems once and retires exactly three
   assert.ok(retiredIds.every((id) => !scheduledIds.includes(id)));
   assert.deepEqual(new Set([...scheduledIds, ...retiredIds]), catalogIds);
 
-  assert.equal(reviewPlan.days.length, 19);
-  assert.equal(reviewPlan.startDate, "2026-09-12");
-  assert.equal(reviewPlan.endDate, "2026-09-30");
+  assert.equal(reviewPlan.days.length, 16);
+  assert.equal(reviewPlan.startDate, "2026-09-14");
+  assert.equal(reviewPlan.endDate, "2026-09-29");
   for (const [index, day] of reviewPlan.days.entries()) {
-    const expectedDate = new Date(Date.UTC(2026, 8, 12 + index)).toISOString().slice(0, 10);
+    const expectedDate = new Date(Date.UTC(2026, 8, 14 + index)).toISOString().slice(0, 10);
     assert.equal(day.day, index + 1);
     assert.equal(day.date, expectedDate);
     assert.ok(day.id.trim() && day.title.trim() && day.focus.trim());
-    assert.ok(day.problemIds.length > 0);
+    assert.ok(day.problemIds.length >= 4, `${day.title} must not leave a 2–3 problem day`);
+    assert.ok(day.problemIds.length <= 8, `${day.title} should remain manageable`);
   }
-  assert.ok(reviewPlan.days[7].problemIds.includes(32), "32 belongs with stack parsing");
-  assert.ok(!reviewPlan.days[8].problemIds.includes(32), "32 must not leak into monotonic stack");
+  const byId = new Map(reviewPlan.days.map((day) => [day.id, day]));
+  assert.ok(byId.get("stack").problemIds.includes(32), "32 belongs with stack parsing");
+  assert.deepEqual(byId.get("window-monotonic").problemIds, [3, 438, 739, 239, 456]);
+  assert.deepEqual(byId.get("sorting-heap-greedy").problemIds, [912, 215, 121, 122, 56, 763, 31]);
+  assert.deepEqual(byId.get("dp-basic-grid").problemIds, [70, 118, 198, 53, 64, 221]);
 });
 
 test("date selection and category plans respect the fixed daily boundary", () => {
-  assert.equal(selectReviewDay(reviewPlan, "2026-09-01").date, "2026-09-12");
-  assert.equal(selectReviewDay(reviewPlan, "2026-09-20").id, "monotonic-stack");
-  assert.equal(selectReviewDay(reviewPlan, "2026-10-01").date, "2026-09-30");
+  assert.equal(selectReviewDay(reviewPlan, "2026-09-01").date, "2026-09-14");
+  assert.equal(selectReviewDay(reviewPlan, "2026-09-15").id, "window-monotonic");
+  assert.equal(selectReviewDay(reviewPlan, "2026-10-01").date, "2026-09-29");
 
-  assert.equal(categoryPlanForDate(reviewPlan, "2026-09-11"), null);
+  assert.equal(categoryPlanForDate(reviewPlan, "2026-09-13"), null);
 
-  const first = categoryPlanForDate(reviewPlan, "2026-09-12");
+  const first = categoryPlanForDate(reviewPlan, "2026-09-14");
   assert.equal(first.mode, "category-review");
   assert.deepEqual(first.category, {
     id: "two-pointers",
     title: "双指针",
     day: 1,
-    totalDays: 19,
+    totalDays: 16,
   });
   assert.equal(first.newProblemIds.length, 0);
   assert.deepEqual(first.reviewQueues.red.problemIds, reviewPlan.days[0].problemIds);
@@ -103,7 +107,7 @@ test("date selection and category plans respect the fixed daily boundary", () =>
   const after = categoryPlanForDate(reviewPlan, "2026-10-08");
   assert.equal(after.date, reviewPlan.endDate);
   assert.ok(after.date < "2026-10-08", "the clamped plan must remain detectably stale");
-  assert.equal(after.category.day, 19);
+  assert.equal(after.category.day, 16);
   assert.deepEqual(after.reviewQueues.red.problemIds, reviewPlan.days.at(-1).problemIds);
 });
 
