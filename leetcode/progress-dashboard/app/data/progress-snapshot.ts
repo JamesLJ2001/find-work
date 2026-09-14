@@ -6003,6 +6003,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-14T12:00:00+08:00"
+    },
+    {
+      "id": 246,
+      "externalId": "csv-0246",
+      "problemId": 11,
+      "attemptedOn": "2026-09-14",
+      "recordedTitle": "盛最多水的容器",
+      "recordedTopic": "哈希与双指针",
+      "recordedDifficulty": "中等",
+      "status": "红",
+      "independentWrite": false,
+      "errorReason": "用户二刷提交 maxArea 代码，但采用接雨水的左右历史最高值和高度差累加模型，未计算两端较小高度乘宽度的容器面积；此外 left_max、right_max 未初始化，右分支将 ans 误写为 an。已复现未初始化变量错误，并说明 11 每轮应先计算 min(height[left],height[right])*(right-left)，用 max 更新最大面积，再移动较矮一侧。",
+      "isReview": true,
+      "reviewDate": "2026-09-14",
+      "notes": "红｜二刷将盛水容器与接雨水模型混淆｜黄→红；11 比较每一对边界的容器面积并取最大值，不累计各位置雨水，不需要 left_max/right_max。当前提交未通过；助手修正版通过本地与暴力枚举对照验证，不计用户独立通过。时间 O(n)，额外空间 O(1)。",
+      "sourceRow": 248,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-14T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-14T23:59:59+08:00",

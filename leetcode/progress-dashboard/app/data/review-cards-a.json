@@ -31,8 +31,8 @@
     "prompt": "给定非负整数数组 height，第 i 个值表示坐标 i 处竖线高度。选两条线与 x 轴围成容器，返回可盛水的最大面积，容器不能倾斜。",
     "example": {"input": "height = [1,8,6,2,5,4,8,3,7]", "output": "49"},
     "memoryHook": "面积由短板决定，所以每次移动较短的那一边。",
-    "steps": ["左右指针放在数组两端", "计算宽度乘两端较小高度并更新答案", "左边较矮则 left++，否则 right--", "直到两指针相遇"],
-    "pitfalls": ["面积高度必须取 min(height[left], height[right])", "移动较高边不能改善当前短板"],
+    "steps": ["左右指针放在数组两端，ans=0", "先算 area=min(height[left],height[right])*(right-left)，再用 ans=max(ans,area) 保存最大面积", "左边较矮则 left++，否则 right--", "直到两指针相遇，返回 ans"],
+    "pitfalls": ["高度取两端较小值，宽度是 right-left；先计算面积再移动指针", "移动较高边不能改善当前短板", "11 是选两条线取最大容器面积；42 接雨水才会累计各位置的水量，本题不维护 left_max/right_max，也不累加最高柱与当前柱的高度差"],
     "complexity": {"time": "O(n)", "space": "O(1)"}
   },
   {
