@@ -68,7 +68,7 @@
     "example": {"input": "s = \"A man, a plan, a canal: Panama\"", "output": "true"},
     "memoryHook": "左右指针跳过无关字符，再比较统一大小写后的字符。",
     "steps": ["左右指针分别指向首尾", "左侧不是字母数字就右移", "右侧不是字母数字就左移", "比较两端小写字符，不同则返回假", "相同则同时向中间移动"],
-    "pitfalls": ["isalnum 要调用在当前字符上", "空串或全是符号的字符串也算回文"],
+    "pitfalls": ["ch.isalnum() 判断当前字符是不是字母或数字，别写成检查整个字符串的 s.isalnum()", "ch.lower() 转小写；ch.isdigit() 只判断数字，不能替代本题需要的字母数字判断", "空串或全是符号的字符串也算回文"],
     "complexity": {"time": "O(n)，n 为字符串长度", "space": "O(1)"}
   },
   {

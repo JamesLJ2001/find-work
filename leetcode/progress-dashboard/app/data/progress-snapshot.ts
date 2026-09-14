@@ -5963,6 +5963,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-14T12:00:00+08:00"
+    },
+    {
+      "id": 244,
+      "externalId": "csv-0244",
+      "problemId": 125,
+      "attemptedOn": "2026-09-14",
+      "recordedTitle": "验证回文串",
+      "recordedTopic": "哈希、双指针与字符串",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "本次分类复习用户表示忘记 Python 字符判断方法并请求查看本题。已提醒 ch.isalnum() 用于保留字母和数字，ch.lower() 统一小写，使用空字符串 join 拼接后再以左右双指针判断回文；须检查当前字符 ch，避免再次写成 s.isalnum()。本次尚未提交独立代码。",
+      "isReview": true,
+      "reviewDate": "2026-09-14",
+      "notes": "黄｜二刷需恢复字符过滤与小写转换方法，尚未独立复现｜黄→黄；isdigit 只判断数字，125 需要 isalnum。先清洗再比较的版本时间 O(n)、额外空间 O(n)；卡片跳过无关字符的版本额外空间 O(1)。参考实现的本地验证不计用户独立通过。",
+      "sourceRow": 246,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-14T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-14T23:59:59+08:00",
