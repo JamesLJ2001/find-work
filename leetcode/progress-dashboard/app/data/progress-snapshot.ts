@@ -5983,6 +5983,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-14T12:00:00+08:00"
+    },
+    {
+      "id": 245,
+      "externalId": "csv-0245",
+      "problemId": 167,
+      "attemptedOn": "2026-09-14",
+      "recordedTitle": "两数之和 II",
+      "recordedTopic": "字符串、窗口、矩阵与链表",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "用户反馈本次复习“167 秒了”，按用户自述记录当日已完成。当前未提供本次代码或明确的运行通过结果，未发现新的具体错误，也不据此判断作答失败；独立通过状态尚未核实。",
+      "isReview": true,
+      "reviewDate": "2026-09-14",
+      "notes": "黄｜用户自述快速完成，已计入今日复习进度｜黄→黄；本条记录反馈而非代码验收，是否独立写出字段否表示当前未验收，保留原掌握颜色，不新增间隔独立通过凭据。",
+      "sourceRow": 247,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-14T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-14T23:59:59+08:00",
