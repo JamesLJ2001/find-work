@@ -5883,9 +5883,29 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-11T12:00:00+08:00"
+    },
+    {
+      "id": 240,
+      "externalId": "csv-0240",
+      "problemId": 977,
+      "attemptedOn": "2026-09-14",
+      "recordedTitle": "有序数组的平方",
+      "recordedTopic": "哈希、双指针与字符串",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "用户正确指出输出应为非递减顺序，并提出从中间向两边选择较小平方的归并方向；尚未明确中间应为负数与非负数分界、比较应按平方或绝对值，也未提交独立代码。已澄清卡片的从后往前填是把最大平方写到答案最右侧空位，最终输出仍升序；同步改写卡片避免填入顺序与结果顺序混淆。",
+      "isReview": true,
+      "reviewDate": "2026-09-14",
+      "notes": "黄｜二刷已提出向两边归并的部分思路，分界与比较规则待补全｜红→黄；若从两端选最大平方，应写 ans[pos] 并令 pos 递减，不能直接 append。用户尚未独立实现或通过；参考实现的本地验证不计独立掌握。",
+      "sourceRow": 242,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-14T12:00:00+08:00"
     }
   ],
-  "syncedAt": "2026-09-11T23:59:59+08:00",
+  "syncedAt": "2026-09-14T23:59:59+08:00",
   "source": "snapshot",
   "stale": false
 };
