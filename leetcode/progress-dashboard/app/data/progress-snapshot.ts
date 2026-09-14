@@ -5923,6 +5923,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-14T12:00:00+08:00"
+    },
+    {
+      "id": 242,
+      "externalId": "csv-0242",
+      "problemId": 977,
+      "attemptedOn": "2026-09-14",
+      "recordedTitle": "有序数组的平方",
+      "recordedTopic": "哈希、双指针与字符串",
+      "recordedDifficulty": "简单",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "用户继续提交两端双指针完整实现，绝对值比较、从末尾填入、cur 递减和对应端点移动均正确；但 ans 初始化为空列表后直接执行 ans[cur]=...，在合法非空输入上触发 IndexError: list assignment index out of range。应先计算 n=len(nums)，再用 ans=[0]*n 创建可按下标写入的位置，其余逻辑可保留。",
+      "isReview": true,
+      "reviewDate": "2026-09-14",
+      "notes": "黄｜已正确写出双指针主体，空列表按下标赋值导致越界｜黄→黄；ans[i]=x 只能替换已有位置，不能自动扩容。本次提交未通过；助手仅修正初始化后的代码通过本地验证，不计用户独立通过。时间 O(n)，额外空间 O(n)。",
+      "sourceRow": 244,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-14T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-14T23:59:59+08:00",
