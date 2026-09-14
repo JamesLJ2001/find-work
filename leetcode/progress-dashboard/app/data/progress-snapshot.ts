@@ -5943,6 +5943,26 @@ export const progressSnapshot: Omit<DashboardPayload, "dailyPlan"> = {
       "supersedesAttemptId": null,
       "correctionReason": null,
       "createdAt": "2026-09-14T12:00:00+08:00"
+    },
+    {
+      "id": 243,
+      "externalId": "csv-0243",
+      "problemId": 80,
+      "attemptedOn": "2026-09-14",
+      "recordedTitle": "删除有序数组中的重复项 II",
+      "recordedTopic": "哈希、双指针与字符串",
+      "recordedDifficulty": "中等",
+      "status": "黄",
+      "independentWrite": false,
+      "errorReason": "本次分类复习用户直接请求查看答案，未先提交本次独立思路或代码。已给出每个数字最多保留两次的原地覆盖实现：slow 表示已保留元素个数，遍历 num，满足 slow<2 或 num!=nums[slow-2] 时写入 nums[slow] 并将 slow 加一，最终返回 slow；前 slow 个元素为有效结果。",
+      "isReview": true,
+      "reviewDate": "2026-09-14",
+      "notes": "黄｜二刷直接查看答案，尚未独立复现｜黄→黄；依靠数组有序性，与已保留部分倒数第二个比较来判断是否超过两次。时间 O(n)，额外空间 O(1)。参考实现已本地验证；查看答案不计用户独立通过。",
+      "sourceRow": 245,
+      "isVoid": false,
+      "supersedesAttemptId": null,
+      "correctionReason": null,
+      "createdAt": "2026-09-14T12:00:00+08:00"
     }
   ],
   "syncedAt": "2026-09-14T23:59:59+08:00",
